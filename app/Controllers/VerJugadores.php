@@ -14,7 +14,9 @@ class VerJugadores extends BaseController
         $jugadorModel = new JugadorModel();
         $jugadores=$jugadorModel->findAll();
         //$jugador=$jugadorModel->find('1');
-        var_dump($jugadores);
-        //$jugadores=array('jugadores'=>$jugadores);
+        //var_dump($jugadores);
+        $jugadores=array('jugadores'=>$jugadores);
+        //return view('headersocio').
+        return view('ver_jugadores', $jugadores);
     }
 }
