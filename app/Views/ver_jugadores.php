@@ -8,12 +8,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugadores</title>
+    
 </head>
 <body>
+    <?= $this->extend('layout/sidebarsocio') ?>
+
+    <?= $this->section('contenido') ?>
+    <!--Tabla para Jugadores-->
     <div class="row">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Nombres</th>
                     <th scope="col">Apellidos</th>
                     <th scope="col">RUN</th>
@@ -36,6 +42,7 @@
         <?php
         foreach($jugadores as $jugador){
             echo "<tr>";
+            echo "<td>".$jugador['id']."</td>";
             echo "<td>".$jugador['nombres']."</td>";
             echo "<td>".$jugador['apellidos']."</td>";
             echo "<td>".$jugador['run']."</td>";
@@ -57,5 +64,6 @@
         ?>
         </table>
     </div>
+    <?= $this->endSection() ?>
 </body>
 </html>
