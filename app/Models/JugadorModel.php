@@ -15,8 +15,7 @@ class JugadorModel extends Model
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['id','nombres','apellidos','run','fecha_nacimiento','foto_url','posicion','goles'
-    ,'partidos_jugados','equipo_proviene','tipo','sueldo','ayuda_economica','lesionado','fecha_inicio_lesion',
-    'fecha_fin_lesion','equipo_id'];
+    ,'partidos_jugados','equipo_proviene','tipo','sueldo','ayuda_economica','lesionado','equipo_id'];
 
     // Dates
     /*protected $useTimestamps = false;
