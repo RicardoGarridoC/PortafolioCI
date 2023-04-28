@@ -18,87 +18,34 @@
     <?= $this->extend('layout/sidebarsocio') ?>
 
     <?= $this->section('contenido') ?>
-    
-    <!--Tabla para Jugadores-->
-    <div class="card-body">
-        <div class="row container table-responsive" style="width:90%">
-            <table class="table table-striped table-hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">RUN</th>
-                        <th scope="col">Fecha de Nacimiento</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Posicion</th>
-                        <th scope="col">Goles</th>
-                        <th scope="col">Partidos Jugados</th>
-                        <th scope="col">Equipo</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Sueldo</th>
-                        <th scope="col">Ayuda</th>
-                        <th scope="col">Lesionado</th>
-                        <th scope="col">Equipo ID</th>
-                    </tr>
-                </thead>
-            
-            <?php
-            foreach($jugadores as $jugador){
-                echo "<tr>";
-                echo "<td>".$jugador['id']."</td>";
-                echo "<td>".$jugador['nombres']."</td>";
-                echo "<td>".$jugador['apellidos']."</td>";
-                echo "<td>".$jugador['run']."</td>";
-                echo "<td>".$jugador['fecha_nacimiento']."</td>";
-                echo "<td>".$jugador['foto_url']."</td>";
-                echo "<td>".$jugador['posicion']."</td>";
-                echo "<td>".$jugador['goles']."</td>";
-                echo "<td>".$jugador['partidos_jugados']."</td>";
-                echo "<td>".$jugador['equipo_proviene']."</td>";
-                echo "<td>".$jugador['tipo']."</td>";
-                echo "<td>".$jugador['sueldo']."</td>";
-                echo "<td>".$jugador['ayuda_economica']."</td>";
-                echo "<td>".$jugador['lesionado']."</td>";
-                echo "<td>".$jugador['equipo_id']."</td>";
-                echo "</tr>";
-            }
-            ?>
-            </table>
-        </div>
-    </div>
-    
-
-    <div class="row" style="width:90%">
+    <!-- Button trigger modal -->
+    <div class="row">
     <?php foreach ($jugadores as $jugador) { ?>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="<?php echo $jugador['foto_url']; ?>" alt="Imagen de <?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?>">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?></h5>
-                    <p class="card-text"><?php echo $jugador['run']; ?></p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#perfilModal<?php echo $jugador['id']; ?>">Ver perfil</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
-                        </div>
-                        <small class="text-muted"><?php echo $jugador['posicion']; ?></small>
-                    </div>
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<?php echo $jugador['foto_url']; ?>" alt="Imagen de <?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?>">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?></h5>
+                <p class="card-text"><?php echo $jugador['run']; ?></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-sm btn-outline-secondary"data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $jugador['id']; ?>">Ver Perfil</a>
+                    <small class="text-muted"><?php echo $jugador['posicion']; ?></small>
                 </div>
             </div>
         </div>
+        
+
         <!-- Modal -->
-        <div class="modal fade" id="perfilModal<?php echo $jugador['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="perfilModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="exampleModal<?php echo $jugador['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="perfilModalLabel"><?php echo $jugador['nombres'] . ' ' . $jugador['apellidos']; ?></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"></button>
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
                             <tbody>
-                                <tr>
+                                 <tr>
                                     <th scope="row">Nombre:</th>
                                     <td><?php echo $jugador['nombres']; ?></td>
                                 </tr>
@@ -130,23 +77,23 @@
                                     <th scope="row">Equipo anterior</th>
                                     <td><?php echo $jugador['equipo_proviene']; ?></td>
                                 </tr>
-                                <th scope="row">Estatuto:</th>
-                                <td><?php echo $jugador['tipo']; ?></td>
+                                    <th scope="row">Estatuto:</th>
+                                    <td><?php echo $jugador['tipo']; ?></td>
                                 </tr>
-                                <th scope="row">Sueldo:</th>
-                                <td><?php echo $jugador['sueldo']; ?></td>
+                                    <th scope="row">Sueldo:</th>
+                                    <td>$<?php echo $jugador['sueldo']; ?></td>
                                 </tr>
-                                <th scope="row">Ayuda económica:</th>
-                                <td><?php echo $jugador['ayuda_economica']; ?></td>
+                                    <th scope="row">Ayuda económica:</th>
+                                    <td>$<?php echo $jugador['ayuda_economica']; ?></td>
                                 </tr>
-                                <th scope="row">Lesionado:</th>
-                                <td><?php echo $jugador['lesionado']; ?></td>
+                                    <th scope="row">Lesionado:</th>
+                                    <td><?php echo $jugador['lesionado']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                        </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -155,7 +102,6 @@
     </div>
 
     <?= $this->endSection() ?>
-    <!--SCRIPTS-->
    
     
 
