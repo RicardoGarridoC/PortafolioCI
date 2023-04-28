@@ -4,8 +4,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .col-auto {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 200px; /* Adjust the width according to your needs */
+            z-index: 1; /* Ensure the sidebar stays on top of other content */
+            overflow-y: auto; /* Add a scrollbar to the sidebar if it's taller than the viewport */
+            transition: all 0.2s ease-in-out; /* Add a transition effect when the sidebar changes position */
+        }
+
+        /* Add some padding to the content to account for the fixed sidebar */
+        .content {
+            padding-left: 220px; /* Adjust the padding according to the width of the sidebar */
+        }
+    </style>
 </head>
 <body>
+    
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -88,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col py-3">
+            <div class="col content">
                 <?= $this->renderSection('contenido') ?>
             </div>
         </div>
