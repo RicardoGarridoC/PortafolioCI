@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        body {
-            padding-top: 80px;
-            /* Altura del header */
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/styles.css">
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #212121;">
         <a class="navbar-brand" href="#">Los Alces F.C</a>
@@ -44,6 +37,3 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-
-</html>
