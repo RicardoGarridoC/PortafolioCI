@@ -46,7 +46,7 @@
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
+                            <a href="<?php echo base_url('index.php/InicioSocios'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Inicio</span>
                             </a>
                         </li>
@@ -55,10 +55,10 @@
                                 <i class="fs-4 bi-speedometer2"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Club</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
+                                    <a href="<?php echo base_url('index.php/VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                    <a href="<?php echo base_url('index.php/VerCampeonatos'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
                                 </li>
                             </ul>
                         </li>

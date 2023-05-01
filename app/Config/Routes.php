@@ -21,6 +21,7 @@ $routes->get('IniciarSesion', 'IniciarSesion::index');
 $routes->get('Registrarse', 'Registrarse::index');
 $routes->get('InicioSocios','InicioSocios::index');
 $routes->get('VerJugadores','VerJugadores::mostrarJugador');
+$routes->get('VerCampeonatos','VerCampeonatos::mostrarCampeonatos');
 
 
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
