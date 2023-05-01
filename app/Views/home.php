@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    Hola mundo <?php echo $nombres; ?>
+    
+    <h1><?php echo $nombres; ?></h1>
+    <h1><?php echo $apellidos; ?></h1>
 </body>
 </html>
