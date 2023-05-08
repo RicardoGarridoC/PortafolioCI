@@ -5,45 +5,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        .my-class {
-            position: sticky;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 200px; /* Adjust the width according to your needs */
-            z-index: 1; /* Ensure the sidebar stays on top of other content */
-            transition: all 0.2s ease-in-out; /* Add a transition effect when the sidebar changes position */
-        }
 
-        /* Add some padding to the content to account for the fixed sidebar 
-        .content {
-            padding-left: 200px;   
-        }*/
-        footer {
-        height: 160px; /* Adjust to your desired height */
-        background-color: #eee;
-        bottom: 0;
-        z-index: 999;
-        }
-        @media (max-width: 576px) {
-            .hide-on-small {
-                display: none;
-            }
-            .my-class {
-                width: 70px;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/">
+                        <img src="../public/images/losalces.png" class="img-fluid" alt="Image description">
+                    </a>
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="hide-on-small fs-5 d-none d-sm-inline">Club Los Alces F.C.</span>
                     </a>
+                    
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
                             <a href="<?php echo base_url('index.php/InicioSocios'); ?>" class="nav-link align-middle px-0">
@@ -180,6 +155,6 @@
     </footer>
     <!--SCRIPTS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
+    <script src="<?php echo base_url('../public/js/sidebar_socio.js'); ?>"></script>
 </body>
 </html>
