@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probando Titulo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -11,7 +14,7 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
+            <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/">
                         <img src="../public/images/losalces.png" class="img-fluid" alt="Image description">
@@ -34,7 +37,7 @@
                                     <a href="<?php echo base_url('index.php/VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('index.php/VerCampeonatos'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                    <a href="<?= site_url('VerCampeonatos')?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
                                 </li>
                             </ul>
                         </li>
@@ -94,13 +97,13 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </aside>
             <div class="col content">
                 <?= $this->renderSection('contenido') ?>
             </div>
         </div>
     </div>
-    <footer class="text-center text-black" style="background-color: #795c3dff;">
+    <footer class="text-center text-black">
         <div class="container pt-4">
             <!-- Social media -->
             <section class="mb-4">

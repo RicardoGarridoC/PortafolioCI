@@ -11,6 +11,8 @@
 
   <?= $this->section('contenido') ?>
 
+  Campeonatos
+
   <?= $this->endSection() ?>
   
 </body>

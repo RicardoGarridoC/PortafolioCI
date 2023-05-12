@@ -18,4 +18,9 @@ class VerJugadores extends BaseController
         $jugadores=array('jugadores'=>$jugadores);
         return view('ver_jugadores', $jugadores);
     }
+    
+    public function mostrarCampeonatos()
+    {
+        return view('ver_campeonatos');
+    }
 }
