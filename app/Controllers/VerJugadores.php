@@ -5,6 +5,11 @@ use CodeIgniter\Controller;
 
 class VerJugadores extends BaseController
 {
+    public function inicioSocios()
+    {
+        return view('inicio_socios');
+    }
+    
     public function mostrarJugador()
     {
         /*String p = "";

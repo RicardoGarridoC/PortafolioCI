@@ -19,7 +19,7 @@ $routes->get('HomeSocios', 'HomeSocios::index');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'IniciarSesion::index');
 $routes->get('Registrarse', 'Registrarse::index');
-$routes->get('InicioSocios','InicioSocios::index');
+$routes->get('InicioSocios','VerJugadores::inicioSocios');
 $routes->get('VerJugadores','VerJugadores::mostrarJugador');
 $routes->get('VerCampeonatos','VerJugadores::mostrarCampeonatos');
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
