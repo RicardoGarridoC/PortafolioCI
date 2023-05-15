@@ -24,6 +24,7 @@ $routes->get('VerJugadores','VerJugadores::mostrarJugador');
 $routes->get('VerCampeonatos','VerJugadores::mostrarCampeonatos');
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
+$routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
 
 
 
