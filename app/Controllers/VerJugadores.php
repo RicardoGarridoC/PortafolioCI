@@ -5,6 +5,11 @@ use CodeIgniter\Controller;
 
 class VerJugadores extends BaseController
 {
+    public function inicioSocios()
+    {
+        return view('inicio_socios');
+    }
+    
     public function mostrarJugador()
     {
         /*String p = "";
@@ -17,5 +22,10 @@ class VerJugadores extends BaseController
         //var_dump($jugadores);
         $jugadores=array('jugadores'=>$jugadores);
         return view('ver_jugadores', $jugadores);
+    }
+    
+    public function mostrarCampeonatos()
+    {
+        return view('ver_campeonatos');
     }
 }
