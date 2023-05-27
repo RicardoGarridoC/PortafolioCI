@@ -28,7 +28,7 @@ class IniciarSesion extends BaseController
                     session()->set('isLoggedIn', true);
                     session()->set('userData', $usuario);
 
-                    return view('header') . view('dashboard_socio', ['usuario' => $usuario]) . view('footer');
+                    return view('header') . view('dashboard_socio', ['usuario' => $usuario]). view('footer');
                 } else if ($usuario['rol'] == 'administrador') {
                     // Redireccionar al home del administrador
                     return view('header') . view('home') . view('footer');
