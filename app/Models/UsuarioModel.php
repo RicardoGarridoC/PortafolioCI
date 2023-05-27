@@ -1,15 +1,15 @@
 <?php namespace App\Models;
 use CodeIgniter\Model;
 
-class SocioModel extends Model{
-    protected $table = 'socios';
+class UsuarioModel extends Model{
+    protected $table = 'usuarios';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
 
-    protected $allowedFields = ['nombres', 'apellidos', 'run', 'direccion', 'telefono', 'email', 'fecha_nacimiento', 'fecha_pago', 'password'];
+    protected $allowedFields = ['nombres', 'apellidos', 'email', 'run', 'direccion', 'telefono', 'password_hash', 'rol'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

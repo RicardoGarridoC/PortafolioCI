@@ -1,1 +1,2 @@
-<h1>HOLA SOCIO</h1>
+
+<h1>HOLA <?php echo $usuario['nombres']; ?></h1>
