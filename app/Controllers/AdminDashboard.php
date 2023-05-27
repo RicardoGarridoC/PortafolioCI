@@ -24,5 +24,4 @@ class AdminDashboard extends BaseController
         $equipos=array('equipos'=>$equipos);
         return view('admin/admin_equipo_dt', $equipos);
     }
-
 }

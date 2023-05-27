@@ -82,7 +82,7 @@
   <div class="login-form-wrapper">
     <div class="login-form">
       <h1>Iniciar sesión</h1>
-      <form>
+      <form action=<?php echo base_url('index.php/DashboardSocio'); ?>>
         <div class="form-group">
           <label for="email">Correo electrónico</label>
           <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico">
