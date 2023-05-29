@@ -25,6 +25,9 @@ $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
 $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
 $routes->get('DashboardSocio','DashboardSocio::index');
 $routes->add('iniciar_sesion/validar_usuario', 'IniciarSesion::validar_usuario', ['post']);
+$routes->add('registrarse/registrar', 'Registrarse::registrar', ['post']);
+$routes->get('registro-exitoso', 'Registrarse::registroExitoso');
+
 
 
 /*

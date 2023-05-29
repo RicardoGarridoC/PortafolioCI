@@ -72,42 +72,43 @@
   <div class="register-form-wrapper">
     <div class="register-form">
       <h1>Registro</h1>
-      <form>
-        <div class="form-group">
-          <label for="nombres">Nombres</label>
-          <input type="text" class="form-control" id="name" placeholder="Ingrese su nombre" pattern="[^\d]+" required>
-        </div>
-        <div class="form-group">
-          <label for="apellidos">Apellidos</label>
-          <input type="text" class="form-control" id="name" placeholder="Ingrese sus apellidos" pattern="[^\d]+" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Correo electrónico</label>
-          <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" required>
-        </div>
-        <div class="form-group">
-          <label for="run">Rut</label>
-          <input type="text" class="form-control" id="name" placeholder="Ingrese su rut" pattern="[^\d]+" required>
-        </div>
-        <div class="form-group">
-          <label for="direccion">Dirección</label>
-          <input type="text" class="form-control" id="name" placeholder="Ingrese su dirección" pattern="[^\d]+" required>
-        </div>
-        <div class="form-group">
-          <label for="telefono">Número de teléfono</label>
-          <input type="tel" class="form-control" id="phone" placeholder="Ingrese su número de teléfono" pattern="[0-9]{8,}" required>
-        </div>
-        <div class="form-group">
-          <label for="password_hash">Contraseña</label>
-          <input type="text" class="form-control" id="name" placeholder="Ingrese su contraseña" pattern="[^\d]+" required>
-        </div>
-        <div class="form-group">
-          <label for="password_hash">Reingrese su contraseña</label>
-          <input type="text" class="form-control" id="name" placeholder="Reingrese su contraseña" pattern="[^\d]+" required>
-        </div>
+      <?php echo form_open('registrarse/registrar'); ?>
+      <div class="form-group">
+        <label for="nombres">Nombres</label>
+        <input type="text" class="form-control" name="nombres" placeholder="Ingrese su nombre" pattern="[^\d]+" required>
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" placeholder="Ingrese sus apellidos" pattern="[^\d]+" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" class="form-control" name="email" placeholder="Ingrese su correo electrónico" required>
+      </div>
+      <div class="form-group">
+        <label for="run">Rut</label>
+        <input type="text" class="form-control" name="run" placeholder="Ingrese su rut" required>
+      </div>
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input type="text" class="form-control" name="direccion" placeholder="Ingrese su dirección" required>
+      </div>
+      <div class="form-group">
+        <label for="telefono">Número de teléfono</label>
+        <input type="tel" class="form-control" name="telefono" placeholder="Ingrese su número de teléfono" pattern="[0-9]{8,}" required>
+      </div>
+      <div class="form-group">
+        <label for="password_hash">Contraseña</label>
+        <input type="password" class="form-control" name="password_hash" placeholder="Ingrese su contraseña" required>
+      </div>
+      <div class="form-group">
+        <label for="password_confirm">Confirmar contraseña</label>
+        <input type="password" class="form-control" name="password_confirm" placeholder="Reingrese su contraseña" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+      <?php echo form_close(); ?>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
-    </form>
   </div>
 
   </div>
