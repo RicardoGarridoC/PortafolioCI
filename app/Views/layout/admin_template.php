@@ -356,6 +356,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?= site_url('AdminUsuarioDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="<?= site_url('AdminJugadorDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

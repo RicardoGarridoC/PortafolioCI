@@ -25,6 +25,15 @@ class AdminDashboard extends BaseController
         return view('admin/admin_equipo_dt', $equipos);
     }
 
+    public function usaurioDatabase()
+    {
+        $usuarioModel = new UsuarioModel();
+        $usuarios=$usuarioModel->findAll();
+        $usuarios=array('usuarios'=>$usuarios);
+        return view('admin/admin_usaurios_dt', $usuarios);
+    }
+
+
     public function __construct(){
 		helper('form');
 	}
@@ -33,7 +42,7 @@ class AdminDashboard extends BaseController
 
     }
     public function guarda(){
-        
+
         $jugadorModel = new JugadorModel();
 		$request= \Config\Services::request();
 		$data=array(

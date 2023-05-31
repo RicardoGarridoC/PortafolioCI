@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class JugadorModel extends Model
 {
-    protected $table      = 'jugadores';
+    protected $table      = 'usuarios';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -15,8 +15,8 @@ class JugadorModel extends Model
     protected $useSoftDeletes = false;
 
     //Añadir JOINS
-    protected $allowedFields = ['id','posicion','goles','partidos_jugados','equipo_proviene'
-    ,'tipo','sueldo','ayuda_economica','lesionado','button_field'];
+    protected $allowedFields = ['id','nombres','apellidos','email','run'
+    ,'direccion','telefono','password_hash','rol','button_field'];
 
     // Dates
     /*protected $useTimestamps = false;
