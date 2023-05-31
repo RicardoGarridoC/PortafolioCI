@@ -78,7 +78,7 @@
                     </div>
                     <div class="modal-footer">
                         <?php
-                        echo form_submit('guarda', 'Guardar', 'class="btn btn-primary"');
+                        echo form_submit('guardaUsuario', 'Guardar', 'class="btn btn-primary"');
                         ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     
@@ -138,13 +138,36 @@
                     </div>
                     <div class="modal-footer">
                         <?php
-                        echo form_submit('guarda', 'Guardar', 'class="btn btn-primary"');
+                        echo form_submit('guardaUsuario', 'Guardar', 'class="btn btn-primary"');
                         echo form_hidden('id', $usuario['id']);
                         ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                     <?php echo form_close(); ?>
                 </div> 
+            </div>
+        </div>
+        <?php endforeach; ?>
+
+        <!-- Modal Eliminar -->
+        <?php foreach($usuarios as $usuario): ?>
+        <div class="modal fade" id="deleteModal<?=$usuario['id']?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro que quieres eliminar al usuario?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
             </div>
         </div>
         <?php endforeach; ?>
@@ -156,7 +179,7 @@
             <div class="col-12">
                 <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#agregarModal">Añadir Jugador</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#agregarModal">Añadir Usuario</button>
                     
                 </div>
                 <!-- /.card-header -->
@@ -191,8 +214,7 @@
                             echo "<td>".$usuario['rol']."</td>";
                             echo "<td>";
                             echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$usuario['id']."'>Editar</button>";
-                            echo "<button type='button' name='button_field' class='btn btn-danger' onclick='borrarJugador(" . $usuario['id'] . ")'>Borrar</button>";
-
+                            echo "<button type='button' name='button_field' class='btn btn-danger' data-toggle='modal' data-target='#deleteModal". $usuario['id'] . "'>Borrar</button>";
                             echo "</td>";
                             echo "</tr>";
                         }

@@ -68,13 +68,39 @@ class AdminDashboard extends BaseController
 			$data['id']=$request->getPostGet('id');
 		}
 		if($jugadorModel->save($data)===false){
-			var_dump($userModel->errors());
+			var_dump($jugadorModel->errors());
 		}
         $jugadores=$jugadorModel->findAll();
         $jugadores=array('jugadores'=>$jugadores);
         return view('admin/admin_jugador_dt', $jugadores);
 	}
-    public function borrar(){
+    public function guardaUsuario(){
+
+        $usuarioModel = new UsuarioModel();
+		$request= \Config\Services::request();
+		$data=array(
+            'nombres' => $request->getPostGet('nombres'),
+            'apellidos' => $request->getPostGet('apellidos'),
+            'email' => $request->getPostGet('email'),
+            'run' => $request->getPostGet('run'),
+            'direccion' => $request->getPostGet('direccion'),
+            'telefono' => $request->getPostGet('telefono'),
+            'password_hash' => $request->getPostGet('password_hash'),
+            'rol' => $request->getPostGet('rol')
+		);
+        if($request->getPostGet('id')){
+			$data['id']=$request->getPostGet('id');
+		}
+		if($usuarioModel->save($data)===false){
+			var_dump($usuarioModel->errors());
+		}
+        $usuarios=$usuarioModel->findAll();
+        $usuarios=array('usuarios'=>$usuarios);
+        return view('admin/admin_usuarios_dt', $usuarios);
+	}
+
+
+    public function borrarJugador(){
 		$jugadorModel=new JugadorModel();
 		$request= \Config\Services::request();
 		$id=$request->getPostGet('id');
@@ -82,6 +108,15 @@ class AdminDashboard extends BaseController
 		$jugadores=$jugadorModel->findAll();
 		$jugadores=array('jugadores'=>$jugadores);
         return view('admin/admin_jugador_dt', $jugadores);
+	}
+    public function borrarUsuario(){
+		$usuarioModel=new UsuarioModel();
+		$request= \Config\Services::request();
+		$id=$request->getPostGet('id');
+		$usuarioModel->delete($id);
+		$usuario=$usuarioModel->findAll();
+		$usuarios=array('usuarios'=>$usuarios);
+        return view('admin/admin_jugador_dt', $usuarios);
 	}
 
 }
