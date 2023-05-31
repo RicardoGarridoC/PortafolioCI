@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 use App\Models\JugadorModel;
 use App\Models\EquipoModel;
+use App\Models\UsuarioModel;
 
 class AdminDashboard extends BaseController
 {
@@ -25,12 +26,12 @@ class AdminDashboard extends BaseController
         return view('admin/admin_equipo_dt', $equipos);
     }
 
-    public function usaurioDatabase()
+    public function usuarioDatabase()
     {
         $usuarioModel = new UsuarioModel();
         $usuarios=$usuarioModel->findAll();
         $usuarios=array('usuarios'=>$usuarios);
-        return view('admin/admin_usaurios_dt', $usuarios);
+        return view('admin/admin_usuarios_dt', $usuarios);
     }
 
 
