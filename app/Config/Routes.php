@@ -25,6 +25,8 @@ $routes->get('VerCampeonatos','VerJugadores::mostrarCampeonatos');
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
 $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
+$routes->post('/AdminDashboard/guarda', 'AdminDashboard::guarda');
+
 
 
 

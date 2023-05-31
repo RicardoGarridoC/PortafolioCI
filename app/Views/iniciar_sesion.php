@@ -1,101 +1,178 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Inicio de sesión</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Login Page</title>
+  <!--Made with love by Mutiullah Samim -->
+
+  <!--Bootsrap 4 CDN-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+  <!--Custom styles-->
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
   <style>
+    html,
     body {
-      background-color: #f7f7f7;
-      padding-top: 0px;
+      background-image: url('/public/images/estadio2.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100%;
+      font-family: 'Numans', sans-serif;
     }
-    .login-form-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+
+    .container {
+      height: 100%;
+      align-content: center;
     }
-    .login-form {
-      width: 80%;
-      max-width: 700px;
-      padding: 40px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .card {
+      height: 370px;
+      margin-top: auto;
+      margin-bottom: auto;
+      width: 400px;
+      background-color: rgba(0, 0, 0, 0.5) !important;
     }
-    .login-form h1 {
-      text-align: center;
-      margin-bottom: 40px;
+
+    .social_icon span {
+      font-size: 60px;
+      margin-left: 10px;
+      color: #000000;
     }
-    .form-group label {
-      font-size: 20px;
+
+    .social_icon span:hover {
+      color: white;
+      cursor: pointer;
     }
-    .form-control {
-      height: 50px;
-      font-size: 18px;
-      border-radius: 5px;
-      border: 2px solid #ddd;
+
+    .card-header h3 {
+      color: rgb(255, 238, 0);
     }
-    .form-control:focus {
-      border-color: #1e87f0;
-      box-shadow: none;
+
+    .social_icon {
+      position: absolute;
+      right: 20px;
+      top: -45px;
     }
-    .form-check-label {
-      font-size: 18px;
+
+    .input-group-prepend span {
+      width: 50px;
+      background-color: #FFC312;
+      color: black;
+      border: 0 !important;
     }
-    .btn-primary {
-      height: 50px;
-      font-size: 20px;
-      font-weight: bold;
-      border-radius: 5px;
-      background-color: #1e87f0;
-      border-color: #1e87f0;
+
+    input:focus {
+      outline: 0 0 0 0 !important;
+      box-shadow: 0 0 0 0 !important;
+
     }
-    .btn-primary:hover {
-      background-color: #185b9d;
-      border-color: #185b9d;
+
+    .remember {
+      color: white;
     }
-    @media only screen and (max-width: 5000px) {
-      .register-form {
-        width: 80%;
-        padding: 20px;
-      }
-      .register-form h1 {
-        font-size: 28px;
-      }
-      .form-group label {
-        font-size: 18px;
-      }
-      .form-control {
-        height: 40px;
-        font-size: 16px;
-      }
-      .form-check-label {
-        font-size: 16px;
-      }
-      .btn-primary {
-        height: 40px;
-        font-size: 18px;
-      }
+
+    .remember input {
+      width: 20px;
+      height: 20px;
+      margin-left: 15px;
+      margin-right: 5px;
+    }
+
+    .login_btn {
+      color: black;
+      background-color: #FFC312;
+      width: 150px;
+    }
+
+    .login_btn:hover {
+      color: black;
+      background-color: white;
+    }
+
+    .links {
+      color: white;
+    }
+
+    .links a {
+      margin-left: 4px;
     }
   </style>
 </head>
+
 <body>
-  <div class="login-form-wrapper">
-    <div class="login-form">
-      <h1>Iniciar sesión</h1>
-      <form>
-        <div class="form-group">
-          <label for="email">Correo electrónico</label>
-          <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico">
+  <div class="container">
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h3></h3>
+          <div class="d-flex justify-content-end social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="password">Contraseña</label>
-          <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+        <div class="card-body">
+          <form action="<?php echo base_url(); ?>/IniciarSesion/validarIngreso" method="post">
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" name="email" id="email" class="form-control" placeholder="Correo Electronico o Usuario"
+                required="Email">
+
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña"
+                required>
+            </div>
+            <div class="row align-items-center remember">
+              <input type="checkbox">Recuerdame
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Iniciar Sesión" class="btn float-right login_btn">
+            </div>
+            <br>
+
+          </form>
+
+          <div class="row">
+            <div class="col-12" style="text-align: center;">
+              <?php
+              if (isset($mensaje)) {
+              ?>
+              <div class="alert alert-<?= $tipo; ?>">
+                <?= $mensaje; ?>
+              </div>
+
+              <?php } ?>
+            </div>
+          </div>
         </div>
-        <div class="form-check mb-4">
-          <input type="checkbox" class="form-check-input" id="rememberMe">
-          <label class="form-check-label" for="rememberMe">Recuérdame</label>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            ¿Eres nuevo?<a href="#">Registrate</a>
+          </div>
+          <div class="d-flex justify-content-center">
+            <a href="#">. </a>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-      </form>
+      </div>
     </div>
   </div>
+</body>
+
+</html>

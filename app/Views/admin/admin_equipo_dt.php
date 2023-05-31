@@ -46,6 +46,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Genero</th>
                                 <th scope="col">Categoria</th>
+                                <!--<th scope="col">Acciones</th>-->
                             </tr>
                         </thead>
                         <tbody>

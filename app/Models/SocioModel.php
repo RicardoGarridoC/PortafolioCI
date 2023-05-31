@@ -8,7 +8,7 @@ class SocioModel extends Model{
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-
+    //HACER JOINS
     protected $allowedFields = ['nombres', 'apellidos', 'run', 'direccion', 'telefono', 'email', 'fecha_nacimiento', 'fecha_pago', 'password'];
 
     protected $validationRules = [];
