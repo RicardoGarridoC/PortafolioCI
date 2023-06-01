@@ -44,35 +44,54 @@ class AdminDashboard extends BaseController
     }
     public function guarda(){
 
+        
         $jugadorModel = new JugadorModel();
 		$request= \Config\Services::request();
-		$data=array(
-            //'nombres' => $request->getPostGet('nombres'),
-            //'apellidos' => $request->getPostGet('apellidos'),
-            //'run' => $request->getPostGet('run'),
-            //'fecha_nacimiento' => $request->getPostGet('fecha_nacimiento'),
-            //'foto_url' => $request->getPostGet('foto_url'),
-            'posicion' => $request->getPostGet('posicion'),
-            'goles' => $request->getPostGet('goles'),
-            'partidos_jugados' => $request->getPostGet('partidos_jugados'),
-            'equipo_proviene' => $request->getPostGet('equipo_proviene'),
-            'tipo' => $request->getPostGet('tipo'),
-            'sueldo' => $request->getPostGet('sueldo'),
-            'ayuda_economica' => $request->getPostGet('ayuda_economica'),
-            'lesionado' => $request->getPostGet('lesionado'),
-            //'equipo_id' => $request->getPostGet('equipo_id'),
-            //'button_field' => $request->getPostGet('button_field')
         
-		);
-        if($request->getPostGet('id')){
-			$data['id']=$request->getPostGet('id');
-		}
-		if($jugadorModel->save($data)===false){
-			var_dump($jugadorModel->errors());
-		}
-        $jugadores=$jugadorModel->findAll();
-        $jugadores=array('jugadores'=>$jugadores);
-        return view('admin/admin_jugador_dt', $jugadores);
+        if (!empty($_POST['guarda'])) {
+            $posicion = $_POST['posicion'];
+            $goles = $_POST['goles'];
+            $partidos_jugados = $_POST['partidos_jugados'];
+            $equipo_proviene = $_POST['equipo_proviene'];
+            $tipo = $_POST['tipo'];
+            $sueldo = $_POST['sueldo'];
+            $ayuda_economica = $_POST['ayuda_economica'];
+            $lesionado = $_POST['lesionado'];
+          
+            // Check if any required fields are empty
+            if (empty($posicion) || empty($goles) || empty($partidos_jugados) || empty($equipo_proviene) || empty($tipo) || empty($sueldo) || empty($ayuda_economica) || empty($lesionado)) {
+                echo "Please fill in all the required fields.";
+            } else {
+                $data=array(
+                    //'nombres' => $request->getPostGet('nombres'),
+                    //'apellidos' => $request->getPostGet('apellidos'),
+                    //'run' => $request->getPostGet('run'),
+                    //'fecha_nacimiento' => $request->getPostGet('fecha_nacimiento'),
+                    //'foto_url' => $request->getPostGet('foto_url'),
+                    'posicion' => $request->getPostGet('posicion'),
+                    'goles' => $request->getPostGet('goles'),
+                    'partidos_jugados' => $request->getPostGet('partidos_jugados'),
+                    'equipo_proviene' => $request->getPostGet('equipo_proviene'),
+                    'tipo' => $request->getPostGet('tipo'),
+                    'sueldo' => $request->getPostGet('sueldo'),
+                    'ayuda_economica' => $request->getPostGet('ayuda_economica'),
+                    'lesionado' => $request->getPostGet('lesionado'),
+                    //'equipo_id' => $request->getPostGet('equipo_id'),
+                    //'button_field' => $request->getPostGet('button_field')
+                
+                );
+                if($request->getPostGet('id')){
+                    $data['id']=$request->getPostGet('id');
+                }
+                if($jugadorModel->save($data)===false){
+                    var_dump($jugadorModel->errors());
+                }
+                $jugadores=$jugadorModel->findAll();
+                $jugadores=array('jugadores'=>$jugadores);
+                return view('admin/admin_jugador_dt', $jugadores);
+            }
+        }
+		
 	}
     public function guardaUsuario(){
 

@@ -368,8 +368,13 @@
       "autoWidth": false,
       "responsive": true,
     });
-  });
-  
+  }); 
+
+  $(document).ready(function() {
+        $('#agregarModal').on('hidden.bs.modal', function() {
+            $('#myForm')[0].reset();
+        });
+    });
 </script>
 
 </body>

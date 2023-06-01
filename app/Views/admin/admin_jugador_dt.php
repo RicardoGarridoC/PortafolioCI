@@ -37,7 +37,9 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('/AdminDashboard/guarda'); ?>
+                    <?php echo form_open('/AdminDashboard/guarda', 'id="myForm"'); ?>
+
+
                         
                         <div class="form-group">
                             <?php
@@ -62,35 +64,35 @@
                             //echo "<br>";
 
                             echo form_label('Posición', 'posicion');
-                            echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Goles', 'goles');
-                            echo form_input(array('name' => 'goles', 'placeholder' => 'Goles', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'goles', 'placeholder' => 'Goles', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Partidos Jugados', 'partidos_jugados');
-                            echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Equipo Proviene', 'equipo_proviene');
-                            echo form_input(array('name' => 'equipo_proviene', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'equipo_proviene', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Tipo', 'tipo');
-                            echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Sueldo', 'sueldo');
-                            echo form_input(array('name' => 'sueldo', 'placeholder' => 'Sueldo', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'sueldo', 'placeholder' => 'Sueldo', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Ayuda Económica', 'ayuda_economica');
-                            echo form_input(array('name' => 'ayuda_economica', 'placeholder' => 'Ayuda Económica', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'ayuda_economica', 'placeholder' => 'Ayuda Económica', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Lesionado', 'lesionado');
-                            echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             //echo form_label('ID del Equipo', 'equipo_id');
@@ -100,9 +102,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <?php
-                        echo form_submit('guarda', 'Guardar', 'class="btn btn-primary"');
-                        ?>
+                        <?php echo form_submit('guarda', 'Guardar', 'class="btn btn-primary"'); ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     
                     <?php echo form_close(); ?>
@@ -110,6 +110,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Modal Editar -->
         <?php foreach($jugadores as $jugador): ?>
         <div class="modal fade" id="editModal<?=$jugador['id']?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -145,35 +146,36 @@
                             //echo "<br>";
                             
                             echo form_label('Posición', 'posicion');
-                            echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control', 'value' => $jugador['posicion']));
+                            echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control', 'value' => $jugador['posicion'], 'required' => 'required'));
+
                             echo "<br>";
                             
                             echo form_label('Goles', 'goles');
-                            echo form_input(array('name' => 'goles', 'placeholder' => 'Goles', 'class' => 'form-control', 'value' => $jugador['goles']));
+                            echo form_input(array('name' => 'goles', 'placeholder' => 'Goles', 'class' => 'form-control', 'value' => $jugador['goles'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Partidos Jugados', 'partidos_jugados');
-                            echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control', 'value' => $jugador['partidos_jugados']));
+                            echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control', 'value' => $jugador['partidos_jugados'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Equipo Proviene', 'equipo_proviene');
-                            echo form_input(array('name' => 'equipo_proviene', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'value' => $jugador['equipo_proviene']));
+                            echo form_input(array('name' => 'equipo_proviene', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'value' => $jugador['equipo_proviene'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Tipo', 'tipo');
-                            echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control', 'value' => $jugador['tipo']));
+                            echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control', 'value' => $jugador['tipo'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Sueldo', 'sueldo');
-                            echo form_input(array('name' => 'sueldo', 'placeholder' => 'Sueldo', 'class' => 'form-control', 'value' => $jugador['sueldo']));
+                            echo form_input(array('name' => 'sueldo', 'placeholder' => 'Sueldo', 'class' => 'form-control', 'value' => $jugador['sueldo'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Ayuda Económica', 'ayuda_economica');
-                            echo form_input(array('name' => 'ayuda_economica', 'placeholder' => 'Ayuda Económica', 'class' => 'form-control', 'value' => $jugador['ayuda_economica']));
+                            echo form_input(array('name' => 'ayuda_economica', 'placeholder' => 'Ayuda Económica', 'class' => 'form-control', 'value' => $jugador['ayuda_economica'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Lesionado', 'lesionado');
-                            echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'value' => $jugador['lesionado']));
+                            echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'value' => $jugador['lesionado'], 'required' => 'required'));
                             echo "<br>";
                             
                             //echo form_label('ID del Equipo', 'equipo_id');
@@ -289,7 +291,6 @@
         <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
-        
         
     <?= $this->endSection() ?>
 
