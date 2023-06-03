@@ -42,12 +42,13 @@ class AdminDashboard extends BaseController
     public function edit_action(){
 
     }
+
     public function guarda(){
 
         
         $jugadorModel = new JugadorModel();
 		$request= \Config\Services::request();
-        
+
         if (!empty($_POST['guarda'])) {
             $posicion = $_POST['posicion'];
             $goles = $_POST['goles'];
@@ -128,14 +129,16 @@ class AdminDashboard extends BaseController
 		$jugadores=array('jugadores'=>$jugadores);
         return view('admin/admin_jugador_dt', $jugadores);
 	}
+
     public function borrarUsuario(){
 		$usuarioModel=new UsuarioModel();
 		$request= \Config\Services::request();
 		$id=$request->getPostGet('id');
 		$usuarioModel->delete($id);
-		$usuario=$usuarioModel->findAll();
+		$usuarios=$usuarioModel->findAll();
 		$usuarios=array('usuarios'=>$usuarios);
-        return view('admin/admin_jugador_dt', $usuarios);
+        return view('admin/admin_usuarios_dt', $usuarios);
 	}
+    
 
 }

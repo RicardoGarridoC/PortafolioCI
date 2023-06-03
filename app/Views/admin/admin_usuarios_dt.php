@@ -155,7 +155,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">Confirmación</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <a href="<?php echo base_url(); ?>/AdminDashboard/borrarUsuario?id=<?php echo $usuario['id']; ?>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i> Eliminar</a>
                     </div>
                 </div>
             </div>
