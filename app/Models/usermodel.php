@@ -9,7 +9,7 @@ class Usermodel extends Model
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
 
-    protected $returnType = 'array';
+    protected $returnType = 'string';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = [
