@@ -1,4 +1,5 @@
-<?php namespace App\Models;
+<?php 
+namespace App\Models;
 use CodeIgniter\Model;
 
 class SocioModel extends Model{
@@ -15,7 +16,7 @@ class SocioModel extends Model{
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    
-    
+
+
 }
 ?>

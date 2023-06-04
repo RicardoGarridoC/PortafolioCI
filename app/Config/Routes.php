@@ -15,16 +15,10 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->get('HomeSocios', 'HomeSocios::index');
-$routes->get('Home', 'Home::index');
-$routes->get('IniciarSesion', 'IniciarSesion::index');
-$routes->get('Registrarse', 'Registrarse::index');
-$routes->get('InicioSocios','VerJugadores::inicioSocios');
-$routes->get('VerJugadores','VerJugadores::mostrarJugador');
-$routes->get('VerCampeonatos','VerJugadores::mostrarCampeonatos');
-$routes->get('AdminDashboard','AdminDashboard::Dashboard');
-$routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
-$routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
+$routes->setAutoRoute(true);
+
+
+
 
 
 
@@ -42,7 +36,20 @@ $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+
+$routes->get('/home', 'Home::index');
+$routes->get('/login', 'IniciarSesion::index');
+$routes->post('/ClubDeFutbolCI/IniciarSesion/validarIngreso', 'IniciarSesion::validarIngreso');
+$routes->match(['get', 'post'], 'logout', 'IniciarSesion::cerrarSesion');
+$routes->match(['get', 'post'], '/register', 'Registrarse::register');
+
+
+
+
+
+
+
+
 
 /*
  * --------------------------------------------------------------------
