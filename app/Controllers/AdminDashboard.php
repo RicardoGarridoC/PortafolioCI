@@ -47,11 +47,11 @@ class AdminDashboard extends BaseController
         $data=array(
             'posicion' => $request->getPostGet('posicion'),
             'partidos_jugados' => $request->getPostGet('partidos_jugados'),
-            'equipo_proviene' => $request->getPostGet('equipo_proviene'),
             'tipo' => $request->getPostGet('tipo'),
             'sueldo' => $request->getPostGet('sueldo'),
             'ayuda_economica' => $request->getPostGet('ayuda_economica'),
-            'lesionado' => $request->getPostGet('lesionado')
+            'lesionado' => $request->getPostGet('lesionado'),
+            'equipo_proviene_id_fk' => $request->getPostGet('equipo_proviene_id_fk')
         
         );
         if($request->getPostGet('id')){

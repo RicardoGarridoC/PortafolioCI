@@ -52,10 +52,6 @@
                             echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
-                            echo form_label('Equipo Proviene', 'equipo_proviene');
-                            echo form_input(array('name' => 'equipo_proviene', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'required' => 'required'));
-                            echo "<br>";
-                            
                             echo form_label('Tipo', 'tipo');
                             echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
@@ -70,6 +66,10 @@
                             
                             echo form_label('Lesionado', 'lesionado');
                             echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'required' => 'required'));
+                            echo "<br>";
+
+                            echo form_label('Equipo Proviene', 'equipo_proviene_id_fk');
+                            echo form_input(array('name' => 'equipo_proviene_id_fk', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             ?>
                         </div>
@@ -108,10 +108,6 @@
                             echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control', 'value' => $jugador['partidos_jugados'], 'required' => 'required'));
                             echo "<br>";
                             
-                            echo form_label('Equipo Proviene', 'equipo_proviene');
-                            echo form_input(array('name' => 'equipo_proviene', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'value' => $jugador['equipo_proviene'], 'required' => 'required'));
-                            echo "<br>";
-                            
                             echo form_label('Tipo', 'tipo');
                             echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control', 'value' => $jugador['tipo'], 'required' => 'required'));
                             echo "<br>";
@@ -126,6 +122,10 @@
                             
                             echo form_label('Lesionado', 'lesionado');
                             echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'value' => $jugador['lesionado'], 'required' => 'required'));
+                            echo "<br>";
+
+                            echo form_label('Equipo Proviene', 'equipo_proviene_id_fk');
+                            echo form_input(array('name' => 'equipo_proviene_id_fk', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'value' => $jugador['equipo_proviene_id_fk'], 'required' => 'required'));
                             echo "<br>";
 
                             ?>
@@ -183,19 +183,13 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <!--<th scope="col">Nombres</th>
-                                    <th scope="col">Apellidos</th>
-                                    <th scope="col">RUN</th>
-                                    <th scope="col">Fecha de Nacimiento</th>-->
                                     <th scope="col">Posicion</th>
                                     <th scope="col">Partidos Jugados</th>
-                                    <th scope="col">Equipo</th>
                                     <th scope="col">Tipo</th>
                                     <th scope="col">Sueldo</th>
                                     <th scope="col">Ayuda</th>
                                     <th scope="col">Lesionado</th>
-                                    <!--<th scope="col">Foto</th>
-                                    <th scope="col">Equipo ID</th>-->
+                                    <th scope="col">Equipo</th>
                                     <th scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -210,13 +204,11 @@
                                     //echo "<td>".$jugador['fecha_nacimiento']."</td>";
                                     echo "<td>".$jugador['posicion']."</td>";
                                     echo "<td>".$jugador['partidos_jugados']."</td>";
-                                    echo "<td>".$jugador['equipo_proviene']."</td>";
                                     echo "<td>".$jugador['tipo']."</td>";
                                     echo "<td>".$jugador['sueldo']."</td>";
                                     echo "<td>".$jugador['ayuda_economica']."</td>";
                                     echo "<td>".$jugador['lesionado']."</td>";
-                                    //echo "<td>".$jugador['foto_url']."</td>";
-                                    //echo "<td>".$jugador['equipo_id']."</td>";
+                                    echo "<td>".$jugador['equipo_proviene_id_fk']."</td>";
                                     echo "<td>";
                                     echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$jugador['id']."'>Editar</button>";
                                     echo "<button type='button' name='button_field' class='btn btn-danger' data-toggle='modal' data-target='#deleteModal". $jugador['id'] . "'>Borrar</button>";
@@ -229,19 +221,13 @@
                             <tfoot>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <!--<th scope="col">Nombres</th>
-                                    <th scope="col">Apellidos</th>
-                                    <th scope="col">RUN</th>
-                                    <th scope="col">Fecha de Nacimiento</th>-->
                                     <th scope="col">Posicion</th>
                                     <th scope="col">Partidos Jugados</th>
-                                    <th scope="col">Equipo</th>
                                     <th scope="col">Tipo</th>
                                     <th scope="col">Sueldo</th>
                                     <th scope="col">Ayuda</th>
                                     <th scope="col">Lesionado</th>
-                                    <!--<th scope="col">Foto</th>
-                                    <th scope="col">Equipo ID</th>-->
+                                    <th scope="col">Equipo</th>
                                     <th scope="col">Acción</th>
                                 </tr>
                             </tfoot>
