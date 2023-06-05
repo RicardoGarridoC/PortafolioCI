@@ -9,7 +9,7 @@ class SocioModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombres', 'apellidos', 'run', 'direccion', 'telefono', 'email', 'fecha_nacimiento', 'fecha_pago', 'password'];
+    protected $allowedFields = ['id', 'fecha_pago'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

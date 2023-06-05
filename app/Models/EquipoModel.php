@@ -14,7 +14,7 @@ class EquipoModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','nombre','genero','categoria'];
+    protected $allowedFields = ['id','nombre','genero','categoria','button_field'];
 
 
     // Validation

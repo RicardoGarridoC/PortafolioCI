@@ -37,31 +37,12 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <?php echo form_open('/AdminDashboard/guarda', 'id="myForm"'); ?>
+                    <?php echo form_open('/AdminDashboard/guardaJugador', 'id="myForm"'); ?>
 
 
                         
                         <div class="form-group">
                             <?php
-                            //echo form_label('Nombres', 'nombres');
-                            //echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control'));
-                            //echo "<br>";
-                            
-                            //echo form_label('Apellidos', 'apellidos');
-                            //echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control'));
-                            //echo "<br>";
-                            
-                            //echo form_label('RUN', 'run');
-                            //echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control'));
-                            //echo "<br>";
-                            
-                            //echo form_label('Fecha de Nacimiento', 'fecha_nacimiento');
-                            //echo form_input(array('name' => 'fecha_nacimiento', 'placeholder' => 'Fecha de Nacimiento', 'class' => 'form-control'));
-                            //echo "<br>";
-                            
-                            //echo form_label('URL de la Foto', 'foto_url');
-                            //echo form_input(array('name' => 'foto_url', 'placeholder' => 'URL de la Foto', 'class' => 'form-control'));
-                            //echo "<br>";
 
                             echo form_label('Posición', 'posicion');
                             echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control', 'required' => 'required'));
@@ -94,15 +75,11 @@
                             echo form_label('Lesionado', 'lesionado');
                             echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
-                            
-                            //echo form_label('ID del Equipo', 'equipo_id');
-                            //echo form_input(array('name' => 'equipo_id', 'placeholder' => 'ID del Equipo', 'class' => 'form-control'));
-                            //echo "<br>";
                             ?>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <?php echo form_submit('guarda', 'Guardar', 'class="btn btn-primary"'); ?>
+                        <?php echo form_submit('guardaJugador', 'Guardar', 'class="btn btn-primary"'); ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     
                     <?php echo form_close(); ?>
@@ -121,7 +98,7 @@
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <?php echo form_open('/AdminDashboard/guarda'); ?>
+                        <?php echo form_open('/AdminDashboard/guardaJugador'); ?>
                     
                         <div class="form-group">
                             <?php
@@ -186,7 +163,7 @@
                     </div>
                     <div class="modal-footer">
                         <?php
-                        echo form_submit('guarda', 'Guardar', 'class="btn btn-primary"');
+                        echo form_submit('guardaJugador', 'Guardar', 'class="btn btn-primary"');
                         echo form_hidden('id', $jugador['id']);
                         ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -201,89 +178,89 @@
         <section class="content">
         <div class="container-fluid">
             <div class="row">
-            <div class="col-12">
-                <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#agregarModal">Añadir Jugador</button>
-                    
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <!--<th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">RUN</th>
-                            <th scope="col">Fecha de Nacimiento</th>-->
-                            <th scope="col">Posicion</th>
-                            <th scope="col">Goles</th>
-                            <th scope="col">Partidos Jugados</th>
-                            <th scope="col">Equipo</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Sueldo</th>
-                            <th scope="col">Ayuda</th>
-                            <th scope="col">Lesionado</th>
-                            <!--<th scope="col">Foto</th>
-                            <th scope="col">Equipo ID</th>-->
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach($jugadores as $jugador){
-                            echo "<tr data-jugador-id='".$jugador['id']."'>";
-                            echo "<td>".$jugador['id']."</td>";
-                            //echo "<td>".$jugador['nombres']."</td>";
-                            //echo "<td>".$jugador['apellidos']."</td>";
-                            //echo "<td>".$jugador['run']."</td>";
-                            //echo "<td>".$jugador['fecha_nacimiento']."</td>";
-                            echo "<td>".$jugador['posicion']."</td>";
-                            echo "<td>".$jugador['goles']."</td>";
-                            echo "<td>".$jugador['partidos_jugados']."</td>";
-                            echo "<td>".$jugador['equipo_proviene']."</td>";
-                            echo "<td>".$jugador['tipo']."</td>";
-                            echo "<td>".$jugador['sueldo']."</td>";
-                            echo "<td>".$jugador['ayuda_economica']."</td>";
-                            echo "<td>".$jugador['lesionado']."</td>";
-                            //echo "<td>".$jugador['foto_url']."</td>";
-                            //echo "<td>".$jugador['equipo_id']."</td>";
-                            echo "<td>";
-                            echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$jugador['id']."'>Editar</button>";
-                            echo "<button type='button' name='button_field' class='btn btn-danger' onclick='borrarJugador(" . $jugador['id'] . ")'>Borrar</button>";
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#agregarModal">Añadir Jugador</button>
+                            
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <!--<th scope="col">Nombres</th>
+                                    <th scope="col">Apellidos</th>
+                                    <th scope="col">RUN</th>
+                                    <th scope="col">Fecha de Nacimiento</th>-->
+                                    <th scope="col">Posicion</th>
+                                    <th scope="col">Goles</th>
+                                    <th scope="col">Partidos Jugados</th>
+                                    <th scope="col">Equipo</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Sueldo</th>
+                                    <th scope="col">Ayuda</th>
+                                    <th scope="col">Lesionado</th>
+                                    <!--<th scope="col">Foto</th>
+                                    <th scope="col">Equipo ID</th>-->
+                                    <th scope="col">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach($jugadores as $jugador){
+                                    echo "<tr data-jugador-id='".$jugador['id']."'>";
+                                    echo "<td>".$jugador['id']."</td>";
+                                    //echo "<td>".$jugador['nombres']."</td>";
+                                    //echo "<td>".$jugador['apellidos']."</td>";
+                                    //echo "<td>".$jugador['run']."</td>";
+                                    //echo "<td>".$jugador['fecha_nacimiento']."</td>";
+                                    echo "<td>".$jugador['posicion']."</td>";
+                                    echo "<td>".$jugador['goles']."</td>";
+                                    echo "<td>".$jugador['partidos_jugados']."</td>";
+                                    echo "<td>".$jugador['equipo_proviene']."</td>";
+                                    echo "<td>".$jugador['tipo']."</td>";
+                                    echo "<td>".$jugador['sueldo']."</td>";
+                                    echo "<td>".$jugador['ayuda_economica']."</td>";
+                                    echo "<td>".$jugador['lesionado']."</td>";
+                                    //echo "<td>".$jugador['foto_url']."</td>";
+                                    //echo "<td>".$jugador['equipo_id']."</td>";
+                                    echo "<td>";
+                                    echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$jugador['id']."'>Editar</button>";
+                                    echo "<button type='button' name='button_field' class='btn btn-danger' onclick='borrarJugador(" . $jugador['id'] . ")'>Borrar</button>";
 
-                            echo "</td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <!--<th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">RUN</th>
-                            <th scope="col">Fecha de Nacimiento</th>-->
-                            <th scope="col">Posicion</th>
-                            <th scope="col">Goles</th>
-                            <th scope="col">Partidos Jugados</th>
-                            <th scope="col">Equipo</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Sueldo</th>
-                            <th scope="col">Ayuda</th>
-                            <th scope="col">Lesionado</th>
-                            <!--<th scope="col">Foto</th>
-                            <th scope="col">Equipo ID</th>-->
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </tfoot>
-                    </table>
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <!--<th scope="col">Nombres</th>
+                                    <th scope="col">Apellidos</th>
+                                    <th scope="col">RUN</th>
+                                    <th scope="col">Fecha de Nacimiento</th>-->
+                                    <th scope="col">Posicion</th>
+                                    <th scope="col">Goles</th>
+                                    <th scope="col">Partidos Jugados</th>
+                                    <th scope="col">Equipo</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Sueldo</th>
+                                    <th scope="col">Ayuda</th>
+                                    <th scope="col">Lesionado</th>
+                                    <!--<th scope="col">Foto</th>
+                                    <th scope="col">Equipo ID</th>-->
+                                    <th scope="col">Acción</th>
+                                </tr>
+                            </tfoot>
+                            </table>
+                        </div>
+                    <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
                 </div>
-                <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
             <!-- /.col -->
             </div>
             <!-- /.row -->
