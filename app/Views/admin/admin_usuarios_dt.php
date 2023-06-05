@@ -42,35 +42,35 @@
                         <div class="form-group">
                             <?php
                             echo form_label('Nombres', 'nombres');
-                            echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Apellidos', 'apellidos');
-                            echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Email', 'email');
-                            echo form_input(array('name' => 'email', 'placeholder' => 'Email', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'email', 'placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('RUN', 'run');
-                            echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Dirección', 'direccion');
-                            echo form_input(array('name' => 'direccion', 'placeholder' => 'Dirección', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'direccion', 'placeholder' => 'Dirección', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Teléfono', 'telefono');
-                            echo form_input(array('name' => 'telefono', 'placeholder' => 'Teléfono', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'telefono', 'placeholder' => 'Teléfono', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Contraseña', 'password_hash');
-                            echo form_input(array('name' => 'password_hash', 'placeholder' => 'Contraseña', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'password_hash', 'placeholder' => 'Contraseña', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Rol', 'rol');
-                            echo form_input(array('name' => 'rol', 'placeholder' => 'Rol', 'class' => 'form-control'));
+                            echo form_input(array('name' => 'rol', 'placeholder' => 'Rol', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
                             ?>
@@ -102,35 +102,35 @@
                         <div class="form-group">
                             <?php
                             echo form_label('Nombres', 'nombres');
-                            echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control', 'value' => $usuario['nombres']));
+                            echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control', 'value' => $usuario['nombres'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Apellidos', 'apellidos');
-                            echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control', 'value' => $usuario['apellidos']));
+                            echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control', 'value' => $usuario['apellidos'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Email', 'email');
-                            echo form_input(array('name' => 'email', 'placeholder' => 'Email', 'class' => 'form-control', 'value' => $usuario['email']));
+                            echo form_input(array('name' => 'email', 'placeholder' => 'Email', 'class' => 'form-control', 'value' => $usuario['email'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('RUN', 'run');
-                            echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control', 'value' => $usuario['run']));
+                            echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control', 'value' => $usuario['run'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Dirección', 'direccion');
-                            echo form_input(array('name' => 'direccion', 'placeholder' => 'Dirección', 'class' => 'form-control', 'value' => $usuario['direccion']));
+                            echo form_input(array('name' => 'direccion', 'placeholder' => 'Dirección', 'class' => 'form-control', 'value' => $usuario['direccion'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Teléfono', 'telefono');
-                            echo form_input(array('name' => 'telefono', 'placeholder' => 'Teléfono', 'class' => 'form-control', 'value' => $usuario['telefono']));
+                            echo form_input(array('name' => 'telefono', 'placeholder' => 'Teléfono', 'class' => 'form-control', 'value' => $usuario['telefono'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Contraseña', 'password_hash');
-                            echo form_input(array('name' => 'password_hash', 'placeholder' => 'Contraseña', 'class' => 'form-control', 'value' => $usuario['password_hash']));
+                            echo form_input(array('name' => 'password_hash', 'placeholder' => 'Contraseña', 'class' => 'form-control', 'value' => $usuario['password_hash'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Rol', 'rol');
-                            echo form_input(array('name' => 'rol', 'placeholder' => 'Rol', 'class' => 'form-control', 'value' => $usuario['rol']));
+                            echo form_input(array('name' => 'rol', 'placeholder' => 'Rol', 'class' => 'form-control', 'value' => $usuario['rol'], 'required' => 'required'));
                             echo "<br>";
                             
                             ?>

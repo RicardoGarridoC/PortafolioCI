@@ -48,10 +48,6 @@
                             echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
-                            echo form_label('Goles', 'goles');
-                            echo form_input(array('name' => 'goles', 'placeholder' => 'Goles', 'class' => 'form-control', 'required' => 'required'));
-                            echo "<br>";
-                            
                             echo form_label('Partidos Jugados', 'partidos_jugados');
                             echo form_input(array('name' => 'partidos_jugados', 'placeholder' => 'Partidos Jugados', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
@@ -102,33 +98,10 @@
                     
                         <div class="form-group">
                             <?php
-                            //echo form_label('Nombres', 'nombres');
-                            //echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control', 'value' => $jugador['nombres']));
-                            //echo "<br>";
-                            
-                            //echo form_label('Apellidos', 'apellidos');
-                            //echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control', 'value' => $jugador['apellidos']));
-                            //echo "<br>";
-                            
-                            //echo form_label('RUN', 'run');
-                            //echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control', 'value' => $jugador['run']));
-                            //echo "<br>";
-                            
-                            //echo form_label('Fecha de Nacimiento', 'fecha_nacimiento');
-                            //echo form_input(array('name' => 'fecha_nacimiento', 'placeholder' => 'Fecha de Nacimiento', 'class' => 'form-control', 'value' => $jugador['fecha_nacimiento']));
-                            //echo "<br>";
-                            
-                            //echo form_label('URL de la Foto', 'foto_url');
-                            //echo form_input(array('name' => 'foto_url', 'placeholder' => 'URL de la Foto', 'class' => 'form-control', 'value' => $jugador['foto_url']));
-                            //echo "<br>";
                             
                             echo form_label('Posición', 'posicion');
                             echo form_input(array('name' => 'posicion', 'placeholder' => 'Posición', 'class' => 'form-control', 'value' => $jugador['posicion'], 'required' => 'required'));
 
-                            echo "<br>";
-                            
-                            echo form_label('Goles', 'goles');
-                            echo form_input(array('name' => 'goles', 'placeholder' => 'Goles', 'class' => 'form-control', 'value' => $jugador['goles'], 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Partidos Jugados', 'partidos_jugados');
@@ -154,10 +127,7 @@
                             echo form_label('Lesionado', 'lesionado');
                             echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'value' => $jugador['lesionado'], 'required' => 'required'));
                             echo "<br>";
-                            
-                            //echo form_label('ID del Equipo', 'equipo_id');
-                            //echo form_input(array('name' => 'equipo_id', 'placeholder' => 'ID del Equipo', 'class' => 'form-control', 'value' => $jugador['equipo_id']));
-                            //echo "<br>";
+
                             ?>
                         </div>
                     </div>
@@ -170,6 +140,29 @@
                     </div>
                     <?php echo form_close(); ?>
                 </div> 
+            </div>
+        </div>
+        <?php endforeach; ?>
+
+        <!-- Modal Eliminar -->
+        <?php foreach($jugadores as $jugador): ?>
+        <div class="modal fade" id="deleteModal<?=$jugador['id']?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirmación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro que quieres eliminar al jugador?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <a href="<?php echo base_url(); ?>/AdminDashboard/borrarJugador?id=<?php echo $jugador['id']; ?>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i> Eliminar</a>
+                    </div>
+                </div>
             </div>
         </div>
         <?php endforeach; ?>
@@ -195,7 +188,6 @@
                                     <th scope="col">RUN</th>
                                     <th scope="col">Fecha de Nacimiento</th>-->
                                     <th scope="col">Posicion</th>
-                                    <th scope="col">Goles</th>
                                     <th scope="col">Partidos Jugados</th>
                                     <th scope="col">Equipo</th>
                                     <th scope="col">Tipo</th>
@@ -217,7 +209,6 @@
                                     //echo "<td>".$jugador['run']."</td>";
                                     //echo "<td>".$jugador['fecha_nacimiento']."</td>";
                                     echo "<td>".$jugador['posicion']."</td>";
-                                    echo "<td>".$jugador['goles']."</td>";
                                     echo "<td>".$jugador['partidos_jugados']."</td>";
                                     echo "<td>".$jugador['equipo_proviene']."</td>";
                                     echo "<td>".$jugador['tipo']."</td>";
@@ -228,7 +219,7 @@
                                     //echo "<td>".$jugador['equipo_id']."</td>";
                                     echo "<td>";
                                     echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$jugador['id']."'>Editar</button>";
-                                    echo "<button type='button' name='button_field' class='btn btn-danger' onclick='borrarJugador(" . $jugador['id'] . ")'>Borrar</button>";
+                                    echo "<button type='button' name='button_field' class='btn btn-danger' data-toggle='modal' data-target='#deleteModal". $jugador['id'] . "'>Borrar</button>";
 
                                     echo "</td>";
                                     echo "</tr>";
@@ -243,7 +234,6 @@
                                     <th scope="col">RUN</th>
                                     <th scope="col">Fecha de Nacimiento</th>-->
                                     <th scope="col">Posicion</th>
-                                    <th scope="col">Goles</th>
                                     <th scope="col">Partidos Jugados</th>
                                     <th scope="col">Equipo</th>
                                     <th scope="col">Tipo</th>

@@ -37,32 +37,30 @@
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <?php echo form_open('/AdminDashboard/guardaEquipo'); ?>
+                <?php echo form_open('/AdminDashboard/guardaEquipo', 'id="myForm"'); ?>
 
+
+                    
                     <div class="form-group">
                         <?php
                         echo form_label('Nombre', 'nombre');
-                        echo form_input(array('name' => 'nombre', 'placeholder' => 'Nombre', 'class' => 'form-control'));
+                        echo form_input(array('name' => 'nombre', 'placeholder' => 'Nombre', 'class' => 'form-control','required' => 'required'));
                         echo "<br>";
-                        
+
                         echo form_label('Genero', 'genero');
-                        echo form_input(array('name' => 'genero', 'placeholder' => 'Genero', 'class' => 'form-control'));
+                        echo form_input(array('name' => 'genero', 'placeholder' => 'Genero', 'class' => 'form-control','required' => 'required'));
                         echo "<br>";
-                        
-                        echo form_label('Categoria', 'categoria');
-                        echo form_input(array('name' => 'categoria', 'placeholder' => 'Categoria', 'class' => 'form-control'));
+                        echo form_label('Division', 'division_id_fk');
+                        echo form_input(array('name' => 'division_id_fk', 'placeholder' => 'Division', 'class' => 'form-control','required' => 'required'));
                         echo "<br>";
-                        
                         ?>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <?php
-                    echo form_submit('guardaEquipo', 'Guardar', 'class="btn btn-primary"');
-                    ?>
+                    <?php echo form_submit('guardaEquipo', 'Guardar', 'class="btn btn-primary"'); ?>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 
-                <?php echo form_close(); ?>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>
@@ -82,17 +80,17 @@
                     <div class="form-group">
                         <?php
                         echo form_label('Nombre', 'nombre');
-                        echo form_input(array('name' => 'nombre', 'placeholder' => 'Nombre', 'class' => 'form-control', 'value' => $equipo['nombre']));
+                        echo form_input(array('name' => 'nombre', 'placeholder' => 'Nombre', 'class' => 'form-control','required' => 'required', 'value' => $equipo['nombre']));
                         echo "<br>";
 
                         echo form_label('Genero', 'genero');
-                        echo form_input(array('name' => 'genero', 'placeholder' => 'Genero', 'class' => 'form-control', 'value' => $equipo['genero']));
+                        echo form_input(array('name' => 'genero', 'placeholder' => 'Genero', 'class' => 'form-control','required' => 'required', 'value' => $equipo['genero']));
                         echo "<br>";
-                        
-                        echo form_label('Categoria', 'categoria');
-                        echo form_input(array('name' => 'categoria', 'placeholder' => 'Categoria', 'class' => 'form-control', 'value' => $equipo['categoria']));
+
+                        echo form_label('Division', 'division_id_fk');
+                        echo form_input(array('name' => 'division_id_fk', 'placeholder' => 'Division', 'class' => 'form-control','required' => 'required', 'value' => $equipo['division_id_fk']));
                         echo "<br>";
-                                        
+                          
                         ?>
                     </div>
                 </div>
@@ -150,8 +148,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Genero</th>
-                                <th scope="col">Categoria</th>
-                                <!--<th scope="col">Acciones</th>-->
+                                <th scope="col">Division</th>
                                 <th scope="col">Acción</th>
                             </tr>
                         </thead>
@@ -162,7 +159,8 @@
                                 echo "<td>".$equipo['id']."</td>";
                                 echo "<td>".$equipo['nombre']."</td>";
                                 echo "<td>".$equipo['genero']."</td>";
-                                echo "<td>".$equipo['categoria']."</td>";
+                                //Hay que hacer que aparesca el nombre y no el id
+                                echo "<td>".$equipo['division_id_fk']."</td>";
                                 echo "<td>";
                                 echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$equipo['id']."'>Editar</button>";
                                 echo "<button type='button' name='button_field' class='btn btn-danger' data-toggle='modal' data-target='#deleteModal". $equipo['id'] . "'>Borrar</button>";
@@ -176,7 +174,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Genero</th>
-                                <th scope="col">Categoria</th>
+                                <th scope="col">Division</th>
                                 <th scope="col">Acción</th>
                             </tr>
                         </tfoot>
