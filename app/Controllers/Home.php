@@ -12,8 +12,8 @@ class Home extends BaseController
         $usuario = $usuarioModel->find('1');
         
         echo view('templates/header');
-        echo view('templates/footer');
         echo view('home/home', $usuario);
+        echo view('templates/footer');
     }
 
 

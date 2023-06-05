@@ -24,7 +24,7 @@
   <style>
     html,
     body {
-      background-image: url('/public/images/estadio2.jpg');
+      background-image: url('../public/images/estadio2.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       height: 100%;
