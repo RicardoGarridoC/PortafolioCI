@@ -96,9 +96,12 @@
 
 <body>
   <!-- Contenido de la página -->
+  <div>
   <video autoplay muted loop id="video-background">
     <source src="<?php echo base_url('public/Background5.mp4'); ?>" type="video/mp4">
   </video>
+  </div>
+  
   <div class="gradient-overlay"></div>
   <div class="buttons-container">
     <a type="button" class="btn" href=<?php echo base_url('index.php/IniciarSesion'); ?>>Iniciar Sesión</a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2023 a las 18:26:57
+-- Tiempo de generación: 05-06-2023 a las 19:32:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -156,11 +156,10 @@ CREATE TABLE `equipos_campeonato` (
 CREATE TABLE `equipo_tecnico` (
   `id` int(11) NOT NULL,
   `cargo` enum('entrenador','asistente_entrenador','preparador_fisico','utilero','kinesiologo') NOT NULL,
-  `equipo_proviene` varchar(100) DEFAULT NULL,
+  `equipo_proviene_fk` int(11) DEFAULT NULL,
   `sueldo` decimal(10,2) DEFAULT NULL,
   `valor_hora_extra` decimal(10,2) DEFAULT NULL,
-  `horas_extras_mes` int(11) DEFAULT 0,
-  `equipo_id_fk` int(11) DEFAULT NULL
+  `horas_extras_mes` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -229,39 +228,38 @@ CREATE TABLE `jugadores` (
   `id` int(11) NOT NULL,
   `posicion` varchar(50) DEFAULT NULL,
   `partidos_jugados` int(11) DEFAULT 0,
-  `equipo_proviene` varchar(100) DEFAULT NULL,
   `tipo` enum('aficionado','profesional') NOT NULL,
   `sueldo` decimal(10,2) DEFAULT NULL,
   `ayuda_economica` decimal(10,2) DEFAULT NULL,
   `lesionado` tinyint(1) DEFAULT 0,
-  `equipo_id_fk` int(11) DEFAULT NULL
+  `equipo_proviene_id_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `jugadores`
 --
 
-INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `equipo_proviene`, `tipo`, `sueldo`, `ayuda_economica`, `lesionado`, `equipo_id_fk`) VALUES
-(1, 'Delantero', 20, 'Equipo 2', 'profesional', 1500000.00, 0.00, 0, 10),
-(2, 'Defensa', 15, 'Equipo 3', 'profesional', 1200000.00, 0.00, 0, 10),
-(3, 'Mediocampista', 18, 'Equipo 4', 'profesional', 1400000.00, 0.00, 0, 10),
-(4, 'Portero', 10, 'Equipo 5', 'aficionado', NULL, 0.00, 0, 10),
-(5, 'Mediocampista', 19, 'Equipo 6', 'profesional', 1350000.00, 0.00, 0, 10),
-(6, 'Delantero', 22, 'Equipo 7', 'profesional', 1600000.00, 0.00, 0, 10),
-(7, 'Defensa', 17, 'Equipo 8', 'profesional', 1250000.00, 0.00, 0, 10),
-(8, 'Mediocampista', 12, 'CD Victoria', 'profesional', 200000.00, 0.00, 0, 10),
-(9, 'Defensa', 18, 'San Antonio FC', 'profesional', 175000.00, 0.00, 0, 10),
-(10, 'Delantero', 20, 'Deportivo Santiago', 'profesional', 220000.00, 0.00, 0, 10),
-(11, 'Mediocampista', 17, 'Unión Fénix', 'profesional', 180000.00, 0.00, 0, 10),
-(12, 'Portero', 10, 'Ferroviarios FC', 'profesional', 170000.00, 0.00, 0, 10),
-(13, 'Delantero', 22, 'Rangers FC', 'profesional', 225000.00, 0.00, 0, 10),
-(14, 'Defensa', 16, 'Arica United', 'profesional', 185000.00, 0.00, 0, 10),
-(15, 'Mediocampista', 19, 'Ñublense', 'profesional', 190000.00, 0.00, 0, 10),
-(16, 'Mediocampista', 30, 'River Plate', 'profesional', 800000.00, 0.00, 0, 10),
-(17, 'Defensa', 25, 'Lanus', 'profesional', 600000.00, 0.00, 0, 10),
-(18, 'Delantero', 28, 'Boca Juniors', 'profesional', 750000.00, 0.00, 0, 10),
-(19, 'Mediocampista', 32, 'Independiente', 'profesional', 700000.00, 0.00, 0, 10),
-(20, 'Defensa', 22, 'San Lorenzo', 'profesional', 550000.00, 0.00, 0, 10);
+INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `tipo`, `sueldo`, `ayuda_economica`, `lesionado`, `equipo_proviene_id_fk`) VALUES
+(1, 'Delantero', 20, 'profesional', 1500000.00, 0.00, 0, 10),
+(2, 'Defensa', 15, 'profesional', 1200000.00, 0.00, 0, 10),
+(3, 'Mediocampista', 18, 'profesional', 1400000.00, 0.00, 0, 10),
+(4, 'Portero', 10, 'aficionado', NULL, 0.00, 0, 10),
+(5, 'Mediocampista', 19, 'profesional', 1350000.00, 0.00, 0, 10),
+(6, 'Delantero', 22, 'profesional', 1600000.00, 0.00, 0, 10),
+(7, 'Defensa', 17, 'profesional', 1250000.00, 0.00, 0, 10),
+(8, 'Mediocampista', 12, 'profesional', 200000.00, 0.00, 0, 10),
+(9, 'Defensa', 18, 'profesional', 175000.00, 0.00, 0, 10),
+(10, 'Delantero', 20, 'profesional', 220000.00, 0.00, 0, 10),
+(11, 'Mediocampista', 17, 'profesional', 180000.00, 0.00, 0, 10),
+(12, 'Portero', 10, 'profesional', 170000.00, 0.00, 0, 10),
+(13, 'Delantero', 22, 'profesional', 225000.00, 0.00, 0, 10),
+(14, 'Defensa', 16, 'profesional', 185000.00, 0.00, 0, 10),
+(15, 'Mediocampista', 19, 'profesional', 190000.00, 0.00, 0, 10),
+(16, 'Mediocampista', 30, 'profesional', 800000.00, 0.00, 0, 10),
+(17, 'Defensa', 25, 'profesional', 600000.00, 0.00, 0, 10),
+(18, 'Delantero', 28, 'profesional', 750000.00, 0.00, 0, 10),
+(19, 'Mediocampista', 32, 'profesional', 700000.00, 0.00, 0, 10),
+(20, 'Defensa', 22, 'profesional', 550000.00, 0.00, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -485,7 +483,7 @@ ALTER TABLE `equipos_campeonato`
 --
 ALTER TABLE `equipo_tecnico`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `equipo_id` (`equipo_id_fk`);
+  ADD KEY `equipo_tecnico_FK` (`equipo_proviene_fk`);
 
 --
 -- Indices de la tabla `estadisticas_campeonato`
@@ -513,7 +511,7 @@ ALTER TABLE `goles`
 --
 ALTER TABLE `jugadores`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `equipo_id` (`equipo_id_fk`);
+  ADD KEY `equipo_id` (`equipo_proviene_id_fk`);
 
 --
 -- Indices de la tabla `motivo`
@@ -740,7 +738,7 @@ ALTER TABLE `equipos_campeonato`
 -- Filtros para la tabla `equipo_tecnico`
 --
 ALTER TABLE `equipo_tecnico`
-  ADD CONSTRAINT `equipo_tecnico_ibfk_1` FOREIGN KEY (`equipo_id_fk`) REFERENCES `equipos` (`id`);
+  ADD CONSTRAINT `equipo_tecnico_FK` FOREIGN KEY (`equipo_proviene_fk`) REFERENCES `equipos` (`id`);
 
 --
 -- Filtros para la tabla `estadisticas_equipo`
@@ -753,13 +751,13 @@ ALTER TABLE `estadisticas_equipo`
 --
 ALTER TABLE `goles`
   ADD CONSTRAINT `goles_FK` FOREIGN KEY (`partido_id_fk`) REFERENCES `partidos` (`id`),
-  ADD CONSTRAINT `goles_ibfk_2` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`);
+  ADD CONSTRAINT `goles_FK_1` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`);
 
 --
 -- Filtros para la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  ADD CONSTRAINT `jugadores_ibfk_1` FOREIGN KEY (`equipo_id_fk`) REFERENCES `equipos` (`id`);
+  ADD CONSTRAINT `jugadores_ibfk_1` FOREIGN KEY (`equipo_proviene_id_fk`) REFERENCES `equipos` (`id`);
 
 --
 -- Filtros para la tabla `movimientos`
@@ -795,7 +793,7 @@ ALTER TABLE `tabla_lesiones`
 -- Filtros para la tabla `traspasos`
 --
 ALTER TABLE `traspasos`
-  ADD CONSTRAINT `traspasos_ibfk_1` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`),
+  ADD CONSTRAINT `traspasos_FK` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`),
   ADD CONSTRAINT `traspasos_ibfk_2` FOREIGN KEY (`equipo_origen_id_fk`) REFERENCES `equipos` (`id`),
   ADD CONSTRAINT `traspasos_ibfk_3` FOREIGN KEY (`equipo_destino_id_fk`) REFERENCES `equipos` (`id`);
 

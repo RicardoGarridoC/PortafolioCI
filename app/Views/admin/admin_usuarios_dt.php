@@ -37,7 +37,7 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('/AdminDashboard/guardaUsuario'); ?>
+                        <?php echo form_open('AdminDashboard/guardaUsuario'); ?>
 
                         <div class="form-group">
                             <?php
@@ -97,7 +97,7 @@
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <?php echo form_open('/AdminDashboard/guardaUsuario'); ?>
+                        <?php echo form_open('AdminDashboard/guardaUsuario'); ?>
                     
                         <div class="form-group">
                             <?php
@@ -165,7 +165,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <a href="<?php echo base_url(); ?>/AdminDashboard/borrarUsuario?id=<?php echo $usuario['id']; ?>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i> Eliminar</a>
+                        <a href="<?php echo base_url(); ?>AdminDashboard/borrarUsuario?id=<?php echo $usuario['id']; ?>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i> Eliminar</a>
                     </div>
                 </div>
             </div>

@@ -26,11 +26,11 @@ $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
 $routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
 $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
-$routes->get('/AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
-$routes->get('/AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
-$routes->post('/AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador');
-$routes->post('/AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario');
-$routes->post('/AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo');
+$routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
+$routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
+$routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador');
+$routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario');
+$routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo');
 
 
 
