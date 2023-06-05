@@ -4,12 +4,19 @@ footer {
   bottom: 0;
   width: 100%;
   text-align: center;
-  background-color: black;
+  background-color: #111;
   color: white;
+  padding: 20px;
 }
 
 .footer-static {
   position: static;
+}
+
+
+.footer p {
+    margin-bottom: 0;
+    color: #fff;
 }
 
 </style>

@@ -11,6 +11,24 @@ class Home extends BaseController
         $usuarioModel = new UsuarioModel();
         $usuario=$usuarioModel->find('1');
         // var_dump($socio);
-        return view('header').view('home', $usuario).view('footer');
+        echo view('templates/header');
+        echo view('home', $usuario);
+        echo view('templates/footer');
+    }
+
+    public function homesocios()
+    {
+        return view('templates/header').view('home_socios').view('templates/footer');
+    }
+
+    public function homeiniciosesion()
+    {
+        return view('iniciar_sesion');
+    }
+
+    public function homeregistro()
+    {
+        return view('templates/header').view('registrarse').view('templates/footer');
     }
 }
+?>

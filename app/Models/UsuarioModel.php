@@ -14,7 +14,6 @@ class UsuarioModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    //Añadir JOINS
     protected $allowedFields = ['id','nombres','apellidos','email','run'
     ,'direccion','telefono','password_hash','rol','button_field'];
 

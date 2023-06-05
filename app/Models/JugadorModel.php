@@ -14,7 +14,6 @@ class JugadorModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    //Añadir JOINS
     protected $allowedFields = ['id','posicion','goles','partidos_jugados','equipo_proviene'
     ,'tipo','sueldo','ayuda_economica','lesionado','button_field'];
 

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EquipoModel extends Model
+class EquipoTecnicoModel extends Model
 {
-    protected $table      = 'equipos';
+    protected $table      = 'equipo_tecnico';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -14,7 +14,7 @@ class EquipoModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','nombre','genero','categoria'];
+    protected $allowedFields = ['id','cargo','equipo_proviene','sueldo','valor_hora_extra','horas_extras_mes'];
 
 
     // Validation

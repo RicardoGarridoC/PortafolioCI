@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EquipoModel extends Model
+class EstCampeonatoModel extends Model
 {
-    protected $table      = 'equipos';
+    protected $table      = 'estadisticas_campeonato';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -14,7 +14,8 @@ class EquipoModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','nombre','genero','categoria'];
+    protected $allowedFields = ['id','nombre_campeonato','partidos_ganados','partidos_empatados','partidos_perdidos'
+    ,'goles_favor','goles_contra','diferencia_goles','equipo_id_fk'];
 
 
     // Validation
