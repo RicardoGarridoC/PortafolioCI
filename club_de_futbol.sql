@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2023 a las 17:53:02
+-- Tiempo de generación: 05-06-2023 a las 18:26:57
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `club_de_futbol`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cambios`
+--
+
+CREATE TABLE `cambios` (
+  `id` int(11) NOT NULL,
+  `minuto` int(11) NOT NULL,
+  `jugador_entrante_fk` int(11) NOT NULL,
+  `jugador_saliente_fk` int(11) DEFAULT NULL,
+  `partido_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -418,6 +432,15 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion
 --
 
 --
+-- Indices de la tabla `cambios`
+--
+ALTER TABLE `cambios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cambios_FK` (`partido_fk`),
+  ADD KEY `cambios_FK_1` (`jugador_entrante_fk`),
+  ADD KEY `cambios_FK_2` (`jugador_saliente_fk`);
+
+--
 -- Indices de la tabla `campeonatos`
 --
 ALTER TABLE `campeonatos`
@@ -563,6 +586,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `cambios`
+--
+ALTER TABLE `cambios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `campeonatos`
 --
 ALTER TABLE `campeonatos`
@@ -679,6 +708,14 @@ ALTER TABLE `usuarios`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cambios`
+--
+ALTER TABLE `cambios`
+  ADD CONSTRAINT `cambios_FK` FOREIGN KEY (`partido_fk`) REFERENCES `partidos` (`id`),
+  ADD CONSTRAINT `cambios_FK_1` FOREIGN KEY (`jugador_entrante_fk`) REFERENCES `jugadores` (`id`),
+  ADD CONSTRAINT `cambios_FK_2` FOREIGN KEY (`jugador_saliente_fk`) REFERENCES `jugadores` (`id`);
 
 --
 -- Filtros para la tabla `campeonatos`
