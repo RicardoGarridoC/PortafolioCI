@@ -3,11 +3,11 @@
 use App\Models\JugadorModel;
 use CodeIgniter\Controller;
 
-class VerJugadores extends BaseController
+class SocioController extends BaseController
 {
     public function inicioSocios()
     {
-        return view('inicio_socios');
+        return view('socio/inicio_socios');
     }
     
     public function mostrarJugador()
@@ -21,11 +21,11 @@ class VerJugadores extends BaseController
         //$jugador=$jugadorModel->find('1');
         //var_dump($jugadores);
         $jugadores=array('jugadores'=>$jugadores);
-        return view('ver_jugadores', $jugadores);
+        return view('socio/ver_jugadores', $jugadores);
     }
     
     public function mostrarCampeonatos()
     {
-        return view('ver_campeonatos');
+        return view('socio/ver_campeonatos');
     }
 }

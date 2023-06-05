@@ -27,5 +27,3 @@ footer {
         <p>© 2023 MiEmpresa S.A. Todos los derechos reservados.</p>
     </div>
 </footer>
-</body>
-</html>
