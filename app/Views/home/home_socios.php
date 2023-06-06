@@ -104,7 +104,7 @@
   
   <div class="gradient-overlay"></div>
   <div class="buttons-container">
-    <a type="button" class="btn" href=<?php echo base_url('index.php/IniciarSesion'); ?>>Iniciar Sesión</a>
-    <a type="button" class="btn" href=<?php echo base_url('index.php/Registrarse'); ?>>Registrarse</a>
+    <a type="button" class="btn" href=<?php echo base_url('IniciarSesion'); ?>>Iniciar Sesión</a>
+    <a type="button" class="btn" href=<?php echo base_url('Registrarse'); ?>>Registrarse</a>
   </div>
 </body>

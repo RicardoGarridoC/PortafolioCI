@@ -24,12 +24,13 @@
   <style>
     html,
     body {
-      background-image: url('../public/images/estadio2.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 100%;
-      font-family: 'Numans', sans-serif;
-    }
+    background-image: url(<?php echo base_url('/public/images/estadio2.jpg'); ?>);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+  }
+
 
     .container {
       height: 100%;
