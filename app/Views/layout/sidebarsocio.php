@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../public/css/sidebar_socio.css">
+    <link rel="stylesheet" href="<?= base_url()?>/public/css/sidebar_socio.css">
 
 </head>
 <body>
@@ -17,7 +17,7 @@
             <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/">
-                        <img src="../public/images/losalces.png" class="img-fluid" alt="Image description">
+                        <img src="<?= base_url()?>/public/images/losalces.png" class="img-fluid" alt="Image description">
                     </a>
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="hide-on-small fs-5 d-none d-sm-inline">Club Los Alces F.C.</span>
@@ -25,7 +25,7 @@
                     
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('index.php/InicioSocios'); ?>" class="nav-link align-middle px-0">
+                            <a href="<?php echo base_url('InicioSocios'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Inicio</span>
                             </a>
                         </li>
@@ -34,10 +34,10 @@
                                 <i class="fs-4 bi-speedometer2"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Club</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="<?php echo base_url('index.php/VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
+                                    <a href="<?php echo base_url('VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="<?= site_url('VerCampeonatos')?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                    <a href="<?php echo base_url('VerCampeonatos')?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
                                 </li>
                             </ul>
                         </li>

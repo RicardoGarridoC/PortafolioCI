@@ -10,11 +10,12 @@
         body {
             background-color: #333;
             color: #fff;
-            padding-top: 50px;
         }
 
         .navbar {
             background-color: #212121;
+            top: 0;
+            z-index: 100;
         }
 
         .navbar-brand {
@@ -51,16 +52,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('index.php/Home'); ?>">Home</a>
+                        <a class="nav-link" href="<?php echo base_url('Home'); ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('index.php/HomeSocios'); ?>">Socios</a>
+                        <a class="nav-link" href="<?php echo base_url('HomeSocios'); ?>">Socios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <img src="../public/images/losalces.png" class="navbar-logo" alt="Image description">
+                        <img src="<?= base_url()?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portafolio</a>

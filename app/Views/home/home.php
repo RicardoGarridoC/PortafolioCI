@@ -3,7 +3,6 @@
         body {
             background-color: #333;
             color: #fff;
-            padding-top: 50px;
         }
         .carousel-item {
             height: 400px;
