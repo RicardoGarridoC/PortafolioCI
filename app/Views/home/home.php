@@ -21,6 +21,17 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
+        
+        .probando {
+            background-color: #222;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -50,20 +61,84 @@
     </div>
 
     <!-- Match Section 
-        CAMBIAR ESTA SECCION CON LOS DATOS DE CAMPEONATO Y PARTIDO -->
+    CAMBIAR ESTA SECCION CON LOS DATOS DE CAMPEONATO Y PARTIDO -->
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="match-section">
-                    <h2>Ultimo Partido</h2>
-                    <p>Equipo X vs Equipo Y</p>
-                    <p>Puntaje: 0-0</p>
+                <div class="container probando">
+                    <h2 class="text-center">Ultimo Partido</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6 text-start">
+                                <h4>Equipo X</h4>
+                                <img src="" alt="">
+                                <h4 class="text-center">1</h4>
+                                </div>
+                                <div class="col-6 text-end">
+                                <h4>Equipo Y</h4>
+                                <img src="" alt="">
+                                <h4 class="text-center">0</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col text-center">
+                            <h4>Goles</h4>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <ul class="col-6 text-start">
+                                    <li>Probando 1</li>
+                                </ul>
+                                <ul class="col-6 text-end">
+                                    <li>Probando 2</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col text-center">
+                            <h4>Cambios</h4>
+                            </div>
+                        </div> 
+                        <div class="col-12">
+                            <div class="row">
+                                <ul class="col-6 text-start">
+                                    <li>Cambio 1</li>
+                                </ul>
+                                <ul class="col-6 text-end">
+                                    <li>Cambio 2</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col text-center">
+                            <h4>Tarjetas</h4>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <ul class="col-6 text-start">
+                                    <li>Tarjeta 1</li>
+                                </ul>
+                                <ul class="col-6 text-end">
+                                    <li>Tarjeta 2</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
+
+
 
             <div class="col-md-6">
                 <div class="championship-table">
-                    <h2>Campeonato</h2>
+                    <h2 class="text-center">Campeonato</h2>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -98,5 +173,7 @@
             </div>
         </div>
     </div>
+
+
 
 </body>
