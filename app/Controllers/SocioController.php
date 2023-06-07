@@ -7,7 +7,12 @@ class SocioController extends BaseController
 {
     public function inicioSocios()
     {
-        return view('socio/inicio_socios');
+        //Agregando Titulo a Cada View
+        $titulo = [ 
+            'title' => 'Inicio Socios',
+        ];
+
+        return view('socio/inicio_socios', $titulo);
     }
     
     public function mostrarJugador()
@@ -26,6 +31,10 @@ class SocioController extends BaseController
     
     public function mostrarCampeonatos()
     {
-        return view('socio/ver_campeonatos');
+        $titulo = [ 
+            'title' => 'Campeonatos',
+        ];
+
+        return view('socio/ver_campeonatos', $titulo);
     }
 }

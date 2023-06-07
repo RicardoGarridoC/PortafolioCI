@@ -2,7 +2,7 @@
 
 <?= $this->section('contenido') ?>
 
-<!--Colocar Contenido Aqui-->
-Campeonatos
+  <!--Colocar Contenido Aqui-->
+
 
 <?= $this->endSection() ?>

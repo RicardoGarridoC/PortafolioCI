@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Probando Titulo</title>
+    <!-- RECORDAR AGREGAR TITULO A LOS CONTROLADORES (ej EN INICIO SOCIOS)-->
+    <title><?= $title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--CSS SIDEBAR -->
     <link rel="stylesheet" href="<?= base_url()?>/public/css/sidebar_socio.css">
 
 </head>
@@ -40,6 +42,11 @@
                                     <a href="<?php echo base_url('VerCampeonatos')?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="/" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
+                            </a>
                         </li>
                         
                     </ul>
@@ -123,6 +130,7 @@
     <!--SCRIPTS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- Cerrar Sesion -->
     <script type="text/javascript">
         function cerrarSesion() {
             window.location.href = " <?php echo base_url('Home/cerrarSesion'); ?>"

@@ -44,8 +44,8 @@ class UsuarioModel extends Model
 
     public function buscarUsuarioPorEmail($email)
     {
-
         $db = db_connect();
+        //Saque estado, si quiere colocarlo faltara agregar en el modelo estado (y bdd)
         $builder = $db->table($this->table)->where('email', $email);
         $resultado = $builder->get();
         return $resultado->getResult() ? $resultado->getResult()[0] : false;
