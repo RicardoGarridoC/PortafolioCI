@@ -26,6 +26,7 @@ $routes->get('Registrarse', 'Home::homeregistro');
 $routes->get('InicioSocios','SocioController::inicioSocios');
 $routes->get('VerJugadores','SocioController::mostrarJugador');
 $routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
+$routes->get('VerPartidos','SocioController::verPartidos');
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
 $routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
