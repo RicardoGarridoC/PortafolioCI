@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2023 a las 19:32:13
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Tiempo de generación: 08-06-2023 a las 01:57:21
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,13 @@ CREATE TABLE `cambios` (
   `jugador_saliente_fk` int(11) DEFAULT NULL,
   `partido_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cambios`
+--
+
+INSERT INTO `cambios` (`id`, `minuto`, `jugador_entrante_fk`, `jugador_saliente_fk`, `partido_fk`) VALUES
+(1, 50, 11, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -240,26 +247,26 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `tipo`, `sueldo`, `ayuda_economica`, `lesionado`, `equipo_proviene_id_fk`) VALUES
-(1, 'Delantero', 20, 'profesional', 1500000.00, 0.00, 0, 10),
-(2, 'Defensa', 15, 'profesional', 1200000.00, 0.00, 0, 10),
-(3, 'Mediocampista', 18, 'profesional', 1400000.00, 0.00, 0, 10),
-(4, 'Portero', 10, 'aficionado', NULL, 0.00, 0, 10),
-(5, 'Mediocampista', 19, 'profesional', 1350000.00, 0.00, 0, 10),
-(6, 'Delantero', 22, 'profesional', 1600000.00, 0.00, 0, 10),
-(7, 'Defensa', 17, 'profesional', 1250000.00, 0.00, 0, 10),
-(8, 'Mediocampista', 12, 'profesional', 200000.00, 0.00, 0, 10),
-(9, 'Defensa', 18, 'profesional', 175000.00, 0.00, 0, 10),
-(10, 'Delantero', 20, 'profesional', 220000.00, 0.00, 0, 10),
-(11, 'Mediocampista', 17, 'profesional', 180000.00, 0.00, 0, 10),
-(12, 'Portero', 10, 'profesional', 170000.00, 0.00, 0, 10),
-(13, 'Delantero', 22, 'profesional', 225000.00, 0.00, 0, 10),
-(14, 'Defensa', 16, 'profesional', 185000.00, 0.00, 0, 10),
-(15, 'Mediocampista', 19, 'profesional', 190000.00, 0.00, 0, 10),
-(16, 'Mediocampista', 30, 'profesional', 800000.00, 0.00, 0, 10),
-(17, 'Defensa', 25, 'profesional', 600000.00, 0.00, 0, 10),
-(18, 'Delantero', 28, 'profesional', 750000.00, 0.00, 0, 10),
-(19, 'Mediocampista', 32, 'profesional', 700000.00, 0.00, 0, 10),
-(20, 'Defensa', 22, 'profesional', 550000.00, 0.00, 0, 10);
+(1, 'Delantero', 20, 'profesional', '1500000.00', '0.00', 0, 10),
+(2, 'Defensa', 15, 'profesional', '1200000.00', '0.00', 0, 10),
+(3, 'Mediocampista', 18, 'profesional', '1400000.00', '0.00', 0, 10),
+(4, 'Portero', 10, 'aficionado', NULL, '0.00', 0, 10),
+(5, 'Mediocampista', 19, 'profesional', '1350000.00', '0.00', 0, 10),
+(6, 'Delantero', 22, 'profesional', '1600000.00', '0.00', 0, 10),
+(7, 'Defensa', 17, 'profesional', '1250000.00', '0.00', 0, 10),
+(8, 'Mediocampista', 12, 'profesional', '200000.00', '0.00', 0, 10),
+(9, 'Defensa', 18, 'profesional', '175000.00', '0.00', 0, 10),
+(10, 'Delantero', 20, 'profesional', '220000.00', '0.00', 0, 10),
+(11, 'Mediocampista', 17, 'profesional', '180000.00', '0.00', 0, 10),
+(12, 'Portero', 10, 'profesional', '170000.00', '0.00', 0, 10),
+(13, 'Delantero', 22, 'profesional', '225000.00', '0.00', 0, 10),
+(14, 'Defensa', 16, 'profesional', '185000.00', '0.00', 0, 10),
+(15, 'Mediocampista', 19, 'profesional', '190000.00', '0.00', 0, 10),
+(16, 'Mediocampista', 30, 'profesional', '800000.00', '0.00', 0, 10),
+(17, 'Defensa', 25, 'profesional', '600000.00', '0.00', 0, 10),
+(18, 'Delantero', 28, 'profesional', '750000.00', '0.00', 0, 10),
+(19, 'Mediocampista', 32, 'profesional', '700000.00', '0.00', 0, 10),
+(20, 'Defensa', 22, 'profesional', '550000.00', '0.00', 0, 10);
 
 -- --------------------------------------------------------
 
@@ -383,6 +390,29 @@ CREATE TABLE `tabla_lesiones` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tarjetas_partido`
+--
+
+CREATE TABLE `tarjetas_partido` (
+  `id` int(11) NOT NULL,
+  `jugador_fk` int(11) DEFAULT NULL,
+  `minuto` int(11) DEFAULT NULL,
+  `partido_fk` int(11) DEFAULT NULL,
+  `jugador_externo` varchar(100) DEFAULT NULL,
+  `tarjeta` enum('amarilla','roja') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarjetas_partido`
+--
+
+INSERT INTO `tarjetas_partido` (`id`, `jugador_fk`, `minuto`, `partido_fk`, `jugador_externo`, `tarjeta`) VALUES
+(1, 7, 50, 6, NULL, 'amarilla'),
+(2, NULL, 70, 6, 'Ivan Zamorano', 'roja');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `traspasos`
 --
 
@@ -422,8 +452,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion`, `telefono`, `password_hash`, `rol`, `socio_id_fk`, `jugador_id_fk`, `equipo_tecnico_id_fk`, `direccion_id_fk`) VALUES
-(1, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '', '', 0, '123455', 'administrador', NULL, NULL, NULL, NULL),
-(2, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20020289-9', 'psj 5 636 chgte', 955269593, '123456', 'socio', NULL, NULL, NULL, NULL);
+(3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, '092f4ccc7f9cb7512e3dad89417d2cbbd702adfd2c11deabb7ee866e1360447f0339458b6ad667a339b94431e4f202d3cb8f18751e931d386f1bf0fc4c0e5e70f5c585430abeadb2b2294d25d4ebc64afa7581c06f60', 'administrador', NULL, NULL, NULL, NULL),
+(4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, 'b2d6691b7a055d72a3b3da1ee4e590ce22070b3acf3da66984c2c2147139e8cf23c4bfbc48465cf6afb895e62e041f1dc0b8a02f8c1583f4b8505ce58f636cd44fd2e7a819f0ce9a1f040cc14406b49da1bc6d0b7bf5', 'administrador', NULL, NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -560,6 +590,14 @@ ALTER TABLE `tabla_lesiones`
   ADD KEY `jugador_id` (`jugador_id_fk`);
 
 --
+-- Indices de la tabla `tarjetas_partido`
+--
+ALTER TABLE `tarjetas_partido`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tarjetas_partido_FK` (`jugador_fk`),
+  ADD KEY `tarjetas_partido_FK_2` (`partido_fk`);
+
+--
 -- Indices de la tabla `traspasos`
 --
 ALTER TABLE `traspasos`
@@ -587,7 +625,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `cambios`
 --
 ALTER TABLE `cambios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `campeonatos`
@@ -692,6 +730,12 @@ ALTER TABLE `tabla_lesiones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tarjetas_partido`
+--
+ALTER TABLE `tarjetas_partido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `traspasos`
 --
 ALTER TABLE `traspasos`
@@ -701,7 +745,7 @@ ALTER TABLE `traspasos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -739,12 +783,6 @@ ALTER TABLE `equipos_campeonato`
 --
 ALTER TABLE `equipo_tecnico`
   ADD CONSTRAINT `equipo_tecnico_FK` FOREIGN KEY (`equipo_proviene_fk`) REFERENCES `equipos` (`id`);
-
---
--- Filtros para la tabla `estadisticas_equipo`
---
-ALTER TABLE `estadisticas_equipo`
-  ADD CONSTRAINT `estadisticas_equipo_ibfk_1` FOREIGN KEY (`equipo_id_fk`) REFERENCES `equipos` (`id`);
 
 --
 -- Filtros para la tabla `goles`
@@ -788,6 +826,13 @@ ALTER TABLE `puntajes`
 --
 ALTER TABLE `tabla_lesiones`
   ADD CONSTRAINT `tabla_lesiones_ibfk_1` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`);
+
+--
+-- Filtros para la tabla `tarjetas_partido`
+--
+ALTER TABLE `tarjetas_partido`
+  ADD CONSTRAINT `tarjetas_partido_FK` FOREIGN KEY (`jugador_fk`) REFERENCES `jugadores` (`id`),
+  ADD CONSTRAINT `tarjetas_partido_FK_2` FOREIGN KEY (`partido_fk`) REFERENCES `partidos` (`id`);
 
 --
 -- Filtros para la tabla `traspasos`
