@@ -41,5 +41,14 @@ class UsuarioModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function buscarUsuarioPorEmail($email)
+    {
+
+        $db = db_connect();
+        $builder = $db->table($this->table)->where('email', $email);
+        $resultado = $builder->get();
+        return $resultado->getResult() ? $resultado->getResult()[0] : false;
+    }
 }
 ?>

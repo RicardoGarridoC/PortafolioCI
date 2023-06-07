@@ -124,21 +124,19 @@
           </div>
         </div>
         <div class="card-body">
-          <form action="<?php echo base_url(); ?>/IniciarSesion/validarIngreso" method="post">
+          <form action="<?php echo base_url(); ?>Home/validarIngreso" method="post">
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input type="text" name="email" id="email" class="form-control" placeholder="Correo Electronico o Usuario"
-                required="Email">
+              <input type="text" name="email" id="email" class="form-control" placeholder="Correo Electronico" required="Email">
 
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
               </div>
-              <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña"
-                required>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
             </div>
             <div class="row align-items-center remember">
               <input type="checkbox">Recuerdame
@@ -146,8 +144,6 @@
             <div class="form-group">
               <input type="submit" value="Iniciar Sesión" class="btn float-right login_btn">
             </div>
-            <br>
-
           </form>
 
           <div class="row">
@@ -155,9 +151,9 @@
               <?php
               if (isset($mensaje)) {
               ?>
-              <div class="alert alert-<?= $tipo; ?>">
-                <?= $mensaje; ?>
-              </div>
+                <div class="alert alert-<?= $tipo; ?>">
+                  <?= $mensaje; ?>
+                </div>
 
               <?php } ?>
             </div>
@@ -165,7 +161,7 @@
         </div>
         <div class="card-footer">
           <div class="d-flex justify-content-center links">
-            ¿Eres nuevo?<a href="#">Registrate</a>
+            ¿Eres nuevo?<a href=<?php echo base_url('Registrarse'); ?>>Registrate</a>
           </div>
           <div class="d-flex justify-content-center">
             <a href="#">. </a>

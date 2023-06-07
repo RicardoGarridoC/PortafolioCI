@@ -15,6 +15,10 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+//RUTA EXTRA
+$routes->setAutoRoute(true);
+
+//Rutas Hechas
 $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
@@ -32,6 +36,12 @@ $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador');
 $routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador');
 $routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario');
 $routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo');
+//RUTAS INICIO Y REGISTER
+//$routes->get('/login', 'SocioController::inicioSocios');
+$routes->post('Home/validarIngreso', 'Home::validarIngreso');
+//Buscar Logout y /register
+$routes->match(['get', 'post'], 'logout', 'Home::cerrarSesion');
+$routes->match(['get', 'post'], '/register', 'Home::register');
 
 
 

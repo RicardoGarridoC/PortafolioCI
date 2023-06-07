@@ -32,6 +32,10 @@
         margin: 0;
         padding: 0;
         }
+        .logo {
+        max-width: 100%;
+        height: auto;
+        }
     </style>
 </head>
 <body>
@@ -69,16 +73,16 @@
                     <h2 class="text-center">Ultimo Partido</h2>
                     <div class="row">
                         <div class="col-12">
-                            <div class="row">
-                                <div class="col-6 text-start">
+                            <div class="row text-center">
+                                <div class="col-6">
                                 <h4>Equipo X</h4>
-                                <img src="" alt="">
-                                <h4 class="text-center">1</h4>
+                                <img src="<?= base_url()?>public/images/logoalce1.png" class="logo" alt="">
+                                <h4>1</h4>
                                 </div>
-                                <div class="col-6 text-end">
+                                <div class="col-6">
                                 <h4>Equipo Y</h4>
-                                <img src="" alt="">
-                                <h4 class="text-center">0</h4>
+                                <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
+                                <h4>1</h4>
                                 </div>
                             </div>
                         </div>
@@ -91,10 +95,10 @@
                         <div class="col-12">
                             <div class="row">
                                 <ul class="col-6 text-start">
-                                    <li>Probando 1</li>
+                                    <li>Probando 20"</li>
                                 </ul>
                                 <ul class="col-6 text-end">
-                                    <li>Probando 2</li>
+                                    <li>22" Probando </li>
                                 </ul>
                             </div>
                         </div>
@@ -106,10 +110,10 @@
                         <div class="col-12">
                             <div class="row">
                                 <ul class="col-6 text-start">
-                                    <li>Cambio 1</li>
+                                    <li>Cambio 1"</li>
                                 </ul>
                                 <ul class="col-6 text-end">
-                                    <li>Cambio 2</li>
+                                    <li>48" Cambio</li>
                                 </ul>
                             </div>
                         </div>
@@ -121,10 +125,10 @@
                         <div class="col-12">
                             <div class="row">
                                 <ul class="col-6 text-start">
-                                    <li>Tarjeta 1</li>
+                                    <li>Tarjeta 33"</li>
                                 </ul>
                                 <ul class="col-6 text-end">
-                                    <li>Tarjeta 2</li>
+                                    <li>59" Tarjeta </li>
                                 </ul>
                             </div>
                         </div>
@@ -132,9 +136,6 @@
                 </div>
 
             </div>
-
-
-
 
             <div class="col-md-6">
                 <div class="championship-table">

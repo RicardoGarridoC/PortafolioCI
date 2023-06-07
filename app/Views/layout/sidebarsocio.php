@@ -47,7 +47,7 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class=" hide-on-small d-none d-sm-inline mx-1">Usuario</span>
+                            <span class=" hide-on-small d-none d-sm-inline mx-1"><?= session('nombreUsuario') ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
@@ -56,7 +56,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -121,6 +121,12 @@
         
     </footer>
     <!--SCRIPTS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function cerrarSesion() {
+            window.location.href = " <?php echo base_url('Home/cerrarSesion'); ?>"
+        }
+    </script>
 </body>
 </html>
