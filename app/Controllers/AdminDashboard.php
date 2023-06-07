@@ -69,6 +69,7 @@ class AdminDashboard extends BaseController
 
         $usuarioModel = new UsuarioModel();
 		$request= \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
 		$data=array(
             'nombres' => $request->getPostGet('nombres'),
             'apellidos' => $request->getPostGet('apellidos'),
@@ -76,7 +77,10 @@ class AdminDashboard extends BaseController
             'run' => $request->getPostGet('run'),
             'direccion' => $request->getPostGet('direccion'),
             'telefono' => $request->getPostGet('telefono'),
-            'password_hash' => $request->getPostGet('password_hash'),
+            //'password_hash' => $request->getPostGet('password_hash'),
+            $clave = $this->request->getPost('password_hash'),
+            $password = bin2hex($encrypter->encrypt($clave)),
+            'password_hash' => $password,
             'rol' => $request->getPostGet('rol')
 		);
         if($request->getPostGet('id')){

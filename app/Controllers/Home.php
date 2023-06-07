@@ -104,7 +104,8 @@ class Home extends BaseController
             return view(('home/iniciar_sesion'), $data);
         }
     }
-
+    
+    //Cerrar Sesion (General)
     public function cerrarSesion()
     {
         session()->destroy();
@@ -150,7 +151,8 @@ class Home extends BaseController
                         'run' => $run,
                         'direccion' => $address,
                         'telefono' => $phone,
-                        'password_hash' => $password
+                        'password_hash' => $password,
+                        'rol' => 'socio'
                     ];
                     $database = \Config\Database::connect();
                     $queryEmail = $database->table('usuarios')->where('email', $email)->get();
@@ -188,4 +190,3 @@ class Home extends BaseController
         return view('home/registrarse', $data);
     }
 }
-?>

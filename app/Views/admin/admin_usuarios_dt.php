@@ -210,7 +210,8 @@
                             echo "<td>".$usuario['run']."</td>";
                             echo "<td>".$usuario['direccion']."</td>";
                             echo "<td>".$usuario['telefono']."</td>";
-                            echo "<td>".$usuario['password_hash']."</td>";
+                            $password = (strlen($usuario['password_hash']) > 10) ? substr($usuario['password_hash'], 0, 10) . "..." : $usuario['password_hash'];
+                            echo "<td>".$password."</td>";
                             echo "<td>".$usuario['rol']."</td>";
                             echo "<td>";
                             echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$usuario['id']."'>Editar</button>";

@@ -39,19 +39,18 @@
     </style>
 </head>
 <body>
-    Hola mundo <?php echo $nombres; ?>
 
      <!-- Carousel -->
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/estadio2.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/losalces.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/logoalce1.png" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -63,7 +62,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
+    <br>
     <!-- Match Section 
     CAMBIAR ESTA SECCION CON LOS DATOS DE CAMPEONATO Y PARTIDO -->
     <div class="container">
@@ -76,7 +75,7 @@
                             <div class="row text-center">
                                 <div class="col-6">
                                 <h4>Equipo X</h4>
-                                <img src="<?= base_url()?>public/images/logoalce1.png" class="logo" alt="">
+                                <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
                                 <h4>1</h4>
                                 </div>
                                 <div class="col-6">
