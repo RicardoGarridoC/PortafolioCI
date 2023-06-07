@@ -70,9 +70,16 @@
                             echo "<br>";
                             
                             echo form_label('Rol', 'rol');
-                            echo form_input(array('name' => 'rol', 'placeholder' => 'Rol', 'class' => 'form-control', 'required' => 'required'));
-                            echo "<br>";
-                            
+                            $options = array(
+                                'administrador' => 'Administrador',
+                                'direccion' => 'Direccion',
+                                'jugador' => 'Jugador',
+                                'entrenador' => 'Entrenador',
+                                'equipo_tecnico' => 'Equipo Técnico',
+                                'socio' => 'Socio'
+                            );
+                            echo form_dropdown('rol', $options, '', 'class="form-control" required');
+                            echo "<br>";               
                             ?>
                         </div>
                     </div>
@@ -130,8 +137,17 @@
                             echo "<br>";
                             
                             echo form_label('Rol', 'rol');
-                            echo form_input(array('name' => 'rol', 'placeholder' => 'Rol', 'class' => 'form-control', 'value' => $usuario['rol'], 'required' => 'required'));
+                            $options = array(
+                                'administrador' => 'Administrador',
+                                'direccion' => 'Direccion',
+                                'jugador' => 'Jugador',
+                                'entrenador' => 'Entrenador',
+                                'equipo_tecnico' => 'Equipo Técnico',
+                                'socio' => 'Socio'
+                            );
+                            echo form_dropdown('rol', $options, $usuario['rol'], 'class="form-control" required');
                             echo "<br>";
+
                             
                             ?>
                         </div>
