@@ -6,7 +6,7 @@
 <body>
     <h1>Último Partido</h1>
     <?php foreach ($results as $row) : ?>
-        <p>Equipo Local: <?php echo $row['nombre_equipo']; ?></p>
+        <p>Equipo: <?php echo $row['nombre_equipo']; ?></p>
         <p>Minuto Gol: <?php echo $row['minuto_gol']; ?></p>
 
         <?php if ($row['nombre_jugador']) : ?>
