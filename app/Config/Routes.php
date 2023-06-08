@@ -1,5 +1,7 @@
 <?php
+
 namespace Config;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -13,22 +15,48 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->get('HomeSocios', 'HomeSocios::index');
+//RUTA EXTRA
+$routes->setAutoRoute(true);
+
+//Rutas Hechas
+$routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
-$routes->get('IniciarSesion', 'IniciarSesion::index');
-$routes->get('Registrarse', 'Registrarse::index');
-$routes->get('InicioSocios','VerJugadores::inicioSocios');
-$routes->get('VerJugadores','VerJugadores::mostrarJugador');
-$routes->get('VerCampeonatos','VerJugadores::mostrarCampeonatos');
+$routes->get('IniciarSesion', 'Home::homeiniciosesion');
+$routes->get('Registrarse', 'Home::homeregistro');
+$routes->get('InicioSocios','SocioController::inicioSocios');
+$routes->get('VerJugadores','SocioController::mostrarJugador');
+$routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
+$routes->get('VerPartidos','SocioController::verPartidos');
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
+$routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
 $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
-$routes->get('DashboardSocio','DashboardSocio::index');
-$routes->add('iniciar_sesion/validar_usuario', 'IniciarSesion::validar_usuario', ['post']);
-$routes->add('registrarse/registrar', 'Registrarse::registrar', ['post']);
-$routes->get('registro-exitoso', 'Registrarse::registroExitoso');
+$routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
+$routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
+$routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador');
+$routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador');
+$routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario');
+$routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo');
+//RUTAS INICIO Y REGISTER
+//$routes->get('/login', 'SocioController::inicioSocios');
+$routes->post('Home/validarIngreso', 'Home::validarIngreso');
+//Buscar Logout y /register
+$routes->match(['get', 'post'], 'logout', 'Home::cerrarSesion');
+$routes->match(['get', 'post'], '/register', 'Home::register');
+//prueba
+$routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles','InfoGolesController::MostrarInfoGoles');
+$routes->get('Cambios','CambiosController::MostrarCambios');
+$routes->get('CambiosExterno','CambiosExternoController::MostrarCambiosExterno');
+$routes->get('TarjetasPartido','TarjetasPartidoController::MostrarTarjetas');
 
 
+
+// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
+// where controller filters or CSRF protection are bypassed.
+// If you don't want to define all routes, please use the Auto Routing (Improved).
+// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
+// $routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
