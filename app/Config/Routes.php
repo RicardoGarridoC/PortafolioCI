@@ -15,16 +15,40 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->get('HomeSocios', 'HomeSocios::index');
+//RUTA EXTRA
+$routes->setAutoRoute(true);
+
+//Rutas Hechas
+$routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
-$routes->get('IniciarSesion', 'IniciarSesion::index');
-$routes->get('Registrarse', 'Registrarse::index');
-$routes->get('InicioSocios','VerJugadores::inicioSocios');
-$routes->get('VerJugadores','VerJugadores::mostrarJugador');
-$routes->get('VerCampeonatos','VerJugadores::mostrarCampeonatos');
+$routes->get('IniciarSesion', 'Home::homeiniciosesion');
+$routes->get('Registrarse', 'Home::homeregistro');
+$routes->get('InicioSocios','SocioController::inicioSocios');
+$routes->get('VerJugadores','SocioController::mostrarJugador');
+$routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
+$routes->get('VerPartidos','SocioController::verPartidos');
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
+$routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
 $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
+$routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
+$routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
+$routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador');
+$routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador');
+$routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario');
+$routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo');
+//RUTAS INICIO Y REGISTER
+//$routes->get('/login', 'SocioController::inicioSocios');
+$routes->post('Home/validarIngreso', 'Home::validarIngreso');
+//Buscar Logout y /register
+$routes->match(['get', 'post'], 'logout', 'Home::cerrarSesion');
+$routes->match(['get', 'post'], '/register', 'Home::register');
+//prueba
+$routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles','InfoGolesController::MostrarInfoGoles');
+$routes->get('Cambios','CambiosController::MostrarCambios');
+$routes->get('CambiosExterno','CambiosExternoController::MostrarCambiosExterno');
+$routes->get('TarjetasPartido','TarjetasPartidoController::MostrarTarjetas');
 
 
 

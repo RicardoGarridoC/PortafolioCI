@@ -14,8 +14,8 @@ class JugadorModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','nombres','apellidos','run','fecha_nacimiento','foto_url','posicion','goles'
-    ,'partidos_jugados','equipo_proviene','tipo','sueldo','ayuda_economica','lesionado','equipo_id'];
+    protected $allowedFields = ['id','posicion','partidos_jugados','tipo','sueldo','ayuda_economica','lesionado',
+    'equipo_proviene_id_fk','button_field'];
 
     // Dates
     /*protected $useTimestamps = false;
@@ -42,4 +42,4 @@ class JugadorModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 }
-
+?>
