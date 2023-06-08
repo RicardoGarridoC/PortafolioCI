@@ -43,6 +43,8 @@ $routes->post('Home/validarIngreso', 'Home::validarIngreso');
 //Buscar Logout y /register
 $routes->match(['get', 'post'], 'logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
+//prueba
+$routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
 
 
 
