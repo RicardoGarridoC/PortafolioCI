@@ -45,6 +45,7 @@ $routes->match(['get', 'post'], 'logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
 //prueba
 $routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles','InfoGolesController::MostrarInfoGoles');
 
 
 
