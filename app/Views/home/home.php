@@ -4,10 +4,7 @@
             background-color: #333;
             color: #fff;
         }
-        .carousel-item {
-            height: 400px;
-        }
-
+        
         .match-section,
         .championship-table {
             background-color: #222;
@@ -36,6 +33,14 @@
         max-width: 100%;
         height: auto;
         }
+        .carousel-item img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        }
+        .carousel-item {
+            height: 500px;
+        }
     </style>
 </head>
 <body>
@@ -44,13 +49,13 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
+            <img src="<?= base_url()?>public/images/paginamoose.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="<?= base_url()?>public/images/paginafutbol.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
             <img src="<?= base_url()?>public/images/estadio2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-            <img src="<?= base_url()?>public/images/losalces.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-            <img src="<?= base_url()?>public/images/logoalce1.png" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
