@@ -48,6 +48,7 @@ $routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
 $routes->get('InfoGoles','InfoGolesController::MostrarInfoGoles');
 $routes->get('Cambios','CambiosController::MostrarCambios');
 $routes->get('CambiosExterno','CambiosExternoController::MostrarCambiosExterno');
+$routes->get('TarjetasPartido','TarjetasPartidoController::MostrarTarjetas');
 
 
 
