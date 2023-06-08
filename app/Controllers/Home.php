@@ -8,11 +8,9 @@ class Home extends BaseController
 {
     public function index()
     {
-        $usuarioModel = new UsuarioModel();
-        $usuario = $usuarioModel->find('1');
         
         echo view('templates/header');
-        echo view('home/home', $usuario);
+        echo view('home/home');
         echo view('templates/footer');
     }
 
