@@ -41,6 +41,16 @@
         .carousel-item {
             height: 500px;
         }
+        #myTab .nav-link {
+        color: white;
+        border: none;
+        border-radius: 0;
+        }
+
+        #myTab .nav-link.active {
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -79,67 +89,100 @@
                         <div class="col-12">
                             <div class="row text-center">
                                 <div class="col-6">
-                                <h4>Equipo X</h4>
-                                <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
-                                <h4>1</h4>
+                                    <h4><?php echo $results[0]->equipo_local; ?></h4>
+                                    <img src="<?= base_url()?>public/images/logoalce1.png" class="logo" alt="">
+                                    <h4><?php echo $results[0]->goles_equipo_local; ?></h4>
                                 </div>
                                 <div class="col-6">
-                                <h4>Equipo Y</h4>
-                                <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
-                                <h4>1</h4>
+                                    <h4><?php echo $results[0]->equipo_visita; ?></h4>
+                                    <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
+                                    <h4><?php echo $results[0]->goles_equipo_visita; ?></h4>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                            <h4>Goles</h4>
-                            </div>
-                        </div>
                         <div class="col-12">
-                            <div class="row">
-                                <ul class="col-6 text-start">
-                                    <li>Probando 20"</li>
-                                </ul>
-                                <ul class="col-6 text-end">
-                                    <li>22" Probando </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                            <h4>Cambios</h4>
-                            </div>
-                        </div> 
-                        <div class="col-12">
-                            <div class="row">
-                                <ul class="col-6 text-start">
-                                    <li>Cambio 1"</li>
-                                </ul>
-                                <ul class="col-6 text-end">
-                                    <li>48" Cambio</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                            <h4>Tarjetas</h4>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="row">
-                                <ul class="col-6 text-start">
-                                    <li>Tarjeta 33"</li>
-                                </ul>
-                                <ul class="col-6 text-end">
-                                    <li>59" Tarjeta </li>
-                                </ul>
+                            <!-- TABS -->
+                            <ul class="nav nav-tabs d-flex justify-content-between" id="myTab" role="tablist">
+                                <li class="nav-item flex-fill">
+                                    <a class="nav-link active text-center" id="goles-tab" data-bs-toggle="tab" href="#goles" role="tab" aria-controls="goles" aria-selected="true">Goles</a>
+                                </li>
+                                <li class="nav-item flex-fill">
+                                    <a class="nav-link text-center" id="cambios-tab" data-bs-toggle="tab" href="#cambios" role="tab" aria-controls="cambios" aria-selected="false">Cambios</a>
+                                </li>
+                                <li class="nav-item flex-fill">
+                                    <a class="nav-link text-center" id="tarjetas-tab" data-bs-toggle="tab" href="#tarjetas" role="tab" aria-controls="tarjetas" aria-selected="false">Tarjetas</a>
+                                </li>
+                            </ul>
+                            <!-- GOLES-->
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="goles" role="tabpanel" aria-labelledby="goles-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="text-start">
+                                                <?php foreach ($results2 as $row) : ?>
+                                                    <li><?php echo $row['nombre_jugador']; ?> <?php echo $row['minuto_gol']; ?>"</li>
+                                                    <hr>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-6">
+                                            <ul class="text-end">
+                                                <?php foreach ($results6 as $row) : ?>
+                                                    <li><?php echo $row['nombre_jugador']; ?> <?php echo $row['minuto_gol']; ?>"</li>
+                                                    <hr>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- CAMBIOS -->
+                                <div class="tab-pane fade" id="cambios" role="tabpanel" aria-labelledby="cambios-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="text-start">
+                                                <?php foreach ($results3 as $row) : ?>
+                                                    <li><?php echo $row['jugador_saliente']; ?> -> <?php echo $row['jugador_entrante']; ?> <?php echo $row['minuto']; ?>"</li>
+                                                    <hr>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-6">
+                                            <ul class="text-end">
+                                                <?php foreach ($results4 as $row) : ?>
+                                                    <li><?php echo $row['jugador_saliente']; ?> -> <?php echo $row['jugador_entrante']; ?> <?php echo $row['minuto']; ?>"</li>
+                                                    <hr>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- TARJETAS -->
+                                <div class="tab-pane fade" id="tarjetas" role="tabpanel" aria-labelledby="tarjetas-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="text-start">
+                                                <?php foreach ($results5 as $row) : ?>
+                                                    <li><?php echo $row['jugador']; ?> Tarjeta <?php echo $row['tarjeta']; ?> <?php echo $row['minuto']; ?>"</li>
+                                                    <hr>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-6">
+                                            <ul class="text-end">
+                                                <?php foreach ($results7 as $row) : ?>
+                                                    <li><?php echo $row['jugador']; ?> Tarjeta <?php echo $row['tarjeta']; ?> <?php echo $row['minuto']; ?>"</li>
+                                                    <hr>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
 
             <div class="col-md-6">
                 <div class="championship-table">

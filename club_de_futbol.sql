@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2023 a las 22:41:01
+-- Tiempo de generación: 09-06-2023 a las 03:02:52
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -153,17 +153,19 @@ CREATE TABLE `equipos` (
 --
 
 INSERT INTO `equipos` (`id`, `nombre`, `genero`, `division_id_fk`) VALUES
-(1, 'Dragones Rojos', 'masculino', 2),
+(1, 'Dragones Rojos', 'masculino', 1),
 (2, 'Panteras Negras', 'femenino', 3),
-(3, 'Lobos Plateados', 'masculino', 3),
+(3, 'Lobos Plateados', 'masculino', 1),
 (4, 'Leonas Blancas', 'femenino', 2),
 (5, 'Tigres Dorados', 'masculino', 1),
 (6, 'Águilas Azules', 'femenino', 1),
 (7, 'Coyotes Salvajes', 'masculino', 1),
 (8, 'Jaguares Amarillos', 'femenino', 1),
 (9, 'Osos Pardos', 'masculino', 1),
-(10, 'Los Alces FC Tercera M', 'masculino', 1),
-(11, 'Arturo Fernandez Vial', 'masculino', 1);
+(10, 'Los Alces FC', 'masculino', 1),
+(11, 'Irreal Madrid', 'masculino', 1),
+(12, 'Guachipato', 'masculino', 1),
+(13, 'Paris San German', 'masculino', 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +248,8 @@ CREATE TABLE `goles` (
 INSERT INTO `goles` (`id`, `partido_id_fk`, `jugador_id_fk`, `minuto`, `jugador_visita`) VALUES
 (2, 6, 1, 34, NULL),
 (3, 6, 2, 45, NULL),
-(4, 6, NULL, 50, '10 Jorge Valdivia');
+(4, 6, NULL, 50, '10 Jorge Valdivia'),
+(5, 7, 4, 40, NULL);
 
 -- --------------------------------------------------------
 
@@ -354,7 +357,7 @@ CREATE TABLE `partidos` (
 
 INSERT INTO `partidos` (`id`, `equipo_local_fk`, `equipo_visita_fk`, `ubicacion_fk`, `fecha`, `campeonato_id_fk`) VALUES
 (6, 10, 11, 1, '2023-06-11 16:00:00', 1),
-(7, 8, 6, 1, '2023-06-10 12:00:00', 1);
+(7, 10, 1, 1, '2023-06-10 12:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -376,6 +379,36 @@ CREATE TABLE `puntajes` (
 
 INSERT INTO `puntajes` (`id`, `id_campeonato_fk`, `id_partido_fk`, `id_equipo_fk`, `puntaje`) VALUES
 (4, 1, 6, 11, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `resultados`
+--
+
+CREATE TABLE `resultados` (
+  `id` int(11) NOT NULL,
+  `equipo_local_fk` int(11) NOT NULL,
+  `equipo_visita_fk` int(11) NOT NULL,
+  `goles_local` int(11) NOT NULL,
+  `goles_visita` int(11) NOT NULL,
+  `id_partido_fk` int(11) DEFAULT NULL,
+  `campeonato_id_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `resultados`
+--
+
+INSERT INTO `resultados` (`id`, `equipo_local_fk`, `equipo_visita_fk`, `goles_local`, `goles_visita`, `id_partido_fk`, `campeonato_id_fk`) VALUES
+(1, 10, 11, 2, 1, 6, 1),
+(2, 10, 1, 1, 0, 7, 1),
+(3, 3, 7, 0, 2, NULL, 1),
+(4, 9, 11, 1, 3, NULL, 1),
+(5, 3, 6, 5, 3, NULL, 2),
+(6, 4, 8, 7, 10, NULL, 2),
+(7, 13, 12, 4, 2, NULL, 1),
+(8, 13, 5, 1, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -613,6 +646,16 @@ ALTER TABLE `puntajes`
   ADD KEY `puntajes_FK` (`id_equipo_fk`);
 
 --
+-- Indices de la tabla `resultados`
+--
+ALTER TABLE `resultados`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `NewTable_FK` (`equipo_local_fk`),
+  ADD KEY `NewTable_FK_1` (`equipo_visita_fk`),
+  ADD KEY `NewTable_FK_2` (`id_partido_fk`),
+  ADD KEY `resultados_FK` (`campeonato_id_fk`);
+
+--
 -- Indices de la tabla `socios`
 --
 ALTER TABLE `socios`
@@ -697,7 +740,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT de la tabla `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `equipos_campeonato`
@@ -727,7 +770,7 @@ ALTER TABLE `estadisticas_equipo`
 -- AUTO_INCREMENT de la tabla `goles`
 --
 ALTER TABLE `goles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
@@ -758,6 +801,12 @@ ALTER TABLE `partidos`
 --
 ALTER TABLE `puntajes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `resultados`
+--
+ALTER TABLE `resultados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `socios`
@@ -862,12 +911,13 @@ ALTER TABLE `partidos`
   ADD CONSTRAINT `partidos_ibfk_3` FOREIGN KEY (`ubicacion_fk`) REFERENCES `cancha` (`id`);
 
 --
--- Filtros para la tabla `puntajes`
+-- Filtros para la tabla `resultados`
 --
-ALTER TABLE `puntajes`
-  ADD CONSTRAINT `puntajes_FK` FOREIGN KEY (`id_equipo_fk`) REFERENCES `equipos` (`id`),
-  ADD CONSTRAINT `puntajes_FK_1` FOREIGN KEY (`id_campeonato_fk`) REFERENCES `campeonatos` (`id`),
-  ADD CONSTRAINT `puntajes_FK_2` FOREIGN KEY (`id_partido_fk`) REFERENCES `partidos` (`id`);
+ALTER TABLE `resultados`
+  ADD CONSTRAINT `NewTable_FK` FOREIGN KEY (`equipo_local_fk`) REFERENCES `equipos` (`id`),
+  ADD CONSTRAINT `NewTable_FK_1` FOREIGN KEY (`equipo_visita_fk`) REFERENCES `equipos` (`id`),
+  ADD CONSTRAINT `NewTable_FK_2` FOREIGN KEY (`id_partido_fk`) REFERENCES `partidos` (`id`),
+  ADD CONSTRAINT `resultados_FK` FOREIGN KEY (`campeonato_id_fk`) REFERENCES `campeonatos` (`id`);
 
 --
 -- Filtros para la tabla `tabla_lesiones`
