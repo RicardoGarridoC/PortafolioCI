@@ -259,7 +259,82 @@ class Home extends BaseController
             );
         }
 
-        $viewData = array_merge($data, $data2, $data3, $data4, $data5, $data6, $data7);
+        $query8 = $db->query('SELECT
+        e.nombre AS equipo,
+        COUNT(*) AS partidos_jugados,
+        SUM(CASE
+            WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
+                OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
+            ELSE 0
+        END) AS partidos_ganados,
+        
+        SUM(CASE
+            WHEN r.goles_local = r.goles_visita THEN 1
+            ELSE 0
+        END) AS partidos_empatados,
+        
+        SUM(CASE
+            WHEN (r.goles_local < r.goles_visita AND r.equipo_local_fk = e.id)
+                OR (r.goles_visita < r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
+            ELSE 0
+        END) AS partidos_perdidos,
+    
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_local
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_visita
+            ELSE 0
+        END) AS goles_a_favor,
+    
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_visita
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_local
+            ELSE 0
+        END) AS goles_en_contra,
+        
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_local - r.goles_visita
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_visita - r.goles_local
+            ELSE 0
+        END) AS diferencia_goles,
+    
+        SUM(CASE
+        WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
+            OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 3
+        WHEN r.goles_local = r.goles_visita AND r.equipo_local_fk = e.id THEN 1
+        WHEN r.goles_local = r.goles_visita AND r.equipo_visita_fk = e.id THEN 1
+        ELSE 0
+        END) AS puntaje
+      
+        FROM
+            resultados r
+        INNER JOIN equipos e ON r.equipo_local_fk = e.id OR r.equipo_visita_fk = e.id
+        WHERE
+            r.campeonato_id_fk = 1
+        GROUP BY
+            e.id, e.nombre
+        ORDER BY
+            puntaje DESC, diferencia_goles desc;');
+
+        $results8 = $query8->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data8['results8'] = array();
+
+        foreach ($results8 as $row) {
+            $data8['results8'][] = array(
+                'equipo' => $row->equipo,
+                'partidos_jugados' => $row->partidos_jugados,
+                'partidos_ganados' => $row->partidos_ganados,
+                'partidos_empatados' => $row->partidos_empatados,
+                'partidos_perdidos' => $row->partidos_perdidos,
+                'goles_a_favor' => $row->goles_a_favor,
+                'goles_en_contra' => $row->goles_en_contra,
+                'diferencia_goles' => $row->diferencia_goles,
+                'puntaje' => $row->puntaje
+            );
+        }
+
+        $viewData = array_merge($data, $data2, $data3, $data4, $data5, $data6, $data7, $data8);
 
         echo view('templates/header');
         echo view('home/home', $viewData);

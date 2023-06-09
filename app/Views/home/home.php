@@ -188,34 +188,34 @@
                 <div class="championship-table">
                     <h2 class="text-center">Campeonato</h2>
                     <table class="table table-dark">
-                        <thead>
+                    <thead>
+                        <tr>
+                            <th>Equipo</th>
+                            <th>PJ</th>
+                            <th>PG</th>
+                            <th>PE</th>
+                            <th>PP</th>
+                            <th>GF</th>
+                            <th>GC</th>
+                            <th>+/- </th>
+                            <th>Puntaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($results8 as $row): ?>
                             <tr>
-                                <th>Equipo</th>
-                                <th>VS</th>
-                                <th>Gano</th>
-                                <th>Perdio</th>
+                                <td><?php echo $row['equipo']; ?></td>
+                                <td><?php echo $row['partidos_jugados']; ?></td>
+                                <td><?php echo $row['partidos_ganados']; ?></td>
+                                <td><?php echo $row['partidos_empatados']; ?></td>
+                                <td><?php echo $row['partidos_perdidos']; ?></td>
+                                <td><?php echo $row['goles_a_favor']; ?></td>
+                                <td><?php echo $row['goles_en_contra']; ?></td>
+                                <td><?php echo $row['diferencia_goles']; ?></td>
+                                <td><?php echo $row['puntaje']; ?></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Equipo 1</td>
-                                <td>10</td>
-                                <td>7</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Equipo 2</td>
-                                <td>10</td>
-                                <td>6</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>Equipo 3</td>
-                                <td>10</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                        </tbody>
+                        <?php endforeach; ?>
+                    </tbody>
                     </table>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2023 a las 03:02:52
+-- Tiempo de generación: 09-06-2023 a las 04:19:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -278,20 +278,42 @@ INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `tipo`, `sueldo`,
 (2, 'Defensa', 15, 'profesional', 1200000.00, 0.00, 0, 10, 8),
 (3, 'Mediocampista', 18, 'profesional', 1400000.00, 0.00, 0, 10, 11),
 (4, 'Portero', 10, 'aficionado', NULL, 0.00, 0, 10, 10),
+(5, 'Centrodelantero', 10, 'profesional', 1000000.00, 0.00, 0, NULL, 50),
+(6, 'Lateral', 1, 'aficionado', NULL, 0.00, 0, NULL, 44),
 (7, 'Delantero', 17, 'profesional', 5000000.00, 0.00, 0, 10, 9),
 (8, 'Mediocampista', 12, 'profesional', 200000.00, 0.00, 0, 10, 1),
 (9, 'Defensa', 18, 'profesional', 175000.00, 0.00, 0, 10, 4),
 (10, 'Delantero', 20, 'profesional', 220000.00, 0.00, 0, 10, 22),
 (11, 'Mediocampista', 17, 'profesional', 180000.00, 0.00, 0, 10, 20),
 (12, 'Portero', 10, 'profesional', 170000.00, 0.00, 0, 10, 24),
-(13, 'Delantero', 22, 'profesional', 225000.00, 0.00, 0, 10, 30),
-(14, 'Defensa', 16, 'profesional', 185000.00, 0.00, 0, 10, 25),
-(15, 'Mediocampista', 19, 'profesional', 190000.00, 0.00, 0, 10, 44),
-(16, 'Mediocampista', 30, 'profesional', 800000.00, 0.00, 0, 10, 6),
-(17, 'Defensa', 25, 'profesional', 600000.00, 0.00, 0, 10, 17),
-(18, 'Delantero', 28, 'profesional', 750000.00, 0.00, 0, 10, 33),
-(19, 'Mediocampista', 32, 'profesional', 700000.00, 0.00, 0, 10, 12),
-(20, 'Defensa', 22, 'profesional', 550000.00, 0.00, 0, 10, 91);
+(13, 'Mediocampista', 22, 'aficionado', 225000.00, 0.00, 0, 10, 30),
+(14, 'Mediocampista', 5, 'aficionado', NULL, 0.00, 0, NULL, 23),
+(15, 'Defensa', 10, 'profesional', 100000.00, 0.00, 0, NULL, 18),
+(16, 'Mediocampista', 15, 'aficionado', NULL, 0.00, 0, NULL, 19),
+(17, 'Defensa', 3, 'aficionado', NULL, 0.00, 0, NULL, 21),
+(18, 'Delantero', 10, 'profesional', 200000.00, 0.00, 0, NULL, 25);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lesiones`
+--
+
+CREATE TABLE `lesiones` (
+  `id` int(11) NOT NULL,
+  `fecha_inicio_lesion` date DEFAULT NULL,
+  `fecha_fin_lesion` date DEFAULT NULL,
+  `jugador_id_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `lesiones`
+--
+
+INSERT INTO `lesiones` (`id`, `fecha_inicio_lesion`, `fecha_fin_lesion`, `jugador_id_fk`) VALUES
+(1, '2023-05-11', '2023-06-30', 1),
+(2, '2023-05-01', '2023-07-11', 18),
+(3, '2023-04-03', '2023-05-02', 8);
 
 -- --------------------------------------------------------
 
@@ -432,19 +454,6 @@ INSERT INTO `socios` (`id`, `fecha_pago`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tabla_lesiones`
---
-
-CREATE TABLE `tabla_lesiones` (
-  `id` int(11) NOT NULL,
-  `fecha_inicio_lesion` date DEFAULT NULL,
-  `fecha_fin_lesion` date DEFAULT NULL,
-  `jugador_id_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tarjetas_partido`
 --
 
@@ -515,7 +524,18 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion
 (8, 'Alexis', 'Sanchez', 'asanchez@@gmail.com', '448815789-7', 'tocopilla 1', 445468487, '123456', 'jugador', NULL, 9, NULL, NULL),
 (9, 'Arturo', 'Vidal', 'avidal@gmail.com', '448712138-8', 'pintana 10', 11544510, '123456', 'jugador', NULL, 4, NULL, NULL),
 (10, 'Gary', 'Medel', 'gmedel@gmail.com', '17712557-8', 'pintana 1', 445122358, '123456', 'jugador', NULL, 8, NULL, NULL),
-(11, 'Cristiano', 'Ronaldo', 'cr7@gmail.com', '123354875-8', 'portugal 1', 1123459, '123456', 'jugador', NULL, 7, NULL, NULL);
+(11, 'Cristiano', 'Ronaldo', 'cr7@gmail.com', '123354875-8', 'portugal 1', 1123459, '123456', 'jugador', NULL, 7, NULL, NULL),
+(12, 'Kevin', 'Empate', 'kempate@gmail.com', '11254887-2', 'francia 3', 15843598, '123456', 'jugador', NULL, 3, NULL, NULL),
+(14, 'Carlos', 'Caszely', 'ccaszeli@gmail.com', '88752146-8', 'Santiago 1', 84257299, '123456', 'jugador', NULL, 5, NULL, NULL),
+(15, 'Lionel', 'Messa', 'lmessa@gmail.com', '4452175-5', 'La Plata 533', 44583321, '123456', 'jugador', NULL, 10, NULL, NULL),
+(16, 'Claudio', 'Bravo', 'cbravo@gmail.com', '55887123-8', 'Viluco 50', 884263575, '123456', 'jugador', NULL, 12, NULL, NULL),
+(17, 'Huaso', 'Isla', 'hisla@gmail.com', '23555782-4', 'buin 789', 88752587, '123456', 'jugador', NULL, 13, NULL, NULL),
+(18, 'Jean', 'Beausejour', 'jbeausejour@gmail.com', '7745123-8', 'pasaje 1', 445123548, '123456', 'jugador', NULL, 6, NULL, NULL),
+(19, 'Jhony', 'Herrera', 'jherrera@gmail.com', '44212354-8', 'PAsje2', 48551284, '123456', 'jugador', NULL, 14, NULL, NULL),
+(20, 'Eugenio', 'Mena', 'emena@gmail.com', '44212354-8', 'Pasaje 6 55', 45615815, '123456', 'jugador', NULL, 15, NULL, NULL),
+(21, 'Jose', 'Rojas', 'jrojas@gmail.com', '11235445-8', 'pasaje8 10', 4561238, '123456', 'jugador', NULL, 16, NULL, NULL),
+(22, 'Felipe', 'Gutierrez', 'fgutierrez@gmail.com', '4321587-8', 'casa 123', 1456481, '123456', 'jugador', NULL, 17, NULL, NULL),
+(23, 'Gonzalo', 'Jara', 'gjara@gmail.com', '1122354-5', 'pasaje 8 santiago', 112335487, '123456', 'jugador', NULL, 18, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -613,6 +633,13 @@ ALTER TABLE `jugadores`
   ADD KEY `equipo_id` (`equipo_proviene_id_fk`);
 
 --
+-- Indices de la tabla `lesiones`
+--
+ALTER TABLE `lesiones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jugador_id` (`jugador_id_fk`);
+
+--
 -- Indices de la tabla `motivo`
 --
 ALTER TABLE `motivo`
@@ -660,13 +687,6 @@ ALTER TABLE `resultados`
 --
 ALTER TABLE `socios`
   ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `tabla_lesiones`
---
-ALTER TABLE `tabla_lesiones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `jugador_id` (`jugador_id_fk`);
 
 --
 -- Indices de la tabla `tarjetas_partido`
@@ -776,7 +796,13 @@ ALTER TABLE `goles`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de la tabla `lesiones`
+--
+ALTER TABLE `lesiones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `motivo`
@@ -815,12 +841,6 @@ ALTER TABLE `socios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `tabla_lesiones`
---
-ALTER TABLE `tabla_lesiones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `tarjetas_partido`
 --
 ALTER TABLE `tarjetas_partido`
@@ -836,7 +856,7 @@ ALTER TABLE `traspasos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
@@ -895,6 +915,12 @@ ALTER TABLE `jugadores`
   ADD CONSTRAINT `jugadores_ibfk_1` FOREIGN KEY (`equipo_proviene_id_fk`) REFERENCES `equipos` (`id`);
 
 --
+-- Filtros para la tabla `lesiones`
+--
+ALTER TABLE `lesiones`
+  ADD CONSTRAINT `lesiones_ibfk_1` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`);
+
+--
 -- Filtros para la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
@@ -918,12 +944,6 @@ ALTER TABLE `resultados`
   ADD CONSTRAINT `NewTable_FK_1` FOREIGN KEY (`equipo_visita_fk`) REFERENCES `equipos` (`id`),
   ADD CONSTRAINT `NewTable_FK_2` FOREIGN KEY (`id_partido_fk`) REFERENCES `partidos` (`id`),
   ADD CONSTRAINT `resultados_FK` FOREIGN KEY (`campeonato_id_fk`) REFERENCES `campeonatos` (`id`);
-
---
--- Filtros para la tabla `tabla_lesiones`
---
-ALTER TABLE `tabla_lesiones`
-  ADD CONSTRAINT `tabla_lesiones_ibfk_1` FOREIGN KEY (`jugador_id_fk`) REFERENCES `jugadores` (`id`);
 
 --
 -- Filtros para la tabla `tarjetas_partido`
