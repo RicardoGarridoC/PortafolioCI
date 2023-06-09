@@ -62,7 +62,7 @@
             <img src="<?= base_url()?>public/images/paginamoose.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="<?= base_url()?>public/images/paginafutbol.jpg" class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/equipoalce.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
             <img src="<?= base_url()?>public/images/estadio2.jpg" class="d-block w-100" alt="...">
