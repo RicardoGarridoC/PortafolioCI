@@ -51,6 +51,12 @@
             background-color: rgba(0, 0, 0, 0.2);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        .smaller-text {
+            font-size: 14px; 
+            padding: 10px; 
+        }
+        
     </style>
 </head>
 <body>
@@ -90,13 +96,13 @@
                             <div class="row text-center">
                                 <div class="col-6">
                                     <h4><?php echo $results[0]->equipo_local; ?></h4>
-                                    <img src="<?= base_url()?>public/images/logoalce1.png" class="logo" alt="">
                                     <h4><?php echo $results[0]->goles_equipo_local; ?></h4>
+                                    <img src="<?= base_url()?>public/images/logoalce1.png" class="logo" alt="">
                                 </div>
                                 <div class="col-6">
                                     <h4><?php echo $results[0]->equipo_visita; ?></h4>
-                                    <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
                                     <h4><?php echo $results[0]->goles_equipo_visita; ?></h4>
+                                    <img src="<?= base_url()?>public/images/logovisita1.png" class="logo" alt="">
                                 </div>
                             </div>
                         </div>
@@ -118,7 +124,7 @@
                                 <div class="tab-pane fade show active" id="goles" role="tabpanel" aria-labelledby="goles-tab">
                                     <div class="row">
                                         <div class="col-6">
-                                            <ul class="text-start">
+                                            <ul class="text-start smaller-text">
                                                 <?php foreach ($results2 as $row) : ?>
                                                     <li><?php echo $row['nombre_jugador']; ?> <?php echo $row['minuto_gol']; ?>"</li>
                                                     <hr>
@@ -126,7 +132,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-6">
-                                            <ul class="text-end">
+                                            <ul class="text-end smaller-text">
                                                 <?php foreach ($results6 as $row) : ?>
                                                     <li><?php echo $row['nombre_jugador']; ?> <?php echo $row['minuto_gol']; ?>"</li>
                                                     <hr>
@@ -139,7 +145,7 @@
                                 <div class="tab-pane fade" id="cambios" role="tabpanel" aria-labelledby="cambios-tab">
                                     <div class="row">
                                         <div class="col-6">
-                                            <ul class="text-start">
+                                            <ul class="text-start smaller-text">
                                                 <?php foreach ($results3 as $row) : ?>
                                                     <li><?php echo $row['jugador_saliente']; ?> -> <?php echo $row['jugador_entrante']; ?> <?php echo $row['minuto']; ?>"</li>
                                                     <hr>
@@ -147,7 +153,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-6">
-                                            <ul class="text-end">
+                                            <ul class="text-end smaller-text">
                                                 <?php foreach ($results4 as $row) : ?>
                                                     <li><?php echo $row['jugador_saliente']; ?> -> <?php echo $row['jugador_entrante']; ?> <?php echo $row['minuto']; ?>"</li>
                                                     <hr>
@@ -160,7 +166,7 @@
                                 <div class="tab-pane fade" id="tarjetas" role="tabpanel" aria-labelledby="tarjetas-tab">
                                     <div class="row">
                                         <div class="col-6">
-                                            <ul class="text-start">
+                                            <ul class="text-start smaller-text">
                                                 <?php foreach ($results5 as $row) : ?>
                                                     <li><?php echo $row['jugador']; ?> Tarjeta <?php echo $row['tarjeta']; ?> <?php echo $row['minuto']; ?>"</li>
                                                     <hr>
@@ -168,7 +174,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-6">
-                                            <ul class="text-end">
+                                            <ul class="text-end smaller-text">
                                                 <?php foreach ($results7 as $row) : ?>
                                                     <li><?php echo $row['jugador']; ?> Tarjeta <?php echo $row['tarjeta']; ?> <?php echo $row['minuto']; ?>"</li>
                                                     <hr>
