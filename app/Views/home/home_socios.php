@@ -21,7 +21,6 @@
   }
 
   body {
-    display: flex;
     justify-content: flex-end;
     align-items: center;
     height: 100vh;
@@ -32,7 +31,7 @@
 
   .buttons-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: row;
     height: 100%;
@@ -40,6 +39,8 @@
     padding-right: 2rem;
     position: relative;
     z-index: 1;
+    margin-left: auto;
+    margin-right: 4%;
   }
 
   .btn {
@@ -79,8 +80,8 @@
     }
 
     .buttons-container {
+      justify-content: center; /* Align buttons to the center */
       width: 100%;
-      height: auto;
       flex-direction: column;
     }
 
@@ -89,6 +90,8 @@
       height: auto;
       font-size: x-large;
       flex-wrap: wrap;
+      margin-left: auto; /* Add this line to center-align the buttons horizontally */
+      margin-right: auto; /* Add this line to center-align the buttons horizontally */
     }
   }
 </style>
@@ -104,7 +107,8 @@
   
   <div class="gradient-overlay"></div>
   <div class="buttons-container">
-    <a type="button" class="btn" href=<?php echo base_url('IniciarSesion'); ?>>Iniciar Sesión</a>
-    <a type="button" class="btn" href=<?php echo base_url('Registrarse'); ?>>Registrarse</a>
+    <a type="button" class="btn" href=<?php echo base_url('IniciarSesion'); ?> style="float: right;">Iniciar Sesión</a>
+    <a type="button" class="btn" href=<?php echo base_url('Registrarse'); ?> style="float: right;">Registrarse</a>
   </div>
+
 </body>
