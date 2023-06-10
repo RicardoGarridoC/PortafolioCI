@@ -10,7 +10,7 @@ class SesionAdmin implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session('type') == ('administrador')) {
+        if (!session()->has('nombreUsuario')) {
             return redirect()->to(base_url('/Home'));
         }
     }
