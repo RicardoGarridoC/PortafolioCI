@@ -50,15 +50,14 @@ class Home extends BaseController
         if ($resultadoUsuario) {
             $encrypter = \config\Services::encrypter();
             $claveBD = $encrypter->decrypt(hex2bin($resultadoUsuario->password_hash));
-
-
             $clave = $this->request->getPost("password");
+
             if ($clave == $claveBD) {
                 $data = [
                     "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
                     "emailUsuario" => $resultadoUsuario->email
                 ];
-                session()->set($data);
+                $sesionActiva = session()->set($data);
 
                 //Buscar rol del usuario
 
@@ -76,7 +75,7 @@ class Home extends BaseController
                     switch ($query) {
                         case  'administrador':
                             //redirecciona a vista de administrador
-                            return redirect()->to(base_url() . '/AdminDashboard ');
+                            return redirect()->to(base_url() . '/AdminDashboard ')->with('session', $sesionActiva);
 
                         case 'direccion':
                             //redirecciona a vista de direccion 
