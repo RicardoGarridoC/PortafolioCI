@@ -1,4 +1,7 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
+
 use App\Models\JugadorModel;
 use App\Models\EquipoModel;
 use App\Models\UsuarioModel;
@@ -16,16 +19,16 @@ class AdminDashboard extends BaseController
     public function equipoDatabase()
     {
         $equipoModel = new EquipoModel();
-        $equipos=$equipoModel->findAll();
-        $equipos=array('equipos'=>$equipos);
+        $equipos = $equipoModel->findAll();
+        $equipos = array('equipos' => $equipos);
         return view('admin/admin_equipo_dt', $equipos);
     }
 
     public function usuarioDatabase()
     {
         $usuarioModel = new UsuarioModel();
-        $usuarios=$usuarioModel->findAll();
-        $usuarios=array('usuarios'=>$usuarios);
+        $usuarios = $usuarioModel->findAll();
+        $usuarios = array('usuarios' => $usuarios);
         return view('admin/admin_usuarios_dt', $usuarios);
     }
 
@@ -33,8 +36,8 @@ class AdminDashboard extends BaseController
     {
 
         $jugadorModel = new JugadorModel();
-        $jugadores=$jugadorModel->findAll();
-        $jugadores=array('jugadores'=>$jugadores);
+        $jugadores = $jugadorModel->findAll();
+        $jugadores = array('jugadores' => $jugadores);
         return view('admin/admin_jugador_dt', $jugadores);
     }
 
@@ -63,16 +66,18 @@ class AdminDashboard extends BaseController
         //return view('admin/admin_socio_dt', $socios);
     }
 
-    public function __construct(){
-		helper('form');
-	}
+    public function __construct()
+    {
+        helper('form');
+    }
 
-    public function guardaJugador(){
+    public function guardaJugador()
+    {
 
-        
+
         $jugadorModel = new JugadorModel();
-		$request= \Config\Services::request();
-        $data=array(
+        $request = \Config\Services::request();
+        $data = array(
             'posicion' => $request->getPostGet('posicion'),
             'partidos_jugados' => $request->getPostGet('partidos_jugados'),
             'tipo' => $request->getPostGet('tipo'),
@@ -80,25 +85,25 @@ class AdminDashboard extends BaseController
             'ayuda_economica' => $request->getPostGet('ayuda_economica'),
             'lesionado' => $request->getPostGet('lesionado'),
             'equipo_proviene_id_fk' => $request->getPostGet('equipo_proviene_id_fk')
-        
+
         );
-        if($request->getPostGet('id')){
-            $data['id']=$request->getPostGet('id');
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
         }
-        if($jugadorModel->save($data)===false){
+        if ($jugadorModel->save($data) === false) {
             var_dump($jugadorModel->errors());
         }
-        $jugadores=$jugadorModel->findAll();
-        $jugadores=array('jugadores'=>$jugadores);
+        $jugadores = $jugadorModel->findAll();
+        $jugadores = array('jugadores' => $jugadores);
         return view('admin/admin_jugador_dt', $jugadores);
-		
-	}
-    public function guardaUsuario(){
+    }
+    public function guardaUsuario()
+    {
 
         $usuarioModel = new UsuarioModel();
-		$request= \Config\Services::request();
+        $request = \Config\Services::request();
         $encrypter = \config\Services::encrypter();
-		$data=array(
+        $data = array(
             'nombres' => $request->getPostGet('nombres'),
             'apellidos' => $request->getPostGet('apellidos'),
             'email' => $request->getPostGet('email'),
@@ -110,126 +115,131 @@ class AdminDashboard extends BaseController
             $password = bin2hex($encrypter->encrypt($clave)),
             'password_hash' => $password,
             'rol' => $request->getPostGet('rol')
-		);
-        if($request->getPostGet('id')){
-			$data['id']=$request->getPostGet('id');
-		}
-		if($usuarioModel->save($data)===false){
-			var_dump($usuarioModel->errors());
-		}
-        $usuarios=$usuarioModel->findAll();
-        $usuarios=array('usuarios'=>$usuarios);
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($usuarioModel->save($data) === false) {
+            var_dump($usuarioModel->errors());
+        }
+        $usuarios = $usuarioModel->findAll();
+        $usuarios = array('usuarios' => $usuarios);
         return view('admin/admin_usuarios_dt', $usuarios);
-	}
-    public function guardaEquipo(){
+    }
+    public function guardaEquipo()
+    {
 
         $equipoModel = new EquipoModel();
-		$request= \Config\Services::request();
-        $data=array(
+        $request = \Config\Services::request();
+        $data = array(
             'nombre' => $request->getPostGet('nombre'),
             'genero' => $request->getPostGet('genero'),
             'division_id_fk' => $request->getPostGet('division_id_fk'),
-        
+
         );
-        if($request->getPostGet('id')){
-            $data['id']=$request->getPostGet('id');
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
         }
-        if($equipoModel->save($data)===false){
+        if ($equipoModel->save($data) === false) {
             var_dump($equipoModel->errors());
         }
-        $equipos=$equipoModel->findAll();
-        $equipos=array('equipos'=>$equipos);
+        $equipos = $equipoModel->findAll();
+        $equipos = array('equipos' => $equipos);
         return view('admin/admin_equipo_dt', $equipos);
-		
-	}
-    public function guardaEquipoTecnico(){
+    }
+    public function guardaEquipoTecnico()
+    {
 
-        
+
         $equipotecnicoModel = new EquipoTecnicoModel();
-		$request= \Config\Services::request();
-        $data=array(
+        $request = \Config\Services::request();
+        $data = array(
             'cargo' => $request->getPostGet('cargo'),
             'equipo_proviene_fk' => $request->getPostGet('equipo_proviene_fk'),
             'sueldo' => $request->getPostGet('sueldo'),
             'valor_hora_extra' => $request->getPostGet('valor_hora_extra'),
             'horas_extras_mes' => $request->getPostGet('horas_extras_mes')
-        
+
         );
-        if($request->getPostGet('id')){
-            $data['id']=$request->getPostGet('id');
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
         }
-        if($equipotecnicoModel->save($data)===false){
+        if ($equipotecnicoModel->save($data) === false) {
             var_dump($equipotecnicoModel->errors());
         }
-        $equipots=$equipotecnicoModel->findAll();
-        $equipots=array('equipots'=>$equipots);
-        return view('admin/admin_equipotecnico_dt', $equipots);
-		
-	}
-    public function guardaSocio(){
-
-        
-        $socioModel = new SocioModel();
-		$request= \Config\Services::request();
-        $data=array(
-            'fecha_pago' => $request->getPostGet('fecha_pago'),
-        
-        );
-        if($request->getPostGet('id')){
-            $data['id']=$request->getPostGet('id');
-        }
-        if($socioModel->save($data)===false){
-            var_dump($socioModel->errors());
-        }
-        $socios=$socioModel->findAll();
-        $socios=array('socios'=>$socios);
-        return view('admin/admin_socio_dt', $socios);
-		
-	}
-
-    public function borrarJugador(){
-		$jugadorModel=new JugadorModel();
-		$request= \Config\Services::request();
-		$id=$request->getPostGet('id');
-		$jugadorModel->delete($id);
-		$jugadores=$jugadorModel->findAll();
-		$jugadores=array('jugadores'=>$jugadores);
-        return view('admin/admin_jugador_dt', $jugadores);
-	}
-    public function borrarUsuario(){
-		$usuarioModel=new UsuarioModel();
-		$request= \Config\Services::request();
-		$id=$request->getPostGet('id');
-		$usuarioModel->delete($id);
-		$usuarios=$usuarioModel->findAll();
-		$usuarios=array('usuarios'=>$usuarios);
-        return view('admin/admin_usuarios_dt', $usuarios);
-	}
-    public function borrarEquipo(){
-		$equipoModel=new EquipoModel();
-		$request= \Config\Services::request();
-		$id=$request->getPostGet('id');
-		$equipoModel->delete($id);
-        $equipos=$equipoModel->findAll();
-        $equipos=array('equipos'=>$equipos);
-        return view('admin/admin_equipo_dt', $equipos);
-	}
-    public function borrarEquipoTecnico(){
-		$equipotecnicoModel = new EquipoTecnicoModel();
-		$request= \Config\Services::request();
-		$id=$request->getPostGet('id');
-		$equipotecnicoModel->delete($id);
-        $equipots=$equipotecnicoModel->findAll();
-        $equipots=array('equipots'=>$equipots);
+        $equipots = $equipotecnicoModel->findAll();
+        $equipots = array('equipots' => $equipots);
         return view('admin/admin_equipotecnico_dt', $equipots);
     }
-    public function borrarSocio(){
-		$socioModel = new SocioModel();
-		$request= \Config\Services::request();
-		$id=$request->getPostGet('id');
-		$socioModel->delete($id);
-        $socios=$socioModel->findAll();
-        $socios=array('socios'=>$socios);
+    public function guardaSocio()
+    {
+
+
+        $socioModel = new SocioModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'fecha_pago' => $request->getPostGet('fecha_pago'),
+
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($socioModel->save($data) === false) {
+            var_dump($socioModel->errors());
+        }
+        $socios = $socioModel->findAll();
+        $socios = array('socios' => $socios);
+        return view('admin/admin_socio_dt', $socios);
+    }
+
+    public function borrarJugador()
+    {
+        $jugadorModel = new JugadorModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $jugadorModel->delete($id);
+        $jugadores = $jugadorModel->findAll();
+        $jugadores = array('jugadores' => $jugadores);
+        return view('admin/admin_jugador_dt', $jugadores);
+    }
+    public function borrarUsuario()
+    {
+        $usuarioModel = new UsuarioModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $usuarioModel->delete($id);
+        $usuarios = $usuarioModel->findAll();
+        $usuarios = array('usuarios' => $usuarios);
+        return view('admin/admin_usuarios_dt', $usuarios);
+    }
+    public function borrarEquipo()
+    {
+        $equipoModel = new EquipoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $equipoModel->delete($id);
+        $equipos = $equipoModel->findAll();
+        $equipos = array('equipos' => $equipos);
+        return view('admin/admin_equipo_dt', $equipos);
+    }
+    public function borrarEquipoTecnico()
+    {
+        $equipotecnicoModel = new EquipoTecnicoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $equipotecnicoModel->delete($id);
+        $equipots = $equipotecnicoModel->findAll();
+        $equipots = array('equipots' => $equipots);
+        return view('admin/admin_equipotecnico_dt', $equipots);
+    }
+    public function borrarSocio()
+    {
+        $socioModel = new SocioModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $socioModel->delete($id);
+        $socios = $socioModel->findAll();
+        $socios = array('socios' => $socios);
         return view('admin/admin_socio_dt', $socios);
     }
 }

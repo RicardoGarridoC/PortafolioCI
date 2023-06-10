@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\UsuarioModel;
 use CodeIgniter\Controller;
+
+$autoload['libraries'] = ['session'];
 
 class Home extends BaseController
 {
@@ -15,25 +18,24 @@ class Home extends BaseController
         SUM(case when g.jugador_id_fk is not null then 1 else 0 end) as goles_equipo_local,
         e2.nombre as equipo_visita,
         SUM(case when g.jugador_id_fk is null then 1 else 0 end) as goles_equipo_visita
+    from
+        partidos p
+    inner join equipos e1 on
+        p.equipo_local_fk = e1.id
+    inner join equipos e2 on
+        p.equipo_visita_fk = e2.id
+    left join goles g on
+        p.id = g.partido_id_fk
+    where
+        p.fecha = (
+        select
+            MAX(fecha)
         from
-            partidos p
-        inner join equipos e1 on
-            p.equipo_local_fk = e1.id
-        inner join equipos e2 on
-            p.equipo_visita_fk = e2.id
-        left join goles g on
-            p.id = g.partido_id_fk
-        where
-            p.fecha = (
-            select
-                MAX(fecha)
-            from
-                partidos)
-            and (e1.id = 10
-                or e2.id = 10)
-        group by
-            e1.nombre,
-            e2.nombre;');
+            partidos)
+    group by
+        e1.nombre,
+        e2.nombre;
+    ');
 
         $results = $query->getResult();
 
@@ -133,7 +135,7 @@ class Home extends BaseController
             )
         ORDER BY
             c.minuto ASC;');
-    
+
         $results3 = $query3->getResult();
 
         // Preparar los datos en un formato adecuado
@@ -176,30 +178,29 @@ class Home extends BaseController
         }
 
         $query5 = $db->query('SELECT
-        CONCAT(u.nombres, " ", u.apellidos) AS jugador,
-        tp.tarjeta AS tarjeta,
-        tp.minuto AS minuto,
+        CONCAT(u.nombres," ", u.apellidos) AS jugador,
+        tp.tarjeta,
+        tp.minuto,
         el.nombre AS equipo
-        FROM
-            tarjetas_partido tp
-        LEFT JOIN jugadores j ON
-            j.id = tp.jugador_fk
-        LEFT JOIN usuarios u ON
-            u.jugador_id_fk = j.id
-        LEFT JOIN partidos p ON
-            p.id = tp.partido_fk
-        LEFT JOIN equipos el ON
-            el.id = p.equipo_local_fk
-        LEFT JOIN equipos ev ON
-            ev.id = p.equipo_visita_fk
-        WHERE
-            p.fecha = (
-                SELECT
-                    MAX(fecha)
-                FROM
-                    partidos
-            )
-        AND el.id = 10
+    FROM
+        tarjetas_partido tp
+    LEFT JOIN jugadores j ON
+        j.id = tp.jugador_fk
+    LEFT JOIN usuarios u ON
+        u.jugador_id_fk = j.id
+    LEFT JOIN partidos p ON
+        p.id = tp.partido_fk
+    LEFT JOIN equipos el ON
+        el.id = p.equipo_local_fk
+    LEFT JOIN equipos ev ON
+        ev.id = p.equipo_visita_fk
+    WHERE
+        p.fecha = (
+            SELECT
+                MAX(fecha)
+            FROM
+                partidos
+        )
         AND tp.jugador_fk IS NOT NULL;');
 
         $results5 = $query5->getResult();
@@ -344,7 +345,7 @@ class Home extends BaseController
 
     public function homesocios()
     {
-        return view('templates/header').view('home/home_socios').view('templates/footer');
+        return view('templates/header') . view('home/home_socios') . view('templates/footer');
     }
 
     public function homeiniciosesion()
@@ -356,6 +357,7 @@ class Home extends BaseController
     {
         return view('home/registrarse');
     }
+    protected $usuario;
 
     //INICIAR SESION
     public function validarIngreso()
@@ -373,9 +375,8 @@ class Home extends BaseController
         if ($resultadoUsuario) {
             $encrypter = \config\Services::encrypter();
             $claveBD = $encrypter->decrypt(hex2bin($resultadoUsuario->password_hash));
-
-
             $clave = $this->request->getPost("password");
+
             if ($clave == $claveBD) {
                 $data = [
                     "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
@@ -385,40 +386,40 @@ class Home extends BaseController
 
                 //Buscar rol del usuario
 
-                // $database = \Config\Database::connect();
-                // $query = ($database->table('usuarios')->select('rol')->where('email', $email1));
-                // $this->$database->select('rol')->from('usuarios')->where('email', $email1);
-                // $query = $this->$database->get();
-                //Control de vistas por Rol
-                // if ($query) {
-                //     switch ($query) {
-                //         case  1:
-                //             //redirecciona a vista de administrador
-                //             return redirect()->to(base_url() . '/ ');
+                $userModel = new UsuarioModel();
+                $query = $userModel->select('rol')->where('email', $email1)->get()->getRow()->rol;
 
-                //         case 'direccion':
-                //             //redirecciona a vista de direccion 
-                //             return redirect()->to(base_url() . '/ ');
+                // Control de vistas por Rol
 
-                //         case 'jugador':
-                //             //redirecciona a vista de jugador
-                //             return redirect()->to(base_url() . '/ ');
+                if ($query) {
+                    switch ($query) {
+                        case  'administrador':
+                            //redirecciona a vista de administrador
+                            return redirect()->to(base_url() . '/AdminDashboard ');
 
-                //         case 'entrenador':
-                //             //redirecciona a vista de entrenador
-                //             return redirect()->to(base_url() . '/ ');
+                        case 'direccion':
+                            //redirecciona a vista de direccion 
+                            return redirect()->to(base_url() . '/DireccionDashboard ');
 
-                //         case 'equipo_tecnico':
-                //             //redirecciona a vista de equipo_tecnico
-                //             return redirect()->to(base_url() . '/ ');
+                        case 'jugador':
+                            //redirecciona a vista de jugador
+                            return redirect()->to(base_url() . '/ ');
 
-                //         case 'socio':
-                //             //redirecciona a vista de socio
-                //             return redirect()->to(base_url() . '/ ');
-                //     }
-                // }
+                        case 'entrenador':
+                            //redirecciona a vista de entrenador
+                            return redirect()->to(base_url() . '/ ');
 
-                return redirect()->to(base_url() . 'InicioSocios');
+                        case 'equipo_tecnico':
+                            //redirecciona a vista de equipo_tecnico
+                            return redirect()->to(base_url() . '/ ');
+
+                        case 'socio':
+                            //redirecciona a vista de socio
+                            return redirect()->to(base_url() . '/InicioSocios ');
+                    }
+                }
+
+                // return redirect()->to(base_url() . '/Home');
             } else {
                 $data = ['tipo' => 'danger', 'mensaje' => 'clave y/o usuario invalido '];
                 return view(('home/iniciar_sesion'),  $data);
@@ -429,7 +430,7 @@ class Home extends BaseController
             return view(('home/iniciar_sesion'), $data);
         }
     }
-    
+
     //Cerrar Sesion (General)
     public function cerrarSesion()
     {
