@@ -11,9 +11,336 @@ class Home extends BaseController
 {
     public function index()
     {
+        $db = db_connect();
+
+        $query = $db->query('select
+        e1.nombre as equipo_local,
+        SUM(case when g.jugador_id_fk is not null then 1 else 0 end) as goles_equipo_local,
+        e2.nombre as equipo_visita,
+        SUM(case when g.jugador_id_fk is null then 1 else 0 end) as goles_equipo_visita
+        from
+            partidos p
+        inner join equipos e1 on
+            p.equipo_local_fk = e1.id
+        inner join equipos e2 on
+            p.equipo_visita_fk = e2.id
+        left join goles g on
+            p.id = g.partido_id_fk
+        where
+            p.fecha = (
+            select
+                MAX(fecha)
+            from
+                partidos)
+            and (e1.id = 10
+                or e2.id = 10)
+        group by
+            e1.nombre,
+            e2.nombre;');
+
+        $results = $query->getResult();
+
+        $data['results'] = $results;
+
+        $query2 = $db->query('SELECT
+        e1.nombre AS nombre_equipo,
+        CONCAT(j.numero_camiseta, " ", u.nombres, " ", u.apellidos) AS nombre_jugador,
+        g.minuto as minuto_gol
+        FROM
+            partidos p
+        INNER JOIN equipos e1 ON
+            p.equipo_local_fk = e1.id
+        LEFT JOIN goles g ON
+            p.id = g.partido_id_fk
+        LEFT JOIN jugadores j ON
+            j.id = g.jugador_id_fk
+        LEFT JOIN usuarios u ON
+            j.id = u.jugador_id_fk 
+        WHERE
+            p.fecha = (
+                SELECT
+                    MAX(fecha)
+                FROM
+                    partidos
+            )
+        AND g.jugador_visita IS NULL;');
+
+        $results2 = $query2->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data2['results2'] = array();
+
+        foreach ($results2 as $row) {
+            $data2['results2'][] = array(
+                'nombre_equipo' => $row->nombre_equipo,
+                'minuto_gol' => $row->minuto_gol,
+                'nombre_jugador' => $row->nombre_jugador
+            );
+        }
+
+        $query6 = $db->query('SELECT
+        e2.nombre AS nombre_equipo,
+        g.jugador_visita AS nombre_jugador,
+        g.minuto as minuto_gol
+        FROM
+            partidos p
+        INNER JOIN equipos e2 ON
+            p.equipo_visita_fk = e2.id
+        LEFT JOIN goles g ON
+            p.id = g.partido_id_fk
+        WHERE
+            p.fecha = (
+                SELECT
+                    MAX(fecha)
+                FROM
+                    partidos
+            )
+        AND g.jugador_id_fk IS NULL;');
+
+        $results6 = $query6->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data6['results6'] = array();
+
+        foreach ($results6 as $row) {
+            $data6['results6'][] = array(
+                'nombre_equipo' => $row->nombre_equipo,
+                'minuto_gol' => $row->minuto_gol,
+                'nombre_jugador' => $row->nombre_jugador
+            );
+        }
+
+
+        $query3 = $db->query('SELECT
+        CONCAT(j2.numero_camiseta ," ",u_sal.nombres," ", u_sal.apellidos) AS jugador_saliente,
+        CONCAT(j.numero_camiseta , " ",u_ent.nombres, " ", u_ent.apellidos) AS jugador_entrante,
+        c.minuto
+        FROM
+            partidos p
+        INNER JOIN cambios c ON
+            p.id = c.partido_fk
+        LEFT JOIN usuarios u_sal ON
+            c.jugador_saliente_fk = u_sal.jugador_id_fk
+        LEFT JOIN usuarios u_ent ON
+            c.jugador_entrante_fk = u_ent.jugador_id_fk
+        left join jugadores j on
+            c.jugador_entrante_fk = j.id 
+        left join jugadores j2 on
+            c.jugador_saliente_fk = j2.id 
+        WHERE
+            p.fecha = (
+                SELECT
+                    MAX(fecha)
+                FROM
+                    partidos
+            )
+        ORDER BY
+            c.minuto ASC;');
+
+        $results3 = $query3->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data3['results3'] = array();
+
+        foreach ($results3 as $row) {
+            $data3['results3'][] = array(
+                'jugador_saliente' => $row->jugador_saliente,
+                'jugador_entrante' => $row->jugador_entrante,
+                'minuto' => $row->minuto
+            );
+        }
+
+        $query4 = $db->query('select e.nombre as nombre_equipo,
+        ce.nombre_jugador_saliente,
+        ce.nombre_jugador_entrante ,
+        ce.minuto 
+        from cambios_externo ce
+        inner join partidos p on
+        ce.partido_id_fk = p.id 
+        left join equipos e on
+        e.id = p.equipo_visita_fk 
+        where p.fecha = (
+        select max(p2.fecha)
+        from partidos p2)
+        order by ce.minuto;');
+
+        $results4 = $query4->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data4['results4'] = array();
+
+        foreach ($results4 as $row) {
+            $data4['results4'][] = array(
+                'nombre_equipo' => $row->nombre_equipo,
+                'jugador_saliente' => $row->nombre_jugador_saliente,
+                'jugador_entrante' => $row->nombre_jugador_entrante,
+                'minuto' => $row->minuto
+            );
+        }
+
+        $query5 = $db->query('SELECT
+        CONCAT(u.nombres, " ", u.apellidos) AS jugador,
+        tp.tarjeta AS tarjeta,
+        tp.minuto AS minuto,
+        el.nombre AS equipo
+        FROM
+            tarjetas_partido tp
+        LEFT JOIN jugadores j ON
+            j.id = tp.jugador_fk
+        LEFT JOIN usuarios u ON
+            u.jugador_id_fk = j.id
+        LEFT JOIN partidos p ON
+            p.id = tp.partido_fk
+        LEFT JOIN equipos el ON
+            el.id = p.equipo_local_fk
+        LEFT JOIN equipos ev ON
+            ev.id = p.equipo_visita_fk
+        WHERE
+            p.fecha = (
+                SELECT
+                    MAX(fecha)
+                FROM
+                    partidos
+            )
+        AND el.id = 10
+        AND tp.jugador_fk IS NOT NULL;');
+
+        $results5 = $query5->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data5['results5'] = array();
+
+        foreach ($results5 as $row) {
+            $data5['results5'][] = array(
+                'jugador' => $row->jugador,
+                'tarjeta' => $row->tarjeta,
+                'minuto' => $row->minuto,
+                'equipo' => $row->equipo
+            );
+        }
+
+        $query7 = $db->query('SELECT
+        CASE
+            WHEN tp.jugador_fk IS NOT NULL THEN CONCAT(u.nombres, " ", u.apellidos)
+            ELSE tp.jugador_externo
+        END AS jugador,
+        tp.tarjeta AS tarjeta, 
+        tp.minuto AS minuto,
+        ev.nombre AS equipo
+        FROM
+            tarjetas_partido tp
+        LEFT JOIN jugadores j ON
+            j.id = tp.jugador_fk
+        LEFT JOIN usuarios u ON
+            u.jugador_id_fk = j.id
+        LEFT JOIN partidos p ON
+            p.id = tp.partido_fk
+        LEFT JOIN equipos el ON
+            el.id = p.equipo_local_fk
+        LEFT JOIN equipos ev ON
+            ev.id = p.equipo_visita_fk
+        WHERE
+            p.fecha = (
+                SELECT
+                    MAX(fecha)
+                FROM
+                    partidos
+            )
+        AND tp.jugador_fk IS NULL;');
+
+        $results7 = $query7->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data7['results7'] = array();
+
+        foreach ($results7 as $row) {
+            $data7['results7'][] = array(
+                'jugador' => $row->jugador,
+                'tarjeta' => $row->tarjeta,
+                'minuto' => $row->minuto,
+                'equipo' => $row->equipo
+            );
+        }
+
+        $query8 = $db->query('SELECT
+        e.nombre AS equipo,
+        COUNT(*) AS partidos_jugados,
+        SUM(CASE
+            WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
+                OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
+            ELSE 0
+        END) AS partidos_ganados,
+        
+        SUM(CASE
+            WHEN r.goles_local = r.goles_visita THEN 1
+            ELSE 0
+        END) AS partidos_empatados,
+        
+        SUM(CASE
+            WHEN (r.goles_local < r.goles_visita AND r.equipo_local_fk = e.id)
+                OR (r.goles_visita < r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
+            ELSE 0
+        END) AS partidos_perdidos,
+    
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_local
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_visita
+            ELSE 0
+        END) AS goles_a_favor,
+    
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_visita
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_local
+            ELSE 0
+        END) AS goles_en_contra,
+        
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_local - r.goles_visita
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_visita - r.goles_local
+            ELSE 0
+        END) AS diferencia_goles,
+    
+        SUM(CASE
+        WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
+            OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 3
+        WHEN r.goles_local = r.goles_visita AND r.equipo_local_fk = e.id THEN 1
+        WHEN r.goles_local = r.goles_visita AND r.equipo_visita_fk = e.id THEN 1
+        ELSE 0
+        END) AS puntaje
+      
+        FROM
+            resultados r
+        INNER JOIN equipos e ON r.equipo_local_fk = e.id OR r.equipo_visita_fk = e.id
+        WHERE
+            r.campeonato_id_fk = 1
+        GROUP BY
+            e.id, e.nombre
+        ORDER BY
+            puntaje DESC, diferencia_goles desc;');
+
+        $results8 = $query8->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data8['results8'] = array();
+
+        foreach ($results8 as $row) {
+            $data8['results8'][] = array(
+                'equipo' => $row->equipo,
+                'partidos_jugados' => $row->partidos_jugados,
+                'partidos_ganados' => $row->partidos_ganados,
+                'partidos_empatados' => $row->partidos_empatados,
+                'partidos_perdidos' => $row->partidos_perdidos,
+                'goles_a_favor' => $row->goles_a_favor,
+                'goles_en_contra' => $row->goles_en_contra,
+                'diferencia_goles' => $row->diferencia_goles,
+                'puntaje' => $row->puntaje
+            );
+        }
+
+        $viewData = array_merge($data, $data2, $data3, $data4, $data5, $data6, $data7, $data8);
 
         echo view('templates/header');
-        echo view('home/home');
+        echo view('home/home', $viewData);
         echo view('templates/footer');
     }
 

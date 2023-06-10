@@ -9,25 +9,37 @@ class InfoGolesController extends BaseController
     {
         $db = db_connect();
 
-        $query = $db->query('SELECT
-            CASE
-                WHEN g.jugador_id_fk IS NOT NULL THEN e1.nombre
-                ELSE e2.nombre
-            END AS nombre_equipo,
-            CASE
-                WHEN g.jugador_id_fk IS NOT NULL THEN CONCAT(u.nombres, " ", u.apellidos)
-                ELSE g.nombre_jugador_visita
-            END AS nombre_jugador,
-            g.minuto AS minuto_gol
-        FROM
-            partidos p
-            INNER JOIN equipos e1 ON p.equipo_local_fk = e1.id
-            INNER JOIN equipos e2 ON p.equipo_visita_fk = e2.id
-            LEFT JOIN goles g ON p.id = g.partido_id_fk
-            LEFT JOIN usuarios u ON g.jugador_id_fk = u.jugador_id_fk
-        WHERE
-            p.fecha = (SELECT MAX(fecha) FROM partidos)
-            AND (e1.id = 10 OR e2.id = 10);');
+        $query = $db->query('select
+        case
+            when g.jugador_id_fk is not null then e1.nombre
+            else e2.nombre
+        end as nombre_equipo,
+        case
+            when g.jugador_id_fk is not null then CONCAT(j.numero_camiseta, " ",u.nombres, " ", u.apellidos)
+            else g.jugador_visita
+        end as nombre_jugador,
+        g.minuto as minuto_gol
+    from
+        partidos p
+    inner join equipos e1 on
+        p.equipo_local_fk = e1.id
+    inner join equipos e2 on
+        p.equipo_visita_fk = e2.id
+    left join goles g on
+        p.id = g.partido_id_fk
+    left join usuarios u on
+        g.jugador_id_fk = u.jugador_id_fk
+    left join jugadores j on
+        j.id = g.jugador_id_fk 
+    where
+        p.fecha = (
+        select
+            MAX(fecha)
+        from
+            partidos
+      )
+        and (e1.id = 10
+            or e2.id = 10);');
 
         $results = $query->getResult();
 

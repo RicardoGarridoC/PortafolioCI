@@ -9,27 +9,31 @@ class CambiosController extends BaseController
     {
         $db = db_connect();
 
-        $query = $db->query('select
-        CONCAT(u_sal.nombres, " ", u_sal.apellidos) as jugador_saliente,
-        CONCAT(u_ent.nombres, " ", u_ent.apellidos) as jugador_entrante,
+        $query = $db->query('SELECT
+        CONCAT(j2.numero_camiseta ," ",u_sal.nombres," ", u_sal.apellidos) AS jugador_saliente,
+        CONCAT(j.numero_camiseta , " ",u_ent.nombres, " ", u_ent.apellidos) AS jugador_entrante,
         c.minuto
-    from
+    FROM
         partidos p
-    inner join cambios c on
+    INNER JOIN cambios c ON
         p.id = c.partido_fk
-    left join usuarios u_sal on
+    LEFT JOIN usuarios u_sal ON
         c.jugador_saliente_fk = u_sal.jugador_id_fk
-    left join usuarios u_ent on
+    LEFT JOIN usuarios u_ent ON
         c.jugador_entrante_fk = u_ent.jugador_id_fk
-    where
+    left join jugadores j on
+        c.jugador_entrante_fk = j.id 
+    left join jugadores j2 on
+        c.jugador_saliente_fk = j2.id 
+    WHERE
         p.fecha = (
-        select
-            MAX(fecha)
-        from
-            partidos
+            SELECT
+                MAX(fecha)
+            FROM
+                partidos
         )
-    order by
-        c.minuto asc;');
+    ORDER BY
+        c.minuto ASC;');
 
         $results = $query->getResult();
 

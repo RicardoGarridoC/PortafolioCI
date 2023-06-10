@@ -19,10 +19,12 @@ $routes->set404Override();
 $routes->setAutoRoute(true);
 
 //Rutas Hechas
+//Rutas Home
 $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::homeregistro');
+<<<<<<< HEAD
 $routes->get('InicioSocios', 'SocioController::inicioSocios');
 $routes->get('VerJugadores', 'SocioController::mostrarJugador');
 $routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos');
@@ -31,6 +33,21 @@ $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'Sesion
 $routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase');
 $routes->get('AdminUsuarioDt', 'AdminDashboard::usuarioDatabase');
 $routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase');
+=======
+//Rutas Socio / Perfile0s
+$routes->get('InicioSocios','SocioController::inicioSocios');
+$routes->get('VerJugadores','SocioController::mostrarJugador');
+$routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
+$routes->get('VerPartidos','SocioController::verPartidos');
+//Rutas Admin
+$routes->get('AdminDashboard','AdminDashboard::Dashboard');
+$routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
+$routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
+$routes->get('AdminEquipoTecnicoDt','AdminDashboard::equipotecnicoDatabase');
+$routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
+$routes->get('AdminSocioDt','AdminDashboard::socioDatabase');
+//Botones Admin
+>>>>>>> 1f6884066ef84f03211c9db8cbd977d1e4df1e42
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
 $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador');
@@ -44,9 +61,17 @@ $routes->post('Home/validarIngreso', 'Home::validarIngreso');
 $routes->get('/logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
 //prueba
+<<<<<<< HEAD
 $routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
 $routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
 $routes->get('Cambios', 'CambiosController::MostrarCambios');
+=======
+$routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles','InfoGolesController::MostrarInfoGoles');
+$routes->get('Cambios','CambiosController::MostrarCambios');
+$routes->get('CambiosExterno','CambiosExternoController::MostrarCambiosExterno');
+$routes->get('TarjetasPartido','TarjetasPartidoController::MostrarTarjetas');
+>>>>>>> 1f6884066ef84f03211c9db8cbd977d1e4df1e42
 
 
 
