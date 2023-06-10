@@ -18,25 +18,24 @@ class Home extends BaseController
         SUM(case when g.jugador_id_fk is not null then 1 else 0 end) as goles_equipo_local,
         e2.nombre as equipo_visita,
         SUM(case when g.jugador_id_fk is null then 1 else 0 end) as goles_equipo_visita
+    from
+        partidos p
+    inner join equipos e1 on
+        p.equipo_local_fk = e1.id
+    inner join equipos e2 on
+        p.equipo_visita_fk = e2.id
+    left join goles g on
+        p.id = g.partido_id_fk
+    where
+        p.fecha = (
+        select
+            MAX(fecha)
         from
-            partidos p
-        inner join equipos e1 on
-            p.equipo_local_fk = e1.id
-        inner join equipos e2 on
-            p.equipo_visita_fk = e2.id
-        left join goles g on
-            p.id = g.partido_id_fk
-        where
-            p.fecha = (
-            select
-                MAX(fecha)
-            from
-                partidos)
-            and (e1.id = 10
-                or e2.id = 10)
-        group by
-            e1.nombre,
-            e2.nombre;');
+            partidos)
+    group by
+        e1.nombre,
+        e2.nombre;
+    ');
 
         $results = $query->getResult();
 
@@ -179,30 +178,29 @@ class Home extends BaseController
         }
 
         $query5 = $db->query('SELECT
-        CONCAT(u.nombres, " ", u.apellidos) AS jugador,
-        tp.tarjeta AS tarjeta,
-        tp.minuto AS minuto,
+        CONCAT(u.nombres," ", u.apellidos) AS jugador,
+        tp.tarjeta,
+        tp.minuto,
         el.nombre AS equipo
-        FROM
-            tarjetas_partido tp
-        LEFT JOIN jugadores j ON
-            j.id = tp.jugador_fk
-        LEFT JOIN usuarios u ON
-            u.jugador_id_fk = j.id
-        LEFT JOIN partidos p ON
-            p.id = tp.partido_fk
-        LEFT JOIN equipos el ON
-            el.id = p.equipo_local_fk
-        LEFT JOIN equipos ev ON
-            ev.id = p.equipo_visita_fk
-        WHERE
-            p.fecha = (
-                SELECT
-                    MAX(fecha)
-                FROM
-                    partidos
-            )
-        AND el.id = 10
+    FROM
+        tarjetas_partido tp
+    LEFT JOIN jugadores j ON
+        j.id = tp.jugador_fk
+    LEFT JOIN usuarios u ON
+        u.jugador_id_fk = j.id
+    LEFT JOIN partidos p ON
+        p.id = tp.partido_fk
+    LEFT JOIN equipos el ON
+        el.id = p.equipo_local_fk
+    LEFT JOIN equipos ev ON
+        ev.id = p.equipo_visita_fk
+    WHERE
+        p.fecha = (
+            SELECT
+                MAX(fecha)
+            FROM
+                partidos
+        )
         AND tp.jugador_fk IS NOT NULL;');
 
         $results5 = $query5->getResult();
@@ -384,14 +382,9 @@ class Home extends BaseController
                     "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
                     "emailUsuario" => $resultadoUsuario->email
                 ];
-                $sesionActiva = session()->set($data);
+                session()->set($data);
 
                 //Buscar rol del usuario
-
-                // $database = \Config\Database::connect();
-                // $query = ($database->table('usuarios')->select('rol')->where('email', $email1));
-                // $this->$database->select('rol')->from('usuarios')->where('email', $email1);
-                // $query = $this->$database->get();
 
                 $userModel = new UsuarioModel();
                 $query = $userModel->select('rol')->where('email', $email1)->get()->getRow()->rol;
@@ -402,11 +395,11 @@ class Home extends BaseController
                     switch ($query) {
                         case  'administrador':
                             //redirecciona a vista de administrador
-                            return redirect()->to(base_url() . '/AdminDashboard ')->with('session', $sesionActiva);
+                            return redirect()->to(base_url() . '/AdminDashboard ');
 
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . '/DireccionDashboard ');
 
                         case 'jugador':
                             //redirecciona a vista de jugador
@@ -422,7 +415,7 @@ class Home extends BaseController
 
                         case 'socio':
                             //redirecciona a vista de socio
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . '/InicioSocios ');
                     }
                 }
 
