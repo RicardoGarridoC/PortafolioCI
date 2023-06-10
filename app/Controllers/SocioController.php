@@ -47,4 +47,16 @@ class SocioController extends BaseController
 
         return view('socio/ver_partidos', $titulo);
     }
+
+    public function verReportes()
+    {
+        //Agregando Titulo a Cada View
+        $titulo = [ 
+            'title' => 'Reportes',
+        ];
+
+        return view('templates/reportes', $titulo);
+    }
+
+
 }

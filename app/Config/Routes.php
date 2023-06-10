@@ -29,6 +29,8 @@ $routes->get('InicioSocios','SocioController::inicioSocios');
 $routes->get('VerJugadores','SocioController::mostrarJugador');
 $routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
 $routes->get('VerPartidos','SocioController::verPartidos');
+$routes->get('VerReportes', 'SocioController::verReportes');
+
 //Rutas Admin
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');

@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/" class="nav-link align-middle px-0">
+                            <a href="<?php echo base_url('VerReportes')?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
                             </a>
                         </li>
