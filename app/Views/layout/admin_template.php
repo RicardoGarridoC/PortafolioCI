@@ -259,9 +259,21 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url('AdminSocioDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Socios</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url('AdminJugadorDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jugadores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminEquipoTecnicoDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Equipo Técnico</p>
                 </a>
               </li>
               <li class="nav-item">

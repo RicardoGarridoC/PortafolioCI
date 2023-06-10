@@ -72,11 +72,7 @@
                             echo form_label('Rol', 'rol');
                             $options = array(
                                 'administrador' => 'Administrador',
-                                'direccion' => 'Direccion',
-                                'jugador' => 'Jugador',
-                                'entrenador' => 'Entrenador',
-                                'equipo_tecnico' => 'Equipo Técnico',
-                                'socio' => 'Socio'
+                                'direccion' => 'Direccion'
                             );
                             echo form_dropdown('rol', $options, '', 'class="form-control" required');
                             echo "<br>";               

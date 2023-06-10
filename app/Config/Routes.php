@@ -19,18 +19,24 @@ $routes->set404Override();
 $routes->setAutoRoute(true);
 
 //Rutas Hechas
+//Rutas Home
 $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::homeregistro');
+//Rutas Socio / Perfile0s
 $routes->get('InicioSocios','SocioController::inicioSocios');
 $routes->get('VerJugadores','SocioController::mostrarJugador');
 $routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
 $routes->get('VerPartidos','SocioController::verPartidos');
+//Rutas Admin
 $routes->get('AdminDashboard','AdminDashboard::Dashboard');
 $routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
 $routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
+$routes->get('AdminEquipoTecnicoDt','AdminDashboard::equipotecnicoDatabase');
 $routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
+$routes->get('AdminSocioDt','AdminDashboard::socioDatabase');
+//Botones Admin
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
 $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador');
