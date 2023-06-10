@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\UsuarioModel;
 use CodeIgniter\Controller;
+
+$autoload['libraries'] = ['session'];
 
 class Home extends BaseController
 {
     public function index()
     {
-        
+
         echo view('templates/header');
         echo view('home/home');
         echo view('templates/footer');
@@ -17,7 +20,7 @@ class Home extends BaseController
 
     public function homesocios()
     {
-        return view('templates/header').view('home/home_socios').view('templates/footer');
+        return view('templates/header') . view('home/home_socios') . view('templates/footer');
     }
 
     public function homeiniciosesion()
@@ -29,6 +32,7 @@ class Home extends BaseController
     {
         return view('home/registrarse');
     }
+    protected $usuario;
 
     //INICIAR SESION
     public function validarIngreso()
@@ -62,36 +66,41 @@ class Home extends BaseController
                 // $query = ($database->table('usuarios')->select('rol')->where('email', $email1));
                 // $this->$database->select('rol')->from('usuarios')->where('email', $email1);
                 // $query = $this->$database->get();
-                //Control de vistas por Rol
-                // if ($query) {
-                //     switch ($query) {
-                //         case  1:
-                //             //redirecciona a vista de administrador
-                //             return redirect()->to(base_url() . '/ ');
 
-                //         case 'direccion':
-                //             //redirecciona a vista de direccion 
-                //             return redirect()->to(base_url() . '/ ');
+                $userModel = new UsuarioModel();
+                $query = $userModel->select('rol')->where('email', $email1)->get()->getRow()->rol;
 
-                //         case 'jugador':
-                //             //redirecciona a vista de jugador
-                //             return redirect()->to(base_url() . '/ ');
+                // Control de vistas por Rol
 
-                //         case 'entrenador':
-                //             //redirecciona a vista de entrenador
-                //             return redirect()->to(base_url() . '/ ');
+                if ($query) {
+                    switch ($query) {
+                        case  'administrador':
+                            //redirecciona a vista de administrador
+                            return redirect()->to(base_url() . '/AdminDashboard ');
 
-                //         case 'equipo_tecnico':
-                //             //redirecciona a vista de equipo_tecnico
-                //             return redirect()->to(base_url() . '/ ');
+                        case 'direccion':
+                            //redirecciona a vista de direccion 
+                            return redirect()->to(base_url() . '/ ');
 
-                //         case 'socio':
-                //             //redirecciona a vista de socio
-                //             return redirect()->to(base_url() . '/ ');
-                //     }
-                // }
+                        case 'jugador':
+                            //redirecciona a vista de jugador
+                            return redirect()->to(base_url() . '/ ');
 
-                return redirect()->to(base_url() . 'InicioSocios');
+                        case 'entrenador':
+                            //redirecciona a vista de entrenador
+                            return redirect()->to(base_url() . '/ ');
+
+                        case 'equipo_tecnico':
+                            //redirecciona a vista de equipo_tecnico
+                            return redirect()->to(base_url() . '/ ');
+
+                        case 'socio':
+                            //redirecciona a vista de socio
+                            return redirect()->to(base_url() . '/ ');
+                    }
+                }
+
+                // return redirect()->to(base_url() . '/Home');
             } else {
                 $data = ['tipo' => 'danger', 'mensaje' => 'clave y/o usuario invalido '];
                 return view(('home/iniciar_sesion'),  $data);
@@ -102,7 +111,7 @@ class Home extends BaseController
             return view(('home/iniciar_sesion'), $data);
         }
     }
-    
+
     //Cerrar Sesion (General)
     public function cerrarSesion()
     {

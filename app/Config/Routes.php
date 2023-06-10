@@ -23,14 +23,14 @@ $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::homeregistro');
-$routes->get('InicioSocios','SocioController::inicioSocios');
-$routes->get('VerJugadores','SocioController::mostrarJugador');
-$routes->get('VerCampeonatos','SocioController::mostrarCampeonatos');
-$routes->get('VerPartidos','SocioController::verPartidos');
-$routes->get('AdminDashboard','AdminDashboard::Dashboard');
-$routes->get('AdminJugadorDt','AdminDashboard::jugadorDatabase');
-$routes->get('AdminUsuarioDt','AdminDashboard::usuarioDatabase');
-$routes->get('AdminEquipoDt','AdminDashboard::equipoDatabase');
+$routes->get('InicioSocios', 'SocioController::inicioSocios');
+$routes->get('VerJugadores', 'SocioController::mostrarJugador');
+$routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos');
+$routes->get('VerPartidos', 'SocioController::verPartidos');
+$routes->get('AdminDashboard', 'AdminDashboard::Dashboard');
+$routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase');
+$routes->get('AdminUsuarioDt', 'AdminDashboard::usuarioDatabase');
+$routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase');
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario');
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo');
 $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador');
@@ -41,12 +41,12 @@ $routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo');
 //$routes->get('/login', 'SocioController::inicioSocios');
 $routes->post('Home/validarIngreso', 'Home::validarIngreso');
 //Buscar Logout y /register
-$routes->match(['get', 'post'], 'logout', 'Home::cerrarSesion');
+$routes->get('/logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
 //prueba
-$routes->get('UltimoPartido','UltimoPartidoController::MostrarPartido');
-$routes->get('InfoGoles','InfoGolesController::MostrarInfoGoles');
-$routes->get('Cambios','CambiosController::MostrarCambios');
+$routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
+$routes->get('Cambios', 'CambiosController::MostrarCambios');
 
 
 
