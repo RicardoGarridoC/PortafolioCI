@@ -1,4 +1,4 @@
-<?= $this->extend('layout/admin_template') ?>
+<?= $this->extend('layout/direccion_template') ?>
 <?= $this->section('content') ?>
 
 <!DOCTYPE html>

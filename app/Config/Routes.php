@@ -25,10 +25,10 @@ $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
 //Rutas Socio / Perfile0s
-$routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionAdmin:socio']);
+$routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionSocio:socio']);
 //Rutas Admin
 $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);

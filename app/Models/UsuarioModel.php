@@ -52,14 +52,14 @@ class UsuarioModel extends Model
         return $resultado->getResult() ? $resultado->getResult()[0] : false;
     }
     //retornar usuario
-    public function getUserBy(string $column, string $value)
+    public function getUserBy(string $column,  $value)
     {
 
-        return $this->where($column, $value)->first();
+        return $this->where($column,  $value)->get();
     }
-    public function getRole()
+    public function getRole(string $email)
     {
         $model =  model('UsuarioModel');
-        return  $model->where('rol', $this->rol)->get();
+        return  $model->select('rol')->where('email', $email)->first();
     }
 }

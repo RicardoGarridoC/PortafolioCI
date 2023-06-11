@@ -15,22 +15,20 @@ class SesionAdmin implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // dd($arguments);
-        try {
-            if (!session()) {
-                return redirect()->route('/');
-            }
-
-            $model =  model('UsuarioModel');
-            if (!$user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol) {
-                session()->destroy();
-                return redirect()->route('/Home');
-            }
-
-            if (!$user) {
-                return redirect()->route('/IniciarSesion');
-            }
-        } catch (PageNotFoundException $e) {
+        if (!session()) {
             return redirect()->route('/');
+        }
+
+        $model =  model('UsuarioModel');
+
+
+        if (!$user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol) {
+            session()->destroy();
+            return redirect()->route('/Home');
+        }
+
+        if (!$user) {
+            return redirect()->route('/IniciarSesion');
         }
     }
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
