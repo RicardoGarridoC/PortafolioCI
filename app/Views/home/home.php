@@ -94,7 +94,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="container probando">
-                    <h2 class="text-center">Ultimo Partido</h2>
+                    <h2 class="text-center">Último Partido</h2>
                     <h6 class="text-center gray-text">Fecha: <?php echo $results[0]->fecha; ?></h6>
                     <div class="row">
                         <div class="col-12">
@@ -123,9 +123,9 @@
                                 <li class="nav-item flex-fill">
                                     <a class="nav-link text-center" id="tarjetas-tab" data-bs-toggle="tab" href="#tarjetas" role="tab" aria-controls="tarjetas" aria-selected="false">Tarjetas</a>
                                 </li>
-                                <li class="nav-item flex-fill">
+                                <!-- <li class="nav-item flex-fill">
                                     <a class="nav-link text-center" id="proximos-tab" data-bs-toggle="tab" href="#proximos" role="tab" aria-controls="proximos" aria-selected="false">Proximos Partidos</a>
-                                </li>
+                                </li> -->
                             </ul>
                             
                             <div class="tab-content" id="myTabContent">
@@ -211,7 +211,7 @@
 
             <div class="col-md-6">
                 <div class="championship-table">
-                    <h2 class="text-center">Campeonato</h2>
+                    <h2 class="text-center">Campeonato Femenino</h2>
                     <table class="table table-dark">
                     <thead>
                         <tr>

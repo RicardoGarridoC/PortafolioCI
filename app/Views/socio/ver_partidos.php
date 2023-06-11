@@ -33,7 +33,7 @@
           </tr>
         <?php } ?>
       </tbody>
-      <tfoot>
+      <!-- <tfoot>
         <tr>
           <th>Fecha</th>
           <th>Equipos</th>
@@ -45,7 +45,7 @@
           <th>Tarjetas Local</th>
           <th>Tarjetas Visita</th>
         </tr>
-      </tfoot>
+      </tfoot> -->
     </table>
   </div>
 </section>

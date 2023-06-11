@@ -28,6 +28,8 @@ $routes->get('Blog', 'Home::homeBlog');
 $routes->get('Contacto', 'Home::homeContacto');
 $routes->get('Portafolio', 'Home::homePortafolio');
 $routes->get('Servicios', 'Home::homeServicios');
+$routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
+$routes->get('ProximoPartido', 'Home::proximoPartido');
 //Rutas Socio / Perfile0s
 $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionAdmin:socio']);
 $routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionAdmin:socio']);

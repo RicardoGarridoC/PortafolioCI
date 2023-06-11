@@ -52,7 +52,7 @@
                         </li>
                         <li>
                             <a href="<?php echo base_url('VerPartidos'); ?>" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-clock-history"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Partidos</span>
+                                <i class="fs-4 bi-clock-history"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Ver todos los partidos</span>
                             </a>
                         </li>
                         <li>
@@ -60,11 +60,11 @@
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Estadisticas Jugadores</span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo base_url('VerReportes')?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
                             </a>
-                        </li>
+                        </li> -->
                         
                         
                     </ul>

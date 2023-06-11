@@ -370,6 +370,16 @@ class Home extends BaseController
         return view('templates/header') . view('home/home_socios') . view('templates/footer');
     }
 
+    public function actividadesEspeciales()
+    {
+        return view('templates/header') . view('home/actividades_especiales') . view('templates/footer');
+    }
+
+    public function proximoPartido()
+    {
+        return view('templates/header') . view('home/proximo_partido') . view('templates/footer');
+    }
+
     public function homeiniciosesion()
     {
         return view('home/iniciar_sesion');
@@ -415,10 +425,14 @@ class Home extends BaseController
             $encrypter = \config\Services::encrypter();
             $claveBD = $encrypter->decrypt(hex2bin($resultadoUsuario->password_hash));
             $clave = $this->request->getPost("password");
+            $nombres = explode(' ', $resultadoUsuario->nombres);
+            $apellidos = explode(' ', $resultadoUsuario->apellidos);
 
+            $primerNombre = $nombres[0];
+            $primerApellido = $apellidos[0];
             if ($clave == $claveBD) {
                 $data = [
-                    "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
+                    "nombreUsuario" => $primerNombre . ' ' . $primerApellido,
                     "emailUsuario" => $resultadoUsuario->email
                 ];
                 session()->set($data);
