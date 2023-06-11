@@ -13,18 +13,19 @@ class Home extends BaseController
     {
         $db = db_connect();
         //EQUIPOS Y GOLES DEL PARTIDO
-        $query = $db->query('select
-        e1.nombre as equipo_local,
-        SUM(case when g.jugador_id_fk is not null then 1 else 0 end) as goles_equipo_local,
-        e2.nombre as equipo_visita,
-        SUM(case when g.jugador_id_fk is null then 1 else 0 end) as goles_equipo_visita
-        from
+        $query = $db->query('SELECT
+        e1.nombre AS equipo_local,
+        SUM(CASE WHEN g.jugador_id_fk IS NOT NULL THEN 1 ELSE 0 END) AS goles_equipo_local,
+        e2.nombre AS equipo_visita,
+        SUM(CASE WHEN g.jugador_id_fk IS NULL THEN 1 ELSE 0 END) AS goles_equipo_visita,
+        DATE_FORMAT(p.fecha, "%b %d") AS fecha
+        FROM
             partidos p
-        inner join equipos e1 on
+        INNER JOIN equipos e1 ON
             p.equipo_local_fk = e1.id
-        inner join equipos e2 on
+        INNER JOIN equipos e2 ON
             p.equipo_visita_fk = e2.id
-        left join goles g on
+        LEFT JOIN goles g ON
             p.id = g.partido_id_fk
         WHERE
             p.id = (
@@ -378,6 +379,23 @@ class Home extends BaseController
     {
         return view('home/registrarse');
     }
+    public function homeContacto()
+    {
+        return view('templates/header') . view('home/home_contacto') . view('templates/footer');
+    }
+    public function homePortafolio()
+    {
+        return view('templates/header') . view('home/home_portafolio') . view('templates/footer');
+    }
+    public function homeServicios()
+    {
+        return view('templates/header') . view('home/home_servicios') . view('templates/footer');
+    }
+    public function homeBlog()
+    {
+        return view('templates/header') . view('home/home_blog') . view('templates/footer');
+    }
+
     protected $usuario;
 
     //INICIAR SESION

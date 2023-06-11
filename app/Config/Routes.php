@@ -20,10 +20,14 @@ $routes->setAutoRoute(true);
 
 //Rutas Hechas
 //Rutas Home
-$routes->get('HomeSocios', 'Home::homesocios');
+$routes->get('Sesion', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
+$routes->get('Blog', 'Home::homeBlog');
+$routes->get('Contacto', 'Home::homeContacto');
+$routes->get('Portafolio', 'Home::homePortafolio');
+$routes->get('Servicios', 'Home::homeServicios');
 //Rutas Socio / Perfile0s
 $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionAdmin:socio']);
 $routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionAdmin:socio']);

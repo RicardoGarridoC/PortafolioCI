@@ -60,22 +60,22 @@
                         <a class="nav-link" href="<?php echo base_url('Home'); ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('HomeSocios'); ?>">Socios</a>
+                        <a class="nav-link" href="<?php echo base_url('Servicios'); ?>">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Servicios</a>
+                        <a class="nav-link" href="<?php echo base_url('Blog'); ?>">Blog</a>
                     </li>
                     <li class="nav-item">
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Portafolio</a>
+                        <a class="nav-link" href="<?php echo base_url('Portafolio'); ?>">Portafolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
+                        <a class="nav-link" href="<?php echo base_url('Contacto'); ?>">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="<?php echo base_url('Sesion'); ?>">Sesion</a>
                     </li>
                 </ul>
             </div>
