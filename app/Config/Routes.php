@@ -29,7 +29,8 @@ $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'Sesi
 $routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionAdmin:socio']);
 $routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionAdmin:socio']);
 $routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerReportes', 'SocioController::verReportes');
+$routes->get('VerReportes', 'SocioController::verReportes', ['filter' => 'SesionAdmin:socio']);
+$routes->get('EstadisticasJugadores', 'SocioController::verEstadisticasJugadores', ['filter' => 'SesionAdmin:socio']);
 
 //Rutas Admin
 $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);

@@ -56,6 +56,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="<?php echo base_url('EstadisticasJugadores'); ?>" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Estadisticas Jugadores</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?php echo base_url('VerReportes')?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
                             </a>
@@ -157,6 +162,16 @@
     <script>
         $(document).ready(function() {
             var table = $('#example').DataTable({
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip', // Specify the buttons to be displayed
+                buttons: ['copy', 'excel', 'pdf', 'print'] // Include the required buttons
+            });
+        });
+
+        $(document).ready(function() {
+            var table = $('#example2').DataTable({
                 responsive: true,
                 lengthChange: false,
                 autoWidth: false,
