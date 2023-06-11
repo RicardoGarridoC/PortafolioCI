@@ -49,7 +49,4 @@
     </table>
   </div>
 </section>
-
-
-
 <?= $this->endSection() ?>
