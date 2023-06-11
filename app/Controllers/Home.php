@@ -12,39 +12,43 @@ class Home extends BaseController
     public function index()
     {
         $db = db_connect();
-
-        $query = $db->query('select
-        e1.nombre as equipo_local,
-        SUM(case when g.jugador_id_fk is not null then 1 else 0 end) as goles_equipo_local,
-        e2.nombre as equipo_visita,
-        SUM(case when g.jugador_id_fk is null then 1 else 0 end) as goles_equipo_visita
-    from
-        partidos p
-    inner join equipos e1 on
-        p.equipo_local_fk = e1.id
-    inner join equipos e2 on
-        p.equipo_visita_fk = e2.id
-    left join goles g on
-        p.id = g.partido_id_fk
-    where
-        p.fecha = (
-        select
-            MAX(fecha)
-        from
-            partidos)
-    group by
-        e1.nombre,
-        e2.nombre;
-    ');
+        //EQUIPOS Y GOLES DEL PARTIDO
+        $query = $db->query('SELECT
+        e1.nombre AS equipo_local,
+        SUM(CASE WHEN g.jugador_id_fk IS NOT NULL THEN 1 ELSE 0 END) AS goles_equipo_local,
+        e2.nombre AS equipo_visita,
+        SUM(CASE WHEN g.jugador_id_fk IS NULL THEN 1 ELSE 0 END) AS goles_equipo_visita,
+        DATE_FORMAT(p.fecha, "%b %d") AS fecha
+        FROM
+            partidos p
+        INNER JOIN equipos e1 ON
+            p.equipo_local_fk = e1.id
+        INNER JOIN equipos e2 ON
+            p.equipo_visita_fk = e2.id
+        LEFT JOIN goles g ON
+            p.id = g.partido_id_fk
+        WHERE
+            p.id = (
+                SELECT
+                    id
+                FROM
+                    partidos
+                WHERE
+                    fecha <= NOW()
+                ORDER BY
+                    fecha DESC
+                LIMIT 1
+            );
+        ');
 
         $results = $query->getResult();
 
         $data['results'] = $results;
-
+        //GOLES EQUIPO LOCAL   
         $query2 = $db->query('SELECT
         e1.nombre AS nombre_equipo,
         CONCAT(j.numero_camiseta, " ", u.nombres, " ", u.apellidos) AS nombre_jugador,
-        g.minuto as minuto_gol
+        g.minuto AS minuto_gol
         FROM
             partidos p
         INNER JOIN equipos e1 ON
@@ -55,14 +59,17 @@ class Home extends BaseController
             j.id = g.jugador_id_fk
         LEFT JOIN usuarios u ON
             j.id = u.jugador_id_fk 
+        INNER JOIN (
+            SELECT
+                MAX(fecha) AS ultima_fecha
+            FROM
+                partidos
+            WHERE
+                fecha <= NOW()
+        ) AS sub ON p.fecha = sub.ultima_fecha
         WHERE
-            p.fecha = (
-                SELECT
-                    MAX(fecha)
-                FROM
-                    partidos
-            )
-        AND g.jugador_visita IS NULL;');
+            g.jugador_visita IS null
+        order by g.minuto asc;');
 
         $results2 = $query2->getResult();
 
@@ -76,25 +83,28 @@ class Home extends BaseController
                 'nombre_jugador' => $row->nombre_jugador
             );
         }
-
-        $query6 = $db->query('SELECT
+        //GOLES EQUIPO VISITANTE
+        $query6 = $db->query(' SELECT
         e2.nombre AS nombre_equipo,
         g.jugador_visita AS nombre_jugador,
-        g.minuto as minuto_gol
+        g.minuto AS minuto_gol
         FROM
             partidos p
         INNER JOIN equipos e2 ON
             p.equipo_visita_fk = e2.id
         LEFT JOIN goles g ON
             p.id = g.partido_id_fk
+        INNER JOIN (
+            SELECT
+                MAX(fecha) AS ultima_fecha
+            FROM
+                partidos
+            WHERE
+                fecha <= NOW()
+        ) AS sub ON p.fecha = sub.ultima_fecha
         WHERE
-            p.fecha = (
-                SELECT
-                    MAX(fecha)
-                FROM
-                    partidos
-            )
-        AND g.jugador_id_fk IS NULL;');
+            g.jugador_id_fk  IS null
+        order by g.minuto asc;');
 
         $results6 = $query6->getResult();
 
@@ -109,10 +119,10 @@ class Home extends BaseController
             );
         }
 
-
+        //CAMBIOS EQUIPO LOCAL
         $query3 = $db->query('SELECT
-        CONCAT(j2.numero_camiseta ," ",u_sal.nombres," ", u_sal.apellidos) AS jugador_saliente,
-        CONCAT(j.numero_camiseta , " ",u_ent.nombres, " ", u_ent.apellidos) AS jugador_entrante,
+        CONCAT(j2.numero_camiseta ," ",u_sal.nombres, " ", u_sal.apellidos) AS jugador_saliente,
+        CONCAT(j.numero_camiseta ," ",u_ent.nombres, " ", u_ent.apellidos) AS jugador_entrante,
         c.minuto
         FROM
             partidos p
@@ -126,13 +136,14 @@ class Home extends BaseController
             c.jugador_entrante_fk = j.id 
         left join jugadores j2 on
             c.jugador_saliente_fk = j2.id 
-        WHERE
-            p.fecha = (
-                SELECT
-                    MAX(fecha)
-                FROM
-                    partidos
-            )
+        INNER JOIN (
+            SELECT
+                MAX(fecha) AS ultima_fecha
+            FROM
+                partidos
+            WHERE
+                fecha <= NOW()
+        ) AS sub ON p.fecha = sub.ultima_fecha
         ORDER BY
             c.minuto ASC;');
 
@@ -148,20 +159,27 @@ class Home extends BaseController
                 'minuto' => $row->minuto
             );
         }
-
-        $query4 = $db->query('select e.nombre as nombre_equipo,
+        //CAMBIOS EQUIPO VISITANTE
+        $query4 = $db->query('SELECT
+        e.nombre AS nombre_equipo,
         ce.nombre_jugador_saliente,
-        ce.nombre_jugador_entrante ,
-        ce.minuto 
-        from cambios_externo ce
-        inner join partidos p on
-        ce.partido_id_fk = p.id 
-        left join equipos e on
-        e.id = p.equipo_visita_fk 
-        where p.fecha = (
-        select max(p2.fecha)
-        from partidos p2)
-        order by ce.minuto;');
+        ce.nombre_jugador_entrante,
+        ce.minuto
+        FROM
+            cambios_externo ce
+        INNER JOIN partidos p ON
+            ce.partido_id_fk = p.id
+        LEFT JOIN equipos e ON
+            e.id = p.equipo_visita_fk
+        WHERE
+            p.fecha <= NOW() -- Filtrar por fecha inferior o igual a la fecha actual
+            AND p.fecha = (
+                SELECT MAX(p2.fecha)
+                FROM partidos p2
+                WHERE p2.fecha <= NOW() -- Filtrar por fecha inferior o igual a la fecha actual
+            )
+        ORDER BY
+            ce.minuto asc;');
 
         $results4 = $query4->getResult();
 
@@ -176,32 +194,34 @@ class Home extends BaseController
                 'minuto' => $row->minuto
             );
         }
-
+        //TARJETAS VISITA
         $query5 = $db->query('SELECT
-        CONCAT(u.nombres," ", u.apellidos) AS jugador,
+        CONCAT(u.nombres, " ", u.apellidos) AS jugador,
         tp.tarjeta,
         tp.minuto,
         el.nombre AS equipo
-    FROM
-        tarjetas_partido tp
-    LEFT JOIN jugadores j ON
-        j.id = tp.jugador_fk
-    LEFT JOIN usuarios u ON
-        u.jugador_id_fk = j.id
-    LEFT JOIN partidos p ON
-        p.id = tp.partido_fk
-    LEFT JOIN equipos el ON
-        el.id = p.equipo_local_fk
-    LEFT JOIN equipos ev ON
-        ev.id = p.equipo_visita_fk
-    WHERE
-        p.fecha = (
-            SELECT
-                MAX(fecha)
-            FROM
-                partidos
-        )
-        AND tp.jugador_fk IS NOT NULL;');
+        FROM
+            tarjetas_partido tp
+        LEFT JOIN jugadores j ON
+            j.id = tp.jugador_fk
+        LEFT JOIN usuarios u ON
+            u.jugador_id_fk = j.id
+        LEFT JOIN partidos p ON
+            p.id = tp.partido_fk
+        LEFT JOIN equipos el ON
+            el.id = p.equipo_local_fk
+        LEFT JOIN equipos ev ON
+            ev.id = p.equipo_visita_fk
+        WHERE
+            p.fecha = (
+                SELECT
+                    MAX(fecha)
+                FROM
+                    partidos
+                where fecha<= now()
+            )
+            AND tp.jugador_fk IS NOT null
+        order by tp.minuto asc;');
 
         $results5 = $query5->getResult();
 
@@ -216,14 +236,14 @@ class Home extends BaseController
                 'equipo' => $row->equipo
             );
         }
-
+        //TARJETAS EQUIPO VISITA
         $query7 = $db->query('SELECT
         CASE
             WHEN tp.jugador_fk IS NOT NULL THEN CONCAT(u.nombres, " ", u.apellidos)
             ELSE tp.jugador_externo
         END AS jugador,
-        tp.tarjeta AS tarjeta, 
-        tp.minuto AS minuto,
+        tp.tarjeta,
+        tp.minuto,
         ev.nombre AS equipo
         FROM
             tarjetas_partido tp
@@ -243,8 +263,10 @@ class Home extends BaseController
                     MAX(fecha)
                 FROM
                     partidos
+                where fecha<= now()
             )
-        AND tp.jugador_fk IS NULL;');
+            AND tp.jugador_fk IS null
+        order by tp.minuto asc;');
 
         $results7 = $query7->getResult();
 
@@ -348,6 +370,16 @@ class Home extends BaseController
         return view('templates/header') . view('home/home_socios') . view('templates/footer');
     }
 
+    public function actividadesEspeciales()
+    {
+        return view('templates/header') . view('home/actividades_especiales') . view('templates/footer');
+    }
+
+    public function proximoPartido()
+    {
+        return view('templates/header') . view('home/proximo_partido') . view('templates/footer');
+    }
+
     public function homeiniciosesion()
     {
         return view('home/iniciar_sesion');
@@ -357,6 +389,23 @@ class Home extends BaseController
     {
         return view('home/registrarse');
     }
+    public function homeContacto()
+    {
+        return view('templates/header') . view('home/home_contacto') . view('templates/footer');
+    }
+    public function homePortafolio()
+    {
+        return view('templates/header') . view('home/home_portafolio') . view('templates/footer');
+    }
+    public function homeServicios()
+    {
+        return view('templates/header') . view('home/home_servicios') . view('templates/footer');
+    }
+    public function homeBlog()
+    {
+        return view('templates/header') . view('home/home_blog') . view('templates/footer');
+    }
+
     protected $usuario;
 
     //INICIAR SESION
@@ -377,12 +426,17 @@ class Home extends BaseController
             $encrypter = \config\Services::encrypter();
             $claveBD = $encrypter->decrypt(hex2bin($resultadoUsuario->password_hash));
             $clave = $this->request->getPost("password");
+            $nombres = explode(' ', $resultadoUsuario->nombres);
+            $apellidos = explode(' ', $resultadoUsuario->apellidos);
 
+            $primerNombre = $nombres[0];
+            $primerApellido = $apellidos[0];
             if ($clave == $claveBD) {
                 $data = [
                     "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
                     "emailUsuario" => $resultadoUsuario->email,
-                    "idUsuario" => $id,
+                    "idUsuario" => $resultadoUsuario->id,
+
                 ];
                 session()->set($data);
 

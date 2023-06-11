@@ -20,6 +20,7 @@ $routes->setAutoRoute(true);
 
 //Rutas Hechas
 //Rutas Home
+
 $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');

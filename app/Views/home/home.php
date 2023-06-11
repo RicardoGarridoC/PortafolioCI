@@ -56,6 +56,10 @@
             font-size: 14px; 
             padding: 10px; 
         }
+
+        .gray-text {
+            color: grey;
+        }
         
     </style>
 </head>
@@ -90,7 +94,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="container probando">
-                    <h2 class="text-center">Ultimo Partido</h2>
+                    <h2 class="text-center">Último Partido</h2>
+                    <h6 class="text-center gray-text">Fecha: <?php echo $results[0]->fecha; ?></h6>
                     <div class="row">
                         <div class="col-12">
                             <div class="row text-center">
@@ -118,9 +123,13 @@
                                 <li class="nav-item flex-fill">
                                     <a class="nav-link text-center" id="tarjetas-tab" data-bs-toggle="tab" href="#tarjetas" role="tab" aria-controls="tarjetas" aria-selected="false">Tarjetas</a>
                                 </li>
+                                <!-- <li class="nav-item flex-fill">
+                                    <a class="nav-link text-center" id="proximos-tab" data-bs-toggle="tab" href="#proximos" role="tab" aria-controls="proximos" aria-selected="false">Proximos Partidos</a>
+                                </li> -->
                             </ul>
-                            <!-- GOLES-->
+                            
                             <div class="tab-content" id="myTabContent">
+                                <!-- GOLES-->
                                 <div class="tab-pane fade show active" id="goles" role="tabpanel" aria-labelledby="goles-tab">
                                     <div class="row">
                                         <div class="col-6">
@@ -183,6 +192,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- PROXIMOS PARTIDOS -->
+                                <div class="tab-pane fade" id="proximos" role="tabpanel" aria-labelledby="proximos-tab">
+                                    <div class="row">
+                                        <div class="col">
+                                            <ul class="text-start smaller-text">
+                                                    <p>Probando</p>
+                                            </ul>   
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -192,7 +211,7 @@
 
             <div class="col-md-6">
                 <div class="championship-table">
-                    <h2 class="text-center">Campeonato</h2>
+                    <h2 class="text-center">Campeonato Femenino</h2>
                     <table class="table table-dark">
                     <thead>
                         <tr>

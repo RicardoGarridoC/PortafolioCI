@@ -60,22 +60,28 @@
                         <a class="nav-link" href="<?php echo base_url('Home'); ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('HomeSocios'); ?>">Socios</a>
+                        <a class="nav-link" href="<?php echo base_url('ActividadesEspeciales'); ?>">Actividades especiales</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Servicios</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('Servicios'); ?>">Servicios</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('Blog'); ?>">Blog</a>
+                    </li> -->
                     <li class="nav-item">
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('Portafolio'); ?>">Portafolio</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('Contacto'); ?>">Contacto</a>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Portafolio</a>
+                        <a class="nav-link" href="<?php echo base_url('Sesion'); ?>">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Próximos partidos</a>
                     </li>
                 </ul>
             </div>

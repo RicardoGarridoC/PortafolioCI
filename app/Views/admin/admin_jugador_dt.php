@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DT - Jugadores</title>
-    
-</head>
-<body>
     <?= $this->extend('layout/admin_template') ?>
     <?= $this->section('content') ?>
 
@@ -64,8 +54,8 @@
                             echo form_input(array('name' => 'ayuda_economica', 'placeholder' => 'Ayuda Económica', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
                             
-                            echo form_label('Lesionado', 'lesionado');
-                            echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'required' => 'required'));
+                            echo form_label('N°Camiseta', 'numero_camiseta');
+                            echo form_input(array('name' => 'numero_camiseta', 'placeholder' => 'N°Camiseta', 'class' => 'form-control', 'required' => 'required'));
                             echo "<br>";
 
                             echo form_label('Equipo Proviene', 'equipo_proviene_id_fk');
@@ -120,8 +110,8 @@
                             echo form_input(array('name' => 'ayuda_economica', 'placeholder' => 'Ayuda Económica', 'class' => 'form-control', 'value' => $jugador['ayuda_economica'], 'required' => 'required'));
                             echo "<br>";
                             
-                            echo form_label('Lesionado', 'lesionado');
-                            echo form_input(array('name' => 'lesionado', 'placeholder' => 'Lesionado', 'class' => 'form-control', 'value' => $jugador['lesionado'], 'required' => 'required'));
+                            echo form_label('N°Camiseta', 'numero_camiseta');
+                            echo form_input(array('name' => 'numero_camiseta', 'placeholder' => 'N°Camiseta', 'class' => 'form-control', 'value' => $jugador['numero_camiseta'], 'required' => 'required'));
                             echo "<br>";
 
                             echo form_label('Equipo Proviene', 'equipo_proviene_id_fk');
@@ -188,7 +178,7 @@
                                     <th scope="col">Tipo</th>
                                     <th scope="col">Sueldo</th>
                                     <th scope="col">Ayuda</th>
-                                    <th scope="col">Lesionado</th>
+                                    <th scope="col">N°Camiseta</th>
                                     <th scope="col">Equipo</th>
                                     <th scope="col">Acción</th>
                                 </tr>
@@ -198,16 +188,12 @@
                                 foreach($jugadores as $jugador){
                                     echo "<tr data-jugador-id='".$jugador['id']."'>";
                                     echo "<td>".$jugador['id']."</td>";
-                                    //echo "<td>".$jugador['nombres']."</td>";
-                                    //echo "<td>".$jugador['apellidos']."</td>";
-                                    //echo "<td>".$jugador['run']."</td>";
-                                    //echo "<td>".$jugador['fecha_nacimiento']."</td>";
                                     echo "<td>".$jugador['posicion']."</td>";
                                     echo "<td>".$jugador['partidos_jugados']."</td>";
                                     echo "<td>".$jugador['tipo']."</td>";
                                     echo "<td>".$jugador['sueldo']."</td>";
                                     echo "<td>".$jugador['ayuda_economica']."</td>";
-                                    echo "<td>".$jugador['lesionado']."</td>";
+                                    echo "<td>".$jugador['numero_camiseta']."</td>";
                                     echo "<td>".$jugador['equipo_proviene_id_fk']."</td>";
                                     echo "<td>";
                                     echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$jugador['id']."'>Editar</button>";
@@ -226,7 +212,7 @@
                                     <th scope="col">Tipo</th>
                                     <th scope="col">Sueldo</th>
                                     <th scope="col">Ayuda</th>
-                                    <th scope="col">Lesionado</th>
+                                    <th scope="col">N°Camiseta</th>
                                     <th scope="col">Equipo</th>
                                     <th scope="col">Acción</th>
                                 </tr>
@@ -246,7 +232,3 @@
         <!-- /.content -->
         
     <?= $this->endSection() ?>
-
-
-</body>
-</html>

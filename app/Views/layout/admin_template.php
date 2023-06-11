@@ -180,7 +180,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="<?= base_url() ?>/public/images/losalces.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Los Alces</span>
     </a>
@@ -188,13 +188,22 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?= base_url() ?>/public/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Usuario</a>
-        </div>
+      <div class="dropdown pb-4">
+          <a href="#" class="user-panel mt-3 pb-3 mb-3 d-flex dropdown-toggle" id="dropdownUser1" data-toggle="dropdown" aria-expanded="false">
+            <div class="image">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="hugenerd" width="30" height="30" class="img-circle elevation-2">
+            </div>  
+              <span class="d-block info d-none d-sm-inline mx-1"><?= session('nombreUsuario') ?></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+              <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
+              <li><a class="dropdown-item" href="#">Configuración</a></li>
+              <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+              <li>
+                  <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/PortafolioCI/logout">Cerrar Sesión</a></li>
+          </ul>
       </div>
 
       <!-- SidebarSearch Form -->

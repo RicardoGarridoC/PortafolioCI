@@ -83,7 +83,7 @@ class AdminDashboard extends BaseController
             'tipo' => $request->getPostGet('tipo'),
             'sueldo' => $request->getPostGet('sueldo'),
             'ayuda_economica' => $request->getPostGet('ayuda_economica'),
-            'lesionado' => $request->getPostGet('lesionado'),
+            'numero_camiseta' => $request->getPostGet('numero_camiseta'),
             'equipo_proviene_id_fk' => $request->getPostGet('equipo_proviene_id_fk')
 
         );
