@@ -119,8 +119,9 @@
                                     <a class="nav-link text-center" id="tarjetas-tab" data-bs-toggle="tab" href="#tarjetas" role="tab" aria-controls="tarjetas" aria-selected="false">Tarjetas</a>
                                 </li>
                             </ul>
-                            <!-- GOLES-->
+                            
                             <div class="tab-content" id="myTabContent">
+                                <!-- GOLES-->
                                 <div class="tab-pane fade show active" id="goles" role="tabpanel" aria-labelledby="goles-tab">
                                     <div class="row">
                                         <div class="col-6">

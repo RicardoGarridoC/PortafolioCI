@@ -10,8 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!--CSS SIDEBAR -->
-    <link rel="stylesheet" href="<?= base_url()?>/public/css/sidebar_socio.css">
+    <link rel="stylesheet" href="<?= base_url('public/css/sidebar_socio.css') ?>">
 
+    <!-- Datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    
+    
 </head>
 <body>
     <div class="container-fluid">
@@ -136,6 +140,15 @@
     <!--SCRIPTS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!--Script Datatable -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js>"></script>
+    <script>
+        $(document).ready(function () {
+        $('#example').DataTable();
+        });
+    </script>
     <!-- Cerrar Sesion -->
     <script type="text/javascript">
         function cerrarSesion() {
