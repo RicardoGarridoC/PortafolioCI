@@ -14,7 +14,7 @@ class JugadorModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','posicion','partidos_jugados','tipo','sueldo','ayuda_economica','lesionado',
+    protected $allowedFields = ['id','posicion','partidos_jugados','tipo','sueldo','ayuda_economica','numero_camiseta',
     'equipo_proviene_id_fk','button_field'];
 
     // Dates
