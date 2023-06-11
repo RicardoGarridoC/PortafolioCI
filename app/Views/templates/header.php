@@ -62,21 +62,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('ActividadesEspeciales'); ?>">Actividades especiales</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Servicios'); ?>">Servicios</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Blog'); ?>">Blog</a>
-                    </li> -->
                     <li class="nav-item">
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Portafolio'); ?>">Portafolio</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Contacto'); ?>">Contacto</a>
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('Sesion'); ?>">Iniciar sesión</a>
                     </li>

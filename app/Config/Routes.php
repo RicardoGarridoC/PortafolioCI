@@ -24,10 +24,6 @@ $routes->get('Sesion', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
-$routes->get('Blog', 'Home::homeBlog');
-$routes->get('Contacto', 'Home::homeContacto');
-$routes->get('Portafolio', 'Home::homePortafolio');
-$routes->get('Servicios', 'Home::homeServicios');
 $routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
 $routes->get('ProximoPartido', 'Home::proximoPartido');
 //Rutas Socio / Perfile0s
