@@ -3,6 +3,7 @@
 use App\Models\JugadorModel;
 use App\Models\PartidosModel;
 use CodeIgniter\Controller;
+use App\Models\CustomModel;
 
 
 
@@ -21,16 +22,23 @@ class SocioController extends BaseController
     
     public function mostrarJugador()
     {
-        /*String p = "";
-        foreach($p in $jugadores){
-            var_dump($p);
-        }*/
-        $jugadorModel = new JugadorModel();
-        $jugadores=$jugadorModel->findAll();
-        //$jugador=$jugadorModel->find('1');
-        //var_dump($jugadores);
-        $jugadores=array('jugadores'=>$jugadores);
-        return view('socio/ver_jugadores', $jugadores);
+        // Agregando Titulo a Cada View
+        $titulo = [ 
+        'title' => 'Jugadores Socio',
+        ];
+
+        $db = db_connect();
+        $jugadorModel = new CustomModel($db);
+        $jugadores = $jugadorModel->getJugadores();
+        $jugadores=array('jugadores' => $jugadores);
+
+        //$jugadorModel = new JugadorModel();
+        //$jugadores=$jugadorModel->findAll();
+        //$jugadores=array('jugadores'=>$jugadores);
+        //return view('admin/admin_equipotecnico_dt', ['jugadores' => $jugadores]);
+
+        $verData= array_merge($jugadores, $titulo);
+        return view('socio/ver_jugadores', $verData);
     }
     
     public function mostrarCampeonatos()

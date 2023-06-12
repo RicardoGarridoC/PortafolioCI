@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+<?= $this->extend('layout/sidebarsocio') ?>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jugadores</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-dBfjg3n50r/9zRR6oN/JSaLd6kG1sJl1eRUss/cPxrdxQIaE/fyAM8XKzBkEfmQC" crossorigin="anonymous"></script>
+<?= $this->section('contenido') ?>
 
-</head>
-<body>
-    <?= $this->extend('layout/sidebarsocio') ?>
-
-    <?= $this->section('contenido') ?>
-    <!-- Button trigger modal -->
-    <div class="row">
+<!-- Button trigger modal -->
+<div class="row">
     <?php foreach ($jugadores as $jugador) { ?>
     <div class="card mb-3 mx-auto col-12 col-sm-6 col-md-4 col-lg-3 card-sm">
-        <img class="card-img-top" src="<?php echo $jugador['foto_url']; ?>" alt="Imagen de <?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?>">
+        <img class="card-img-top" src="" alt="Imagen de <?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?>">
         <div class="card-body">
             <h5 class="card-title"><?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?></h5>
             <p class="card-text"><?php echo $jugador['run']; ?></p>
@@ -43,7 +28,7 @@
                 <div class="modal-body">
                     <table class="table">
                         <tbody>
-                                <tr>
+                            <tr>
                                 <th scope="row">Nombre:</th>
                                 <td><?php echo $jugador['nombres']; ?></td>
                             </tr>
@@ -56,16 +41,12 @@
                                 <td><?php echo $jugador['run']; ?></td>
                             </tr>
                             <tr>
-                                <th scope="row">Fecha de nacimiento:</th>
-                                <td><?php echo $jugador['fecha_nacimiento']; ?></td>
-                            </tr>
-                            <tr>
                                 <th scope="row">Posicion:</th>
                                 <td><?php echo $jugador['posicion']; ?></td>
                             </tr>
                             <tr>
-                                <th scope="row">Goles:</th>
-                                <td><?php echo $jugador['goles']; ?></td>
+                                <th scope="row">Genero:</th>
+                                <td><?php echo $jugador['genero']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Partidos jugados:</th>
@@ -73,19 +54,23 @@
                             </tr>
                             <tr>
                                 <th scope="row">Equipo anterior</th>
-                                <td><?php echo $jugador['equipo_proviene']; ?></td>
+                                <td><?php echo $jugador['equipo_proviene_id_fk']; ?></td>
                             </tr>
+                            <tr>
                                 <th scope="row">Estatuto:</th>
                                 <td><?php echo $jugador['tipo']; ?></td>
                             </tr>
+                            <tr>
                                 <th scope="row">Sueldo:</th>
                                 <td>$<?php echo $jugador['sueldo']; ?></td>
                             </tr>
+                            <tr>
                                 <th scope="row">Ayuda económica:</th>
                                 <td>$<?php echo $jugador['ayuda_economica']; ?></td>
                             </tr>
-                                <th scope="row">Lesionado:</th>
-                                <td><?php echo $jugador['lesionado']; ?></td>
+                            <tr>
+                                <th scope="row">N°Camiseta:</th>
+                                <td><?php echo $jugador['numero_camiseta']; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,11 +82,6 @@
         </div>
     </div>
     <?php } ?>
-    </div>
+</div>
 
-    <?= $this->endSection() ?>
-   
-    
-
-</body>
-</html>
+<?= $this->endSection() ?>
