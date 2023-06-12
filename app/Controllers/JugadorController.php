@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\CustomModel;
 
 class JugadorController extends BaseController
 {
@@ -44,7 +44,19 @@ class JugadorController extends BaseController
             'title' => 'Jugadores Jugador',
         ];
 
-        return view('jugador/jugador_ver_jugadores', $titulo);
+        $db = db_connect();
+        $jugadorModel = new CustomModel($db);
+        $jugadores = $jugadorModel->getJugadores();
+        $jugadores=array('jugadores' => $jugadores);
+
+        //$jugadorModel = new JugadorModel();
+        //$jugadores=$jugadorModel->findAll();
+        //$jugadores=array('jugadores'=>$jugadores);
+        //return view('admin/admin_equipotecnico_dt', ['jugadores' => $jugadores]);
+
+        $verData= array_merge($jugadores, $titulo);
+
+        return view('jugador/jugador_ver_jugadores', $verData);
     }
     public function jugadorverPartidos()
     {
