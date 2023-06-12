@@ -14,16 +14,9 @@ class UsuarioModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','nombres','apellidos','email','run'
-    ,'direccion','telefono','password_hash','rol','button_field'];
-
-    // Dates
-    /*protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-    */
+    protected $allowedFields = [
+        'id', 'nombres', 'apellidos', 'email', 'run', 'direccion', 'telefono', 'password_hash', 'rol', 'button_field'
+    ];
 
     // Validation
     protected $validationRules      = [];
@@ -50,5 +43,20 @@ class UsuarioModel extends Model
         $resultado = $builder->get();
         return $resultado->getResult() ? $resultado->getResult()[0] : false;
     }
+    //retornar usuario
+    public function getUserBy(string $column, string $value)
+    {
+
+        return $this->where($column, $value)->first();
+    }
+    public function getRole()
+    {
+        $model =  model('UsuarioModel');
+        return  $model->where('rol', $this->rol)->get();
+    }
+
+    public function buscarUsuarioPorIdJugador($jugadorId)
+    {
+        return $this->where('jugador_id_fk', $jugadorId)->first();
+    }
 }
-?>

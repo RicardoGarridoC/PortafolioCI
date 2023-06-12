@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DT - Usuarios</title>
-    
-</head>
-<body>
     <?= $this->extend('layout/admin_template') ?>
     <?= $this->section('content') ?>
 
@@ -72,11 +62,7 @@
                             echo form_label('Rol', 'rol');
                             $options = array(
                                 'administrador' => 'Administrador',
-                                'direccion' => 'Direccion',
-                                'jugador' => 'Jugador',
-                                'entrenador' => 'Entrenador',
-                                'equipo_tecnico' => 'Equipo Técnico',
-                                'socio' => 'Socio'
+                                'direccion' => 'Direccion'
                             );
                             echo form_dropdown('rol', $options, '', 'class="form-control" required');
                             echo "<br>";               
@@ -267,7 +253,3 @@
         
         
     <?= $this->endSection() ?>
-
-
-</body>
-</html>
