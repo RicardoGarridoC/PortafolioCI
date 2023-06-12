@@ -2,6 +2,6 @@
 
 <?= $this->section('contenido') ?>
 
-Jugador Inicio
+Jugador Estadisticas
 
 <?= $this->endSection() ?>

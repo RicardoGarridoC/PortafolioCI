@@ -2,6 +2,6 @@
 
 <?= $this->section('contenido') ?>
 
-Inicio Equipo Tecnico
+Equipo Tecnico Estadisticas
 
 <?= $this->endSection() ?>

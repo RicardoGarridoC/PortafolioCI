@@ -469,15 +469,15 @@ class Home extends BaseController
                     switch ($query) {
                         case  'administrador':
                             //redirecciona a vista de administrador
-                            return redirect()->to(base_url() . '/AdminDashboard ');
+                            return redirect()->to(base_url() . 'AdminDashboard');
 
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            return redirect()->to(base_url() . '/DireccionDashboard ');
+                            return redirect()->to(base_url() . 'DireccionDashboard');
 
                         case 'jugador':
                             //redirecciona a vista de jugador
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . 'InicioJugador');
 
                         case 'entrenador':
                             //redirecciona a vista de entrenador
@@ -485,11 +485,11 @@ class Home extends BaseController
 
                         case 'equipo_tecnico':
                             //redirecciona a vista de equipo_tecnico
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
 
                         case 'socio':
                             //redirecciona a vista de socio
-                            return redirect()->to(base_url() . '/InicioSocios ');
+                            return redirect()->to(base_url() . 'InicioSocios');
                     }
                 }
 
