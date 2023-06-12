@@ -33,19 +33,6 @@
           </tr>
         <?php } ?>
       </tbody>
-      <!-- <tfoot>
-        <tr>
-          <th>Fecha</th>
-          <th>Equipos</th>
-          <th>Resultado</th>
-          <th>Goles Local</th>
-          <th>Goles Visita</th>
-          <th>Cambios Local</th>
-          <th>Cambios Visita</th>
-          <th>Tarjetas Local</th>
-          <th>Tarjetas Visita</th>
-        </tr>
-      </tfoot> -->
     </table>
   </div>
 </section>

@@ -43,16 +43,16 @@
                                 <i class="fs-4 bi-speedometer2"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Club</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="<?php echo base_url('VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
+                                    <a href="<?php echo base_url('VerJugadores'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-badge"></i> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('VerCampeonatos')?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                    <a href="<?php echo base_url('VerCampeonatos')?>" class="nav-link px-0"> <i class="fs-4 bi-trophy"></i><span class=" hide-on-small d-none d-sm-inline">Campeonatos</span></a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="<?php echo base_url('VerPartidos'); ?>" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-clock-history"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Ver todos los partidos</span>
+                                <i class="fs-4 bi-clock-history"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Partidos Jugados</span>
                             </a>
                         </li>
                         <li>

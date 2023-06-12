@@ -20,8 +20,6 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <!-- <th>sueldo</th>
-                    <th>Ayuda Economica</th> -->
                     <th>Posicion</th>
                     <th>Goles</th>
                     <th>Lesion?</th>
@@ -34,8 +32,6 @@
                 <tr>
                     <td><?= $masculino['nombre'] ?></td>
                     <td><?= $masculino['apellido'] ?></td>
-                    <!-- <td><?= $masculino['sueldo'] ?></td>
-                    <td><?= $masculino['ayuda_economica'] ?></td> -->
                     <td><?= $masculino['posicion'] ?></td>
                     <td><?= $masculino['goles'] ?></td>
                     <td><?= $masculino['jugador_lesionado'] ?></td>
@@ -44,19 +40,6 @@
                 </tr>
                 <?php } ?>
             </tbody>
-            <!-- <tfoot>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>sueldo</th>
-                    <th>Ayuda Economica</th>
-                    <th>Posicion</th>
-                    <th>Goles</th>
-                    <th>Lesion?</th>
-                    <th>Fecha Inicio Lesion</th>
-                    <th>Fecha Fin Lesion</th>
-                </tr>
-            </tfoot> -->
             </table>
         </div>
     </div>
@@ -68,8 +51,6 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <!-- <th>sueldo</th>
-                    <th>Ayuda Economica</th> -->
                     <th>Posicion</th>
                     <th>Goles</th>
                     <th>Lesion?</th>
@@ -82,8 +63,6 @@
                     <tr>
                     <td><?= $femenino['nombre'] ?></td>
                     <td><?= $femenino['apellido'] ?></td>
-                    <!-- <td><?= $femenino['sueldo'] ?></td>
-                    <td><?= $femenino['ayuda_economica'] ?></td> -->
                     <td><?= $femenino['posicion'] ?></td>
                     <td><?= $femenino['goles'] ?></td>
                     <td><?= $femenino['jugador_lesionado'] ?></td>
@@ -92,19 +71,6 @@
                     </tr>
                 <?php } ?>
                 </tbody>
-            <!-- <tfoot>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>sueldo</th>
-                    <th>Ayuda Economica</th>
-                    <th>Posicion</th>
-                    <th>Goles</th>
-                    <th>Lesion?</th>
-                    <th>Fecha Inicio Lesion</th>
-                    <th>Fecha Fin Lesion</th>
-                </tr>
-            </tfoot> -->
             </table>
         </div>
     </div>

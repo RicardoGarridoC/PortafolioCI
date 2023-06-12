@@ -42,10 +42,10 @@
                                 <i class="fs-4 bi-speedometer2"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Club</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="<?php echo base_url('JugadoresJugador'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
+                                    <a href="<?php echo base_url('JugadoresJugador'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-badge"></i> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('CampeonatosJugador')?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                    <a href="<?php echo base_url('CampeonatosJugador')?>" class="nav-link px-0"> <i class="fs-4 bi-trophy"></i><span class=" hide-on-small d-none d-sm-inline">Campeonatos</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -171,6 +171,19 @@
                 autoWidth: false,
                 dom: 'Bfrtip', // Specify the buttons to be displayed
                 buttons: ['copy', 'excel', 'pdf', 'print'] // Include the required buttons
+            });
+        });
+        $(document).ready(function() {
+            $('#championshipTable1').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5',
+                    'print'
+                ]
             });
         });
     </script>
