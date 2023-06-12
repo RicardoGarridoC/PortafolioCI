@@ -30,6 +30,8 @@ $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'Sesi
 $routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio:socio']);
 $routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionSocio:socio']);
 $routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
+$routes->post('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
 //Rutas Admin
 $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);

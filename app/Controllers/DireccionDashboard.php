@@ -28,6 +28,9 @@ class DireccionDashboard extends BaseController
 
     public function ingresosEspeciales()
     {
+        $titulo = [
+            'title' => 'Ingresos especiales',
+        ];
         $data = [];
         if ($this->request->getMethod() === 'post') {
             // Validar los datos del formulario
