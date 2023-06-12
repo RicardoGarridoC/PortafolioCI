@@ -38,7 +38,13 @@ $routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['
 $routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin:administrador']);
 //Rutas Direccion
-$routes->get('DireccionDashboard', 'DireccionDashboard::Dashboard', ['filter' => 'SesionDirector:direccion']);
+$routes->get('DireccionDashboard', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
+$routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
+$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
+
+
 //Botones Admin
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin:administrador']);

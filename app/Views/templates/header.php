@@ -78,7 +78,7 @@
                         <a class="nav-link" href="<?php echo base_url('Contacto'); ?>">Contacto</a>
                     </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Sesion'); ?>">Iniciar sesión</a>
+                        <a class="nav-link" href="<?php echo base_url('IniciarSesion'); ?>">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Próximos partidos</a>
