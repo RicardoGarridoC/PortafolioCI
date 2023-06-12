@@ -437,6 +437,7 @@ class Home extends BaseController
                     "emailUsuario" => $resultadoUsuario->email,
                     "idUsuario" => $resultadoUsuario->id,
 
+
                 ];
                 session()->set($data);
 

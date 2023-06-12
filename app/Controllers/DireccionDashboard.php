@@ -28,50 +28,55 @@ class DireccionDashboard extends BaseController
 
     public function ingresosEspeciales()
     {
+        $data = [];
+        if ($this->request->getMethod() === 'post') {
+            // Validar los datos del formulario
+            $rules = [
+                'monto' => 'required',
 
-        // Validar los datos del formulario
-        $rules = [
-            'monto' => 'required'
-        ];
-        try {
-            if ($this->validate($rules)) {
+            ];
+            try {
+                if ($this->validate($rules)) {
 
-                $monto = $this->request->getPost('monto');
+                    $monto = $this->request->getPost('monto');
 
-                // Guardar los datos en la base de datos
-                $ingresoModel = new IngresosModel();
-                $userData = [
-                    'monto' => $monto
+                    // Guardar los datos en la base de datos
+                    $ingresoModel = new IngresosModel();
+                    $userData = [
+                        'monto' => $monto,
+                        'concepto' => 'actividades_extra',
+                        'fecha' => date('Y-m-d')
+                    ];
+                    $database = \Config\Database::connect();
 
-                ];
-                $database = \Config\Database::connect();
-
-                if ($monto) {
-                    $data = ['tipo' => 'danger', 'mensaje' => ' Ingrese un monto valido '];
-                    return view(('direccion/director_ingresos_especiales'), $data);
-                } else {
-                    try {
-                        $ingresoModel->insert($userData);
-                        return redirect()->to('DireccionDashboard')->with('success', 'Ingreso registrado exitosamente');
-                    } catch (\Exception $e) {
-                        $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
+                    if (!$monto) {
+                        $data = ['tipo' => 'danger', 'mensaje' => ' Ingrese un monto valido '];
                         return view(('direccion/director_ingresos_especiales'), $data);
+                    } else {
+                        try {
+                            $ingresoModel->insert($userData);
+                            return redirect()->to('DireccionDashboard')->with('success', 'Ingreso registrado exitosamente');
+                        } catch (\Exception $e) {
+                            $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
+                            return view(('direccion/director_ingresos_especiales'), $data);
+                        }
                     }
+
+
+                    // Redirigir al usuario a una página de éxito o mostrar un mensaje
+                    // de éxito en la misma página.
+
+                } else {
+                    $data = ['tipo' => 'danger', 'mensaje' => 'Dato Invalido '];
+                    return view(('direccion/director_ingresos_especiales'), $data);
                 }
-
-
-                // Redirigir al usuario a una página de éxito o mostrar un mensaje
-                // de éxito en la misma página.
-
-            } else {
-                $data = ['tipo' => 'danger', 'mensaje' => 'Dato Invalido '];
+            } catch (\Exception $data) {
+                $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
                 return view(('direccion/director_ingresos_especiales'), $data);
             }
-        } catch (\Exception $data) {
-            $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
-            return view(('direccion/director_ingresos_especiales'), $data);
+            // Cargar la vista del formulario de registro
+
         }
-        // Cargar la vista del formulario de registro
-        return view(('direccion/director_ingresos_especiales'));
+        return view(('direccion/director_ingresos_especiales'), $data);
     }
 }

@@ -1,58 +1,143 @@
 <?= $this->extend('layout/direccion_template') ?>
-<?= $this->section('content') ?>
+<?= $this->section('direccion_contenido') ?>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Ingresos</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Tablas</a></li>
-                    <li class="breadcrumb-item active">Ingresos Especiales</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <title>Login Page</title>
+    <!--Made with love by Mutiullah Samim -->
 
-<!-- Modal Añadir -->
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar ingreso especial</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <?php echo form_open('DireccionDashboard/ingresosEspeciales', 'id="myForm"'); ?>
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-                <div class="form-group">
-                    <?php
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-                    echo form_label('monto', 'monto');
-                    echo form_input(array('number' => 'monto', 'placeholder' => 'monto', 'class' => 'form-control', 'required' => 'required'));
-                    echo "<br>";
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
+    <style>
+        html,
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            font-family: 'Numans', sans-serif;
+        }
 
-                    ?>
+        .container {
+            height: 100%;
+            align-content: center;
+        }
+
+        .card {
+            height: 300px;
+            margin-top: 300px;
+            margin-bottom: auto;
+            width: 300px;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .social_icon span {
+            font-size: 60px;
+            margin-left: 10px;
+            color: #000000;
+        }
+
+        .social_icon span:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+        .card-header h3 {
+            color: rgb(255, 255, 255);
+        }
+
+        .social_icon {
+            position: absolute;
+            right: 20px;
+            top: -45px;
+        }
+
+        .input-group-prepend span {
+            width: 50px;
+            background-color: #FFC312;
+            color: black;
+            border: 0 !important;
+        }
+
+        input:focus {
+            outline: 0 0 0 0 !important;
+            box-shadow: 0 0 0 0 !important;
+
+        }
+
+        .remember {
+            color: white;
+        }
+
+        .remember input {
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+            margin-right: 5px;
+        }
+
+        .login_btn {
+            color: black;
+            background-color: #FFC312;
+            width: 150px;
+        }
+
+        .login_btn:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .links {
+            color: white;
+        }
+
+        .links a {
+            margin-left: 4px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Ingresar ingreso especial</h5>
+
                 </div>
-            </div>
-            <div class="modal-footer">
-                <?php echo form_submit('DireccionDashboard/ingresosEspeciales', 'Guardar', 'class="btn btn-primary"'); ?>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <div class="card-body">
+                    <form action="<?php echo base_url(); ?>IngresosEspeciales" method="post">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"></span>
+                            </div>
+                            <input type="number" name="monto" id="monto" class="form-control" placeholder="Ingresar monto" required>
 
-                <?php echo form_close(); ?>
+                        </div>
+                        <br>
+                        <input type="submit" value="Ingresar" class="btn float-right login_btn">
+                </div>
+                <br>
+
+
+
+                </form>
+                <div class="row">
+
+
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-
-
-
-
 </section>
 <!-- /.content -->
 

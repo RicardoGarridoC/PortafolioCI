@@ -96,7 +96,7 @@
                 </div>
             </aside>
             <div class="col content">
-                <?= $this->renderSection('contenido') ?>
+                <?= $this->renderSection('direccion_contenido') ?>
             </div>
         </div>
     </div>

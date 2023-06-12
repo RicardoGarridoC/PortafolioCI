@@ -41,8 +41,8 @@ $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'Sesi
 $routes->get('DireccionDashboard', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
 $routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
 $routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
-$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
-$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
+$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
+$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
 
 
 //Botones Admin

@@ -1,5 +1,5 @@
 <?= $this->extend('layout/direccion_template') ?>
-<?= $this->section('content') ?>
+<?= $this->section('direccion_contenido') ?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -22,13 +22,10 @@ class SesionAdmin implements FilterInterface
         $model =  model('UsuarioModel');
 
 
-        if (!$user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol) {
+        if (!$user = $model->select('rol')->where('id', session()->idUsuario)->get()->getRow()->rol) {
+
             session()->destroy();
             return redirect()->route('/Home');
-        }
-
-        if (!$user) {
-            return redirect()->route('/IniciarSesion');
         }
     }
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
