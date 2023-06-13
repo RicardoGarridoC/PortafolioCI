@@ -3,11 +3,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
- 
-    <!------ Include the above in your HEAD tag ---------->
-    <title>Login Page</title>
-    <!--Made with love by Mutiullah Samim -->
-    <!--Custom styles-->
+    
     <link rel="stylesheet" type="text/css" href="styles.css">
 
     <style>

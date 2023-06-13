@@ -22,7 +22,7 @@ class VentaJugadorController extends BaseController
         $validation->setRules($ingreso->getValidationRules());
 
         $data = [
-            'title' => 'Ingresos',
+            'title' => 'Ingresas Venta Jugador Direccion',
         ];
 
         $db = \Config\Database::connect();

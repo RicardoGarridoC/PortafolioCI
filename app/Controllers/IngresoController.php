@@ -19,7 +19,7 @@ class IngresoController extends BaseController
         $sponsorAmounts = array_column($sponsors, 'monto_por_partido', 'id');
 
         $data = [
-            'title' => 'Ingresos',
+            'title' => 'Ingresos Direccion',
             'sponsorNames' => $sponsorNames,
             'sponsorAmounts' => $sponsorAmounts,
         ];
