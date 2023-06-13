@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2023 a las 19:33:14
+-- Tiempo de generación: 13-06-2023 a las 19:39:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -322,7 +322,7 @@ INSERT INTO `goles` (`id`, `partido_id_fk`, `jugador_id_fk`, `minuto`, `jugador_
 
 CREATE TABLE `ingresos` (
   `id` int(11) NOT NULL,
-  `concepto` enum('mensualidad','sponsor','actividades_extra','venta_jugadores') NOT NULL,
+  `concepto` enum('mensualidad','sponsor','actividades_extra','venta_jugadores','venta_souvenirs','entradas') NOT NULL,
   `monto` decimal(10,0) NOT NULL,
   `fecha` date NOT NULL,
   `detalle` varchar(100) NOT NULL,
