@@ -58,7 +58,7 @@ class DireccionDashboard extends BaseController
                     } else {
                         try {
                             $ingresoModel->insert($userData);
-                            return redirect()->to('DireccionDashboard')->with('success', 'Ingreso registrado exitosamente');
+                            return redirect()->to('IngresosEspeciales')->with('success', 'Ingreso registrado exitosamente');
                         } catch (\Exception $e) {
                             $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
                             return view(('direccion/director_ingresos_especiales'), $data);

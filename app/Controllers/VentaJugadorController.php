@@ -110,7 +110,7 @@ class VentaJugadorController extends BaseController
             return redirect()->to('VentaJugadorController/registrarVentaJugadores')->with('success', 'Venta de jugador registrada exitosamente');
         }
 
-        return view('venta_jugadores', $data);
+        return view('direccion/venta_jugadores', $data);
     }
 
     public function __construct()

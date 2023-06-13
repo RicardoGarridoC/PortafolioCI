@@ -41,11 +41,23 @@ $routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['
 $routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin:administrador']);
 //Rutas Direccion
-$routes->get('DireccionDashboard', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
+$routes->get('DireccionHome', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
 $routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
 $routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
-$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
-$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
+$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales',['filter' => 'SesionDirector:direccion']);
+$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
+$routes->get('AgregarIngreso', 'IngresoController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->post('AgregarIngreso', 'IngresoController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->get('PagoJugadores', 'EgresoController::registrarPagoJugadores', ['filter' => 'SesionDirector:direccion']);
+$routes->post('PagoJugadores', 'EgresoController::registrarPagoJugadores', ['filter' => 'SesionDirector:direccion']);
+$routes->get('PagoEquipoTecnico', 'EgresoController::PagarSueldoEquipoTecnico', ['filter' => 'SesionDirector:direccion']);
+$routes->post('PagoEquipoTecnico', 'EgresoController::PagarSueldoEquipoTecnico', ['filter' => 'SesionDirector:direccion']);
+$routes->get('PagoDirigente', 'EgresoController::PagarSueldoDirigente', ['filter' => 'SesionDirector:direccion']);
+$routes->post('PagoDirigente', 'EgresoController::PagarSueldoDirigente', ['filter' => 'SesionDirector:direccion']);
+$routes->get('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa', ['filter' => 'SesionDirector:direccion']);
+$routes->post('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa', ['filter' => 'SesionDirector:direccion']);
+$routes->get('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores', ['filter' => 'SesionDirector:direccion']);
+$routes->post('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores', ['filter' => 'SesionDirector:direccion']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);
@@ -72,37 +84,15 @@ $routes->post('Home/validarIngreso', 'Home::validarIngreso');
 //Buscar Logout y /register
 $routes->get('/logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
-//prueba
-$routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
-$routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
-$routes->get('Cambios', 'CambiosController::MostrarCambios');
 
 //para todas estas vistas se debe modificar el archivo view ya que extiende el formato desde 
 //el sidebar socio, deben colocar que extienda desde el sidebardireccion o como se llame
 //también deben agregar el tema de que la sesión esté activa
 
-//esta vista es para agregar un nuevo sponsor, debe estar en un botón en direccion
-$routes->get('AgregarSponsor', 'SponsorController::registrar');
-$routes->post('AgregarSponsor', 'SponsorController::registrar');
 
 //esta vista contiene ingreso por sponsor o actividades especiales, debe estar en un botón en direccion
-$routes->get('AgregarIngreso', 'IngresoController::registrar');
-$routes->post('AgregarIngreso', 'IngresoController::registrar');
-//esta vista contiene el pago de sueldos a jugadores, tambien como botón en direccion
-$routes->get('PagoJugadores', 'EgresoController::registrarPagoJugadores');
-$routes->post('PagoJugadores', 'EgresoController::registrarPagoJugadores');
-//esta vista contiene el pago de sueldo a miembros del equipo tecnico, boton en direccion
-$routes->get('PagoEquipoTecnico', 'EgresoController::PagarSueldoEquipoTecnico');
-$routes->post('PagoEquipoTecnico', 'EgresoController::PagarSueldoEquipoTecnico');
-//esta vista contiene el pago a dirigentes, boton en direccion
-$routes->get('PagoDirigente', 'EgresoController::PagarSueldoDirigente');
-$routes->post('PagoDirigente', 'EgresoController::PagarSueldoDirigente');
-//esta vista contiene el pago de mensualidad a la anfa, boton en direccion
-$routes->get('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
-$routes->post('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
-//esta va en direccion
-$routes->get('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores');
-$routes->post('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores');
+
+
 
 //-----------------------------------------------------------------------------------------
 

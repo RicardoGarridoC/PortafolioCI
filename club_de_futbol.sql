@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2023 a las 05:53:03
+-- Tiempo de generación: 13-06-2023 a las 05:46:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -171,9 +171,7 @@ INSERT INTO `egresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`) VALUES
 (23, 'sueldo_e_tecnico', 350000, '2023-06-12', 'Sueldo de equipo tecnico Andres Mundi'),
 (24, 'sueldo_dirigentes', 1000000, '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
 (25, 'sueldo_dirigentes', 1000000, '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
-(26, 'pago_mensualidad', 126526, '2023-06-12', 'Pago de mensualidad ANFA mes de June 2023'),
-(27, 'impuesto_venta', 2500000, '2023-06-13', 'Comisión venta jugador Paulo Neyman ANFA'),
-(28, 'impuesto_venta', 2500000, '2023-06-13', 'Comisión venta jugador Paulo Neyman Asociación del Bio Bio');
+(26, 'pago_mensualidad', 126526, '2023-06-12', 'Pago de mensualidad ANFA mes de June 2023');
 
 -- --------------------------------------------------------
 
@@ -335,8 +333,7 @@ CREATE TABLE `ingresos` (
 
 INSERT INTO `ingresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`, `id_usuario_fk`) VALUES
 (17, 'sponsor', 200000, '2023-06-08', 'McDonalds', NULL),
-(18, 'venta_jugadores', 1233, '2023-06-13', 'Venta de jugador Andres Manchez', NULL),
-(19, 'venta_jugadores', 10000000, '2023-06-13', 'Venta de jugador Paulo Neyman', NULL);
+(18, 'venta_jugadores', 1233, '2023-06-13', 'Venta de jugador Andres Manchez', NULL);
 
 -- --------------------------------------------------------
 
@@ -639,8 +636,7 @@ CREATE TABLE `traspaso` (
 INSERT INTO `traspaso` (`id`, `nombre_jugador`, `equipo_origen`, `equipo_destino`, `fecha_traspaso`, `monto`) VALUES
 (1, 'Arturo Mival', 'Los Alces FC M', 'Tigres Dorados', '2023-06-13', 1231231),
 (2, 'Maite Fernandez', 'Los Alces FC F', 'Coyotes Salvajes', '2023-06-13', 9999999999),
-(3, 'Andres Manchez', 'Los Alces FC M', 'Lobas Plateadas', '2023-06-13', 1233),
-(4, 'Paulo Neyman', 'Los Alces FC M', 'Leonas Blancas', '2023-06-13', 10000000);
+(3, 'Andres Manchez', 'Los Alces FC M', 'Lobas Plateadas', '2023-06-13', 1233);
 
 -- --------------------------------------------------------
 
@@ -1005,7 +1001,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT de la tabla `egresos`
 --
 ALTER TABLE `egresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `equipos`
@@ -1047,7 +1043,7 @@ ALTER TABLE `goles`
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
@@ -1119,7 +1115,7 @@ ALTER TABLE `tarjetas_partido`
 -- AUTO_INCREMENT de la tabla `traspaso`
 --
 ALTER TABLE `traspaso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

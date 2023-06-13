@@ -37,11 +37,11 @@ class IngresoController extends BaseController
             } else {
                 // Si la validación falla, mostrar el cuadro de diálogo
                 echo '<script>alert("Ingreso no válido");</script>';
-                return view('agregar_ingreso', $data);
+                return view('direccion/agregar_ingreso', $data);
             }
         }
 
-        return view('agregar_ingreso', $data);
+        return view('direccion/agregar_ingreso', $data);
     }
     public function __construct()
     {

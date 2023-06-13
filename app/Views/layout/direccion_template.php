@@ -35,7 +35,7 @@
 
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('InicioSocios'); ?>" class="nav-link align-middle px-0">
+                            <a href="<?php echo base_url('DireccionHome'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Inicio</span>
                             </a>
                         </li>
@@ -61,21 +61,42 @@
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Estadisticas Jugadores</span>
                             </a>
                         </li>
-
                         <li>
-                            <a class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Ingresos</span>
-                            </a>
-                            <ul class="submenu">
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-box-arrow-in-down-left"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Ingresos</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="<?php echo base_url('AgregarIngreso'); ?>" class="nav-link px-0"> <i class="fs-4 bi-file-plus"></i> <span class=" hide-on-small d-none d-sm-inline">Agregar Ingreso</span></a>
+                                </li>
                                 <li>
-                                    <a href="<?php echo base_url('IngresosEspeciales') ?>" class="nav-link align-middle px-0">
-                                        <span class="hide-on-small ms-1 d-none d-sm-inline">Especiales</span>
-                                    </a>
+                                    <a href="<?php echo base_url('VentaJugadores') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Venta Jugadores</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('AgregarSponsor') ?>" class="nav-link px-0">  <i class="fs-4 bi-patch-plus"></i> <span class=" hide-on-small d-none d-sm-inline">Sponsors</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('IngresosEspeciales') ?>" class="nav-link px-0">  <i class="fs-4 bi-cash"></i> <span class=" hide-on-small d-none d-sm-inline">Especiales</span></a>
                                 </li>
                             </ul>
                         </li>
-
-
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-box-arrow-up-right"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Egresos</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="<?php echo base_url('PagoJugadores'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('PagoEquipoTecnico') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Equipo Técnico</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('PagoDirigente') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Dirigentes</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('PagoMensualidadAnfa') ?>" class="nav-link px-0">  <i class="fs-4 bi-plus-circle"></i> <span class=" hide-on-small d-none d-sm-inline">Anfa</span></a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
