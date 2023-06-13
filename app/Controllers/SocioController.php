@@ -195,7 +195,6 @@ class SocioController extends BaseController
         $titulo = [
             'title' => 'Mensualidad',
         ];
-        $data = [];
         if ($this->request->getMethod() === 'post') {
 
             try {
@@ -213,7 +212,8 @@ class SocioController extends BaseController
                     'monto' => $montopredeterminado,
                     'concepto' => 'mensualidad',
                     'fecha' => date('Y-m-d'),
-                    'id_usuario' => $id
+                    'id_usuario_fk' => $id,
+                    'detalle' => 'Pago de mensualidad'
                 ];
 
 
@@ -222,18 +222,21 @@ class SocioController extends BaseController
                     return view('socio/ver_mensualidad');
                 }
 
-                try {
-                    $this->ingresoModel->insert($ingresoData);
-                    return redirect()->to('InicioSocios')->with('success', 'pago hecho correctamente');
-                } catch (\Exception $e) {
 
+                if ($this->ingresoModel->insert($ingresoData)) {
+
+                    echo '<script>alert("Mensualidad pagada con exito.");</script>';
+
+                    return view(('socio/inicio_socios'));
+                } else {
                     return view(('socio/ver_mensualidad'));
                 }
+
                 // Redirigir al usuario a una página de éxito o mostrar un mensaje
                 // de éxito en la misma página.
-            } catch (\Exception $data) {
-                $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
-                return view(('socio/ver_mensualidad'), $data);
+            } catch (\Exception $e) {
+                echo '<script>alert("Ingreso no válido");</script>';
+                return view(('socio/ver_mensualidad'));
             }
             // Cargar la vista del formulario de registro
 
