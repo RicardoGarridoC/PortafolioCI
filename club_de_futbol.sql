@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2023 a las 05:46:03
+-- Tiempo de generación: 13-06-2023 a las 19:33:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -171,7 +171,9 @@ INSERT INTO `egresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`) VALUES
 (23, 'sueldo_e_tecnico', 350000, '2023-06-12', 'Sueldo de equipo tecnico Andres Mundi'),
 (24, 'sueldo_dirigentes', 1000000, '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
 (25, 'sueldo_dirigentes', 1000000, '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
-(26, 'pago_mensualidad', 126526, '2023-06-12', 'Pago de mensualidad ANFA mes de June 2023');
+(26, 'pago_mensualidad', 126526, '2023-06-12', 'Pago de mensualidad ANFA mes de June 2023'),
+(27, 'impuesto_venta', 2500000, '2023-06-13', 'Comisión venta jugador Paulo Neyman ANFA'),
+(28, 'impuesto_venta', 2500000, '2023-06-13', 'Comisión venta jugador Paulo Neyman Asociación del Bio Bio');
 
 -- --------------------------------------------------------
 
@@ -636,7 +638,8 @@ CREATE TABLE `traspaso` (
 INSERT INTO `traspaso` (`id`, `nombre_jugador`, `equipo_origen`, `equipo_destino`, `fecha_traspaso`, `monto`) VALUES
 (1, 'Arturo Mival', 'Los Alces FC M', 'Tigres Dorados', '2023-06-13', 1231231),
 (2, 'Maite Fernandez', 'Los Alces FC F', 'Coyotes Salvajes', '2023-06-13', 9999999999),
-(3, 'Andres Manchez', 'Los Alces FC M', 'Lobas Plateadas', '2023-06-13', 1233);
+(3, 'Andres Manchez', 'Los Alces FC M', 'Lobas Plateadas', '2023-06-13', 1233),
+(4, 'Paulo Neyman', 'Los Alces FC M', 'Leonas Blancas', '2023-06-13', 10000000);
 
 -- --------------------------------------------------------
 
@@ -667,7 +670,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion`, `telefono`, `password_hash`, `rol`, `socio_id_fk`, `jugador_id_fk`, `equipo_tecnico_id_fk`, `direccion_id_fk`) VALUES
 (3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, '092f4ccc7f9cb7512e3dad89417d2cbbd702adfd2c11deabb7ee866e1360447f0339458b6ad667a339b94431e4f202d3cb8f18751e931d386f1bf0fc4c0e5e70f5c585430abeadb2b2294d25d4ebc64afa7581c06f60', 'administrador', NULL, NULL, NULL, NULL),
 (4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, 'b2d6691b7a055d72a3b3da1ee4e590ce22070b3acf3da66984c2c2147139e8cf23c4bfbc48465cf6afb895e62e041f1dc0b8a02f8c1583f4b8505ce58f636cd44fd2e7a819f0ce9a1f040cc14406b49da1bc6d0b7bf5', 'socio', 1, NULL, NULL, NULL),
-(5, 'Humberta', 'Suazo', 'chupete.suazo@gmail.com', '112584128-K', 'Avenida siempre viva 123', 11122258, '123456', 'jugador', NULL, 1, NULL, NULL),
+(5, 'Humberta', 'Suazo', 'chupete.suazo@gmail.com', '112584128-K', 'Avenida siempre viva 123', 11122258, '6ac0c2e3e24a2c48736f51c42af167a175b8617d91f5d928f095d4aa40f106c6c674a0a93901396e84332ffce25d8f01cc3a6c2adfa01ed087763cb5dc386a640c6442664d5485e0590001c6703cb9749fdfb1bd13c9', 'jugador', NULL, 1, NULL, NULL),
 (6, 'Maite', 'Fernandez', 'matigol@gmail.com', '44487158-8', 'calle 123', 111228420, '123456', 'jugador', NULL, 2, NULL, NULL),
 (7, 'Marcela', 'Salas', 'msalas@gmail.com', '11557848-8', 'chillan', 4455842, '123456', 'jugador', NULL, 11, NULL, NULL),
 (8, 'Alexa', 'Sanchez', 'asanchez@@gmail.com', '448815789-7', 'tocopilla 1', 445468487, '123456', 'jugador', NULL, 9, NULL, NULL),
@@ -1001,7 +1004,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT de la tabla `egresos`
 --
 ALTER TABLE `egresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `equipos`
@@ -1043,7 +1046,7 @@ ALTER TABLE `goles`
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
@@ -1115,7 +1118,7 @@ ALTER TABLE `tarjetas_partido`
 -- AUTO_INCREMENT de la tabla `traspaso`
 --
 ALTER TABLE `traspaso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

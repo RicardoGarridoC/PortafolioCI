@@ -23,5 +23,3 @@
 <button type="submit" class="btn btn-primary btn-block">Registrar sponsor</button>
 <?php echo form_close(); ?>
 <?= $this->endSection() ?>
-
-<?= $this->endSection() ?>

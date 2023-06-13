@@ -12,13 +12,9 @@ class IngresosModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['concepto', 'monto', 'fecha', 'id_usuario'];
+    protected $allowedFields = ['concepto', 'monto', 'fecha', 'id_usuario','id_usuario_fk'];
 
     protected $validationRules = [
-        'concepto' => 'required',
-        'monto' => 'required',
-        'fecha' => 'required',
-        'id_usuario ' => 'required',
     ];
     protected $validationMessages = [];
     protected $skipValidation = false;

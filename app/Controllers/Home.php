@@ -457,12 +457,12 @@ class Home extends BaseController
                     "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
                     "emailUsuario" => $resultadoUsuario->email,
                     "idUsuario" => $resultadoUsuario->id,
-                    "nombresUsuario" => $resultadoUsuario->nombres,
-                    "apellidosUsuario" => $resultadoUsuario->apellidos,
-                    "runUsuario" => $resultadoUsuario->run,
-                    "direccionUsuario" => $resultadoUsuario->direccion,
-                    "telefonoUsuario" => $resultadoUsuario->telefono,
-                    "passwordUsuario" => $resultadoUsuario->password_hash
+                    //"nombresUsuario" => $resultadoUsuario->nombres,
+                    //"apellidosUsuario" => $resultadoUsuario->apellidos,
+                    //"runUsuario" => $resultadoUsuario->run,
+                    //"direccionUsuario" => $resultadoUsuario->direccion,
+                    //"telefonoUsuario" => $resultadoUsuario->telefono,
+                    //"passwordUsuario" => $resultadoUsuario->password_hash
 
                 ];
                 session()->set($data);
@@ -482,7 +482,7 @@ class Home extends BaseController
 
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            return redirect()->to(base_url() . 'DireccionHome');
+                            return redirect()->to(base_url() . '/DireccionDashboard ');
 
                         case 'jugador':
                             //redirecciona a vista de jugador
