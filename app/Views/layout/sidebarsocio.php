@@ -27,10 +27,8 @@
             <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/">
-                        <<<<<<< HEAD <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
-                            =======
-                            <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
-                            >>>>>>> 9e78ec027d3763c21a2e4410f34a7a806a37696c
+                        <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
+
                     </a>
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="hide-on-small fs-5 d-none d-sm-inline">Club Los Alces F.C.</span>
@@ -50,10 +48,9 @@
                                     <a href="<?php echo base_url('VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
                                 </li>
                                 <li>
-                                    <<<<<<< HEAD <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
-                                        =======
-                                        <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
-                                        >>>>>>> 9e78ec027d3763c21a2e4410f34a7a806a37696c
+                                    <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+
+                                    <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
                                 </li>
                             </ul>
                         </li>
@@ -66,7 +63,7 @@
                             <a href="<?php echo base_url('EstadisticasJugadores'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Estadisticas Jugadores</span>
                             </a>
-                            <<<<<<< HEAD </li>
+                        </li>
                         <li>
                             <a href="<?php echo base_url('VerMensualidad'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Mensalidad</span>
@@ -79,7 +76,7 @@
                         </li> -->
 
 
-                        =======
+
                         </li>
                         <!-- <li>
                             <a href="<?php echo base_url('VerReportes') ?>" class="nav-link align-middle px-0">
@@ -88,7 +85,6 @@
                         </li> -->
 
 
-                        >>>>>>> 9e78ec027d3763c21a2e4410f34a7a806a37696c
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">

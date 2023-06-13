@@ -23,7 +23,7 @@ class SesionAdmin implements FilterInterface
 
 
         if (!$user = $model->select('rol')->where('id', session()->idUsuario)->get()->getRow()->rol) {
-
+            dd($user);
             session()->destroy();
             return redirect()->route('/Home');
         }
