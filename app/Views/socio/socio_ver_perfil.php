@@ -11,14 +11,14 @@
     <div class="form-group">
         <?php
         echo form_label('Nombre(s)', 'nombres');
-        echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control', 'value' => session('nombresUsuario'), 'required' => 'required'));
+        echo form_input(array('name' => 'nombres', 'placeholder' => 'Nombres', 'class' => 'form-control', 'value' => session('nombresUsuario'), 'required' => 'required', 'readonly' => 'readonly'));
         echo "<br>";
         ?>
     </div>
     <div class="form-group">
         <?php
         echo form_label('Apellido(s)', 'apellidos');
-        echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control', 'value' => session('apellidosUsuario'), 'required' => 'required'));
+        echo form_input(array('name' => 'apellidos', 'placeholder' => 'Apellidos', 'class' => 'form-control', 'value' => session('apellidosUsuario'), 'required' => 'required', 'readonly' => 'readonly'));
         echo "<br>";
         ?>
     </div>
@@ -33,7 +33,7 @@
     <div class="form-group">
         <?php
         echo form_label('RUN', 'run');
-        echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control', 'value' => session('runUsuario'), 'required' => 'required'));
+        echo form_input(array('name' => 'run', 'placeholder' => 'RUN', 'class' => 'form-control', 'value' => session('runUsuario'), 'required' => 'required', 'readonly' => 'readonly'));
         echo "<br>";
         ?>
     </div>
