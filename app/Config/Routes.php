@@ -20,7 +20,6 @@ $routes->setAutoRoute(true);
 
 //Rutas Hechas
 //Rutas Home
-
 $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
@@ -47,36 +46,6 @@ $routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'Ses
 $routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
 $routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
 $routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
-
-
-//Botones Admin
-$routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador', ['filter' => 'SesionAdmin:administrador']);
-$routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador', ['filter' => 'SesionAdmin:administrador']);
-$routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario', ['filter' => 'SesionAdmin:administrador']);
-$routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo', ['filter' => 'SesionAdmin:administrador']);
-
-//RUTAS INICIO Y REGISTER
-//$routes->get('/login', 'SocioController::inicioSocios');
-$routes->post('Home/validarIngreso', 'Home::validarIngreso');
-//Buscar Logout y /register
-$routes->get('/logout', 'Home::cerrarSesion');
-$routes->match(['get', 'post'], '/register', 'Home::register');
-//prueba
-$routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
-$routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
-$routes->get('Cambios', 'CambiosController::MostrarCambios');
-
-//Rutas Admin
-$routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminUsuarioDt', 'AdminDashboard::usuarioDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin:administrador']);
-//Rutas Direccion
-$routes->get('DireccionDashboard', 'DireccionDashboard::Dashboard', ['filter' => 'SesionDirector:direccion']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);
