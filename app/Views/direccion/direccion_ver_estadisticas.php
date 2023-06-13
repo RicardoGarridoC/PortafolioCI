@@ -21,6 +21,8 @@
                     <th>Apellido</th>
                     <th>Posicion</th>
                     <th>Goles</th>
+                    <th>Sueldo</th>
+                    <th>Ayuda Economica</th>
                     <th>Lesion?</th>
                     <th>Fecha Inicio Lesion</th>
                     <th>Fecha Fin Lesion</th>
@@ -33,6 +35,8 @@
                     <td><?= $masculino['apellido'] ?></td>
                     <td><?= $masculino['posicion'] ?></td>
                     <td><?= $masculino['goles'] ?></td>
+                    <td><?= $masculino['sueldo'] ?></td>
+                    <td><?= $masculino['ayuda_economica'] ?></td>
                     <td><?= $masculino['jugador_lesionado'] ?></td>
                     <td><?= $masculino['fecha_inicio_lesion'] ?></td>
                     <td><?= $masculino['fecha_fin_lesion'] ?></td>
@@ -52,6 +56,8 @@
                     <th>Apellido</th>
                     <th>Posicion</th>
                     <th>Goles</th>
+                    <th>Sueldo</th>
+                    <th>Ayuda Economica</th>
                     <th>Lesion?</th>
                     <th>Fecha Inicio Lesion</th>
                     <th>Fecha Fin Lesion</th>
@@ -64,6 +70,8 @@
                     <td><?= $femenino['apellido'] ?></td>
                     <td><?= $femenino['posicion'] ?></td>
                     <td><?= $femenino['goles'] ?></td>
+                    <td><?= $femenino['sueldo'] ?></td>
+                    <td><?= $femenino['ayuda_economica'] ?></td>
                     <td><?= $femenino['jugador_lesionado'] ?></td>
                     <td><?= $femenino['fecha_inicio_lesion'] ?></td>
                     <td><?= $femenino['fecha_fin_lesion'] ?></td>
