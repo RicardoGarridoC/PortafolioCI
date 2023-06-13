@@ -18,7 +18,7 @@ class Home extends BaseController
         SUM(CASE WHEN g.jugador_id_fk IS NOT NULL THEN 1 ELSE 0 END) AS goles_equipo_local,
         e2.nombre AS equipo_visita,
         SUM(CASE WHEN g.jugador_id_fk IS NULL THEN 1 ELSE 0 END) AS goles_equipo_visita,
-        DATE_FORMAT(p.fecha, "%b %d") AS fecha
+        DATE_FORMAT(p.fecha, "%b %d", "es_ES") AS fecha
         FROM
             partidos p
         INNER JOIN equipos e1 ON
@@ -377,7 +377,44 @@ class Home extends BaseController
 
     public function proximoPartido()
     {
-        return view('templates/header') . view('home/proximo_partido') . view('templates/footer');
+        $db = db_connect();
+        //PROXIMOS PARTIDOS
+        $query9 = $db->query('SELECT
+        p.id,
+        e_local.nombre AS equipo_local,
+        e_visita.nombre AS equipo_visita,
+        CONCAT(DAY(p.fecha), " de ", DATE_FORMAT(p.fecha, "%M", "es_ES")) AS fecha,
+        c.nombre AS cancha
+        FROM
+            partidos p
+        INNER JOIN equipos e_local ON
+            e_local.id = p.equipo_local_fk
+        INNER JOIN equipos e_visita ON
+            e_visita.id = p.equipo_visita_fk
+        left join  cancha c on
+            p.ubicacion_fk = c.id
+        WHERE
+            p.fecha >= NOW() -- Filtrar por fechas mayores o iguales a la fecha actual
+        ORDER BY
+            p.fecha ASC;
+        ');
+
+        $results9 = $query9->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data9['results9'] = array();
+
+        foreach ($results9 as $row9) {
+            $data9['results9'][] = array(
+                'id' => $row9->id,
+                'equipo_local' => $row9->equipo_local,
+                'equipo_visita' => $row9->equipo_visita,
+                'fecha' => $row9->fecha,
+                'cancha' => $row9->cancha
+            );
+        }
+
+        return view('templates/header') . view('home/proximo_partido', $data9) . view('templates/footer');
     }
 
     public function homeiniciosesion()
@@ -388,22 +425,6 @@ class Home extends BaseController
     public function homeregistro()
     {
         return view('home/registrarse');
-    }
-    public function homeContacto()
-    {
-        return view('templates/header') . view('home/home_contacto') . view('templates/footer');
-    }
-    public function homePortafolio()
-    {
-        return view('templates/header') . view('home/home_portafolio') . view('templates/footer');
-    }
-    public function homeServicios()
-    {
-        return view('templates/header') . view('home/home_servicios') . view('templates/footer');
-    }
-    public function homeBlog()
-    {
-        return view('templates/header') . view('home/home_blog') . view('templates/footer');
     }
 
     protected $usuario;
@@ -452,27 +473,27 @@ class Home extends BaseController
                     switch ($query) {
                         case  'administrador':
                             //redirecciona a vista de administrador
-                            return redirect()->to(base_url() . '/AdminDashboard ');
+                            return redirect()->to(base_url() . 'AdminDashboard');
 
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            return redirect()->to(base_url() . '/DireccionDashboard ');
+                            return redirect()->to(base_url() . 'DireccionDashboard');
 
                         case 'jugador':
                             //redirecciona a vista de jugador
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . 'InicioJugador');
 
                         case 'entrenador':
                             //redirecciona a vista de entrenador
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
 
                         case 'equipo_tecnico':
                             //redirecciona a vista de equipo_tecnico
-                            return redirect()->to(base_url() . '/ ');
+                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
 
                         case 'socio':
                             //redirecciona a vista de socio
-                            return redirect()->to(base_url() . '/InicioSocios ');
+                            return redirect()->to(base_url() . 'InicioSocios');
                     }
                 }
 

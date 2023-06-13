@@ -20,11 +20,12 @@ $routes->setAutoRoute(true);
 
 //Rutas Hechas
 //Rutas Home
-
 $routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
+$routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
+$routes->get('ProximoPartido', 'Home::proximoPartido');
 //Rutas Socio / Perfile0s
 $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio:socio']);
 $routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio:socio']);
@@ -45,8 +46,18 @@ $routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'Ses
 $routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
 $routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
 $routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
-
-
+//Rutas Jugador
+$routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
+$routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);
+$routes->get('CampeonatosJugador', 'JugadorController::jugadorverCampeonatos', ['filter' => 'SesionJugador:jugador']);
+$routes->get('PartidosJugador', 'JugadorController::jugadorverPartidos', ['filter' => 'SesionJugador:jugador']);
+$routes->get('EstadisticasJugador', 'JugadorController::jugadorverEstadisticas', ['filter' => 'SesionJugador:jugador']);
+//Rutas Equipo Tecnico
+$routes->get('InicioEquipoTecnico', 'EquipoTecnicoController::Dashboard', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->get('JugadoresEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverJugadores', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->get('CampeonatosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverCampeonatos', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->get('PartidosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverPartidos', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->get('EstadisticasEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEstadisticas', ['filter' => 'SesionJugador:equipo_tecnico']);
 //Botones Admin
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin:administrador']);
@@ -65,36 +76,6 @@ $routes->match(['get', 'post'], '/register', 'Home::register');
 $routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
 $routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
 $routes->get('Cambios', 'CambiosController::MostrarCambios');
-
-//Rutas Admin
-$routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminUsuarioDt', 'AdminDashboard::usuarioDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin:administrador']);
-//Rutas Direccion
-$routes->get('DireccionDashboard', 'DireccionDashboard::Dashboard', ['filter' => 'SesionDirector:direccion']);
-//Botones Admin
-$routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin:administrador']);
-$routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador', ['filter' => 'SesionAdmin:administrador']);
-$routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador', ['filter' => 'SesionAdmin:administrador']);
-$routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario', ['filter' => 'SesionAdmin:administrador']);
-$routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo', ['filter' => 'SesionAdmin:administrador']);
-
-//RUTAS INICIO Y REGISTER
-//$routes->get('/login', 'SocioController::inicioSocios');
-$routes->post('Home/validarIngreso', 'Home::validarIngreso');
-//Buscar Logout y /register
-$routes->get('/logout', 'Home::cerrarSesion');
-$routes->match(['get', 'post'], '/register', 'Home::register');
-//prueba
-$routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
-$routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
-$routes->get('Cambios', 'CambiosController::MostrarCambios');
-//-------------------------------------------------------------------------------------
-//nuevas vistas ricardo
 
 //para todas estas vistas se debe modificar el archivo view ya que extiende el formato desde 
 //el sidebar socio, deben colocar que extienda desde el sidebardireccion o como se llame
@@ -119,6 +100,9 @@ $routes->post('PagoDirigente', 'EgresoController::PagarSueldoDirigente');
 //esta vista contiene el pago de mensualidad a la anfa, boton en direccion
 $routes->get('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
 $routes->post('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
+//esta va en direccion
+$routes->get('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores');
+$routes->post('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores');
 
 //-----------------------------------------------------------------------------------------
 

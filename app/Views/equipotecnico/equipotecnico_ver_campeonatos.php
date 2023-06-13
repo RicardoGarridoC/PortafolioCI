@@ -1,7 +1,6 @@
-<?= $this->extend('layout/sidebarsocio') ?>
+<?= $this->extend('layout/equipotecnico_template') ?>
 
 <?= $this->section('contenido') ?>
-
 <style>
     .championship-table {
         overflow-x: auto;

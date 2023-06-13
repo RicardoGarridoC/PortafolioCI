@@ -8,6 +8,7 @@ use App\Models\JugadorModel;
 use App\Models\PartidosModel;
 use CodeIgniter\Controller;
 use App\Models\PagoSocioModel;
+use App\Models\CustomModel;
 
 
 
@@ -26,25 +27,112 @@ class SocioController extends BaseController
 
     public function mostrarJugador()
     {
-        /*String p = "";
-        foreach($p in $jugadores){
-            var_dump($p);
-        }*/
-        $jugadorModel = new JugadorModel();
-        $jugadores = $jugadorModel->findAll();
-        //$jugador=$jugadorModel->find('1');
-        //var_dump($jugadores);
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Jugadores Socio',
+        ];
+
+        $db = db_connect();
+        $jugadorModel = new CustomModel($db);
+        $jugadores = $jugadorModel->getJugadores();
         $jugadores = array('jugadores' => $jugadores);
-        return view('socio/ver_jugadores', $jugadores);
+
+        //$jugadorModel = new JugadorModel();
+        //$jugadores=$jugadorModel->findAll();
+        //$jugadores=array('jugadores'=>$jugadores);
+        //return view('admin/admin_equipotecnico_dt', ['jugadores' => $jugadores]);
+
+        $verData = array_merge($jugadores, $titulo);
+        return view('socio/ver_jugadores', $verData);
     }
 
     public function mostrarCampeonatos()
     {
+        // Agregando Titulo a Cada View
         $titulo = [
-            'title' => 'Campeonatos',
+            'title' => 'Campeonatos Socio',
         ];
 
-        return view('socio/ver_campeonatos', $titulo);
+        $db = db_connect();
+
+        $campeonato = $db->query('SELECT
+        e.nombre AS equipo,
+        COUNT(*) AS partidos_jugados,
+        SUM(CASE
+            WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
+                OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
+            ELSE 0
+        END) AS partidos_ganados,
+        
+        SUM(CASE
+            WHEN r.goles_local = r.goles_visita THEN 1
+            ELSE 0
+        END) AS partidos_empatados,
+        
+        SUM(CASE
+            WHEN (r.goles_local < r.goles_visita AND r.equipo_local_fk = e.id)
+                OR (r.goles_visita < r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
+            ELSE 0
+        END) AS partidos_perdidos,
+
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_local
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_visita
+            ELSE 0
+        END) AS goles_a_favor,
+
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_visita
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_local
+            ELSE 0
+        END) AS goles_en_contra,
+        
+        SUM(CASE
+            WHEN r.equipo_local_fk = e.id THEN r.goles_local - r.goles_visita
+            WHEN r.equipo_visita_fk = e.id THEN r.goles_visita - r.goles_local
+            ELSE 0
+        END) AS diferencia_goles,
+
+        SUM(CASE
+        WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
+            OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 3
+        WHEN r.goles_local = r.goles_visita AND r.equipo_local_fk = e.id THEN 1
+        WHEN r.goles_local = r.goles_visita AND r.equipo_visita_fk = e.id THEN 1
+        ELSE 0
+        END) AS puntaje
+    
+        FROM
+            resultados r
+        INNER JOIN equipos e ON r.equipo_local_fk = e.id OR r.equipo_visita_fk = e.id
+        WHERE
+            r.campeonato_id_fk = 1
+        GROUP BY
+            e.id, e.nombre
+        ORDER BY
+            puntaje DESC, diferencia_goles desc;');
+
+        $results = $campeonato->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data['results'] = array();
+
+        foreach ($results as $row) {
+            $data['results'][] = array(
+                'equipo' => $row->equipo,
+                'partidos_jugados' => $row->partidos_jugados,
+                'partidos_ganados' => $row->partidos_ganados,
+                'partidos_empatados' => $row->partidos_empatados,
+                'partidos_perdidos' => $row->partidos_perdidos,
+                'goles_a_favor' => $row->goles_a_favor,
+                'goles_en_contra' => $row->goles_en_contra,
+                'diferencia_goles' => $row->diferencia_goles,
+                'puntaje' => $row->puntaje
+            );
+        }
+
+        $viewData = array_merge($data, $titulo);
+
+        return view('socio/ver_campeonatos', $viewData);
     }
 
     public function verPartidos()
@@ -189,6 +277,7 @@ class SocioController extends BaseController
     protected $usuario;
     protected $pagoSocio;
     protected $ingresoModel;
+
     public function verMensualidad()
     {
 

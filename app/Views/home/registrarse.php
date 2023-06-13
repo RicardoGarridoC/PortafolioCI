@@ -63,6 +63,19 @@
       right: 20px;
       top: -45px;
     }
+    .back_button {
+      position: absolute;
+      right: 380px;
+      top: -90px;
+    }
+    .back_button .btn {
+      color: #000;
+      font-size: 2rem;
+    }
+
+    .back_button .btn:hover {
+      color: #fff;
+    }
 
     .input-group-prepend span {
       width: 50px;
@@ -124,6 +137,11 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
+              <div class="d-flex justify-content-start back_button">
+              <a  href=<?php echo base_url('Home'); ?> class="btn btn-link text-left">
+                <span><i class="fas fa-arrow-left"></i></span>
+              </a>
+            </div>
               <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Nombre" required>
 
             </div>
