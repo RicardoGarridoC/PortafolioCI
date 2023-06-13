@@ -329,4 +329,63 @@ class SocioController extends BaseController
         }
         return view('socio/ver_mensualidad', $titulo);
     }
+
+    public function verSocioUsuario()
+    {
+        $titulo = [
+            'title' => 'Ver Usuario Socio',
+        ];
+    
+        //  Obtén una instancia del encrypter
+        $encrypter = \Config\Services::encrypter();
+    
+        // Desencripta la contraseña almacenada en la sesión
+        $encryptedPassword = session('passwordUsuario');
+        $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
+    
+        // Combina los datos en un solo array
+        $verCosas = array_merge(['clavebuena' => $clavebuena], $titulo);
+    
+        return view('socio/socio_ver_perfil', $verCosas);
+    }
+    
+
+    public function guardaSocioUsuario()
+    {
+
+        $usuarioModel = new UsuarioModel();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
+        $data = array(
+            'nombres' => $request->getPostGet('nombres'),
+            'apellidos' => $request->getPostGet('apellidos'),
+            'email' => $request->getPostGet('email'),
+            'run' => $request->getPostGet('run'),
+            'direccion' => $request->getPostGet('direccion'),
+            'telefono' => $request->getPostGet('telefono'),
+            //'password_hash' => $request->getPostGet('password_hash'),
+            $clave = $this->request->getPost('password_hash'),
+            $password = bin2hex($encrypter->encrypt($clave)),
+            'password_hash' => $password
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($usuarioModel->save($data) === false) {
+            var_dump($usuarioModel->errors());
+        }
+
+        //Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Editar Usuario Socio',
+        ];
+
+        return view('socio/socio_ver_perfil', $titulo);
+    }
+    public function __construct()
+    {
+        helper('form');
+        //helper('encryption');
+    }
+
 }

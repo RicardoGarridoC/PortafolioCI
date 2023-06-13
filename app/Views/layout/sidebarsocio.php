@@ -68,22 +68,6 @@
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Mensualidad</span>
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="<?php echo base_url('VerReportes') ?>" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
-                            </a>
-                        </li> -->
-
-
-
-                        </li>
-                        <!-- <li>
-                            <a href="<?php echo base_url('VerReportes') ?>" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
-                            </a>
-                        </li> -->
-
-
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
@@ -94,7 +78,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
                             <li><a class="dropdown-item" href="#">Configuración</a></li>
-                            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="<?php echo base_url('PerfilSocio'); ?>">Ver Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
