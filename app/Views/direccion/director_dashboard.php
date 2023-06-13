@@ -12,6 +12,10 @@
 
 <body>
 
+    <div class="container mt-5">
+        <a href="/PortafolioCI/logout">Cerrar sesión</a>
+    </div>
+
 </body>
 
 </html>

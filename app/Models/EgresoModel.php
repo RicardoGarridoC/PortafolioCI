@@ -4,21 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SponsorModel extends Model
+class EgresoModel extends Model
 {
-    protected $table = 'sponsors';
+    protected $table = 'egresos';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'monto_por_partido', 'condiciones'];
+    protected $allowedFields = ['concepto', 'monto', 'fecha', 'detalle'];
 
     protected $validationRules = [
-        'nombre' => 'required|is_unique[sponsors.nombre]',
-        'monto_por_partido' => 'required',
-        'condiciones' => 'required',
+        'monto' => 'required|decimal',
     ];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }
+?>

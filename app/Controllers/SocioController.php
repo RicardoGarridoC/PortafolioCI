@@ -117,7 +117,6 @@ class SocioController extends BaseController
                 'fecha_fin_lesion' => $masculino->fecha_fin_lesion
             );
         }
-
         //JUGADORES FEMENINOS
         $query2 = $db->query('SELECT
         u.nombres AS nombre,

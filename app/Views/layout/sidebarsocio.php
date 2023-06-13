@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- RECORDAR AGREGAR TITULO A LOS CONTROLADORES (ej EN INICIO SOCIOS)-->
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
@@ -28,7 +27,10 @@
             <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/">
-                        <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
+                        <<<<<<< HEAD <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
+                            =======
+                            <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
+                            >>>>>>> 9e78ec027d3763c21a2e4410f34a7a806a37696c
                     </a>
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="hide-on-small fs-5 d-none d-sm-inline">Club Los Alces F.C.</span>
@@ -48,7 +50,10 @@
                                     <a href="<?php echo base_url('VerJugadores'); ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                    <<<<<<< HEAD <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                        =======
+                                        <a href="<?php echo base_url('VerCampeonatos') ?>" class="nav-link px-0"> <span class=" hide-on-small d-none d-sm-inline">Campeonatos</span> 2</a>
+                                        >>>>>>> 9e78ec027d3763c21a2e4410f34a7a806a37696c
                                 </li>
                             </ul>
                         </li>
@@ -61,7 +66,7 @@
                             <a href="<?php echo base_url('EstadisticasJugadores'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Estadisticas Jugadores</span>
                             </a>
-                        </li>
+                            <<<<<<< HEAD </li>
                         <li>
                             <a href="<?php echo base_url('VerMensualidad'); ?>" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Mensalidad</span>
@@ -74,6 +79,16 @@
                         </li> -->
 
 
+                        =======
+                        </li>
+                        <!-- <li>
+                            <a href="<?php echo base_url('VerReportes') ?>" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-file-earmark-bar-graph"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Reportes</span>
+                            </a>
+                        </li> -->
+
+
+                        >>>>>>> 9e78ec027d3763c21a2e4410f34a7a806a37696c
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
