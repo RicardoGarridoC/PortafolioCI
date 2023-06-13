@@ -64,7 +64,7 @@
                         </li>
                         <li>
                             <a href="<?php echo base_url('VerMensualidad'); ?>" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Mensalidad</span>
+                                <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Mensualidad</span>
                             </a>
                         </li>
                         <!-- <li>

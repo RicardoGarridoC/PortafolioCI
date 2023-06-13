@@ -5,7 +5,8 @@ namespace App\Controllers;
 use App\Models\IngresoModel;
 use App\Models\UsuarioModel;
 use App\Models\JugadorModel;
-use App\Models\TraspasoModel; // Asegúrate de tener este modelo definido en tu proyecto
+use App\Models\TraspasoModel;
+use App\Models\EgresoModel; // Asegúrate de tener este modelo definido en tu proyecto
 
 class VentaJugadorController extends BaseController
 {
@@ -14,7 +15,8 @@ class VentaJugadorController extends BaseController
         $ingreso = new IngresoModel();
         $usuario = new UsuarioModel();
         $jugador = new JugadorModel();
-        $traspaso = new TraspasoModel(); // Instanciamos el modelo TraspasoModel
+        $traspaso = new TraspasoModel();
+        $egreso = new EgresoModel(); // Instanciamos el modelo EgresoModel
 
         $validation = \Config\Services::validation();
         $validation->setRules($ingreso->getValidationRules());
@@ -55,7 +57,7 @@ class VentaJugadorController extends BaseController
             $postData = $this->request->getPost();
             $postData['concepto'] = 'venta_jugadores';
             $postData['monto'];
-            
+
             // Obtener el nombre del jugador
             $nombreJugador = array_merge($masculinos, $femeninos);
             $nombreJugador = array_filter($nombreJugador, function($jugador) use ($postData) {
@@ -67,6 +69,27 @@ class VentaJugadorController extends BaseController
             $postData['detalle'] = 'Venta de jugador ' . $nombreJugador;
             $postData['fecha'] = date('Y-m-d');
             $ingreso->save($postData);
+
+            // Datos para los egresos
+            $egresoData = [
+                [
+                    'concepto' => 'impuesto_venta',
+                    'monto' => $postData['monto'] * 0.25,
+                    'fecha' => date('Y-m-d'),
+                    'detalle' => 'Comisión venta jugador ' . $nombreJugador . ' ANFA',
+                ],
+                [
+                    'concepto' => 'impuesto_venta',
+                    'monto' => $postData['monto'] * 0.25,
+                    'fecha' => date('Y-m-d'),
+                    'detalle' => 'Comisión venta jugador ' . $nombreJugador . ' Asociación del Bio Bio',
+                ]
+            ];
+            
+            // Guardar los datos de los egresos
+            foreach ($egresoData as $egresoItem) {
+                $egreso->save($egresoItem);
+            }
 
             // Datos para la tabla traspaso
             $traspasoData = [
@@ -95,6 +118,7 @@ class VentaJugadorController extends BaseController
         helper('form');
     }
 }
+
 
 
 
