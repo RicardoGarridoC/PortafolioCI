@@ -66,7 +66,7 @@
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Sesion'); ?>">Iniciar sesión</a>
+                        <a class="nav-link" href="<?php echo base_url('IniciarSesion'); ?>">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Próximos partidos</a>

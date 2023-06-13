@@ -20,19 +20,53 @@ $routes->setAutoRoute(true);
 
 //Rutas Hechas
 //Rutas Home
-$routes->get('Sesion', 'Home::homesocios');
+
+$routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
 $routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
 $routes->get('ProximoPartido', 'Home::proximoPartido');
 //Rutas Socio / Perfile0s
-$routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionAdmin:socio']);
-$routes->get('VerReportes', 'SocioController::verReportes', ['filter' => 'SesionAdmin:socio']);
-$routes->get('EstadisticasJugadores', 'SocioController::verEstadisticasJugadores', ['filter' => 'SesionAdmin:socio']);
+$routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionSocio:socio']);
+$routes->get('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
+$routes->post('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
+//Rutas Admin
+$routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminUsuarioDt', 'AdminDashboard::usuarioDatabase', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin:administrador']);
+//Rutas Direccion
+$routes->get('DireccionDashboard', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
+$routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
+$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
+
+
+//Botones Admin
+$routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador', ['filter' => 'SesionAdmin:administrador']);
+$routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador', ['filter' => 'SesionAdmin:administrador']);
+$routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario', ['filter' => 'SesionAdmin:administrador']);
+$routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo', ['filter' => 'SesionAdmin:administrador']);
+
+//RUTAS INICIO Y REGISTER
+//$routes->get('/login', 'SocioController::inicioSocios');
+$routes->post('Home/validarIngreso', 'Home::validarIngreso');
+//Buscar Logout y /register
+$routes->get('/logout', 'Home::cerrarSesion');
+$routes->match(['get', 'post'], '/register', 'Home::register');
+//prueba
+$routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
+$routes->get('Cambios', 'CambiosController::MostrarCambios');
 
 //Rutas Admin
 $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
@@ -70,23 +104,36 @@ $routes->post('Home/validarIngreso', 'Home::validarIngreso');
 $routes->get('/logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
 //prueba
+$routes->get('UltimoPartido', 'UltimoPartidoController::MostrarPartido');
+$routes->get('InfoGoles', 'InfoGolesController::MostrarInfoGoles');
+$routes->get('Cambios', 'CambiosController::MostrarCambios');
 
+//para todas estas vistas se debe modificar el archivo view ya que extiende el formato desde 
+//el sidebar socio, deben colocar que extienda desde el sidebardireccion o como se llame
+//también deben agregar el tema de que la sesión esté activa
 
+//esta vista es para agregar un nuevo sponsor, debe estar en un botón en direccion
+$routes->get('AgregarSponsor', 'SponsorController::registrar');
+$routes->post('AgregarSponsor', 'SponsorController::registrar');
 
-// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
-// where controller filters or CSRF protection are bypassed.
-// If you don't want to define all routes, please use the Auto Routing (Improved).
-// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
+//esta vista contiene ingreso por sponsor o actividades especiales, debe estar en un botón en direccion
+$routes->get('AgregarIngreso', 'IngresoController::registrar');
+$routes->post('AgregarIngreso', 'IngresoController::registrar');
+//esta vista contiene el pago de sueldos a jugadores, tambien como botón en direccion
+$routes->get('PagoJugadores', 'EgresoController::registrarPagoJugadores');
+$routes->post('PagoJugadores', 'EgresoController::registrarPagoJugadores');
+//esta vista contiene el pago de sueldo a miembros del equipo tecnico, boton en direccion
+$routes->get('PagoEquipoTecnico', 'EgresoController::PagarSueldoEquipoTecnico');
+$routes->post('PagoEquipoTecnico', 'EgresoController::PagarSueldoEquipoTecnico');
+//esta vista contiene el pago a dirigentes, boton en direccion
+$routes->get('PagoDirigente', 'EgresoController::PagarSueldoDirigente');
+$routes->post('PagoDirigente', 'EgresoController::PagarSueldoDirigente');
+//esta vista contiene el pago de mensualidad a la anfa, boton en direccion
+$routes->get('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
+$routes->post('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
 
-/*
- * --------------------------------------------------------------------
- * Route Definitions
- * --------------------------------------------------------------------
- */
+//-----------------------------------------------------------------------------------------
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
 /*

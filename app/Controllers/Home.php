@@ -433,6 +433,7 @@ class Home extends BaseController
     public function validarIngreso()
     {
         $email1 = $this->request->getPost("email");
+        $id = $this->request->getPost("id");
         if (filter_var($email1, FILTER_VALIDATE_EMAIL)) {
             $email = filter_var($email1, FILTER_SANITIZE_EMAIL);
             $this->usuario = new UsuarioModel();
@@ -453,8 +454,11 @@ class Home extends BaseController
             $primerApellido = $apellidos[0];
             if ($clave == $claveBD) {
                 $data = [
-                    "nombreUsuario" => $primerNombre . ' ' . $primerApellido,
-                    "emailUsuario" => $resultadoUsuario->email
+                    "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
+                    "emailUsuario" => $resultadoUsuario->email,
+                    "idUsuario" => $resultadoUsuario->id,
+
+
                 ];
                 session()->set($data);
 

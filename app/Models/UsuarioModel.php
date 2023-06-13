@@ -62,4 +62,9 @@ class UsuarioModel extends Model
         $model =  model('UsuarioModel');
         return  $model->where('rol', $this->rol)->get();
     }
+
+    public function buscarUsuarioPorIdJugador($jugadorId)
+    {
+        return $this->where('jugador_id_fk', $jugadorId)->first();
+    }
 }
