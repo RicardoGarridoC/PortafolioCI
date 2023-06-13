@@ -1,4 +1,4 @@
-<?= $this->extend('layout/sidebarsocio') ?>
+<?= $this->extend('layout/equipotecnico_template') ?>
 
 <?= $this->section('contenido') ?>
 
@@ -36,4 +36,5 @@
     </table>
   </div>
 </section>
+
 <?= $this->endSection() ?>

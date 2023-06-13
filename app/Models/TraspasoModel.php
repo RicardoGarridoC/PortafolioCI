@@ -4,17 +4,19 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class IngresoModel extends Model
+class TraspasoModel extends Model
 {
-    protected $table = 'ingresos';
+    protected $table = 'traspaso';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['concepto', 'monto', 'fecha', 'detalle','id_usuario_fk'];
+    protected $allowedFields = ['nombre_jugador', 'equipo_origen', 'equipo_destino', 'fecha_traspaso', 'monto'];
 
-    protected $validationRules = [];
+    protected $validationRules = [
+
+    ];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }

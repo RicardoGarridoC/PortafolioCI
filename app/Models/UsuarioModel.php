@@ -18,6 +18,14 @@ class UsuarioModel extends Model
         'id', 'nombres', 'apellidos', 'email', 'run', 'direccion', 'telefono', 'password_hash', 'rol', 'button_field'
     ];
 
+    // Dates
+    /*protected $useTimestamps = false;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+    */
+
     // Validation
     protected $validationRules      = [];
     protected $validationMessages   = [];

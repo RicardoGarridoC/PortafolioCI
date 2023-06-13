@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class IngresoModel extends Model
+class IngresosModel extends Model
 {
     protected $table = 'ingresos';
     protected $primaryKey = 'id';
@@ -12,9 +12,10 @@ class IngresoModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['concepto', 'monto', 'fecha', 'detalle','id_usuario_fk'];
+    protected $allowedFields = ['concepto', 'monto', 'fecha', 'id_usuario','id_usuario_fk'];
 
-    protected $validationRules = [];
+    protected $validationRules = [
+    ];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }

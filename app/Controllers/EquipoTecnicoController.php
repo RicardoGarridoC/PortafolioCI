@@ -1,56 +1,31 @@
 <?php
 
 namespace App\Controllers;
-
-use App\Models\IngresosModel;
-use App\Models\UsuarioModel;
-use App\Models\JugadorModel;
 use App\Models\PartidosModel;
-use CodeIgniter\Controller;
-use App\Models\PagoSocioModel;
 use App\Models\CustomModel;
 
 
 
-class SocioController extends BaseController
+class EquipoTecnicoController extends BaseController
 {
-
-    public function inicioSocios()
+    public function __construct()
     {
-        //Agregando Titulo a Cada View
-        $titulo = [
-            'title' => 'Inicio Socios',
-        ];
-
-        return view('socio/inicio_socios', $titulo);
+        helper('form');
     }
-
-    public function mostrarJugador()
+    public function Dashboard()
     {
         // Agregando Titulo a Cada View
         $titulo = [ 
-        'title' => 'Jugadores Socio',
+            'title' => 'Inicio Equipo Técnico',
         ];
 
-        $db = db_connect();
-        $jugadorModel = new CustomModel($db);
-        $jugadores = $jugadorModel->getJugadores();
-        $jugadores=array('jugadores' => $jugadores);
-
-        //$jugadorModel = new JugadorModel();
-        //$jugadores=$jugadorModel->findAll();
-        //$jugadores=array('jugadores'=>$jugadores);
-        //return view('admin/admin_equipotecnico_dt', ['jugadores' => $jugadores]);
-
-        $verData= array_merge($jugadores, $titulo);
-        return view('socio/ver_jugadores', $verData);
+        return view('equipotecnico/inicio_equipotecnico', $titulo);
     }
-
-    public function mostrarCampeonatos()
+    public function equipotecnicoverCampeonatos()
     {
-       // Agregando Titulo a Cada View
-       $titulo = [ 
-        'title' => 'Campeonatos Socio',
+         // Agregando Titulo a Cada View
+         $titulo = [ 
+            'title' => 'Campeonatos Equipo Tecnico',
         ];
 
         $db = db_connect();
@@ -74,13 +49,13 @@ class SocioController extends BaseController
                 OR (r.goles_visita < r.goles_local AND r.equipo_visita_fk = e.id) THEN 1
             ELSE 0
         END) AS partidos_perdidos,
-
+    
         SUM(CASE
             WHEN r.equipo_local_fk = e.id THEN r.goles_local
             WHEN r.equipo_visita_fk = e.id THEN r.goles_visita
             ELSE 0
         END) AS goles_a_favor,
-
+    
         SUM(CASE
             WHEN r.equipo_local_fk = e.id THEN r.goles_visita
             WHEN r.equipo_visita_fk = e.id THEN r.goles_local
@@ -92,7 +67,7 @@ class SocioController extends BaseController
             WHEN r.equipo_visita_fk = e.id THEN r.goles_visita - r.goles_local
             ELSE 0
         END) AS diferencia_goles,
-
+    
         SUM(CASE
         WHEN (r.goles_local > r.goles_visita AND r.equipo_local_fk = e.id)
             OR (r.goles_visita > r.goles_local AND r.equipo_visita_fk = e.id) THEN 3
@@ -100,7 +75,7 @@ class SocioController extends BaseController
         WHEN r.goles_local = r.goles_visita AND r.equipo_visita_fk = e.id THEN 1
         ELSE 0
         END) AS puntaje
-    
+      
         FROM
             resultados r
         INNER JOIN equipos e ON r.equipo_local_fk = e.id OR r.equipo_visita_fk = e.id
@@ -132,28 +107,9 @@ class SocioController extends BaseController
 
         $viewData = array_merge($data, $titulo);
 
-        return view('socio/ver_campeonatos', $viewData);
+        return view('equipotecnico/equipotecnico_ver_campeonatos', $viewData);
     }
-
-    public function verPartidos()
-    {
-        $partidosModel = new PartidosModel();
-        $partidos = $partidosModel->findAll();
-
-        // Pasar los datos a la vista
-        $data['partidos'] = $partidos;
-
-        // Agregando Titulo a Cada View
-        $titulo = [
-            'title' => 'Partidos',
-        ];
-
-        $verPartidos = array_merge($data, $titulo);
-
-        return view('socio/ver_partidos', $verPartidos);
-    }
-
-    public function verEstadisticasJugadores()
+    public function equipotecnicoverEstadisticas()
     {
         $db = db_connect();
         //JUGADORES MASCULINOS
@@ -205,6 +161,7 @@ class SocioController extends BaseController
                 'fecha_fin_lesion' => $masculino->fecha_fin_lesion
             );
         }
+        
         //JUGADORES FEMENINOS
         $query2 = $db->query('SELECT
         u.nombres AS nombre,
@@ -255,78 +212,54 @@ class SocioController extends BaseController
         }
 
         //Agregando Titulo a Cada View
-        $titulo = [
+        $titulo = [ 
             'title' => 'Estadistica de Jugadores',
         ];
 
         $verData = array_merge($data1, $data2, $titulo);
 
-        return view('socio/ver_estadisticas.php', $verData);
+        return view('equipotecnico/equipotecnico_ver_estadisticas', $verData);
     }
-
-    public function verReportes()
+    public function equipotecnicoverJugadores()
     {
-        //Agregando Titulo a Cada View
-        $titulo = [
-            'title' => 'Reportes',
+         // Agregando Titulo a Cada View
+         $titulo = [ 
+            'title' => 'Jugadores Equipo Tecnico',
         ];
 
-        return view('templates/reportes', $titulo);
-    }
+        $db = db_connect();
+        $jugadorModel = new CustomModel($db);
+        $jugadores = $jugadorModel->getJugadores();
+        $jugadores=array('jugadores' => $jugadores);
 
-    protected $usuario;
-    protected $pagoSocio;
-    protected $ingresoModel;
-    
-    public function verMensualidad()
+        //$jugadorModel = new JugadorModel();
+        //$jugadores=$jugadorModel->findAll();
+        //$jugadores=array('jugadores'=>$jugadores);
+        //return view('admin/admin_equipotecnico_dt', ['jugadores' => $jugadores]);
+
+        $verData= array_merge($jugadores, $titulo);
+
+        return view('equipotecnico/equipotecnico_ver_jugadores', $verData);
+    }
+    public function equipotecnicoverPartidos()
     {
 
-        $titulo = [
-            'title' => 'Mensualidad',
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
+
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+        // Agregando Titulo a Cada View
+        $titulo = [ 
+            'title' => 'Partidos',
         ];
-        $data = [];
-        if ($this->request->getMethod() === 'post') {
 
-            try {
-                // Guardar los datos en la base de datos
+        $verPartidos = array_merge($data, $titulo);
+        // Agregando Titulo a Cada View
 
-                $email = session('emailUsuario');
-                $this->pagoSocio = new PagoSocioModel();
-                $this->usuario = new UsuarioModel();
-                $this->ingresoModel = new IngresosModel();
-                $resultadoUsuario = $this->usuario->buscarUsuarioPorEmail($email);
-                $id = $resultadoUsuario->id;
-                $montopredeterminado = $this->pagoSocio->select('monto')->first();
-
-                $ingresoData = [
-                    'monto' => $montopredeterminado,
-                    'concepto' => 'mensualidad',
-                    'fecha' => date('Y-m-d'),
-                    'id_usuario_fk' => $id
-                ];
-
-
-                if ($montopredeterminado = null) {
-                    echo '<script>alert("Ingreso no válido");</script>';
-                    return view('socio/ver_mensualidad');
-                }
-
-                try {
-                    $this->ingresoModel->insert($ingresoData);
-                    return redirect()->to('InicioSocios')->with('success', 'pago hecho correctamente');
-                } catch (\Exception $e) {
-
-                    return view(('socio/ver_mensualidad'));
-                }
-                // Redirigir al usuario a una página de éxito o mostrar un mensaje
-                // de éxito en la misma página.
-            } catch (\Exception $data) {
-                $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
-                return view(('socio/ver_mensualidad'), $data);
-            }
-            // Cargar la vista del formulario de registro
-
-        }
-        return view('socio/ver_mensualidad', $titulo);
+        return view('equipotecnico/equipotecnico_ver_partidos', $verPartidos);
     }
+
 }
+    

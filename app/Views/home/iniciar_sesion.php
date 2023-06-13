@@ -65,6 +65,19 @@
       right: 20px;
       top: -45px;
     }
+    .back_button {
+      position: absolute;
+      right: 350px;
+      top: -45px;
+    }
+    .back_button .btn {
+      color: #000;
+      font-size: 2rem;
+    }
+
+    .back_button .btn:hover {
+      color: #fff;
+    }
 
     .input-group-prepend span {
       width: 50px;
@@ -121,6 +134,11 @@
             <span><i class="fab fa-facebook-square"></i></span>
             <span><i class="fab fa-google-plus-square"></i></span>
             <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+          <div class="d-flex justify-content-start back_button">
+            <a  href=<?php echo base_url('Home'); ?> class="btn btn-link text-left">
+              <span><i class="fas fa-arrow-left"></i></span>
+            </a>
           </div>
         </div>
         <div class="card-body">

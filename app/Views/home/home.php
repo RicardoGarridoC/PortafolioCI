@@ -123,9 +123,6 @@
                                 <li class="nav-item flex-fill">
                                     <a class="nav-link text-center" id="tarjetas-tab" data-bs-toggle="tab" href="#tarjetas" role="tab" aria-controls="tarjetas" aria-selected="false">Tarjetas</a>
                                 </li>
-                                <!-- <li class="nav-item flex-fill">
-                                    <a class="nav-link text-center" id="proximos-tab" data-bs-toggle="tab" href="#proximos" role="tab" aria-controls="proximos" aria-selected="false">Proximos Partidos</a>
-                                </li> -->
                             </ul>
                             
                             <div class="tab-content" id="myTabContent">
@@ -192,16 +189,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- PROXIMOS PARTIDOS -->
-                                <div class="tab-pane fade" id="proximos" role="tabpanel" aria-labelledby="proximos-tab">
-                                    <div class="row">
-                                        <div class="col">
-                                            <ul class="text-start smaller-text">
-                                                    <p>Probando</p>
-                                            </ul>   
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

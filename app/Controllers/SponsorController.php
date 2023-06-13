@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\SponsorModel;
 use CodeIgniter\Controller;
@@ -13,7 +15,7 @@ class SponsorController extends BaseController
         $validation->setRules($sponsor->validationRules);
 
         if ($this->request->getMethod() === 'post') {
-            $titulo = [ 
+            $titulo = [
                 'title' => 'Sponsor',
             ];
             if ($validation->withRequest($this->request)->run()) {
@@ -26,7 +28,7 @@ class SponsorController extends BaseController
                 return view('direccion/agregar_sponsor', $titulo);
             }
         }
-        $titulo = [ 
+        $titulo = [
             'title' => 'Sponsor',
         ];
         return view('direccion/agregar_sponsor', $titulo);

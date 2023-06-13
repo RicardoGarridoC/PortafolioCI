@@ -4,17 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class IngresoModel extends Model
+class PagoSocioModel extends Model
 {
-    protected $table = 'ingresos';
+    protected $table = 'pago_socio';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['concepto', 'monto', 'fecha', 'detalle','id_usuario_fk'];
+    protected $allowedFields = ['id', 'monto'];
 
-    protected $validationRules = [];
+    protected $validationRules = [
+        'id' => 'required',
+        'monto' => 'required',
+
+    ];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }

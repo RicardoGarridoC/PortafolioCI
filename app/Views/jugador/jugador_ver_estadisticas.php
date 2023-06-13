@@ -1,7 +1,6 @@
-<?= $this->extend('layout/sidebarsocio') ?>
+<?= $this->extend('layout/jugador_template') ?>
 
 <?= $this->section('contenido') ?>
-
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
@@ -75,4 +74,5 @@
         </div>
     </div>
 </div>
+
 <?= $this->endSection() ?>

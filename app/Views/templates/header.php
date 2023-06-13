@@ -49,7 +49,7 @@
 <body>
 
     <!-- Navbar (ADD fixed-top a nav class para arreglar panel socios)-->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -62,23 +62,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('ActividadesEspeciales'); ?>">Actividades especiales</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Servicios'); ?>">Servicios</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Blog'); ?>">Blog</a>
-                    </li> -->
                     <li class="nav-item">
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Portafolio'); ?>">Portafolio</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Contacto'); ?>">Contacto</a>
-                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Sesion'); ?>">Iniciar sesión</a>
+                        <a class="nav-link" href="<?php echo base_url('IniciarSesion'); ?>">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Próximos partidos</a>

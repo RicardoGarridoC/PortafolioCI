@@ -18,13 +18,10 @@ class SesionDirector implements FilterInterface
         $model =  model('UsuarioModel');
 
 
-        if (!$user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol) {
+        $user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol;
+        if ($user = !'direccion') {
             session()->destroy();
             return redirect()->route('/Home');
-        }
-
-        if (!$user) {
-            return redirect()->route('/IniciarSesion');
         }
     }
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
