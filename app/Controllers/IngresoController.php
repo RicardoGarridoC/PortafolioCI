@@ -24,7 +24,8 @@ class IngresoController extends BaseController
             'sponsorAmounts' => $sponsorAmounts,
         ];
 
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'post') 
+        {
                 $postData = $this->request->getPost();
                 $postData['monto'] = $postData['concepto'] === 'sponsor' ? $sponsorAmounts[$postData['sponsor_id']] : $postData['monto'];
                 $postData['detalle'] = $postData['concepto'] === 'sponsor' ? $sponsorNames[$postData['sponsor_id']] : $postData['detalle'];
@@ -33,13 +34,13 @@ class IngresoController extends BaseController
                 
                 // Redirigir a la página deseada después de guardar el ingreso
                 return redirect()->to('IngresoController/registrar')->with('success', 'Ingreso registrado exitosamente');
-            } else {
-                // Si la validación falla, mostrar el cuadro de diálogo
-                echo '<script>alert("Ingreso no válido");</script>';
-                return view('direccion/agregar_ingreso', $data);
-            }
         }
-
+        //SAQUE ESTAS LINEAS PORQUE DABAN ERROR AL ENTRAR, REVISAR (DIEGOS) 
+        //else {
+        //     // Si la validación falla, mostrar el cuadro de diálogo
+        //     echo '<script>alert("Ingreso no válido");</script>';
+        //     return view('direccion/agregar_ingreso', $data);
+        // }
         return view('direccion/agregar_ingreso', $data);
     }
     public function __construct()

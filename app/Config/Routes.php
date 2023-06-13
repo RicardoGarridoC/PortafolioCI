@@ -21,19 +21,12 @@ $routes->setAutoRoute(true);
 //Rutas Hechas
 //Rutas Home
 $routes->get('HomeSocios', 'Home::homesocios');
-$routes->get('HomeSocios', 'Home::homesocios');
 $routes->get('Home', 'Home::index');
 $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
 $routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
 $routes->get('ProximoPartido', 'Home::proximoPartido');
 //Rutas Socio / Perfile0s
-$routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio:socio']);
-$routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio:socio']);
-$routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionSocio:socio']);
-$routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionSocio:socio']);
-$routes->get('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
-$routes->post('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
 $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio:socio']);
 $routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio:socio']);
 $routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionSocio:socio']);
@@ -49,8 +42,8 @@ $routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'Se
 $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin:administrador']);
 //Rutas Direccion
 $routes->get('DireccionHome', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
-$routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
-$routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
+$routes->get('AgregarSponsor', 'SponsorController::registrar');
+$routes->post('AgregarSponsor', 'SponsorController::registrar');
 $routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales',['filter' => 'SesionDirector:direccion']);
 $routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
 $routes->get('AgregarIngreso', 'IngresoController::registrar', ['filter' => 'SesionDirector:direccion']);

@@ -482,7 +482,7 @@ class Home extends BaseController
 
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            return redirect()->to(base_url() . '/DireccionDashboard ');
+                            return redirect()->to(base_url() . 'DireccionHome');
 
                         case 'jugador':
                             //redirecciona a vista de jugador

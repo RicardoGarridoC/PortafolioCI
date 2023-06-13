@@ -1,7 +1,10 @@
 <?= $this->extend('layout/sidebarsocio') ?>
 
 <?= $this->section('contenido') ?>
-<?php echo form_open('AgregarSponsor'); ?>
+<?//php echo form_open('AgregarSponsor'); ?>
+
+<!-- NOSE QUE HACE ESTE SONSER AQUI, YA ESTA EN DIRECCION /AGREGAR_SPONSOR-->
+
 <div class="form-group">
     <?php
     echo form_label('Nombre', 'nombre');
@@ -21,5 +24,5 @@
     ?>
 </div>
 <button type="submit" class="btn btn-primary btn-block">Registrar sponsor</button>
-<?php echo form_close(); ?>
+<?//php echo form_close(); ?>
 <?= $this->endSection() ?>
