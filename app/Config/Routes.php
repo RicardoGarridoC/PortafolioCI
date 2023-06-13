@@ -100,6 +100,9 @@ $routes->post('PagoDirigente', 'EgresoController::PagarSueldoDirigente');
 //esta vista contiene el pago de mensualidad a la anfa, boton en direccion
 $routes->get('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
 $routes->post('PagoMensualidadAnfa', 'EgresoController::pagarMensualidadAnfa');
+//esta va en direccion
+$routes->get('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores');
+$routes->post('VentaJugadores', 'VentaJugadorController::registrarVentaJugadores');
 
 //-----------------------------------------------------------------------------------------
 

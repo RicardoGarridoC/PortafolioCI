@@ -277,6 +277,7 @@ class SocioController extends BaseController
     protected $usuario;
     protected $pagoSocio;
     protected $ingresoModel;
+    
     public function verMensualidad()
     {
 
@@ -301,7 +302,7 @@ class SocioController extends BaseController
                     'monto' => $montopredeterminado,
                     'concepto' => 'mensualidad',
                     'fecha' => date('Y-m-d'),
-                    'id_usuario' => $id
+                    'id_usuario_fk' => $id
                 ];
 
 
