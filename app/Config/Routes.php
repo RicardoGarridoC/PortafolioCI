@@ -104,6 +104,9 @@ $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador', ['
 $routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador', ['filter' => 'SesionAdmin:administrador']);
 $routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario', ['filter' => 'SesionAdmin:administrador']);
 $routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('PerfilAdmin', 'AdminDashboard::verAdminUsuario', ['filter' => 'SesionAdmin:administrador']);
+$routes->get('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin:administrador']);
+$routes->post('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin:administrador']);
 
 //RUTAS INICIO Y REGISTER
 //$routes->get('/login', 'SocioController::inicioSocios');
@@ -111,13 +114,6 @@ $routes->post('Home/validarIngreso', 'Home::validarIngreso');
 //Buscar Logout y /register
 $routes->get('/logout', 'Home::cerrarSesion');
 $routes->match(['get', 'post'], '/register', 'Home::register');
-
-//para todas estas vistas se debe modificar el archivo view ya que extiende el formato desde 
-//el sidebar socio, deben colocar que extienda desde el sidebardireccion o como se llame
-//también deben agregar el tema de que la sesión esté activa
-
-
-
 
 
 
