@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\CustomModel;
 use App\Models\UsuarioModel;
+use App\Models\PartidosModel;
 
 class JugadorController extends BaseController
 {
@@ -18,7 +19,17 @@ class JugadorController extends BaseController
             'title' => 'Inicio Jugador',
         ];
 
-        return view('jugador/inicio_jugador', $titulo);
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
+
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $titulo);
+
+        return view('jugador/inicio_jugador', $verPartidos);
     }
     public function jugadorverCampeonatos()
     {
