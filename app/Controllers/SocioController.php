@@ -27,8 +27,47 @@ class SocioController extends BaseController
         $titulo = [
             'title' => 'Inicio Socios',
         ];
+        //Colocar Aqui proximos partidos
+        $db = db_connect();
+        //PROXIMOS PARTIDOS
+        $query9 = $db->query('SELECT
+        p.id,
+        e_local.nombre AS equipo_local,
+        e_visita.nombre AS equipo_visita,
+        CONCAT(DAY(p.fecha), " de ", DATE_FORMAT(p.fecha, "%M", "es_ES"), " ", TIME_FORMAT(p.fecha, "%H:%i"), " hrs") AS fecha,
+        c.nombre AS cancha
+        FROM
+            partidos p
+        INNER JOIN equipos e_local ON
+            e_local.id = p.equipo_local_fk
+        INNER JOIN equipos e_visita ON
+            e_visita.id = p.equipo_visita_fk
+        LEFT JOIN cancha c ON
+            p.ubicacion_fk = c.id
+        WHERE
+            p.fecha >= NOW() -- Filtrar por fechas mayores o iguales a la fecha actual
+        ORDER BY
+            p.fecha ASC;
+        ');
 
-        return view('socio/inicio_socios', $titulo);
+        $results9 = $query9->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data9['results9'] = array();
+
+        foreach ($results9 as $row9) {
+            $data9['results9'][] = array(
+                'id' => $row9->id,
+                'equipo_local' => $row9->equipo_local,
+                'equipo_visita' => $row9->equipo_visita,
+                'fecha' => $row9->fecha,
+                'cancha' => $row9->cancha
+            );
+        }
+
+        $verData = array_merge($data9, $titulo);
+
+        return view('socio/inicio_socios', $verData);
     }
 
     public function mostrarJugador()
