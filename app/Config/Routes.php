@@ -39,6 +39,7 @@ $routes->post('EditarUsuario', 'SocioController::guardaSocioUsuario', ['filter' 
 $routes->get('EstadisticasSocio', 'SocioController::socioverEstadisticas', ['filter' => 'SesionSocio:socio']);
 $routes->get('boletaMensualidad', 'SocioController::boletaMensualidad', ['filter' => 'SesionSocio:socio']);
 $routes->get('EquipoTecnicoSocio', 'SocioController::socioverEquipoTecnico', ['filter' => 'SesionSocio:socio']);
+$routes->get('HistorialPagos', 'SocioController::historialPagos', ['filter' => 'SesionSocio:socio']);
 //Rutas Admin
 $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);

@@ -67,9 +67,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('VerMensualidad'); ?>" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-card-list"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Mensualidad</span>
-                            </a>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-coin"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Pagos</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="<?php echo base_url('VerMensualidad'); ?>" class="nav-link px-0"> <i class="fs-4 bi-card-list"></i> <span class="hide-on-small d-none d-sm-inline">Pagar Mensualidad</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('HistorialPagos'); ?>" class="nav-link px-0"><i class="fs-4 bi-card-list"></i> <span class="hide-on-small d-none d-sm-inline">Historial Pagos</span></a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <hr>
@@ -129,6 +136,16 @@
     <script>
         $(document).ready(function() {
             var table = $('#example').DataTable({
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip', // Specify the buttons to be displayed
+                buttons: ['copy', 'excel', 'pdf', 'print'] // Include the required buttons
+            });
+        });
+
+        $(document).ready(function() {
+            var table = $('#example1').DataTable({
                 responsive: true,
                 lengthChange: false,
                 autoWidth: false,

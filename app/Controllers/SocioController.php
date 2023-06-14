@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\IngresosModel;
+use App\Models\IngresoModel;
 use App\Models\UsuarioModel;
 use App\Models\JugadorModel;
 use App\Models\PartidosModel;
@@ -607,6 +608,23 @@ class SocioController extends BaseController
         return view('socio/socio_ver_equipotecnico', $viewData);
 
     }
+
+    public function historialPagos()
+    {
+
+        $titulo = [
+            'title' => 'Historial Pagos Socio'
+        ];
+
+        $ingresoModel = new IngresoModel();
+        $pagos = $ingresoModel->findAll();
+        $pagos = array('pagos' => $pagos);
+
+        $viewData = array_merge($pagos, $titulo);
+
+        return view('socio/socio_ver_historialpago', $viewData);
+    }
+
     public function __construct()
     {
         helper('form');
