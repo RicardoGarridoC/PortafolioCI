@@ -91,6 +91,50 @@ class DireccionDashboard extends BaseController
         return view(('direccion/director_ingresos_especiales'), $viewData);
     }
 
+    public function direccionverEquipoTecnico()
+    {
+        $titulo = [
+            'title' => 'Equipo Tecnico Direccion'
+        ];
+
+        $db = db_connect();
+
+        $query = $db->query('SELECT 
+        concat(u.nombres, " ", u.apellidos) as nombre,
+        et.cargo,
+        CASE WHEN e.nombre is NULL THEN "Sin equipo previo" ELSE e.nombre END AS equipo_proviene,
+        et.sueldo ,
+        et.valor_hora_extra ,
+        et.horas_extras_mes ,
+        et.sueldo + et.valor_hora_extra * et.horas_extras_mes as total_a_pagar
+        FROM equipo_tecnico et
+        inner join usuarios u on
+        u.equipo_tecnico_id_fk = et.id
+        left join equipos e on
+        e.id = et.equipo_proviene_fk ;');
+
+        $equipotecnicos  = $query->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data1['equipotecnicos'] = array();
+
+        foreach ($equipotecnicos as $equipotecnico) {
+            $data1['equipotecnicos'][] = array(
+                'nombre' => $equipotecnico->nombre,
+                'cargo' => $equipotecnico->cargo,
+                'equipo_proviene' => $equipotecnico->equipo_proviene,
+                'sueldo' => $equipotecnico->sueldo,
+                'valor_hora_extra' => $equipotecnico->valor_hora_extra,
+                'horas_extras_mes' => $equipotecnico->horas_extras_mes,
+                'total_a_pagar' => $equipotecnico->total_a_pagar
+            );
+        }
+
+        $viewData = array_merge($data1, $titulo);
+
+        return view('direccion/direccion_ver_equipotecnico', $viewData);
+
+    }
     public function direccionverCampeonatos()
     {
         // Agregando Titulo a Cada View

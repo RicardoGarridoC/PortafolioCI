@@ -51,6 +51,9 @@
                                 <li>
                                     <a href="<?php echo base_url('VerCampeonatos')?>" class="nav-link px-0"> <i class="fs-4 bi-trophy"></i><span class=" hide-on-small d-none d-sm-inline">Campeonatos</span></a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('EquipoTecnicoSocio')?>" class="nav-link px-0"> <i class="fs-4 bi-person-gear"></i><span class=" hide-on-small d-none d-sm-inline">Equipo Tecnico</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -136,6 +139,16 @@
 
         $(document).ready(function() {
             var table = $('#example2').DataTable({
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip', // Specify the buttons to be displayed
+                buttons: ['copy', 'excel', 'pdf', 'print'] // Include the required buttons
+            });
+        });
+
+        $(document).ready(function() {
+            var table = $('#example4').DataTable({
                 responsive: true,
                 lengthChange: false,
                 autoWidth: false,
