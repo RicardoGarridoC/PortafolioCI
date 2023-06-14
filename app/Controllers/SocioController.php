@@ -382,26 +382,33 @@ class SocioController extends BaseController
         }
         return view('socio/ver_mensualidad', $titulo);
     }
-
+    
     public function verSocioUsuario()
     {
         $titulo = [
             'title' => 'Ver Usuario Socio',
         ];
-    
-        //  Obtén una instancia del encrypter
+
+        // Obtén una instancia del encrypter
         $encrypter = \Config\Services::encrypter();
-    
-        // Desencripta la contraseña almacenada en la sesión
-        $encryptedPassword = session('passwordUsuario');
-        $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
-    
+
+        // Verifica si la contraseña encriptada está presente en la sesión
+        if (session()->has('passwordUsuario')) {
+            // Desencripta la contraseña almacenada en la sesión
+            $encryptedPassword = session('passwordUsuario');
+            $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
+        } else {
+            // La contraseña encriptada no está presente en la sesión, intenta obtenerla de la otra función
+            $clave = $this->request->getPost('password_hash');
+            $clavebuena = $encrypter->decrypt(hex2bin($clave));
+        }
+
         // Combina los datos en un solo array
         $verCosas = array_merge(['clavebuena' => $clavebuena], $titulo);
-    
         return view('socio/socio_ver_perfil', $verCosas);
     }
-    
+
+
     public function socioverEstadisticas()
     {
         $db = db_connect();
@@ -516,10 +523,19 @@ class SocioController extends BaseController
 
     public function guardaSocioUsuario()
     {
-
         $usuarioModel = new UsuarioModel();
         $request = \Config\Services::request();
         $encrypter = \config\Services::encrypter();
+
+        // Obtén la contraseña en claro
+        $clavebuena = $request->getPost('password_hash');
+        // Encripta la contraseña
+        $password = bin2hex($encrypter->encrypt($clavebuena));
+        // Actualizar Clave de Session
+        $session = session();
+        $session->set('passwordUsuario', $password);
+
+        
         $data = array(
             'nombres' => $request->getPostGet('nombres'),
             'apellidos' => $request->getPostGet('apellidos'),
@@ -527,25 +543,26 @@ class SocioController extends BaseController
             'run' => $request->getPostGet('run'),
             'direccion' => $request->getPostGet('direccion'),
             'telefono' => $request->getPostGet('telefono'),
-            //'password_hash' => $request->getPostGet('password_hash'),
-            $clave = $this->request->getPost('password_hash'),
-            $password = bin2hex($encrypter->encrypt($clave)),
-            'password_hash' => $password
+            'password_hash' => $password // Utiliza la contraseña encriptada
         );
+        
         if ($request->getPostGet('id')) {
             $data['id'] = $request->getPostGet('id');
         }
+        
         if ($usuarioModel->save($data) === false) {
             var_dump($usuarioModel->errors());
         }
-
-        //Agregando Titulo a Cada View
+        
+        // Agregando Titulo a Cada View
         $titulo = [
             'title' => 'Editar Usuario Socio',
+            'clavebuena' => $clavebuena // Agrega el valor de $clavebuena al arreglo $titulo
         ];
-
+        
         return view('socio/socio_ver_perfil', $titulo);
     }
+
     public function socioverEquipoTecnico()
     {
         $titulo = [
@@ -593,6 +610,7 @@ class SocioController extends BaseController
     public function __construct()
     {
         helper('form');
+        //helper('session');
         //helper('encryption');
     }
 
