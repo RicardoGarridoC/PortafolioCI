@@ -118,7 +118,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
                             <li><a class="dropdown-item" href="#">Configuración</a></li>
-                            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="<?php echo base_url('PerfilDireccion') ?>">Ver Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

@@ -74,6 +74,9 @@ $routes->get('HistorialPagosDireccion', 'DireccionDashboard::direccionverHistori
 $routes->get('CompraJugadores', 'CompraJugadorController::index', ['filter' => 'SesionDirector:direccion']);
 $routes->post('CompraJugadores', 'CompraJugadorController::index', ['filter' => 'SesionDirector:direccion']);
 $routes->get('obtenerEquipos/(:any)', 'CompraJugadorController@obtenerEquipos/$1', ['filter' => 'SesionDirector:direccion']);
+$routes->get('PerfilDireccion', 'DireccionDashboard::verDireccionUsuario', ['filter' => 'SesionDirector:direccion']);
+$routes->get('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector:direccion']);
+$routes->post('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector:direccion']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);
@@ -81,6 +84,9 @@ $routes->get('CampeonatosJugador', 'JugadorController::jugadorverCampeonatos', [
 $routes->get('PartidosJugador', 'JugadorController::jugadorverPartidos', ['filter' => 'SesionJugador:jugador']);
 $routes->get('EstadisticasJugador', 'JugadorController::jugadorverEstadisticas', ['filter' => 'SesionJugador:jugador']);
 $routes->get('EquipoTecnicoJugador', 'JugadorController::jugadorverEquipoTecnico', ['filter' => 'SesionJugador:jugador']);
+$routes->get('PerfilJugador', 'JugadorController::verJugadorUsuario', ['filter' => 'SesionJugador:jugador']);
+$routes->get('EditarUsuarioJugador', 'JugadorController::guardaJugadorUsuario', ['filter' => 'SesionJugador:jugador']);
+$routes->post('EditarUsuarioJugador', 'JugadorController::guardaJugadorUsuario', ['filter' => 'SesionJugador:jugador']);
 //Rutas Equipo Tecnico
 $routes->get('InicioEquipoTecnico', 'EquipoTecnicoController::Dashboard', ['filter' => 'SesionJugador:equipo_tecnico']);
 $routes->get('JugadoresEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverJugadores', ['filter' => 'SesionJugador:equipo_tecnico']);
@@ -88,6 +94,9 @@ $routes->get('CampeonatosEquipoTecnico', 'EquipoTecnicoController::equipotecnico
 $routes->get('PartidosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverPartidos', ['filter' => 'SesionJugador:equipo_tecnico']);
 $routes->get('EstadisticasEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEstadisticas', ['filter' => 'SesionJugador:equipo_tecnico']);
 $routes->get('EquipoTecnicoEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEquipoTecnico', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->get('PerfilEquipoTecnico', 'EquipoTecnicoController::verEquipoTecnicoUsuario', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->get('EditarUsuarioEquipoTecnico', 'EquipoTecnicoController::guardaEquipoTecnicoUsuario', ['filter' => 'SesionJugador:equipo_tecnico']);
+$routes->post('EditarUsuarioEquipoTecnico', 'EquipoTecnicoController::guardaEquipoTecnicoUsuario', ['filter' => 'SesionJugador:equipo_tecnico']);
 //Botones Admin
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin:administrador']);
