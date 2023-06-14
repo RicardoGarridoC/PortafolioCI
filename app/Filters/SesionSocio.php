@@ -18,13 +18,14 @@ class SesionSocio implements FilterInterface
         $model =  model('UsuarioModel');
 
 
-        if (!$user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol) {
-            session()->destroy();
-            return redirect()->route('/Home');
-        }
+        $row = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow();
 
-        if (!$user) {
-            return redirect()->route('/IniciarSesion');
+
+        if ($row !== null && property_exists($row, 'rol')) {
+            $user = $row->rol;
+        } else {
+            session()->destroy();
+            return redirect()->route('/');
         }
     }
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

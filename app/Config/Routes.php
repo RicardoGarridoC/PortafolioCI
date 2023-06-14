@@ -51,7 +51,7 @@ $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'Sesi
 $routes->get('DireccionHome', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
 $routes->get('AgregarSponsor', 'SponsorController::registrar');
 $routes->post('AgregarSponsor', 'SponsorController::registrar');
-$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales',['filter' => 'SesionDirector:direccion']);
+$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
 $routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
 $routes->get('AgregarIngreso', 'IngresoController::registrar', ['filter' => 'SesionDirector:direccion']);
 $routes->post('AgregarIngreso', 'IngresoController::registrar', ['filter' => 'SesionDirector:direccion']);
@@ -92,12 +92,22 @@ $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador', ['
 $routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador', ['filter' => 'SesionAdmin:administrador']);
 $routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario', ['filter' => 'SesionAdmin:administrador']);
 $routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo', ['filter' => 'SesionAdmin:administrador']);
+//Rutas Aplicacion Movil
+//login
+$routes->post('Home/validarIngresoMovil', 'Home::validarIngresoMovil');
+//dashboard Movil
+$routes->get('ReporteEstadisticasMovil', 'SocioController::getReporteEstadisticasMovil');
+//Cerrar sesion Movil
+$routes->get('/logoutM', 'Home::cerrarSesionMovil');
+
+
+
 
 //RUTAS INICIO Y REGISTER
-//$routes->get('/login', 'SocioController::inicioSocios');
-$routes->post('Home/validarIngreso', 'Home::validarIngreso');
-//Buscar Logout y /register
+//$routes->get('logout/login', 'SocioController::inicioSocios');
 $routes->get('/logout', 'Home::cerrarSesion');
+$routes->post('Home/validarIngreso', 'Home::validarIngreso');
+//Buscar  /register
 $routes->match(['get', 'post'], '/register', 'Home::register');
 
 //para todas estas vistas se debe modificar el archivo view ya que extiende el formato desde 

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UsuarioModel;
 use CodeIgniter\Controller;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\RequestInterface;
 
 
 $autoload['libraries'] = ['session'];
@@ -432,7 +433,9 @@ class Home extends BaseController
     protected $usuario;
     //INICIAR SESION
     public function validarIngreso()
+
     {
+
         $email1 = $this->request->getPost("email");
         $id = $this->request->getPost("id");
         if (filter_var($email1, FILTER_VALIDATE_EMAIL)) {
@@ -458,12 +461,7 @@ class Home extends BaseController
                     "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
                     "emailUsuario" => $resultadoUsuario->email,
                     "idUsuario" => $resultadoUsuario->id,
-                    "nombresUsuario" => $resultadoUsuario->nombres,
-                    "apellidosUsuario" => $resultadoUsuario->apellidos,
-                    "runUsuario" => $resultadoUsuario->run,
-                    "direccionUsuario" => $resultadoUsuario->direccion,
-                    "telefonoUsuario" => $resultadoUsuario->telefono,
-                    "passwordUsuario" => $resultadoUsuario->password_hash
+
 
                 ];
                 session()->set($data);
@@ -479,34 +477,29 @@ class Home extends BaseController
                     switch ($query) {
                         case  'administrador':
                             //redirecciona a vista de administrador
-                            $redirectTo = 'AdminDashboard';
-                            break;
+                            return redirect()->to(base_url() . 'AdminDashboard');
+
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            $redirectTo = 'DireccionDashboard';
-                            break;
+                            return redirect()->to(base_url() . 'DireccionHome');
+
                         case 'jugador':
                             //redirecciona a vista de jugador
-                            $redirectTo = 'InicioJugador';
-                            break;
+                            return redirect()->to(base_url() . 'InicioJugador');
+
                         case 'entrenador':
                             //redirecciona a vista de entrenador
-                            $redirectTo = 'InicioEquipoTecnico';
-                            break;
+                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
+
                         case 'equipo_tecnico':
                             //redirecciona a vista de equipo_tecnico
-                            $redirectTo = 'InicioEquipoTecnico';
-                            break;
+                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
+
                         case 'socio':
                             //redirecciona a vista de socio
 
-                            $redirectTo = 'InicioSocios';
-                            break;
+                            return redirect()->to(base_url() . 'InicioSocios');
                     }
-                }
-                if (!empty($redirectTo)) {
-                    // Redireccionar a la vista correspondiente
-                    return redirect()->to(base_url() . $redirectTo);
                 }
 
                 // return redirect()->to(base_url() . '/Home');
@@ -521,12 +514,89 @@ class Home extends BaseController
         }
     }
 
-    //Cerrar Sesion (General)
+    //inicio de sesion aplicacion movil
+    public function validarIngresoMovil()
+
+    {
+
+        $email1 = $this->request->getPost("email");
+        $id = $this->request->getPost("id");
+        if (filter_var($email1, FILTER_VALIDATE_EMAIL)) {
+            $email = filter_var($email1, FILTER_SANITIZE_EMAIL);
+            $this->usuario = new UsuarioModel();
+            $resultadoUsuario = $this->usuario->buscarUsuarioPorEmail($email);
+        } else {
+            $data = ['tipo' => 'danger', 'mensaje' => 'Usuario  y/o clave invalido'];
+            return view(('home/iniciar_sesion'), $data);
+        }
+
+        if ($resultadoUsuario) {
+            $encrypter = \config\Services::encrypter();
+            $claveBD = $encrypter->decrypt(hex2bin($resultadoUsuario->password_hash));
+            $clave = $this->request->getPost("password");
+            $nombres = explode(' ', $resultadoUsuario->nombres);
+            $apellidos = explode(' ', $resultadoUsuario->apellidos);
+
+            $primerNombre = $nombres[0];
+            $primerApellido = $apellidos[0];
+            if ($clave == $claveBD) {
+                $data = [
+                    "nombreUsuario" => $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos,
+                    "emailUsuario" => $resultadoUsuario->email,
+                    "idUsuario" => $resultadoUsuario->id,
+
+
+                ];
+                session()->set($data);
+
+                //Buscar rol del usuario
+
+                $userModel = new UsuarioModel();
+                $query = $userModel->select('rol')->where('email', $email1)->get()->getRow()->rol;
+
+                // Control de vistas por Rol
+
+                if ($query) {
+                    switch ($query) {
+
+                        case 'socio':
+                            //redirecciona a vista de socio
+
+                            return $this->response->setJSON([
+                                'status' => 'success',
+
+                            ]);
+                    }
+                }
+
+                // return redirect()->to(base_url() . '/Home');
+            } else {
+                $data = ['tipo' => 'danger', 'mensaje' => 'Usuario  y/o clave invalido'];
+                return view(('home/iniciar_sesion'),  $data);
+            }
+        } else {
+            // print_r($_POST);
+            $data = ['tipo' => 'danger', 'mensaje' => 'Usuario  y/o clave invalido'];
+            return view(('home/iniciar_sesion'), $data);
+        }
+    }
+
+    //Cerrar Sesion (Aplicacion Movil)
     public function cerrarSesion()
     {
         session()->destroy();
         return redirect()->to(base_url() . 'Home');
     }
+
+    public function cerrarSesionMovil()
+    {
+        session()->destroy();
+        return $this->response->setJSON([
+            'status' => 'success',
+
+        ]);
+    }
+
 
     //REGISTRARSE
     public function register()
