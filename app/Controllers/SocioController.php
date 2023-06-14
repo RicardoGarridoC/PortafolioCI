@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\IngresosModel;
+use App\Models\IngresoModel;
 use App\Models\UsuarioModel;
 use App\Models\JugadorModel;
 use App\Models\PartidosModel;
@@ -382,4 +383,253 @@ class SocioController extends BaseController
         }
         return view('socio/ver_mensualidad', $titulo);
     }
+    
+    public function verSocioUsuario()
+    {
+        $titulo = [
+            'title' => 'Ver Usuario Socio',
+        ];
+
+        // Obtén una instancia del encrypter
+        $encrypter = \Config\Services::encrypter();
+
+        // Verifica si la contraseña encriptada está presente en la sesión
+        if (session()->has('passwordUsuario')) {
+            // Desencripta la contraseña almacenada en la sesión
+            $encryptedPassword = session('passwordUsuario');
+            $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
+        } else {
+            // La contraseña encriptada no está presente en la sesión, intenta obtenerla de la otra función
+            $clave = $this->request->getPost('password_hash');
+            $clavebuena = $encrypter->decrypt(hex2bin($clave));
+        }
+
+        // Combina los datos en un solo array
+        $verCosas = array_merge(['clavebuena' => $clavebuena], $titulo);
+        return view('socio/socio_ver_perfil', $verCosas);
+    }
+
+
+    public function socioverEstadisticas()
+    {
+        $db = db_connect();
+        //JUGADORES MASCULINOS
+
+        $query = $db->query('SELECT
+        u.nombres AS nombre,
+        u.apellidos AS apellido,
+        j.sueldo,
+        j.ayuda_economica,
+        j.posicion,
+        COUNT(g.jugador_id_fk) AS goles,
+        CASE
+          WHEN l.fecha_fin_lesion > CURDATE() THEN "si"
+          ELSE "no"
+        END AS jugador_lesionado,
+        CASE
+          WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_inicio_lesion
+          ELSE NULL
+        END AS fecha_inicio_lesion,
+        CASE
+          WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_fin_lesion
+          ELSE NULL
+        END AS fecha_fin_lesion
+        FROM
+            jugadores j
+            INNER JOIN usuarios u ON j.id = u.jugador_id_fk
+            LEFT JOIN goles g ON j.id = g.jugador_id_fk
+            LEFT JOIN lesiones l ON j.id = l.jugador_id_fk
+        WHERE
+            j.genero = "masculino"
+        GROUP BY
+            j.id;');
+
+        $masculinos = $query->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data1['masculinos'] = array();
+
+        foreach ($masculinos as $masculino) {
+            $data1['masculinos'][] = array(
+                'nombre' => $masculino->nombre,
+                'apellido' => $masculino->apellido,
+                'sueldo' => $masculino->sueldo,
+                'ayuda_economica' => $masculino->ayuda_economica,
+                'posicion' => $masculino->posicion,
+                'goles' => $masculino->goles,
+                'jugador_lesionado' => $masculino->jugador_lesionado,
+                'fecha_inicio_lesion' => $masculino->fecha_inicio_lesion,
+                'fecha_fin_lesion' => $masculino->fecha_fin_lesion
+            );
+        }
+        
+        //JUGADORES FEMENINOS
+        $query2 = $db->query('SELECT
+        u.nombres AS nombre,
+        u.apellidos AS apellido,
+        j.sueldo,
+        j.ayuda_economica,
+        j.posicion,
+        COUNT(g.jugador_id_fk) AS goles,
+        CASE
+          WHEN l.fecha_fin_lesion > CURDATE() THEN "si"
+          ELSE "no"
+        END AS jugador_lesionado,
+        CASE
+          WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_inicio_lesion
+          ELSE NULL
+        END AS fecha_inicio_lesion,
+        CASE
+          WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_fin_lesion
+          ELSE NULL
+        END AS fecha_fin_lesion
+        FROM
+            jugadores j
+            INNER JOIN usuarios u ON j.id = u.jugador_id_fk
+            LEFT JOIN goles g ON j.id = g.jugador_id_fk
+            LEFT JOIN lesiones l ON j.id = l.jugador_id_fk
+        WHERE
+            j.genero = "femenino"
+        GROUP BY
+            j.id;');
+
+        $femeninos = $query2->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data2['femeninos'] = array();
+
+        foreach ($femeninos as $femenino) {
+            $data2['femeninos'][] = array(
+                'nombre' => $femenino->nombre,
+                'apellido' => $femenino->apellido,
+                'sueldo' => $femenino->sueldo,
+                'ayuda_economica' => $femenino->ayuda_economica,
+                'posicion' => $femenino->posicion,
+                'goles' => $femenino->goles,
+                'jugador_lesionado' => $femenino->jugador_lesionado,
+                'fecha_inicio_lesion' => $femenino->fecha_inicio_lesion,
+                'fecha_fin_lesion' => $femenino->fecha_fin_lesion
+            );
+        }
+
+        //Agregando Titulo a Cada View
+        $titulo = [ 
+            'title' => 'Ver Estadisticas Socio',
+        ];
+
+        $verData = array_merge($data1, $data2, $titulo);
+
+        return view('socio/socio_ver_estadisticas', $verData);
+    }
+
+    public function guardaSocioUsuario()
+    {
+        $usuarioModel = new UsuarioModel();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
+
+        // Obtén la contraseña en claro
+        $clavebuena = $request->getPost('password_hash');
+        // Encripta la contraseña
+        $password = bin2hex($encrypter->encrypt($clavebuena));
+        // Actualizar Clave de Session
+        $session = session();
+        $session->set('passwordUsuario', $password);
+
+        
+        $data = array(
+            'nombres' => $request->getPostGet('nombres'),
+            'apellidos' => $request->getPostGet('apellidos'),
+            'email' => $request->getPostGet('email'),
+            'run' => $request->getPostGet('run'),
+            'direccion' => $request->getPostGet('direccion'),
+            'telefono' => $request->getPostGet('telefono'),
+            'password_hash' => $password // Utiliza la contraseña encriptada
+        );
+        
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        
+        if ($usuarioModel->save($data) === false) {
+            var_dump($usuarioModel->errors());
+        }
+        
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Editar Usuario Socio',
+            'clavebuena' => $clavebuena // Agrega el valor de $clavebuena al arreglo $titulo
+        ];
+        
+        return view('socio/socio_ver_perfil', $titulo);
+    }
+
+    public function socioverEquipoTecnico()
+    {
+        $titulo = [
+            'title' => 'Equipo Tecnico Socio'
+        ];
+
+        $db = db_connect();
+
+        $query = $db->query('SELECT 
+        concat(u.nombres, " ", u.apellidos) as nombre,
+        et.cargo,
+        CASE WHEN e.nombre is NULL THEN "Sin equipo previo" ELSE e.nombre END AS equipo_proviene,
+        et.sueldo ,
+        et.valor_hora_extra ,
+        et.horas_extras_mes ,
+        et.sueldo + et.valor_hora_extra * et.horas_extras_mes as total_a_pagar
+        FROM equipo_tecnico et
+        inner join usuarios u on
+        u.equipo_tecnico_id_fk = et.id
+        left join equipos e on
+        e.id = et.equipo_proviene_fk ;');
+
+        $equipotecnicos  = $query->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data1['equipotecnicos'] = array();
+
+        foreach ($equipotecnicos as $equipotecnico) {
+            $data1['equipotecnicos'][] = array(
+                'nombre' => $equipotecnico->nombre,
+                'cargo' => $equipotecnico->cargo,
+                'equipo_proviene' => $equipotecnico->equipo_proviene,
+                'sueldo' => $equipotecnico->sueldo,
+                'valor_hora_extra' => $equipotecnico->valor_hora_extra,
+                'horas_extras_mes' => $equipotecnico->horas_extras_mes,
+                'total_a_pagar' => $equipotecnico->total_a_pagar
+            );
+        }
+
+        $viewData = array_merge($data1, $titulo);
+
+        return view('socio/socio_ver_equipotecnico', $viewData);
+
+    }
+
+    public function historialPagos()
+    {
+
+        $titulo = [
+            'title' => 'Historial Pagos Socio'
+        ];
+
+        $ingresoModel = new IngresoModel();
+        $pagos = $ingresoModel->findAll();
+        $pagos = array('pagos' => $pagos);
+
+        $viewData = array_merge($pagos, $titulo);
+
+        return view('socio/socio_ver_historialpago', $viewData);
+    }
+
+    public function __construct()
+    {
+        helper('form');
+        //helper('session');
+        //helper('encryption');
+    }
+
 }

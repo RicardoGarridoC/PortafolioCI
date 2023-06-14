@@ -1,6 +1,6 @@
-<?= $this->extend('layout/sidebarsocio') ?>
+<?= $this->extend('layout/direccion_template') ?>
 
-<?= $this->section('contenido') ?>
+<?= $this->section('direccion_contenido') ?>
 
 <?php if(session('error')): ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
