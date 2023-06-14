@@ -15,7 +15,7 @@ class UsuarioModel extends Model
     protected $useSoftDeletes = false;
 
     protected $allowedFields = [
-        'id', 'nombres', 'apellidos', 'email', 'run', 'direccion', 'telefono', 'password_hash', 'rol', 'button_field'
+        'id', 'nombres', 'apellidos', 'email', 'run', 'direccion', 'telefono', 'password_hash', 'rol', 'socio_id_fk', 'jugador_id_fk', 'equipo_tecnico_id_fk', 'direccion_id_dk', 'button_field'
     ];
 
     // Dates

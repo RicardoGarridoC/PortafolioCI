@@ -11,7 +11,6 @@ use CodeIgniter\Controller;
 use App\Models\PagoSocioModel;
 use App\Models\CustomModel;
 use Dompdf\Dompdf as Dompdf;
-use CodeIgniter\API\ResponseTrait;
 
 
 require 'vendor/autoload.php';
@@ -29,8 +28,47 @@ class SocioController extends BaseController
         $titulo = [
             'title' => 'Inicio Socios',
         ];
+        //Colocar Aqui proximos partidos
+        $db = db_connect();
+        //PROXIMOS PARTIDOS
+        $query9 = $db->query('SELECT
+        p.id,
+        e_local.nombre AS equipo_local,
+        e_visita.nombre AS equipo_visita,
+        CONCAT(DAY(p.fecha), " de ", DATE_FORMAT(p.fecha, "%M", "es_ES"), " ", TIME_FORMAT(p.fecha, "%H:%i"), " hrs") AS fecha,
+        c.nombre AS cancha
+        FROM
+            partidos p
+        INNER JOIN equipos e_local ON
+            e_local.id = p.equipo_local_fk
+        INNER JOIN equipos e_visita ON
+            e_visita.id = p.equipo_visita_fk
+        LEFT JOIN cancha c ON
+            p.ubicacion_fk = c.id
+        WHERE
+            p.fecha >= NOW() -- Filtrar por fechas mayores o iguales a la fecha actual
+        ORDER BY
+            p.fecha ASC;
+        ');
 
-        return view('socio/inicio_socios', $titulo);
+        $results9 = $query9->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data9['results9'] = array();
+
+        foreach ($results9 as $row9) {
+            $data9['results9'][] = array(
+                'id' => $row9->id,
+                'equipo_local' => $row9->equipo_local,
+                'equipo_visita' => $row9->equipo_visita,
+                'fecha' => $row9->fecha,
+                'cancha' => $row9->cancha
+            );
+        }
+
+        $verData = array_merge($data9, $titulo);
+
+        return view('socio/inicio_socios', $verData);
     }
 
     public function mostrarJugador()
@@ -286,31 +324,56 @@ class SocioController extends BaseController
     protected $pagoSocio;
     protected $ingresoModel;
 
+
+
     public function verMensualidad()
     {
-
         $titulo = [
             'title' => 'Mensualidad',
         ];
+
+        $data = []; // Declarar la variable $data
+
         if ($this->request->getMethod() === 'post') {
-
             try {
-                /* Guardar los datos en la base de datos*/
 
-                //Sesion de usuario para obtener el email
+                // Sesión de usuario para obtener el email
                 $email = session('emailUsuario');
 
-                //carga de modelos 
+                // Carga de modelos
                 $this->pagoSocio = new PagoSocioModel();
                 $this->usuario = new UsuarioModel();
                 $this->ingresoModel = new IngresosModel();
 
-                //obtener datos de usuario a traves de la session
+                // Obtener datos de usuario a través de la sesión
                 $resultadoUsuario = $this->usuario->buscarUsuarioPorEmail($email);
                 $id = $resultadoUsuario->id;
                 $montopredeterminado = $this->pagoSocio->select('monto')->first();
                 $nombre = $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos;
                 $fecha = date('Y-m-d');
+
+                // Verificar si ya existe un pago de mensualidad para el mes actual y el ID de usuario
+                $pagosPrevios = $this->ingresoModel->where('concepto', 'mensualidad')
+                    ->where('fecha >=', date('Y-m-01'))
+                    ->where('fecha <=', date('Y-m-t'))
+                    ->where('id_usuario_fk', $id)
+                    ->countAllResults();
+
+                // Si ya existe un pago previo, mostrar mensaje y redirigir
+                if ($pagosPrevios > 0) {
+                    $data['mensaje'] = 'Ya has realizado el pago de la mensualidad para este mes.';
+                    $this->pagoSocio = new PagoSocioModel();
+                    $montojojo = $this->pagoSocio->select('monto')->first();
+
+                    if ($montojojo !== null) {
+                        $data1['monto_a_pagar'] = $montojojo['monto'];
+                    } else {
+                        $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
+                    }
+                    $verData = array_merge($data, $data1, $titulo);
+                    return view('socio/ver_mensualidad', $verData);
+                }
+
                 $ingresoData = [
                     'monto' => $montopredeterminado,
                     'concepto' => 'mensualidad',
@@ -318,72 +381,123 @@ class SocioController extends BaseController
                     'id_usuario_fk' => $id,
                     'detalle' => 'Pago de mensualidad'
                 ];
-                //validacion de datos
-                if ($montopredeterminado = null) {
-                    echo '<script>alert("Ingreso no válido");</script>';
-                    return view('socio/ver_mensualidad');
-                }
 
+                // Validación de datos
+                if ($montopredeterminado == null) {
+                    $data['mensaje'] = 'No hay un monto predeterminado.';
+                    $this->pagoSocio = new PagoSocioModel();
+                    $montojojo = $this->pagoSocio->select('monto')->first();
+
+                    if ($montojojo !== null) {
+                        $data1['monto_a_pagar'] = $montojojo['monto'];
+                    } else {
+                        $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
+                    }
+                    $verData = array_merge($data, $data1, $titulo);
+                    return view('socio/ver_mensualidad', $verData);
+                }
 
                 if ($this->ingresoModel->insert($ingresoData)) {
 
-                    $dompdf = new DOMPDF();
-                    //Aqui con las variables no imprime la informacion, pero con solo  html, imprime bien.   
-                    $dompdf->loadHtml(`<!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Boleta</title>
+                    $monto = is_array($ingresoData['monto']) ? implode(', ', $ingresoData['monto']) : $ingresoData['monto'];
+                    $concepto = is_array($ingresoData['concepto']) ? implode(', ', $ingresoData['concepto']) : $ingresoData['concepto'];
+                    $fecha = is_array($ingresoData['fecha']) ? implode(', ', $ingresoData['fecha']) : $ingresoData['fecha'];
+                    $id_usuario_fk = is_array($ingresoData['id_usuario_fk']) ? implode(', ', $ingresoData['id_usuario_fk']) : $ingresoData['id_usuario_fk'];
+                    $detalle = is_array($ingresoData['detalle']) ? implode(', ', $ingresoData['detalle']) : $ingresoData['detalle'];
+
+                    $dompdf = new Dompdf();
+                    //Falta Arreglar Imagen
+                    $html = '
+                        <html>
+                        <head>
                         <style>
                             body {
-                                font-family: Arial, sans-serif;
-                            }
-                            .container {
-                                margin: 20px;
-                            }
-                            .header {
                                 text-align: center;
-                                margin-bottom: 20px;
                             }
-                           
+                            h1 {
+                                text-align: left;
+                            }
+                            .data-label {
+                                text-align: left;
+                            }
+                            .image-container {
+                                position: fixed;
+                                bottom: 0;
+                                right: 0;
+                            }
+                            .image-container img {
+                                width: 80px; /* Ajusta el ancho de la imagen */
+                                height: auto; /* Mantiene la proporción de aspecto */
+                            }
                         </style>
-                    </head>
-                    <body>
-                        <div class="container">
-                            <div class="header">
-                                <h1>Boleta de Venta</h1>
+                        </head>
+                        <body>
+                            <h1>Comprobante de Pago</h1>
+                            <hr>
+                            <h2> Su pago fue realizado con exito</h2>
+                            <br>
+                            <div class="content">
+                                <p><span class="data-label">Monto:</span> ' . $monto . '</p>
+                                <p><span class="data-label">Concepto:</span> ' . $concepto . '</p>
+                                <p><span class="data-label">Fecha:</span> ' . $fecha .  '</p>
+                                <p><span class="data-label">ID Usuario:</span> ' . $id_usuario_fk . '</p>
+                                <p><span class="data-label">Detalle:</span> ' . $detalle . '</p>
                             </div>
-                            <div class="customer-info">
-                                <p><strong>Nombre:</strong> {$nombre}</p>
-                                <p><strong>Monto:</strong> {$montopredeterminado}</p>
-                                <p><strong>Fecha:</strong> {$fecha}</p>
+                            <div class="image-container" style="position: fixed; bottom: 0px; right: 0px;">
+                                <img src="../../public/images/losalces.png" alt="Alces"/>
                             </div>
-                        </div>
-                    </body>
-                    </html>
-                     `);
-                    $dompdf->setPaper('A4', 'portrait');
+                            
+                        </body>
+                        </html>';
+
+                    $dompdf->loadHtml($html);
+                    $customPaper = array(0, 0, 360, 360);
+                    $dompdf->set_paper($customPaper);
                     $dompdf->render();
-                    $dompdf->stream();
+                    $filename = 'boletalosalces.pdf';
+                    $dompdf->stream($filename);
 
+                    $data['mensaje'] = 'Pago realizado exitosamente.';
+                    $this->pagoSocio = new PagoSocioModel();
+                    $montojojo = $this->pagoSocio->select('monto')->first();
 
-                    echo '<script>alert("Mensualidad pagada con exito.");</script>';
-
-                    return view(('socio/inicio_socios'));
+                    if ($montojojo !== null) {
+                        $data1['monto_a_pagar'] = $montojojo['monto'];
+                    } else {
+                        $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
+                    }
+                    $verData = array_merge($data, $data1, $titulo);
+                    return view('socio/ver_mensualidad', $verData);
                 } else {
-                    return view(('socio/ver_mensualidad'));
+                    $data['mensaje'] = 'Error de pago.';
+                    $verData = array_merge($data, $titulo);
+                    return view('socio/ver_mensualidad', $verData);
                 }
-
-                // Redirigir al usuario a una página de éxito o mostrar un mensaje
-                // de éxito en la misma página.
             } catch (\Exception $e) {
-                echo '<script>alert("Ingreso no válido");</script>';
-                return view(('socio/ver_mensualidad'));
-            }
-            // Cargar la vista del formulario de registro
+                $data['mensaje'] = 'Ingreso no válido';
+                $this->pagoSocio = new PagoSocioModel();
+                $montojojo = $this->pagoSocio->select('monto')->first();
 
+                if ($montojojo !== null) {
+                    $data1['monto_a_pagar'] = $montojojo['monto'];
+                } else {
+                    $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
+                }
+                $verData = array_merge($data, $data1, $titulo);
+                return view('socio/ver_mensualidad', $verData);
+            }
         }
-        return view('socio/ver_mensualidad', $titulo);
+
+        $this->pagoSocio = new PagoSocioModel();
+        $montojojo = $this->pagoSocio->select('monto')->first();
+
+        if ($montojojo !== null) {
+            $data1['monto_a_pagar'] = $montojojo['monto'];
+        } else {
+            $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
+        }
+
+        return view('socio/ver_mensualidad', array_merge($titulo, $data1));
     }
 
     public function verSocioUsuario()

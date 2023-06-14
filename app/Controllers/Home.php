@@ -21,7 +21,7 @@ class Home extends BaseController
         SUM(CASE WHEN g.jugador_id_fk IS NOT NULL THEN 1 ELSE 0 END) AS goles_equipo_local,
         e2.nombre AS equipo_visita,
         SUM(CASE WHEN g.jugador_id_fk IS NULL THEN 1 ELSE 0 END) AS goles_equipo_visita,
-        DATE_FORMAT(p.fecha, "%b %d", "es_ES") AS fecha
+        CONCAT(UPPER(DATE_FORMAT(p.fecha, "%b")), " ", DATE_FORMAT(p.fecha, "%d", "es_ES"), " / ", TIME_FORMAT(p.fecha, "%H:%i"), " hrs") AS fecha
         FROM
             partidos p
         INNER JOIN equipos e1 ON
@@ -386,7 +386,7 @@ class Home extends BaseController
         p.id,
         e_local.nombre AS equipo_local,
         e_visita.nombre AS equipo_visita,
-        CONCAT(DAY(p.fecha), " de ", DATE_FORMAT(p.fecha, "%M", "es_ES")) AS fecha,
+        CONCAT(DAY(p.fecha), " de ", DATE_FORMAT(p.fecha, "%M", "es_ES"), " ", TIME_FORMAT(p.fecha, "%H:%i"), " hrs") AS fecha,
         c.nombre AS cancha
         FROM
             partidos p
@@ -394,10 +394,10 @@ class Home extends BaseController
             e_local.id = p.equipo_local_fk
         INNER JOIN equipos e_visita ON
             e_visita.id = p.equipo_visita_fk
-        left join  cancha c on
+        LEFT JOIN cancha c ON
             p.ubicacion_fk = c.id
         WHERE
-            p.fecha >= NOW() -- Filtrar por fechas mayores o iguales a la fecha actual
+            p.fecha >= NOW() 
         ORDER BY
             p.fecha ASC;
         ');

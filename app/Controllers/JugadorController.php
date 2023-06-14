@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\CustomModel;
+use App\Models\UsuarioModel;
+use App\Models\PartidosModel;
 
 class JugadorController extends BaseController
 {
@@ -17,7 +19,17 @@ class JugadorController extends BaseController
             'title' => 'Inicio Jugador',
         ];
 
-        return view('jugador/inicio_jugador', $titulo);
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
+
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $titulo);
+
+        return view('jugador/inicio_jugador', $verPartidos);
     }
     public function jugadorverCampeonatos()
     {
@@ -291,6 +303,71 @@ class JugadorController extends BaseController
 
         return view('jugador/jugador_ver_equipotecnico', $viewData);
 
+    }
+    public function verJugadorUsuario()
+    {
+        $titulo = [
+            'title' => 'Ver Usuario Jugador',
+        ];
+
+        // Obtén una instancia del encrypter
+        $encrypter = \Config\Services::encrypter();
+
+        // Verifica si la contraseña encriptada está presente en la sesión
+        if (session()->has('passwordUsuario')) {
+            // Desencripta la contraseña almacenada en la sesión
+            $encryptedPassword = session('passwordUsuario');
+            $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
+        } else {
+            // La contraseña encriptada no está presente en la sesión, intenta obtenerla de la otra función
+            $clave = $this->request->getPost('password_hash');
+            $clavebuena = $encrypter->decrypt(hex2bin($clave));
+        }
+
+        // Combina los datos en un solo array
+        $verCosas = array_merge(['clavebuena' => $clavebuena], $titulo);
+        return view('jugador/jugador_ver_perfil', $verCosas);
+    }
+    public function guardaJugadorUsuario()
+    {
+        $usuarioModel = new UsuarioModel();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
+
+        // Obtén la contraseña en claro
+        $clavebuena = $request->getPost('password_hash');
+        // Encripta la contraseña
+        $password = bin2hex($encrypter->encrypt($clavebuena));
+        // Actualizar Clave de Session
+        $session = session();
+        $session->set('passwordUsuario', $password);
+
+        
+        $data = array(
+            'nombres' => $request->getPostGet('nombres'),
+            'apellidos' => $request->getPostGet('apellidos'),
+            'email' => $request->getPostGet('email'),
+            'run' => $request->getPostGet('run'),
+            'direccion' => $request->getPostGet('direccion'),
+            'telefono' => $request->getPostGet('telefono'),
+            'password_hash' => $password // Utiliza la contraseña encriptada
+        );
+        
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        
+        if ($usuarioModel->save($data) === false) {
+            var_dump($usuarioModel->errors());
+        }
+        
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Editar Usuario Jugador',
+            'clavebuena' => $clavebuena // Agrega el valor de $clavebuena al arreglo $titulo
+        ];
+        
+        return view('jugador/jugador_ver_perfil', $titulo);
     }
 
 }

@@ -56,6 +56,9 @@
                                 <li>
                                     <a href="<?php echo base_url('EquipoTecnicoDireccion'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-gear"></i> <span class="hide-on-small d-none d-sm-inline">Equipo Tecnico</span></a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('CompraJugadores'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class="hide-on-small d-none d-sm-inline">Comprar Jugador</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -115,7 +118,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
                             <li><a class="dropdown-item" href="#">Configuración</a></li>
-                            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="<?php echo base_url('PerfilDireccion') ?>">Ver Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

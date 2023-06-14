@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\PartidosModel;
 use App\Models\CustomModel;
+use App\Models\UsuarioModel;
 
 
 
@@ -18,8 +19,17 @@ class EquipoTecnicoController extends BaseController
         $titulo = [ 
             'title' => 'Inicio Equipo Técnico',
         ];
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
 
-        return view('equipotecnico/inicio_equipotecnico', $titulo);
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $titulo);
+
+        return view('equipotecnico/inicio_equipotecnico', $verPartidos);
     }
     public function equipotecnicoverCampeonatos()
     {
@@ -303,6 +313,71 @@ class EquipoTecnicoController extends BaseController
 
         return view('equipotecnico/equipotecnico_ver_equipotecnico', $viewData);
 
+    }
+    public function verEquipoTecnicoUsuario()
+    {
+        $titulo = [
+            'title' => 'Ver Usuario Equipo Tecnico',
+        ];
+
+        // Obtén una instancia del encrypter
+        $encrypter = \Config\Services::encrypter();
+
+        // Verifica si la contraseña encriptada está presente en la sesión
+        if (session()->has('passwordUsuario')) {
+            // Desencripta la contraseña almacenada en la sesión
+            $encryptedPassword = session('passwordUsuario');
+            $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
+        } else {
+            // La contraseña encriptada no está presente en la sesión, intenta obtenerla de la otra función
+            $clave = $this->request->getPost('password_hash');
+            $clavebuena = $encrypter->decrypt(hex2bin($clave));
+        }
+
+        // Combina los datos en un solo array
+        $verCosas = array_merge(['clavebuena' => $clavebuena], $titulo);
+        return view('equipotecnico/equipotecnico_ver_perfil', $verCosas);
+    }
+    public function guardaEquipoTecnicoUsuario()
+    {
+        $usuarioModel = new UsuarioModel();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
+
+        // Obtén la contraseña en claro
+        $clavebuena = $request->getPost('password_hash');
+        // Encripta la contraseña
+        $password = bin2hex($encrypter->encrypt($clavebuena));
+        // Actualizar Clave de Session
+        $session = session();
+        $session->set('passwordUsuario', $password);
+
+        
+        $data = array(
+            'nombres' => $request->getPostGet('nombres'),
+            'apellidos' => $request->getPostGet('apellidos'),
+            'email' => $request->getPostGet('email'),
+            'run' => $request->getPostGet('run'),
+            'direccion' => $request->getPostGet('direccion'),
+            'telefono' => $request->getPostGet('telefono'),
+            'password_hash' => $password // Utiliza la contraseña encriptada
+        );
+        
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        
+        if ($usuarioModel->save($data) === false) {
+            var_dump($usuarioModel->errors());
+        }
+        
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Editar Usuario Equipo Tecnico',
+            'clavebuena' => $clavebuena // Agrega el valor de $clavebuena al arreglo $titulo
+        ];
+        
+        return view('equipotecnico/equipotecnico_ver_perfil', $titulo);
     }
 
 }
