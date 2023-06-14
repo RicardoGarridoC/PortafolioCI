@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\UsuarioModel;
 use CodeIgniter\Controller;
+use CodeIgniter\API\ResponseTrait;
+
 
 $autoload['libraries'] = ['session'];
 
@@ -428,7 +430,6 @@ class Home extends BaseController
     }
 
     protected $usuario;
-
     //INICIAR SESION
     public function validarIngreso()
     {
@@ -473,33 +474,39 @@ class Home extends BaseController
                     switch ($query) {
                         case  'administrador':
                             //redirecciona a vista de administrador
-                            return redirect()->to(base_url() . 'AdminDashboard');
-
+                            $redirectTo = 'AdminDashboard';
+                            break;
                         case 'direccion':
                             //redirecciona a vista de direccion 
-                            return redirect()->to(base_url() . 'DireccionDashboard');
-
+                            $redirectTo = 'DireccionDashboard';
+                            break;
                         case 'jugador':
                             //redirecciona a vista de jugador
-                            return redirect()->to(base_url() . 'InicioJugador');
-
+                            $redirectTo = 'InicioJugador';
+                            break;
                         case 'entrenador':
                             //redirecciona a vista de entrenador
-                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
-
+                            $redirectTo = 'InicioEquipoTecnico';
+                            break;
                         case 'equipo_tecnico':
                             //redirecciona a vista de equipo_tecnico
-                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
-
+                            $redirectTo = 'InicioEquipoTecnico';
+                            break;
                         case 'socio':
                             //redirecciona a vista de socio
-                            return redirect()->to(base_url() . 'InicioSocios');
+
+                            $redirectTo = 'InicioSocios';
+                            break;
                     }
+                }
+                if (!empty($redirectTo)) {
+                    // Redireccionar a la vista correspondiente
+                    return redirect()->to(base_url() . $redirectTo);
                 }
 
                 // return redirect()->to(base_url() . '/Home');
             } else {
-                $data = ['tipo' => 'danger', 'mensaje' => 'clave y/o usuario invalido '];
+                $data = ['tipo' => 'danger', 'mensaje' => 'Usuario  y/o clave invalido'];
                 return view(('home/iniciar_sesion'),  $data);
             }
         } else {
