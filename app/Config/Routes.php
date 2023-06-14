@@ -71,6 +71,9 @@ $routes->get('EstadisticasDireccion', 'DireccionDashboard::direccionverEstadisti
 $routes->get('JugadoresDireccion', 'DireccionDashboard::direccionverJugadores', ['filter' => 'SesionDirector:direccion']);
 $routes->get('PartidosDireccion', 'DireccionDashboard::direccionverPartidos', ['filter' => 'SesionDirector:direccion']);
 $routes->get('HistorialPagosDireccion', 'DireccionDashboard::direccionverHistorialPagos', ['filter' => 'SesionDirector:direccion']);
+$routes->get('CompraJugadores', 'CompraJugadorController::index', ['filter' => 'SesionDirector:direccion']);
+$routes->post('CompraJugadores', 'CompraJugadorController::index', ['filter' => 'SesionDirector:direccion']);
+$routes->get('obtenerEquipos/(:any)', 'CompraJugadorController@obtenerEquipos/$1', ['filter' => 'SesionDirector:direccion']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);
@@ -105,10 +108,7 @@ $routes->match(['get', 'post'], '/register', 'Home::register');
 //también deben agregar el tema de que la sesión esté activa
 
 
-//Prueba
-$routes->get('CompraJugadores', 'CompraJugadorController::index');
-$routes->post('CompraJugadores', 'CompraJugadorController::index');
-$routes->get('obtenerEquipos/(:any)', 'CompraJugadorController@obtenerEquipos/$1');
+
 
 
 

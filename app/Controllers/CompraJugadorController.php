@@ -49,7 +49,7 @@ class CompraJugadorController extends BaseController
             return redirect()->to('/CompraJugadorController/registrarJugador')->with('success', 'Compra de jugador registrada exitosamente');
         }
 
-        return view('compra_jugadores', $data);
+        return view('direccion/compra_jugadores', $data);
     }
 
 
@@ -100,7 +100,7 @@ class CompraJugadorController extends BaseController
                 'title' => 'Registrar nuevo jugador',
             ];
 
-            return view('registrar_jugador', $data);
+            return view('direccion/registrar_jugador', $data);
         }
     }
 
@@ -139,7 +139,7 @@ class CompraJugadorController extends BaseController
                 'title' => 'Registrar nuevo usuario',
             ];
 
-            return view('registrar_usuario', $data);
+            return view('direccion/registrar_usuario', $data);
         }
     }
 
