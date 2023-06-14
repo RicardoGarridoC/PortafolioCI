@@ -105,7 +105,10 @@ $routes->match(['get', 'post'], '/register', 'Home::register');
 //también deben agregar el tema de que la sesión esté activa
 
 
-//esta vista contiene ingreso por sponsor o actividades especiales, debe estar en un botón en direccion
+//Prueba
+$routes->get('CompraJugadores', 'CompraJugadorController::index');
+$routes->post('CompraJugadores', 'CompraJugadorController::index');
+$routes->get('obtenerEquipos/(:any)', 'CompraJugadorController@obtenerEquipos/$1');
 
 
 
