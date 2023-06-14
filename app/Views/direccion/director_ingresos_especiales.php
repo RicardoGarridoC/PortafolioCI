@@ -114,7 +114,7 @@
 
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo base_url(); ?>IngresosEspeciales" method="post">
+                    <form action="<?php echo base_url(); ?>/ingresosEspeciales" method="post">
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"></span>

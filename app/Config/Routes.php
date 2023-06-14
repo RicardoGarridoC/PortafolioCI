@@ -33,6 +33,7 @@ $routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' 
 $routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionSocio:socio']);
 $routes->get('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
 $routes->post('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio:socio']);
+$routes->get('boletaMensualidad', 'SocioController::boletaMensualidad', ['filter' => 'SesionSocio:socio']);
 //Rutas Admin
 $routes->get('AdminDashboard', 'AdminDashboard::Dashboard', ['filter' => 'SesionAdmin:administrador']);
 $routes->get('AdminJugadorDt', 'AdminDashboard::jugadorDatabase', ['filter' => 'SesionAdmin:administrador']);
@@ -44,8 +45,8 @@ $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'Sesi
 $routes->get('DireccionDashboard', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector:direccion']);
 $routes->get('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
 $routes->post('AgregarSponsor', 'SponsorController::registrar', ['filter' => 'SesionDirector:direccion']);
-$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
-$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales');
+$routes->post('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
+$routes->get('IngresosEspeciales', 'DireccionDashboard::ingresosEspeciales', ['filter' => 'SesionDirector:direccion']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);
