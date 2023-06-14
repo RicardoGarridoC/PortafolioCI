@@ -80,6 +80,9 @@
                                 <li>
                                     <a href="<?php echo base_url('IngresosEspeciales') ?>" class="nav-link px-0">  <i class="fs-4 bi-cash"></i> <span class=" hide-on-small d-none d-sm-inline">Especiales</span></a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('HistorialPagosDireccion') ?>" class="nav-link px-0">  <i class="fs-4 bi-coin"></i> <span class=" hide-on-small d-none d-sm-inline">Pago Socios</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li>

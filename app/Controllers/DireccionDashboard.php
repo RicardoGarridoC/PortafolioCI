@@ -369,4 +369,39 @@ class DireccionDashboard extends BaseController
 
         return view('direccion/direccion_ver_partidos', $verPartidos);
     }
+    public function direccionverHistorialPagos()
+    {
+        $titulo = [
+            'title' => 'Historial Pagos Direccion'
+        ];
+
+        $db = db_connect();
+
+        $query = $db->query('SELECT concat(u.nombres, " ", u.apellidos ) as nombre,
+        i.concepto, i.monto, i.fecha, i.detalle
+        from ingresos i 
+        left join usuarios u on
+        i.id_usuario_fk = u.id
+        where i.concepto = "mensualidad";');
+
+        $pagos  = $query->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data1['pagos'] = array();
+
+        foreach ($pagos as $pago) {
+            $data1['pagos'][] = array(
+                'nombre' => $pago->nombre,
+                'concepto' => $pago->concepto,
+                'monto' => $pago->monto,
+                'fecha' => $pago->fecha,
+                'detalle' => $pago->detalle
+            );
+        }
+
+        $viewData = array_merge($data1, $titulo);
+
+        return view('direccion/direccion_ver_historialpagos', $viewData);
+
+    }
 }
