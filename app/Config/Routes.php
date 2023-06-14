@@ -77,6 +77,8 @@ $routes->get('obtenerEquipos/(:any)', 'CompraJugadorController@obtenerEquipos/$1
 $routes->get('PerfilDireccion', 'DireccionDashboard::verDireccionUsuario', ['filter' => 'SesionDirector:direccion']);
 $routes->get('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector:direccion']);
 $routes->post('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector:direccion']);
+//Guardar Jugador Direccion
+//$routes->post('DireccionDashboard/guardaJugador', 'DireccionDashboard::guardaJugador', ['filter' => 'SesionDirector:direccion']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador:jugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador:jugador']);

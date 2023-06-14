@@ -469,5 +469,5 @@ class DireccionDashboard extends BaseController
         ];
         
         return view('direccion/direccion_ver_perfil', $titulo);
-    }
+    }    
 }
