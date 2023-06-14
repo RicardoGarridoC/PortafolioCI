@@ -108,6 +108,8 @@ class CompraJugadorController extends BaseController
     {
         $user = new UsuarioModel();
         $db = \Config\Database::connect();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
 
         if ($this->request->getMethod() === 'post') {
             $postData = $this->request->getPost();
@@ -124,7 +126,10 @@ class CompraJugadorController extends BaseController
                 'run' => $postData['run'],
                 'direccion' => $postData['direccion'],
                 'telefono' => $postData['telefono'],
-                'password_hash' => password_hash('123456', PASSWORD_BCRYPT),
+                //'password_hash' => password_hash('123456', PASSWORD_BCRYPT),
+                //$clave = $this->request->getPost('password_hash'),
+                $password = bin2hex($encrypter->encrypt(123456)),
+                'password_hash' => $password,
                 'rol' => 'jugador',
                 'jugador_id_fk' => $jugador_id,
             ];
