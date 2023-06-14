@@ -19,8 +19,17 @@ class EquipoTecnicoController extends BaseController
         $titulo = [ 
             'title' => 'Inicio Equipo Técnico',
         ];
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
 
-        return view('equipotecnico/inicio_equipotecnico', $titulo);
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $titulo);
+
+        return view('equipotecnico/inicio_equipotecnico', $verPartidos);
     }
     public function equipotecnicoverCampeonatos()
     {
