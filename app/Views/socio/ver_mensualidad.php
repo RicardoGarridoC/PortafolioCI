@@ -2,130 +2,35 @@
 
 <?= $this->section('contenido') ?>
 
+<div class="form-group">
+    <?php
+    echo form_label('Fecha', 'fecha', ['class' => 'form-label']);
+    echo '<p class="form-control">' . date('Y-m-d') . '</p>';
+    ?>
+</div>
 
-    <style>
-        html,
-        body {
-            background-size: cover;
-            background-repeat: no-repeat;
-            height: 100%;
-            font-family: 'Numans', sans-serif;
-        }
+<div class="form-group">
+    <?php
+    echo form_label('Monto a Pagar', 'monto_a_pagar', ['class' => 'form-label']);
+    echo '<p class="form-control">' . $monto_a_pagar . '</p>';
+    ?>
+</div>
 
-        .container {
-            height: 100%;
-            align-content: center;
-        }
+<div class="form-group">
+    <?php
+    echo form_label('Descripción', 'descripcion', ['class' => 'form-label']);
+    echo '<p class="form-control">Pago de Mensualidad</p>';
+    ?>
+</div>
+<br>
+<?php echo form_open('VerMensualidad'); ?>
+  <button type="submit" class="btn btn-primary btn-block">Pagar Mensualidad</button>
+<?php echo form_close(); ?>
 
-        .card {
-            height: 150px;
-            margin-top: 300px;
-            margin-bottom: 300px;
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.5) !important;
-        }
+<br>
+<?php if (isset($mensaje)) : ?>
+    <div class="mensaje text-warning bg-dark"><?php echo $mensaje; ?></div>
+<?php endif; ?>
 
-        /* .card-body {
-            height: 150px;
-            margin-top: auto;
-            margin-bottom: auto;
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.5) !important;
-        } */
-
-        .social_icon span {
-            font-size: 60px;
-            margin-left: 10px;
-            color: #000000;
-        }
-
-        .social_icon span:hover {
-            color: white;
-            cursor: pointer;
-        }
-
-        .card-header h5 {
-            color: rgb(255, 255, 255);
-        }
-
-        .social_icon {
-            position: absolute;
-            right: 20px;
-            top: -45px;
-        }
-
-        .input-group-prepend span {
-            width: 50px;
-            background-color: #FFC312;
-            color: black;
-            border: 0 !important;
-        }
-
-        input:focus {
-            outline: 0 0 0 0 !important;
-            box-shadow: 0 0 0 0 !important;
-
-        }
-
-        .remember {
-            color: white;
-        }
-
-        .remember input {
-            width: 20px;
-            height: 20px;
-            margin-left: 15px;
-            margin-right: 5px;
-        }
-
-        .login_btn {
-            color: black;
-            background-color: #FFC312;
-            width: 150px;
-        }
-
-        .login_btn:hover {
-            color: black;
-            background-color: white;
-        }
-
-        .links {
-            color: white;
-        }
-
-        .links a {
-            margin-left: 4px;
-        }
-    </style>
-
-    <div class="container">
-        <div class="d-flex justify-content-center h-100">
-            <div class="card">
-                <div class="card-header">
-                    <h5></h5>
-
-                </div>
-                <div class="card-body">
-                    <form action="<?php echo base_url(); ?>VerMensualidad" method="post">
-
-
-                        <input type="submit" value="Pagar Mensualidad" class="btn float-center login_btn">
-                </div>
-                <br>
-
-
-
-                </form>
-                <div class="row">
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</section>
-<!-- /.content -->
 
 <?= $this->endSection() ?>
