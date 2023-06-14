@@ -51,20 +51,24 @@ class DireccionDashboard extends BaseController
                         'monto' => $monto,
                         'concepto' => 'actividades_extra',
                         'fecha' => date('Y-m-d'),
-                        'detalle' => 'Ingresos Especiales'
+                        'detalle' => 'Ingreso por actividades especiales',
+                        'id_usuario_fk' => NULL
+
+
                     ];
                     $database = \Config\Database::connect();
 
                     if (!$monto) {
-                        $data = ['tipo' => 'danger', 'mensaje' => ' Ingrese un monto valido '];
-                        return view(('direccion/director_ingresos_especiales'), $data);
+                        echo '<script>alert("Ingreso no válido");</script>';
+                        return view(('direccion/director_ingresos_especiales'));
                     } else {
                         try {
                             $ingresoModel->insert($userData);
-                            return redirect()->to('IngresosEspeciales')->with('success', 'Ingreso registrado exitosamente');
+                            echo '<script>alert("Mensualidad pagada con exito.");</script>';
+                            return redirect()->to('DireccionDashboard');
                         } catch (\Exception $e) {
-                            $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
-                            return view(('direccion/director_ingresos_especiales'), $data);
+                            echo '<script>alert("Ingreso no válido");</script>';
+                            return view(('direccion/director_ingresos_especiales'));
                         }
                     }
 
@@ -77,8 +81,7 @@ class DireccionDashboard extends BaseController
                     return view(('direccion/director_ingresos_especiales'), $data);
                 }
             } catch (\Exception $data) {
-                $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
-                return view(('direccion/director_ingresos_especiales'), $data);
+                return view('direccion/director_ingresos_especiales');
             }
             // Cargar la vista del formulario de registro
 

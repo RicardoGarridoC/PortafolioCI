@@ -9,6 +9,11 @@ use App\Models\PartidosModel;
 use CodeIgniter\Controller;
 use App\Models\PagoSocioModel;
 use App\Models\CustomModel;
+use Dompdf\Dompdf as Dompdf;
+
+
+require 'vendor/autoload.php';
+
 
 
 
@@ -28,29 +33,29 @@ class SocioController extends BaseController
     public function mostrarJugador()
     {
         // Agregando Titulo a Cada View
-        $titulo = [ 
-        'title' => 'Jugadores Socio',
+        $titulo = [
+            'title' => 'Jugadores Socio',
         ];
 
         $db = db_connect();
         $jugadorModel = new CustomModel($db);
         $jugadores = $jugadorModel->getJugadores();
-        $jugadores=array('jugadores' => $jugadores);
+        $jugadores = array('jugadores' => $jugadores);
 
         //$jugadorModel = new JugadorModel();
         //$jugadores=$jugadorModel->findAll();
         //$jugadores=array('jugadores'=>$jugadores);
         //return view('admin/admin_equipotecnico_dt', ['jugadores' => $jugadores]);
 
-        $verData= array_merge($jugadores, $titulo);
+        $verData = array_merge($jugadores, $titulo);
         return view('socio/ver_jugadores', $verData);
     }
 
     public function mostrarCampeonatos()
     {
-       // Agregando Titulo a Cada View
-       $titulo = [ 
-        'title' => 'Campeonatos Socio',
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Campeonatos Socio',
         ];
 
         $db = db_connect();
@@ -277,52 +282,100 @@ class SocioController extends BaseController
     protected $usuario;
     protected $pagoSocio;
     protected $ingresoModel;
-    
+
     public function verMensualidad()
     {
 
         $titulo = [
             'title' => 'Mensualidad',
         ];
-        $data = [];
         if ($this->request->getMethod() === 'post') {
 
             try {
-                // Guardar los datos en la base de datos
+                /* Guardar los datos en la base de datos*/
 
+                //Sesion de usuario para obtener el email
                 $email = session('emailUsuario');
+
+                //carga de modelos 
                 $this->pagoSocio = new PagoSocioModel();
                 $this->usuario = new UsuarioModel();
                 $this->ingresoModel = new IngresosModel();
+
+                //obtener datos de usuario a traves de la session
                 $resultadoUsuario = $this->usuario->buscarUsuarioPorEmail($email);
                 $id = $resultadoUsuario->id;
                 $montopredeterminado = $this->pagoSocio->select('monto')->first();
-
+                $nombre = $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos;
+                $fecha = date('Y-m-d');
                 $ingresoData = [
                     'monto' => $montopredeterminado,
                     'concepto' => 'mensualidad',
-                    'fecha' => date('Y-m-d'),
-                    'id_usuario_fk' => $id
+                    'fecha' => $fecha,
+                    'id_usuario_fk' => $id,
+                    'detalle' => 'Pago de mensualidad'
                 ];
-
-
+                //validacion de datos
                 if ($montopredeterminado = null) {
                     echo '<script>alert("Ingreso no válido");</script>';
                     return view('socio/ver_mensualidad');
                 }
 
-                try {
-                    $this->ingresoModel->insert($ingresoData);
-                    return redirect()->to('InicioSocios')->with('success', 'pago hecho correctamente');
-                } catch (\Exception $e) {
 
+                if ($this->ingresoModel->insert($ingresoData)) {
+
+                    $dompdf = new DOMPDF();
+                    //Aqui con las variables no imprime la informacion, pero con solo  html, imprime bien.   
+                    $dompdf->loadHtml(`<!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Boleta</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                            }
+                            .container {
+                                margin: 20px;
+                            }
+                            .header {
+                                text-align: center;
+                                margin-bottom: 20px;
+                            }
+                           
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="header">
+                                <h1>Boleta de Venta</h1>
+                            </div>
+                            <div class="customer-info">
+                                <p><strong>Nombre:</strong> {$nombre}</p>
+                                <p><strong>Monto:</strong> {$montopredeterminado}</p>
+                                <p><strong>Fecha:</strong> {$fecha}</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                     `);
+                    $dompdf->setPaper('A4', 'portrait');
+                    $dompdf->render();
+                    $dompdf->stream();
+
+
+                    echo '<script>alert("Mensualidad pagada con exito.");</script>';
+
+                    return view(('socio/inicio_socios'));
+                } else {
                     return view(('socio/ver_mensualidad'));
                 }
+
                 // Redirigir al usuario a una página de éxito o mostrar un mensaje
                 // de éxito en la misma página.
-            } catch (\Exception $data) {
-                $data = ['tipo' => 'danger', 'mensaje' => 'Error al registrar monto '];
-                return view(('socio/ver_mensualidad'), $data);
+            } catch (\Exception $e) {
+                echo '<script>alert("Ingreso no válido");</script>';
+                return view(('socio/ver_mensualidad'));
             }
             // Cargar la vista del formulario de registro
 
