@@ -25,7 +25,80 @@ class DireccionDashboard extends BaseController
             'title' => 'Inicio Direccion',
         ];
 
-        return view('direccion/director_dashboard', $titulo);
+        $db = db_connect();
+
+        $query = $db->query('SELECT
+        CASE
+          WHEN concepto = "sponsor" THEN "Sponsor"
+          WHEN concepto = "venta_jugadores" THEN "Venta de jugador"
+          WHEN concepto = "actividades_extra" THEN "Actividades Extras"
+          WHEN concepto = "mensualidad" THEN "Mensualidad"
+        END AS concepto,
+        CONCAT("$", monto) AS monto,
+        DATE_FORMAT(fecha, "%e de %M del %Y", "es_ES") AS fecha,
+        CASE
+          WHEN detalle = " " THEN "Sin Detalle"
+          ELSE detalle
+        END AS detalle
+        FROM ingresos
+        UNION
+        SELECT
+            CASE
+            WHEN concepto = "sueldo_jugadores" THEN "Sueldo de Jugador"
+            WHEN concepto = "sueldo_e_tecnico" THEN "Sueldo Equipo Tecnico"
+            WHEN concepto = "sueldo_dirigentes" THEN "Sueldo de Dirigente"
+            WHEN concepto = "pago_mensualidad" THEN "Pago de Mensualidad"
+            WHEN concepto = "impuesto_venta" THEN "Impuesto de venta"
+            WHEN concepto = "compra_jugadores" THEN "Compra de Jugador"
+            END AS concepto,
+            CONCAT("$", monto) AS monto,
+            DATE_FORMAT(fecha, "%e de %M del %Y", "es_ES") AS fecha,
+            CASE
+            WHEN detalle = " " THEN "Sin Detalle"
+            ELSE detalle
+            END AS detalle
+        FROM egresos;
+        ');
+
+        $totalhaberes = $query->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data1['totalhaberes'] = array();
+
+        foreach ($totalhaberes as $total) {
+            $data1['totalhaberes'][] = array(
+                'concepto' => $total->concepto,
+                'monto' => $total->monto,
+                'fecha' => $total->fecha,
+                'detalle' => $total->detalle
+            );
+        }
+
+        $query2 = $db->query('SELECT
+        CONCAT("$", (t1.total_ingresos_monto - t2.total_egresos_monto))AS diferencia_monto,
+        t1.total_ingresos,
+        t2.total_egresos
+        FROM
+        (SELECT
+            SUM(i.monto) as total_ingresos_monto,
+            COUNT(i.id) AS total_ingresos
+        FROM
+            ingresos i) t1,
+        (SELECT
+            SUM(e.monto) as total_egresos_monto,
+            COUNT(e.id) as total_egresos
+        FROM
+            egresos e) t2;
+        ');
+
+        $totaltodo = $query2->getResultArray();
+
+        $data2 = array();
+        $data2['totaltodo'] = $totaltodo;
+
+        $viewData = array_merge($data1, $data2, $titulo);
+
+        return view('direccion/director_dashboard', $viewData);
     }
 
     public function ingresosEspeciales()
