@@ -19,15 +19,17 @@ Composer Update
 - Revisar Archivo .env app.baseURL = 'http://localhost:TUPUERTOENXAMPP/PortafolioCI/'
 - XAMPP Control Panel v3.0.0 o LASTEST y sacarle al comentario ';' a extension=intl ( XAMPP -> APACHE -> Config -> PHP.ini)
 - ADMINLTE3 https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.2.0 - Dercargar y Colocar en Carpeta 'Publics' los archivos 'dist' y 'plugins'.
+- Subir Archivo SQL (club_de_futbol.sql) a MySQL 
 
 ## Instalación
 
 Clonar Repositorio (dejar en la carpeta htdocs)   directorio:..\xampp\htdocs\PROYECTO AQUI
 Revisar Las dependencias
 
+
 ## Uso
 
-Iniciar sesion
+-Iniciar sesion
 Usuarios 
 - Admin= di.servietti@duocuc.cl contraseña: 123455
 - Socio= rangamind@gmail.com contraseña: 123456
@@ -51,7 +53,7 @@ Este proyecto está bajo la Licencia Patito de Goma
 
 ## Contacto
 
-Cualquier Integrate del grupo
+Cualquier Integrante del grupo
 di.servietti@duocuc.cl
 ricardogarrido398@gmail.com
 dieg.barros@duocuc.cl
