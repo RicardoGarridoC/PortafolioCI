@@ -117,9 +117,14 @@
                             echo form_label('Teléfono', 'telefono');
                             echo form_input(array('name' => 'telefono', 'placeholder' => 'Teléfono', 'class' => 'form-control', 'value' => $usuario['telefono'], 'required' => 'required'));
                             echo "<br>";
-                            
+
                             echo form_label('Contraseña', 'password_hash');
-                            echo form_input(array('name' => 'password_hash', 'placeholder' => 'Contraseña', 'class' => 'form-control', 'value' => $usuario['password_hash'], 'required' => 'required'));
+                            if (isset($usuario['clavebuena'])) {
+                                $passwordValue = $usuario['clavebuena'];
+                            } else {
+                                $passwordValue = '';
+                            }
+                            echo form_input(array('name' => 'password_hash', 'placeholder' => 'Contraseña', 'class' => 'form-control', 'value' => $passwordValue, 'required' => 'required'));
                             echo "<br>";
                             
                             echo form_label('Rol', 'rol');
@@ -212,8 +217,13 @@
                             echo "<td>".$usuario['run']."</td>";
                             echo "<td>".$usuario['direccion']."</td>";
                             echo "<td>".$usuario['telefono']."</td>";
-                            $password = (strlen($usuario['password_hash']) > 10) ? substr($usuario['password_hash'], 0, 10) . "..." : $usuario['password_hash'];
-                            echo "<td>".$password."</td>";
+                            echo "<td>";
+                            echo "<input type='password' value='".$usuario['clavebuena']."' id='password_".$usuario['id']."' readonly>";
+                            echo "<span class='input-group-text' onclick='togglePassword(".$usuario['id'].")'>";
+                            echo "<i class='fas fa-eye nav-icon' id='show_eye_".$usuario['id']."'></i>";
+                            echo "<i class='fas fa-eye-slash nav-icon d-none' id='hide_eye_".$usuario['id']."'></i>";
+                            echo "</span>";
+                            echo "</td>";
                             echo "<td>".$usuario['rol']."</td>";
                             echo "<td>";
                             echo "<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#editModal".$usuario['id']."'>Editar</button>";
@@ -250,6 +260,24 @@
         <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
-        
+        <script>
+            function togglePassword(id) {
+            var passwordInput = document.getElementById('password_' + id);
+            var showEyeIcon = document.getElementById('show_eye_' + id);
+            var hideEyeIcon = document.getElementById('hide_eye_' + id);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                showEyeIcon.classList.add('d-none');
+                hideEyeIcon.classList.remove('d-none');
+            } else {
+                passwordInput.type = 'password';
+                showEyeIcon.classList.remove('d-none');
+                hideEyeIcon.classList.add('d-none');
+            }
+            }
+        </script>
+
+
         
     <?= $this->endSection() ?>

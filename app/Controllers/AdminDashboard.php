@@ -24,12 +24,28 @@ class AdminDashboard extends BaseController
         return view('admin/admin_equipo_dt', $equipos);
     }
 
+    public function __construct()
+    {
+        helper(['form', 'encryption']);
+
+        //$this->encryption = \Config\Services::encryption();
+    }
+
     public function usuarioDatabase()
     {
         $usuarioModel = new UsuarioModel();
+        $encrypter = \config\Services::encrypter();
         $usuarios = $usuarioModel->findAll();
         $usuarios = array('usuarios' => $usuarios);
-        return view('admin/admin_usuarios_dt', $usuarios);
+
+        foreach ($usuarios['usuarios'] as &$usuario) {
+            $encryptedPassword = $usuario['password_hash'];
+            $usuario['clavebuena'] = $encrypter->decrypt(hex2bin($encryptedPassword));
+        }
+
+        $data = ['usuarios' => $usuarios['usuarios']];
+
+        return view('admin/admin_usuarios_dt', $data);
     }
 
     public function jugadorDataBase()
@@ -64,11 +80,6 @@ class AdminDashboard extends BaseController
         //$socios=$socioModel->findAll();
         //$socios=array('socios'=>$socios);
         //return view('admin/admin_socio_dt', $socios);
-    }
-
-    public function __construct()
-    {
-        helper('form');
     }
 
     public function guardaJugador()
@@ -124,7 +135,15 @@ class AdminDashboard extends BaseController
         }
         $usuarios = $usuarioModel->findAll();
         $usuarios = array('usuarios' => $usuarios);
-        return view('admin/admin_usuarios_dt', $usuarios);
+
+        foreach ($usuarios['usuarios'] as &$usuario) {
+            $encryptedPassword = $usuario['password_hash'];
+            $usuario['clavebuena'] = $encrypter->decrypt(hex2bin($encryptedPassword));
+        }
+
+        $data = ['usuarios' => $usuarios['usuarios']];
+
+        return view('admin/admin_usuarios_dt', $data);
     }
     public function guardaEquipo()
     {
