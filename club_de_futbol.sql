@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-06-2023 a las 04:10:14
+-- Tiempo de generación: 15-06-2023 a las 20:13:23
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -259,7 +259,9 @@ INSERT INTO `equipo_tecnico` (`id`, `cargo`, `equipo_proviene_fk`, `sueldo`, `va
 (2, 'asistente_entrenador', 1, '350000.00', '3000.00', 0),
 (3, 'preparador_fisico', 8, '400000.00', '4000.00', 5),
 (4, 'utilero', NULL, '350000.00', '3000.00', 0),
-(5, 'kinesiologo', NULL, '400000.00', '4000.00', 5);
+(5, 'kinesiologo', NULL, '400000.00', '4000.00', 5),
+(6, 'entrenador', NULL, '22.00', '131.00', 0),
+(7, 'entrenador', 11, '1000000.00', '13100.00', 0);
 
 -- --------------------------------------------------------
 
@@ -356,7 +358,6 @@ INSERT INTO `ingresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`, `id_usuar
 (29, 'sponsor', '200000', '2023-06-14', 'McDonalds', NULL),
 (30, 'sponsor', '200000', '2023-06-15', 'McDonalds', NULL),
 (31, 'mensualidad', '30000', '2023-06-14', 'Pago de mensualidad', 43),
-(68, 'mensualidad', '30000', '2023-06-14', 'Pago de mensualidad', 4),
 (69, 'mensualidad', '30000', '2023-06-15', 'Pago de mensualidad', 41),
 (70, 'mensualidad', '30000', '2023-06-15', 'Pago de mensualidad', 42);
 
@@ -422,7 +423,9 @@ INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `tipo`, `sueldo`,
 (46, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
 (47, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
 (48, 'Defensa', 0, 'aficionado', NULL, '1.00', 18, 88, 'masculino'),
-(49, 'Delantero', 0, 'profesional', '1.00', NULL, 12, 88, 'femenino');
+(49, 'Delantero', 0, 'profesional', '1.00', NULL, 12, 88, 'femenino'),
+(51, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 0, 'masculino'),
+(52, 'Defensa', 0, 'profesional', '200000.00', NULL, 16, 78, 'masculino');
 
 -- --------------------------------------------------------
 
@@ -602,7 +605,8 @@ CREATE TABLE `socios` (
 
 INSERT INTO `socios` (`id`, `fecha_pago`) VALUES
 (1, '2023-04-20'),
-(4, '2023-04-20');
+(4, '2023-04-20'),
+(5, '2023-06-09');
 
 -- --------------------------------------------------------
 
@@ -703,8 +707,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion`, `telefono`, `password_hash`, `rol`, `socio_id_fk`, `jugador_id_fk`, `equipo_tecnico_id_fk`, `direccion_id_fk`) VALUES
-(3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, 'bfe3818644ce6be5896e716ea65840ec19ca2f233560dd13e2fe588c707ea77a117358ef61fec4c7ac8458a881f606872878e305109e6e86b624c8983b83e943b265d19d26ba74565f93b2997767a8aa331e116702cc', 'administrador', NULL, NULL, NULL, NULL),
-(4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, 'b2d6691b7a055d72a3b3da1ee4e590ce22070b3acf3da66984c2c2147139e8cf23c4bfbc48465cf6afb895e62e041f1dc0b8a02f8c1583f4b8505ce58f636cd44fd2e7a819f0ce9a1f040cc14406b49da1bc6d0b7bf5', 'socio', 1, NULL, NULL, NULL),
+(3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, 'd038153e18469d76cd25266a1fdbff705512a7d3a629d6b705882c6af9209767e9b8bd963ff2339e0effd1b542f1425176bfad3c9300b6d768816e43ff308c2b22ba55fa7f2ef42d7444b9eee435e29e1598771d1b11', 'administrador', NULL, NULL, NULL, NULL),
+(4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, '86ad61534ee0e4c4ad6455764ba193d1c5bce2995a47bfd50f7d21688a76165b65b1b83d6fc60d4a3a0d936f88d6e10c9bf53bad9bd8447b5089894b913818c26e79b23e898c78689c75f6021918f4de3e5c19243fef', 'socio', 1, NULL, NULL, NULL),
 (5, 'Humberta', 'Suazo', 'chupete.suazo@gmail.com', '112584128-K', 'Avenida siempre viva 123', 11122258, '6ac0c2e3e24a2c48736f51c42af167a175b8617d91f5d928f095d4aa40f106c6c674a0a93901396e84332ffce25d8f01cc3a6c2adfa01ed087763cb5dc386a640c6442664d5485e0590001c6703cb9749fdfb1bd13c9', 'jugador', NULL, 1, NULL, NULL),
 (6, 'Maite', 'Fernandez', 'matigol@gmail.com', '44487158-8', 'calle 123', 111228420, '4251d90af3706b68c96d5c616348bed521ecc9dead4efce3466a5ca6c4341a20565a8baad3f4254ea3cec8ceb5c30470f4e6069300cbe241418935f70fe7ee2b0b2800e778dd7c3d6973594844c237ffa5f4da67f4ff', 'jugador', NULL, 2, NULL, NULL),
 (7, 'Marcela', 'Salas', 'msalas@gmail.com', '11557848-8', 'chillan', 4455842, 'f7a083febf922f8152a9655b4467819112bda1cfbc949d085ee60361074d0b9de8c8181fa3e94816518bd53123f1c083a5defa1b621e245b1ad80f4c8dca56d6944824e4348883dac5b45e0c083fdf7f200ba823995f', 'jugador', NULL, 11, NULL, NULL),
@@ -747,7 +751,10 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion
 (47, 'Probando ', 'Jugador', 'probandojugador2@hotmail.com', '12312322-2', 'sdsdsdddd', 33333333, '4b84a746e3f82c50cdfc5dd6c5b341d19286f279b9ef120453afe54bd8fd4da0cb7281225bde48775b24e8345854b35a381e86fb3b8b31c4a3480d5d34e58764bd40c6469daa2ee7c3c940d821f29678737d00706d4b', 'jugador', NULL, 40, NULL, NULL),
 (48, 'Probando', 'Clave', 'probando2@gmail.com', '12666878-0', 'Pablito', 95939444, 'c7ee042451c464d714b723dac74b9e5c750a1e3a609a2da0271ea9f9d92c867271be347416bdb7b1ccf3a2b08812248d0ad3102b260acd43caeda98fcd831b3695cd58ca55403341ee6301be5303cdd0b0573de6723e', 'jugador', NULL, 41, NULL, NULL),
 (49, 'Clave', 'Probando', 'registro@hotmail.com', '454343-4', 'Iyytt', 64544545, '7ee991ef9cdaee849d910e27156049ffc9fce57a1066c357006bef17eb91ec37ec3f6fdc0f958f9244e11a72a7e33df57f1126c4d00b6d744f4f02343730a6ed21105d7122cb9321babca9d0e765463157cbf0db2ba5', 'jugador', NULL, 42, NULL, NULL),
-(50, 'Tornadito', 'Rojo', 'tornado@gmail.com', '2923344-3', 'Pablo de Rokha 433', 34343444, '37d15f078854f89424543fc72baf62b74f8a3566240f3744231cba9f145d5e6678a4c7f7a413d768309bd507c36e2c045c893c0997a5d80d8319cbfa6804fef938af6885aac3a11c808199564e41237b4813b0ef763506', 'jugador', NULL, 43, NULL, NULL);
+(50, 'Tornadito', 'Rojo', 'tornado@gmail.com', '2923344-3', 'Pablo de Rokha 433', 34343444, '37d15f078854f89424543fc72baf62b74f8a3566240f3744231cba9f145d5e6678a4c7f7a413d768309bd507c36e2c045c893c0997a5d80d8319cbfa6804fef938af6885aac3a11c808199564e41237b4813b0ef763506', 'jugador', NULL, 43, NULL, NULL),
+(51, 'Probando', 'Probando 2', 'probando222221@hotmail.com', '1231233-K', 'ssdsdsd', 1231233, 'd8004b99ac33d26a6761b34aa9ba331d400c5a18560bd6e2364dced63e4497cbb310839bc009060f57f2d912195dda0ff7149f8731f18d4d7587b44d9f9c601c7ecaf55fef37e3cc609fa55d88e1df4f768c606b9cfe', 'jugador', NULL, 51, NULL, NULL),
+(52, 'wdasasdasd', 'asdasdsssd', 'asdasdasd@guoddd.cl', '19.532.588-2', 'assdsasddas', 2147483647, '1470cc9b137d1afe89a6606c20373a3d43b74199b9d1ebbf9c9421401f731bda2333a59a2a6416adf3396574315dc4cb3cc8dfb83ce338a4ccec3e8c93883e929aa5c152b7eefe8f80fec969fe183b9558623bc7c40d', 'jugador', NULL, 52, NULL, NULL),
+(53, 'Probando22', 'Probando 222', 'aperegriasdsdsdni@gmail.com', '20100863-2', 'asadasdsaasd', 1231231232, '75ff4120be7dfe5160a0bfe9471cf8c7af0c7f94bec40eb7779e49602a218fb9e96fb276d622eb3716f9845a48b0a365b9de78e1629eadbc843f632dc3a70d8ead6efc0200fcfd13d8205260d9d7fc8a9c1ab4c24698', 'jugador', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1051,7 +1058,7 @@ ALTER TABLE `egresos`
 -- AUTO_INCREMENT de la tabla `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `equipos_campeonato`
@@ -1063,7 +1070,7 @@ ALTER TABLE `equipos_campeonato`
 -- AUTO_INCREMENT de la tabla `equipo_tecnico`
 --
 ALTER TABLE `equipo_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `estadisticas_campeonato`
@@ -1093,7 +1100,7 @@ ALTER TABLE `ingresos`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `lesiones`
@@ -1141,7 +1148,7 @@ ALTER TABLE `resultados`
 -- AUTO_INCREMENT de la tabla `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `sponsors`
@@ -1165,7 +1172,7 @@ ALTER TABLE `traspaso`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Restricciones para tablas volcadas
