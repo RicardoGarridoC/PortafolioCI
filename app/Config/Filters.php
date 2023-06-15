@@ -21,6 +21,12 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'SesionAdmin' => \App\Filters\SesionAdmin::class,
+        'SesionSocio' => \App\Filters\SesionSocio::class,
+        'SesionEquipoTecnico' => \App\Filters\SesionEquipoTecnico::class,
+        'SesionJugador' => \App\Filters\SesionJugador::class,
+        'SesionEntrenador' => \App\Filters\SesionEntrenador::class,
+        'SesionDirector' => \App\Filters\SesionDirector::class,
     ];
 
     /**
@@ -32,6 +38,7 @@ class Filters extends BaseConfig
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+
         ],
         'after' => [
             'toolbar',

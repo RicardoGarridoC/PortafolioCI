@@ -14,9 +14,8 @@ class JugadorModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','posicion','partidos_jugados','tipo','sueldo','ayuda_economica','lesionado',
+    protected $allowedFields = ['id','posicion','partidos_jugados','tipo','sueldo','ayuda_economica','numero_camiseta', 'genero',
     'equipo_proviene_id_fk','button_field'];
-
     // Dates
     /*protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
@@ -41,5 +40,17 @@ class JugadorModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function obtenerJugadoresPorGenero($genero)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('jugadores j');
+        $builder->select("CONCAT(u.nombres, ' ', u.apellidos) as nombre_completo, j.sueldo");
+        $builder->join('usuarios u', 'u.jugador_id_fk = j.id');
+        $builder->where('j.genero', $genero);
+        $builder->where('j.sueldo !=', null);
+        return $builder->get()->getResultArray();
+    }
+
+    
 }
-?>

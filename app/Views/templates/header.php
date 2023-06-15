@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +23,7 @@
             color: #fff !important;
             font-weight: bold;
         }
-        
+
         .navbar-nav .nav-link {
             color: #fff;
         }
@@ -33,18 +34,22 @@
             margin-right: 10px;
             margin-left: 10px;
         }
+
         .navbar-nav {
             align-items: center;
         }
+
         .navbar-toggler-icon {
             color: rgb(255, 255, 255);
         }
     </style>
 
 </head>
+
 <body>
+
     <!-- Navbar (ADD fixed-top a nav class para arreglar panel socios)-->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,22 +60,16 @@
                         <a class="nav-link" href="<?php echo base_url('Home'); ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('HomeSocios'); ?>">Socios</a>
+                        <a class="nav-link" href="<?php echo base_url('ActividadesEspeciales'); ?>">Actividades especiales</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Servicios</a>
+                        <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
                     <li class="nav-item">
-                        <img src="<?= base_url()?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
+                        <a class="nav-link" href="<?php echo base_url('IniciarSesion'); ?>">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Portafolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Próximos partidos</a>
                     </li>
                 </ul>
             </div>
@@ -82,4 +81,5 @@
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </body>
+
 </html>

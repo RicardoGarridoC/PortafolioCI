@@ -14,7 +14,7 @@ class EquipoTecnicoModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','cargo','equipo_proviene','sueldo','valor_hora_extra','horas_extras_mes'];
+    protected $allowedFields = ['id','cargo','equipo_proviene_fk','sueldo','valor_hora_extra','horas_extras_mes'];
 
 
     // Validation
