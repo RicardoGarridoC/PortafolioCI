@@ -11,6 +11,7 @@ use CodeIgniter\Controller;
 use App\Models\PagoSocioModel;
 use App\Models\CustomModel;
 use Dompdf\Dompdf as Dompdf;
+use CodeIgniter\API\ResponseTrait;
 
 
 require 'vendor/autoload.php';
@@ -499,6 +500,9 @@ class SocioController extends BaseController
 
         return view('socio/ver_mensualidad', array_merge($titulo, $data1));
     }
+
+
+
 
     public function verSocioUsuario()
     {
