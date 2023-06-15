@@ -10,7 +10,8 @@ use App\Models\PartidosModel;
 use CodeIgniter\Controller;
 use App\Models\PagoSocioModel;
 use App\Models\CustomModel;
-use Dompdf\Dompdf;
+use Dompdf\Dompdf as Dompdf;
+use CodeIgniter\API\ResponseTrait;
 
 
 require 'vendor/autoload.php';
@@ -20,6 +21,7 @@ require 'vendor/autoload.php';
 
 class SocioController extends BaseController
 {
+    use ResponseTrait;
 
     public function inicioSocios()
     {
@@ -323,7 +325,7 @@ class SocioController extends BaseController
     protected $pagoSocio;
     protected $ingresoModel;
 
-    
+
 
     public function verMensualidad()
     {
@@ -350,7 +352,7 @@ class SocioController extends BaseController
                 $montopredeterminado = $this->pagoSocio->select('monto')->first();
                 $nombre = $resultadoUsuario->nombres . ' ' . $resultadoUsuario->apellidos;
                 $fecha = date('Y-m-d');
-                
+
                 // Verificar si ya existe un pago de mensualidad para el mes actual y el ID de usuario
                 $pagosPrevios = $this->ingresoModel->where('concepto', 'mensualidad')
                     ->where('fecha >=', date('Y-m-01'))
@@ -370,7 +372,7 @@ class SocioController extends BaseController
                         $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
                     }
                     $verData = array_merge($data, $data1, $titulo);
-                    return view('socio/ver_mensualidad', $verData );
+                    return view('socio/ver_mensualidad', $verData);
                 }
 
                 $ingresoData = [
@@ -393,7 +395,7 @@ class SocioController extends BaseController
                         $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
                     }
                     $verData = array_merge($data, $data1, $titulo);
-                    return view('socio/ver_mensualidad', $verData );
+                    return view('socio/ver_mensualidad', $verData);
                 }
 
                 if ($this->ingresoModel->insert($ingresoData)) {
@@ -403,7 +405,7 @@ class SocioController extends BaseController
                     $fecha = is_array($ingresoData['fecha']) ? implode(', ', $ingresoData['fecha']) : $ingresoData['fecha'];
                     $id_usuario_fk = is_array($ingresoData['id_usuario_fk']) ? implode(', ', $ingresoData['id_usuario_fk']) : $ingresoData['id_usuario_fk'];
                     $detalle = is_array($ingresoData['detalle']) ? implode(', ', $ingresoData['detalle']) : $ingresoData['detalle'];
-            
+
                     $dompdf = new Dompdf();
                     //Falta Arreglar Imagen
                     $html = '
@@ -448,9 +450,9 @@ class SocioController extends BaseController
                             
                         </body>
                         </html>';
-                        
+
                     $dompdf->loadHtml($html);
-                    $customPaper = array(0,0,360,360);
+                    $customPaper = array(0, 0, 360, 360);
                     $dompdf->set_paper($customPaper);
                     $dompdf->render();
                     $filename = 'boletalosalces.pdf';
@@ -466,8 +468,7 @@ class SocioController extends BaseController
                         $data1['monto_a_pagar'] = '0'; // O un valor predeterminado en caso de que no haya monto disponible
                     }
                     $verData = array_merge($data, $data1, $titulo);
-                    return view('socio/ver_mensualidad', $verData );
-
+                    return view('socio/ver_mensualidad', $verData);
                 } else {
                     $data['mensaje'] = 'Error de pago.';
                     $verData = array_merge($data, $titulo);
@@ -501,8 +502,8 @@ class SocioController extends BaseController
     }
 
 
-   
-    
+
+
     public function verSocioUsuario()
     {
         $titulo = [
@@ -581,7 +582,7 @@ class SocioController extends BaseController
                 'fecha_fin_lesion' => $masculino->fecha_fin_lesion
             );
         }
-        
+
         //JUGADORES FEMENINOS
         $query2 = $db->query('SELECT
         u.nombres AS nombre,
@@ -632,7 +633,7 @@ class SocioController extends BaseController
         }
 
         //Agregando Titulo a Cada View
-        $titulo = [ 
+        $titulo = [
             'title' => 'Ver Estadisticas Socio',
         ];
 
@@ -655,7 +656,7 @@ class SocioController extends BaseController
         $session = session();
         $session->set('passwordUsuario', $password);
 
-        
+
         $data = array(
             'nombres' => $request->getPostGet('nombres'),
             'apellidos' => $request->getPostGet('apellidos'),
@@ -665,21 +666,21 @@ class SocioController extends BaseController
             'telefono' => $request->getPostGet('telefono'),
             'password_hash' => $password // Utiliza la contraseña encriptada
         );
-        
+
         if ($request->getPostGet('id')) {
             $data['id'] = $request->getPostGet('id');
         }
-        
+
         if ($usuarioModel->save($data) === false) {
             var_dump($usuarioModel->errors());
         }
-        
+
         // Agregando Titulo a Cada View
         $titulo = [
             'title' => 'Editar Usuario Socio',
             'clavebuena' => $clavebuena // Agrega el valor de $clavebuena al arreglo $titulo
         ];
-        
+
         return view('socio/socio_ver_perfil', $titulo);
     }
 
@@ -725,7 +726,6 @@ class SocioController extends BaseController
         $viewData = array_merge($data1, $titulo);
 
         return view('socio/socio_ver_equipotecnico', $viewData);
-
     }
 
     public function historialPagos()
@@ -751,4 +751,81 @@ class SocioController extends BaseController
         //helper('encryption');
     }
 
+    public function getReporteEstadisticasMovil()
+    {
+        $db = db_connect();
+
+        // Obtener estadísticas de jugadores masculinos
+        $query1 = $db->query('SELECT
+            u.nombres AS nombre,
+            u.apellidos AS apellido,
+            j.sueldo,
+            j.ayuda_economica,
+            j.posicion,
+            COUNT(g.jugador_id_fk) AS goles,
+            CASE
+                WHEN l.fecha_fin_lesion > CURDATE() THEN "si"
+                ELSE "no"
+            END AS jugador_lesionado,
+            CASE
+                WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_inicio_lesion
+                ELSE NULL
+            END AS fecha_inicio_lesion,
+            CASE
+                WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_fin_lesion
+                ELSE NULL
+            END AS fecha_fin_lesion
+            FROM
+                jugadores j
+                INNER JOIN usuarios u ON j.id = u.jugador_id_fk
+                LEFT JOIN goles g ON j.id = g.jugador_id_fk
+                LEFT JOIN lesiones l ON j.id = l.jugador_id_fk
+            WHERE
+                j.genero = "masculino"
+            GROUP BY
+                j.id;');
+
+        $masculinos = $query1->getResultArray();
+
+        // Obtener estadísticas de jugadores femeninos
+        $query2 = $db->query('SELECT
+            u.nombres AS nombre,
+            u.apellidos AS apellido,
+            j.sueldo,
+            j.ayuda_economica,
+            j.posicion,
+            COUNT(g.jugador_id_fk) AS goles,
+            CASE
+                WHEN l.fecha_fin_lesion > CURDATE() THEN "si"
+                ELSE "no"
+            END AS jugador_lesionado,
+            CASE
+                WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_inicio_lesion
+                ELSE NULL
+            END AS fecha_inicio_lesion,
+            CASE
+                WHEN l.fecha_fin_lesion > CURDATE() THEN l.fecha_fin_lesion
+                ELSE NULL
+            END AS fecha_fin_lesion
+            FROM
+                jugadores j
+                INNER JOIN usuarios u ON j.id = u.jugador_id_fk
+                LEFT JOIN goles g ON j.id = g.jugador_id_fk
+                LEFT JOIN lesiones l ON j.id = l.jugador_id_fk
+            WHERE
+                j.genero = "femenino"
+            GROUP BY
+                j.id;');
+
+        $femeninos = $query2->getResultArray();
+
+        // Preparar los datos en un formato adecuado
+        $reporte = [
+            'masculinos' => $masculinos,
+            'femeninos' => $femeninos
+        ];
+
+        // Retornar la respuesta como un objeto JSON
+        return $this->respond($reporte);
+    }
 }

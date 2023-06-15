@@ -10,22 +10,24 @@ class SesionDirector implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // dd($arguments);
-        if (!session()) {
-            return redirect()->route('/');
+        if (!session()->has('emailUsuario')) {
+            return redirect()->to('/');
         }
 
-        $model =  model('UsuarioModel');
+        $model = model('UsuarioModel');
+        $user = $model->select('rol')->where('email', session()->get('emailUsuario'))->get()->getRow();
 
-
-        $user = $model->select('rol')->where('email', session()->emailUsuario)->get()->getRow()->rol;
-        if ($user = !'direccion') {
-            session()->destroy();
-            return redirect()->route('/Home');
+        if ($user !== null && property_exists($user, 'rol') && $user->rol === 'direccion') {
+            // El usuario tiene el rol de "socio", permitir el acceso
+            return;
+        } else {
+            // El usuario no tiene el rol de "socio", redirigir al inicio
+            return redirect()->to('/');
         }
     }
+
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
+        // No es necesario hacer nada después del procesamiento de la solicitud
     }
 }
