@@ -83,10 +83,10 @@ $routes->post('RegistrarNuevoJugador', 'RegistrarJugadorController::registrar', 
 $routes->get('RegistrarJugadorController/obtenerEquiposPorGenero/(:segment)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1', ['filter' => 'SesionDirector']);
 $routes->get('obtenerEquiposPorGenero/(:any)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1', ['filter' => 'SesionDirector']);
 $routes->get('RegistrarNuevoUsuario', 'RegistrarJugadorController::index', ['filter' => 'SesionDirector']);
-$routes->get('RegistrarNuevoEquipoTecnico', 'RegistrarEquipoTecnicoController::index');
-$routes->post('RegistrarNuevoEquipoTecnico', 'RegistrarEquipoTecnicoController::registrar');
-$routes->get('RegistrarNuevoEquipoTecnicoController/obtenerEquipos/(:segment)', 'RegistrarNuevoEquipoTecnicoController::obtenerEquipos/$1');
-$routes->post('RegistrarNuevoEquipoTecnicoController/registrarUsuario', 'RegistrarNuevoEquipoTecnicoController::registrarUsuario');
+$routes->get('RegistrarNuevoEquipoTecnico', 'RegistrarEquipoTecnicoController::index' , ['filter' => 'SesionDirector']);
+$routes->post('RegistrarNuevoEquipoTecnico', 'RegistrarEquipoTecnicoController::registrar' , ['filter' => 'SesionDirector']);
+$routes->get('RegistrarNuevoEquipoTecnicoController/obtenerEquipos/(:segment)', 'RegistrarNuevoEquipoTecnicoController::obtenerEquipos/$1' , ['filter' => 'SesionDirector']);
+$routes->post('RegistrarNuevoEquipoTecnicoController/registrarUsuario', 'RegistrarNuevoEquipoTecnicoController::registrarUsuario' , ['filter' => 'SesionDirector']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador']);
