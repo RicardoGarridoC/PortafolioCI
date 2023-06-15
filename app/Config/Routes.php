@@ -78,7 +78,11 @@ $routes->get('PerfilDireccion', 'DireccionDashboard::verDireccionUsuario', ['fil
 $routes->get('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector']);
 $routes->post('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector']);
 //Guardar Jugador Direccion
-//$routes->post('DireccionDashboard/guardaJugador', 'DireccionDashboard::guardaJugador', ['filter' => 'SesionDirector:direccion']);
+$routes->get('RegistrarNuevoJugador', 'RegistrarJugadorController::index');
+$routes->post('RegistrarNuevoJugador', 'RegistrarJugadorController::registrar');
+$routes->get('RegistrarJugadorController/obtenerEquiposPorGenero/(:segment)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1');
+$routes->get('obtenerEquiposPorGenero/(:any)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1');
+$routes->get('RegistrarNuevoUsuario', 'RegistrarJugadorController::index');
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador']);
