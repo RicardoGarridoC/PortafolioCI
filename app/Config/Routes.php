@@ -78,11 +78,11 @@ $routes->get('PerfilDireccion', 'DireccionDashboard::verDireccionUsuario', ['fil
 $routes->get('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector']);
 $routes->post('EditarUsuarioDireccion', 'DireccionDashboard::guardaDireccionUsuario', ['filter' => 'SesionDirector']);
 //Guardar Jugador Direccion
-$routes->get('RegistrarNuevoJugador', 'RegistrarJugadorController::index');
-$routes->post('RegistrarNuevoJugador', 'RegistrarJugadorController::registrar');
-$routes->get('RegistrarJugadorController/obtenerEquiposPorGenero/(:segment)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1');
-$routes->get('obtenerEquiposPorGenero/(:any)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1');
-$routes->get('RegistrarNuevoUsuario', 'RegistrarJugadorController::index');
+$routes->get('RegistrarNuevoJugador', 'RegistrarJugadorController::index' , ['filter' => 'SesionDirector']);
+$routes->post('RegistrarNuevoJugador', 'RegistrarJugadorController::registrar', ['filter' => 'SesionDirector']);
+$routes->get('RegistrarJugadorController/obtenerEquiposPorGenero/(:segment)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1', ['filter' => 'SesionDirector']);
+$routes->get('obtenerEquiposPorGenero/(:any)', 'RegistrarJugadorController::obtenerEquiposPorGenero/$1', ['filter' => 'SesionDirector']);
+$routes->get('RegistrarNuevoUsuario', 'RegistrarJugadorController::index', ['filter' => 'SesionDirector']);
 //Rutas Jugador
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores', ['filter' => 'SesionJugador']);
@@ -94,15 +94,15 @@ $routes->get('PerfilJugador', 'JugadorController::verJugadorUsuario', ['filter' 
 $routes->get('EditarUsuarioJugador', 'JugadorController::guardaJugadorUsuario', ['filter' => 'SesionJugador']);
 $routes->post('EditarUsuarioJugador', 'JugadorController::guardaJugadorUsuario', ['filter' => 'SesionJugador']);
 //Rutas Equipo Tecnico
-$routes->get('InicioEquipoTecnico', 'EquipoTecnicoController::Dashboard', ['filter' => 'SesionJugador']);
-$routes->get('JugadoresEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverJugadores', ['filter' => 'SesionJugador']);
-$routes->get('CampeonatosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverCampeonatos', ['filter' => 'SesionJugador']);
-$routes->get('PartidosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverPartidos', ['filter' => 'SesionJugador']);
-$routes->get('EstadisticasEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEstadisticas', ['filter' => 'SesionJugador']);
-$routes->get('EquipoTecnicoEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEquipoTecnico', ['filter' => 'SesionJugador']);
-$routes->get('PerfilEquipoTecnico', 'EquipoTecnicoController::verEquipoTecnicoUsuario', ['filter' => 'SesionJugador']);
-$routes->get('EditarUsuarioEquipoTecnico', 'EquipoTecnicoController::guardaEquipoTecnicoUsuario', ['filter' => 'SesionJugador']);
-$routes->post('EditarUsuarioEquipoTecnico', 'EquipoTecnicoController::guardaEquipoTecnicoUsuario', ['filter' => 'SesionJugador']);
+$routes->get('InicioEquipoTecnico', 'EquipoTecnicoController::Dashboard', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('JugadoresEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverJugadores', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('CampeonatosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverCampeonatos', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('PartidosEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverPartidos', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('EstadisticasEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEstadisticas', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('EquipoTecnicoEquipoTecnico', 'EquipoTecnicoController::equipotecnicoverEquipoTecnico', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('PerfilEquipoTecnico', 'EquipoTecnicoController::verEquipoTecnicoUsuario', ['filter' => 'SesionEquipoTecnico']);
+$routes->get('EditarUsuarioEquipoTecnico', 'EquipoTecnicoController::guardaEquipoTecnicoUsuario', ['filter' => 'SesionEquipoTecnico']);
+$routes->post('EditarUsuarioEquipoTecnico', 'EquipoTecnicoController::guardaEquipoTecnicoUsuario', ['filter' => 'SesionEquipoTecnico']);
 //Botones Admin
 $routes->get('AdminDashboard/borrarUsuario', 'AdminDashboard::borrarUsuario', ['filter' => 'SesionAdmin']);
 $routes->get('AdminDashboard/borrarEquipo', 'AdminDashboard::borrarEquipo', ['filter' => 'SesionAdmin']);

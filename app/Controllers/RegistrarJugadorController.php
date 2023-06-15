@@ -55,7 +55,10 @@ class RegistrarJugadorController extends BaseController
     public function registrarUsuario()
     {
         $db = \Config\Database::connect();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
         $usuario = new UsuarioModel();
+
 
         if ($this->request->getMethod() === 'post') {
             $postData = $this->request->getPost();
@@ -68,14 +71,22 @@ class RegistrarJugadorController extends BaseController
                 'run' => $postData['run'],
                 'direccion' => $postData['direccion'],
                 'telefono' => $postData['telefono'],
-                'password_hash' => '123456', // Cambiar por la forma adecuada de almacenar las contraseñas en tu aplicación
+                $password = bin2hex($encrypter->encrypt(123456)),
+                'password_hash' => $password,
                 'rol' => 'jugador',
-                'jugador_id_fk' => $jugadorId,
+                'jugador_id_fk' => $jugador_id,
             ];
 
             $usuario->save($usuarioData);
 
             return redirect()->to('/RegistrarJugadorController/index')->with('success', 'Usuario registrado exitosamente');
+        }
+        else{
+            $data = [
+                'title' => 'Registrar nuevo usuario',
+            ];
+
+            return view('direccion/registrar_nuevo_usuario', $data); 
         }
     }
 

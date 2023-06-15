@@ -1,6 +1,20 @@
 <?= $this->extend('layout/direccion_template') ?>
 
 <?= $this->section('direccion_contenido') ?>
+<?php if(session('success')): ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?= session('success') ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<script>
+setTimeout(function() {
+    $('.alert').alert('close');
+}, 2000);
+</script>
+<?php endif; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,12 +46,12 @@
 
         <div class="form-group">
             <label for="posicion">Posición:</label>
-            <input type="text" class="form-control" id="posicion" name="posicion">
+            <input type="text" class="form-control" id="posicion" name="posicion" required>
         </div>
 
         <div class="form-group">
             <label for="monto">Sueldo o Ayuda economica:</label>
-            <input type="text" class="form-control" id="monto" name="monto">
+            <input type="text" class="form-control" id="monto" name="monto" required>
         </div>
 
         <div class="form-group">
@@ -49,7 +63,7 @@
 
         <div class="form-group">
             <label for="numero_camiseta">Numero de camiseta:</label>
-            <input type="text" class="form-control" id="numero_camiseta" name="numero_camiseta">
+            <input type="text" class="form-control" id="numero_camiseta" name="numero_camiseta" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Registrar</button>

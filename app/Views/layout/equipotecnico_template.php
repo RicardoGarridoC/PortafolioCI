@@ -50,6 +50,9 @@
                                 <li>
                                     <a href="<?php echo base_url('EquipoTecnicoEquipoTecnico')?>" class="nav-link px-0"> <i class="fs-4 bi-person-gear"></i><span class=" hide-on-small d-none d-sm-inline">Equipo Tecnico</span></a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url(''); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class="hide-on-small d-none d-sm-inline">Registrar Nuevo Miembro</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li>
