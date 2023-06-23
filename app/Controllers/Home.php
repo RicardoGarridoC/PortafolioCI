@@ -487,9 +487,6 @@ class Home extends BaseController
                             //redirecciona a vista de jugador
                             return redirect()->to(base_url() . 'InicioJugador');
 
-                        case 'entrenador':
-                            //redirecciona a vista de entrenador
-                            return redirect()->to(base_url() . 'InicioEquipoTecnico');
 
                         case 'equipo_tecnico':
                             //redirecciona a vista de equipo_tecnico
