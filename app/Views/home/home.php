@@ -69,13 +69,16 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-            <img src="<?= base_url()?>public/images/paginamoose.jpg" class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/foto portada 2.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="<?= base_url()?>public/images/equipoalce.jpg" class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/foto portada 4.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="<?= base_url()?>public/images/estadio2.jpg" class="d-block w-100" alt="...">
+            <img src="<?= base_url()?>public/images/foto portada 3.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="<?= base_url()?>public/images/portada los alces 1.png" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">

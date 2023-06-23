@@ -87,9 +87,6 @@
                                     <a href="<?php echo base_url('AgregarSponsor') ?>" class="nav-link px-0">  <i class="fs-4 bi-patch-plus"></i> <span class=" hide-on-small d-none d-sm-inline">Sponsors</span></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('IngresosEspeciales') ?>" class="nav-link px-0">  <i class="fs-4 bi-cash"></i> <span class=" hide-on-small d-none d-sm-inline">Especiales</span></a>
-                                </li>
-                                <li>
                                     <a href="<?php echo base_url('HistorialPagosDireccion') ?>" class="nav-link px-0">  <i class="fs-4 bi-coin"></i> <span class=" hide-on-small d-none d-sm-inline">Pago Socios</span></a>
                                 </li>
                             </ul>
@@ -99,16 +96,16 @@
                                 <i class="fs-4 bi-box-arrow-up-right"></i> <span class="hide-on-small ms-1 d-none d-sm-inline">Egresos</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="<?php echo base_url('PagoJugadores'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Jugadores</span></a>
+                                    <a href="<?php echo base_url('PagoJugadores'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Pago sueldo Jugadores</span></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('PagoEquipoTecnico') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Equipo Técnico</span></a>
+                                    <a href="<?php echo base_url('PagoEquipoTecnico') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Pago sueldo Equipo Técnico</span></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('PagoDirigente') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Dirigentes</span></a>
+                                    <a href="<?php echo base_url('PagoDirigente') ?>" class="nav-link px-0">  <i class="fs-4 bi-person-add"></i> <span class=" hide-on-small d-none d-sm-inline">Pago sueldo Dirigentes</span></a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('PagoMensualidadAnfa') ?>" class="nav-link px-0">  <i class="fs-4 bi-plus-circle"></i> <span class=" hide-on-small d-none d-sm-inline">Anfa</span></a>
+                                    <a href="<?php echo base_url('PagoMensualidadAnfa') ?>" class="nav-link px-0">  <i class="fs-4 bi-plus-circle"></i> <span class=" hide-on-small d-none d-sm-inline">Pago mensualidad Anfa</span></a>
                                 </li>
                             </ul>
                         </li>

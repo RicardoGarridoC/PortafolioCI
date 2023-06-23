@@ -16,15 +16,23 @@ setTimeout(function() {
 </script>
 <?php endif; ?>
 
-<h2>Registro de usuario</h2>
+<h2>Registro de usuario para equipo tecnico</h2>
 
-<form method="post" action="<?= base_url('CompraJugadorController/registrarUsuario') ?>">
+<form method="post" action="<?= base_url('RegistrarEquipoTecnicoController/registrarUsuarioEquipoTecnico') ?>">
     <div class="form-group">
-        <label>Email del Jugador</label>
+        <label for="nombres">Nombres:</label>
+        <input type="text" class="form-control" id="nombres" name="nombres" required>
+    </div>
+    <div class="form-group">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
         <input type="email" name="email" class="form-control" required>
     </div>
     <div class="form-group">
-        <label>RUT del Jugador (sin puntos y con guion)</label>
+        <label>RUT (sin puntos y con guion)</label>
         <input type="text" name="run" class="form-control" required>
     </div>
     <div class="form-group">

@@ -38,9 +38,9 @@ setTimeout(function() {
         </div>
 
         <div class="form-group">
-            <label for="equipo_origen">Equipo de origen:</label>
-            <select name="equipo_origen" id="equipo_origen" class="form-control" required>
-                <option value="null">No aplica</option>
+            <label for="equipo_origen">Equipo origen:</label>
+            <select id="equipo_origen" name="equipo_origen" class="form-control">
+                <!-- Los equipos origen se cargarán aquí mediante AJAX -->
             </select>
         </div>
 
@@ -60,23 +60,23 @@ setTimeout(function() {
     <script>
     $(document).ready(function(){
         $.ajax({
-            url: '<url_del_endpoint>',
+            url: '<?= base_url('RegistrarEquipoTecnicoController/obtenerEquipos/') ?>',
             type: 'GET',
-            success: function(data){
-                var equipos = JSON.parse(data);
-                equipos.forEach(function(equipo){
-                    if (equipo.id !== 10 && equipo.id !== 14) {
-                        $('#equipo_origen').append('<option value="' + equipo.id + '">' + equipo.nombre + '</option>');
-                    }
-                });
-            },
-            error: function(){
-                console.log("No se ha podido obtener la información");
-            }
+            dataType: 'json',
+            success: function(response) {
+                    var $equipo_origen = $('#equipo_origen');
+                    $equipo_origen.empty();
+                    $equipo_origen.append('<option value="">Seleccione el equipo origen</option>');
+                    $.each(response, function(index, equipo) {
+                        $equipo_origen.append('<option value="' + equipo.id + '">' + equipo.nombre + '</option>');
+                    });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
         });
     });
     </script>
-
 </body>
 </html>
 <?= $this->endSection() ?>

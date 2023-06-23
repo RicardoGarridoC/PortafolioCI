@@ -25,7 +25,7 @@ class RegistrarEquipoTecnicoController extends BaseController
             $postData = $this->request->getPost();
             $miembroData = [
                 'cargo' => $postData['cargo'],
-                'equipo_proviene_id_fk' => $postData['equipo_origen'] === 'sin_equipo' ? null : $postData['equipo_origen'],
+                'equipo_proviene_fk' => $postData['equipo_origen'] === 'sin_equipo' ? null : $postData['equipo_origen'],
                 'sueldo' => $postData['sueldo'],
                 'valor_hora_extra' => $postData['valor_hora_extra'],
                 'horas_extra_mes' => 0,
@@ -37,19 +37,19 @@ class RegistrarEquipoTecnicoController extends BaseController
 
             session()->set('equipo_tecnico_id', $lastInsertedId);
 
-            return redirect()->to('/RegistrarEquipoTecnicoController/registrarUsuario')->with('success', 'Miembro del equipo técnico registrado exitosamente');
+            return redirect()->to('/RegistrarEquipoTecnicoController/registrarUsuarioEquipoTecnico')->with('success', 'Miembro del equipo técnico registrado exitosamente');
         }
     }
 
     public function obtenerEquipos()
     {
         $db = \Config\Database::connect();
-        $query = "SELECT id, nombre FROM equipos WHERE id != 10 AND id != 14";
+        $query = "SELECT id, nombre FROM equipos WHERE id != 10 and id != 14";
         $equipos = $db->query($query)->getResultArray();
         echo json_encode($equipos);
     }
 
-    public function registrarUsuario()
+    public function registrarUsuarioEquipoTecnico()
     {
         $db = \Config\Database::connect();
         $usuario = new UsuarioModel();
@@ -81,7 +81,7 @@ class RegistrarEquipoTecnicoController extends BaseController
                 'title' => 'Registrar nuevo usuario',
             ];
 
-            return view('direccion/registrar_nuevo_usuario', $data); 
+            return view('direccion/registrar_usuario', $data); 
         }
     }
 

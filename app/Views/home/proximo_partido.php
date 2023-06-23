@@ -24,8 +24,7 @@
     <br>
     <div class="container probando">
         <?php foreach ($results9 as $row9) : ?>
-            <h2 class="text-center h5-sm">Partido <?php echo $row9['id']; ?></h2>
-            <h4 class="text-center h6-sm">Fecha: <?php echo $row9['fecha']; ?></h4>
+            <h3 class="text-center h6-sm">Fecha: <?php echo $row9['fecha']; ?></h4>
             <h4 class="text-center h6-sm">Ubicacion: <?php echo $row9['cancha']; ?></h4>
             <div class="row">
                 <div class="col-12">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-06-2023 a las 20:13:23
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 23-06-2023 a las 06:29:14
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -124,7 +124,7 @@ CREATE TABLE `dirigente` (
 --
 
 INSERT INTO `dirigente` (`id`, `sueldo`) VALUES
-(1, '1000000');
+(1, 1000000);
 
 -- --------------------------------------------------------
 
@@ -165,25 +165,25 @@ CREATE TABLE `egresos` (
 --
 
 INSERT INTO `egresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`) VALUES
-(20, 'sueldo_e_tecnico', '420000', '2023-06-12', 'Sueldo de equipo tecnico Emilio Gutierrez'),
-(21, 'sueldo_e_tecnico', '420000', '2023-06-12', 'Sueldo de equipo tecnico Emilio Gutierrez'),
-(22, 'sueldo_e_tecnico', '420000', '2023-06-12', 'Sueldo de equipo tecnico Emilio Gutierrez'),
-(23, 'sueldo_e_tecnico', '350000', '2023-06-12', 'Sueldo de equipo tecnico Andres Mundi'),
-(24, 'sueldo_dirigentes', '1000000', '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
-(25, 'sueldo_dirigentes', '1000000', '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
-(26, 'pago_mensualidad', '126526', '2023-06-12', 'Pago de mensualidad ANFA mes de June 2023'),
-(27, 'impuesto_venta', '2500000', '2023-06-13', 'Comisión venta jugador Paulo Neyman ANFA'),
-(28, 'impuesto_venta', '2500000', '2023-06-13', 'Comisión venta jugador Paulo Neyman Asociación del Bio Bio'),
-(29, 'sueldo_jugadores', '150000', '2023-06-13', 'Pago de sueldo jugador Kevin Ronalducci'),
-(30, 'sueldo_e_tecnico', '640000', '2023-06-13', 'Sueldo de equipo tecnico Jorge Sampaoli'),
-(31, 'sueldo_dirigentes', '1000000', '2023-06-13', 'Pago de sueldo dirigente Andres  Peregrini'),
-(32, 'sueldo_jugadores', '150000', '2023-06-14', 'Pago de sueldo jugador Kevin Ronalducci'),
-(33, 'compra_jugadores', '99990', '2023-06-14', 'Compra de jugador Ricardito Garrido origen Dragones Rojos'),
-(34, 'compra_jugadores', '888881', '2023-06-14', 'Compra de jugador tornado sdasd origen Tornado Rojo'),
-(35, 'compra_jugadores', '6666666', '2023-06-14', 'Compra de jugador Probando  Jugador origen Dragones Rojos'),
-(36, 'compra_jugadores', '555559', '2023-06-14', 'Compra de jugador Probando Clave origen Rusia Dortmund'),
-(37, 'compra_jugadores', '555657575', '2023-06-14', 'Compra de jugador Clave Probando origen Concepcion United'),
-(38, 'compra_jugadores', '293434', '2023-06-14', 'Compra de jugador Tornadito Rojo origen Tornado Rojo');
+(20, 'sueldo_e_tecnico', 420000, '2023-06-12', 'Sueldo de equipo tecnico Emilio Gutierrez'),
+(21, 'sueldo_e_tecnico', 420000, '2023-06-12', 'Sueldo de equipo tecnico Emilio Gutierrez'),
+(22, 'sueldo_e_tecnico', 420000, '2023-06-12', 'Sueldo de equipo tecnico Emilio Gutierrez'),
+(23, 'sueldo_e_tecnico', 350000, '2023-06-12', 'Sueldo de equipo tecnico Andres Mundi'),
+(24, 'sueldo_dirigentes', 1000000, '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
+(25, 'sueldo_dirigentes', 1000000, '2023-06-12', 'Pago de sueldo dirigente Andres  Peregrini'),
+(26, 'pago_mensualidad', 126526, '2023-06-12', 'Pago de mensualidad ANFA mes de June 2023'),
+(27, 'impuesto_venta', 2500000, '2023-06-13', 'Comisión venta jugador Paulo Neyman ANFA'),
+(28, 'impuesto_venta', 2500000, '2023-06-13', 'Comisión venta jugador Paulo Neyman Asociación del Bio Bio'),
+(29, 'sueldo_jugadores', 150000, '2023-06-13', 'Pago de sueldo jugador Kevin Ronalducci'),
+(30, 'sueldo_e_tecnico', 640000, '2023-06-13', 'Sueldo de equipo tecnico Jorge Sampaoli'),
+(31, 'sueldo_dirigentes', 1000000, '2023-06-13', 'Pago de sueldo dirigente Andres  Peregrini'),
+(32, 'sueldo_jugadores', 150000, '2023-06-14', 'Pago de sueldo jugador Kevin Ronalducci'),
+(33, 'compra_jugadores', 99990, '2023-06-14', 'Compra de jugador Ricardito Garrido origen Dragones Rojos'),
+(34, 'compra_jugadores', 888881, '2023-06-14', 'Compra de jugador tornado sdasd origen Tornado Rojo'),
+(35, 'compra_jugadores', 6666666, '2023-06-14', 'Compra de jugador Probando  Jugador origen Dragones Rojos'),
+(36, 'compra_jugadores', 555559, '2023-06-14', 'Compra de jugador Probando Clave origen Rusia Dortmund'),
+(37, 'compra_jugadores', 555657575, '2023-06-14', 'Compra de jugador Clave Probando origen Concepcion United'),
+(38, 'compra_jugadores', 293434, '2023-06-14', 'Compra de jugador Tornadito Rojo origen Tornado Rojo');
 
 -- --------------------------------------------------------
 
@@ -255,13 +255,12 @@ CREATE TABLE `equipo_tecnico` (
 --
 
 INSERT INTO `equipo_tecnico` (`id`, `cargo`, `equipo_proviene_fk`, `sueldo`, `valor_hora_extra`, `horas_extras_mes`) VALUES
-(1, 'entrenador', NULL, '600000.00', '10000.00', 4),
-(2, 'asistente_entrenador', 1, '350000.00', '3000.00', 0),
-(3, 'preparador_fisico', 8, '400000.00', '4000.00', 5),
-(4, 'utilero', NULL, '350000.00', '3000.00', 0),
-(5, 'kinesiologo', NULL, '400000.00', '4000.00', 5),
-(6, 'entrenador', NULL, '22.00', '131.00', 0),
-(7, 'entrenador', 11, '1000000.00', '13100.00', 0);
+(1, 'entrenador', NULL, 600000.00, 10000.00, 4),
+(2, 'asistente_entrenador', 1, 350000.00, 3000.00, 0),
+(3, 'preparador_fisico', 8, 400000.00, 4000.00, 5),
+(4, 'utilero', NULL, 350000.00, 3000.00, 0),
+(5, 'kinesiologo', NULL, 400000.00, 4000.00, 5),
+(16, 'utilero', 3, 400000.00, 3000.00, 0);
 
 -- --------------------------------------------------------
 
@@ -346,20 +345,21 @@ CREATE TABLE `ingresos` (
 --
 
 INSERT INTO `ingresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`, `id_usuario_fk`) VALUES
-(17, 'sponsor', '200000', '2023-06-08', 'McDonalds', NULL),
-(18, 'venta_jugadores', '1233', '2023-06-13', 'Venta de jugador Andres Manchez', NULL),
-(22, 'sponsor', '200000', '2023-06-13', 'McDonalds', NULL),
-(23, 'actividades_extra', '5000008', '2023-06-13', 'Detallesssl', NULL),
-(24, 'actividades_extra', '200000', '2023-06-13', '', NULL),
-(25, 'actividades_extra', '123123222', '2023-06-13', '', NULL),
-(26, 'actividades_extra', '11111111', '2023-06-13', '', NULL),
-(27, 'actividades_extra', '9999999999', '2023-06-13', '', NULL),
-(28, 'actividades_extra', '8886', '2023-06-13', 'Ingresos Especiales', NULL),
-(29, 'sponsor', '200000', '2023-06-14', 'McDonalds', NULL),
-(30, 'sponsor', '200000', '2023-06-15', 'McDonalds', NULL),
-(31, 'mensualidad', '30000', '2023-06-14', 'Pago de mensualidad', 43),
-(69, 'mensualidad', '30000', '2023-06-15', 'Pago de mensualidad', 41),
-(70, 'mensualidad', '30000', '2023-06-15', 'Pago de mensualidad', 42);
+(17, 'sponsor', 200000, '2023-06-08', 'McDonalds', NULL),
+(18, 'venta_jugadores', 1233, '2023-06-13', 'Venta de jugador Andres Manchez', NULL),
+(22, 'sponsor', 200000, '2023-06-13', 'McDonalds', NULL),
+(23, 'actividades_extra', 5000008, '2023-06-13', 'Detallesssl', NULL),
+(24, 'actividades_extra', 200000, '2023-06-13', '', NULL),
+(25, 'actividades_extra', 123123222, '2023-06-13', '', NULL),
+(26, 'actividades_extra', 11111111, '2023-06-13', '', NULL),
+(27, 'actividades_extra', 9999999999, '2023-06-13', '', NULL),
+(28, 'actividades_extra', 8886, '2023-06-13', 'Ingresos Especiales', NULL),
+(29, 'sponsor', 200000, '2023-06-14', 'McDonalds', NULL),
+(30, 'sponsor', 200000, '2023-06-15', 'McDonalds', NULL),
+(31, 'mensualidad', 30000, '2023-06-14', 'Pago de mensualidad', 43),
+(69, 'mensualidad', 30000, '2023-06-15', 'Pago de mensualidad', 41),
+(70, 'mensualidad', 30000, '2023-06-15', 'Pago de mensualidad', 42),
+(71, 'mensualidad', 30000, '2023-06-22', 'Pago de mensualidad', 4);
 
 -- --------------------------------------------------------
 
@@ -384,48 +384,48 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `tipo`, `sueldo`, `ayuda_economica`, `equipo_proviene_id_fk`, `numero_camiseta`, `genero`) VALUES
-(1, 'Delantero', 20, 'profesional', '400000.00', '0.00', 10, 7, 'femenino'),
-(2, 'Defensa', 15, 'profesional', '300000.00', '0.00', 10, 8, 'femenino'),
-(3, 'Mediocampista', 18, 'profesional', '300000.00', '0.00', 10, 11, 'femenino'),
-(4, 'Portero', 10, 'aficionado', NULL, '150000.00', 10, 10, 'femenino'),
-(5, 'Centrodelantero', 10, 'profesional', '250000.00', '0.00', NULL, 50, 'femenino'),
-(6, 'Lateral', 1, 'aficionado', NULL, '200000.00', NULL, 44, 'femenino'),
-(7, 'Delantero', 17, 'profesional', '500000.00', '0.00', 10, 9, 'femenino'),
-(8, 'Mediocampista', 12, 'profesional', '200000.00', '0.00', 10, 1, 'femenino'),
-(9, 'Defensa', 18, 'profesional', '175000.00', '0.00', 10, 4, 'femenino'),
-(10, 'Delantero', 20, 'profesional', '220000.00', '0.00', 10, 22, 'femenino'),
-(11, 'Mediocampista', 17, 'profesional', '180000.00', '0.00', 10, 20, 'femenino'),
-(12, 'Portero', 10, 'profesional', '170000.00', '0.00', 10, 24, 'femenino'),
-(13, 'Mediocampista', 22, 'aficionado', '225000.00', '151000.00', 10, 30, 'femenino'),
-(14, 'Mediocampista', 5, 'aficionado', NULL, '0.00', NULL, 23, 'femenino'),
-(15, 'Defensa', 10, 'profesional', '100000.00', '0.00', NULL, 18, 'femenino'),
-(16, 'Mediocampista', 15, 'aficionado', NULL, '150000.00', NULL, 19, 'femenino'),
-(17, 'Defensa', 3, 'aficionado', NULL, '0.00', NULL, 21, 'femenino'),
-(18, 'Delantero', 10, 'profesional', '200000.00', '0.00', NULL, 25, 'femenino'),
-(19, 'Portero', 3, 'aficionado', NULL, '200000.00', NULL, 12, 'masculino'),
-(20, 'Delantero', 4, 'aficionado', NULL, '150000.00', NULL, 10, 'masculino'),
-(21, 'Delantero', 2, 'aficionado', NULL, '300000.00', NULL, 9, 'masculino'),
-(22, 'Defensa', 4, 'aficionado', NULL, '200000.00', NULL, 8, 'masculino'),
-(23, 'Defensa', 5, 'profesional', '200000.00', NULL, 15, 11, 'masculino'),
-(24, 'Defensa', 3, 'aficionado', NULL, '200000.00', NULL, 16, 'masculino'),
-(25, 'Mediocampista', 2, 'profesional', '150000.00', NULL, NULL, 22, 'masculino'),
-(26, 'Mediocampista', 4, 'aficionado', NULL, '150000.00', NULL, 30, 'masculino'),
-(27, 'Lateral', 6, 'aficionado', NULL, '50000.00', 18, 24, 'masculino'),
-(28, 'Lateral', 2, 'profesional', '150000.00', NULL, NULL, 19, 'masculino'),
-(29, 'Delantero', 1, 'aficionado', NULL, '46000.00', NULL, 40, 'masculino'),
-(39, 'Defensa', 0, 'profesional', '888887.00', NULL, 17, 232, 'masculino'),
-(40, 'Defensa', 0, 'aficionado', NULL, '10000.00', 1, 31, 'femenino'),
-(41, 'Defensa', 0, 'profesional', '55557.00', NULL, 15, 2211, 'masculino'),
-(42, 'Delantero', 0, 'profesional', '99999999.99', NULL, 19, 674, 'masculino'),
-(43, 'Defensa', 0, 'profesional', '33224.00', NULL, 17, 322, 'masculino'),
-(44, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
-(45, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
-(46, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
-(47, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
-(48, 'Defensa', 0, 'aficionado', NULL, '1.00', 18, 88, 'masculino'),
-(49, 'Delantero', 0, 'profesional', '1.00', NULL, 12, 88, 'femenino'),
-(51, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 0, 'masculino'),
-(52, 'Defensa', 0, 'profesional', '200000.00', NULL, 16, 78, 'masculino');
+(1, 'Delantero', 20, 'profesional', 400000.00, 0.00, 10, 7, 'femenino'),
+(2, 'Defensa', 15, 'profesional', 300000.00, 0.00, 10, 8, 'femenino'),
+(3, 'Mediocampista', 18, 'profesional', 300000.00, 0.00, 10, 11, 'femenino'),
+(4, 'Portero', 10, 'aficionado', NULL, 150000.00, 10, 10, 'femenino'),
+(5, 'Centrodelantero', 10, 'profesional', 250000.00, 0.00, NULL, 50, 'femenino'),
+(6, 'Lateral', 1, 'aficionado', NULL, 200000.00, NULL, 44, 'femenino'),
+(7, 'Delantero', 17, 'profesional', 500000.00, 0.00, 10, 9, 'femenino'),
+(8, 'Mediocampista', 12, 'profesional', 200000.00, 0.00, 10, 1, 'femenino'),
+(9, 'Defensa', 18, 'profesional', 175000.00, 0.00, 10, 4, 'femenino'),
+(10, 'Delantero', 20, 'profesional', 220000.00, 0.00, 10, 22, 'femenino'),
+(11, 'Mediocampista', 17, 'profesional', 180000.00, 0.00, 10, 20, 'femenino'),
+(12, 'Portero', 10, 'profesional', 170000.00, 0.00, 10, 24, 'femenino'),
+(13, 'Mediocampista', 22, 'aficionado', 225000.00, 151000.00, 10, 30, 'femenino'),
+(14, 'Mediocampista', 5, 'aficionado', NULL, 0.00, NULL, 23, 'femenino'),
+(15, 'Defensa', 10, 'profesional', 100000.00, 0.00, NULL, 18, 'femenino'),
+(16, 'Mediocampista', 15, 'aficionado', NULL, 150000.00, NULL, 19, 'femenino'),
+(17, 'Defensa', 3, 'aficionado', NULL, 0.00, NULL, 21, 'femenino'),
+(18, 'Delantero', 10, 'profesional', 200000.00, 0.00, NULL, 25, 'femenino'),
+(19, 'Portero', 3, 'aficionado', NULL, 200000.00, NULL, 12, 'masculino'),
+(20, 'Delantero', 4, 'aficionado', NULL, 150000.00, NULL, 10, 'masculino'),
+(21, 'Delantero', 2, 'aficionado', NULL, 300000.00, NULL, 9, 'masculino'),
+(22, 'Defensa', 4, 'aficionado', NULL, 200000.00, NULL, 8, 'masculino'),
+(23, 'Defensa', 5, 'profesional', 200000.00, NULL, 15, 11, 'masculino'),
+(24, 'Defensa', 3, 'aficionado', NULL, 200000.00, NULL, 16, 'masculino'),
+(25, 'Mediocampista', 2, 'profesional', 150000.00, NULL, NULL, 22, 'masculino'),
+(26, 'Mediocampista', 4, 'aficionado', NULL, 150000.00, NULL, 30, 'masculino'),
+(27, 'Lateral', 6, 'aficionado', NULL, 50000.00, 18, 24, 'masculino'),
+(28, 'Lateral', 2, 'profesional', 150000.00, NULL, NULL, 19, 'masculino'),
+(29, 'Delantero', 1, 'aficionado', NULL, 46000.00, NULL, 40, 'masculino'),
+(39, 'Defensa', 0, 'profesional', 888887.00, NULL, 17, 232, 'masculino'),
+(40, 'Defensa', 0, 'aficionado', NULL, 10000.00, 1, 31, 'femenino'),
+(41, 'Defensa', 0, 'profesional', 55557.00, NULL, 15, 2211, 'masculino'),
+(42, 'Delantero', 0, 'profesional', 99999999.99, NULL, 19, 674, 'masculino'),
+(43, 'Defensa', 0, 'profesional', 33224.00, NULL, 17, 322, 'masculino'),
+(44, 'Defensa', 0, 'profesional', 1.00, NULL, 16, 89, 'masculino'),
+(45, 'Defensa', 0, 'profesional', 1.00, NULL, 16, 89, 'masculino'),
+(46, 'Defensa', 0, 'profesional', 1.00, NULL, 16, 89, 'masculino'),
+(47, 'Defensa', 0, 'profesional', 1.00, NULL, 16, 89, 'masculino'),
+(48, 'Defensa', 0, 'aficionado', NULL, 1.00, 18, 88, 'masculino'),
+(49, 'Delantero', 0, 'profesional', 1.00, NULL, 12, 88, 'femenino'),
+(51, 'Defensa', 0, 'profesional', 1.00, NULL, 16, 0, 'masculino'),
+(52, 'Defensa', 0, 'profesional', 200000.00, NULL, 16, 78, 'masculino');
 
 -- --------------------------------------------------------
 
@@ -530,12 +530,12 @@ CREATE TABLE `partidos` (
 --
 
 INSERT INTO `partidos` (`id`, `equipo_local_fk`, `equipo_visita_fk`, `ubicacion_fk`, `fecha`, `campeonato_id_fk`) VALUES
-(6, 10, 11, 1, '2023-06-10 13:00:00', 1),
-(7, 10, 1, 1, '2023-06-06 12:00:00', 1),
+(6, 10, 11, 1, '2023-06-21 13:00:00', 1),
+(7, 10, 1, 1, '2023-06-20 12:00:00', 1),
 (8, 14, 18, 1, '2023-06-10 12:00:00', 2),
 (9, 14, 19, 1, '2023-06-08 15:00:00', 2),
 (10, 10, 2, 1, '2023-06-17 13:30:00', 2),
-(11, 14, 16, 1, '2023-07-03 15:00:00', 2);
+(11, 14, 16, 1, '2023-07-04 15:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -604,9 +604,23 @@ CREATE TABLE `socios` (
 --
 
 INSERT INTO `socios` (`id`, `fecha_pago`) VALUES
-(1, '2023-04-20'),
-(4, '2023-04-20'),
-(5, '2023-06-09');
+(1, '2023-04-20');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `souvenirs`
+--
+
+CREATE TABLE `souvenirs` (
+  `id` int(11) NOT NULL,
+  `producto` varchar(100) NOT NULL,
+  `talla` enum('S','M','L','XL','XXL') DEFAULT NULL,
+  `precio` decimal(10,0) NOT NULL,
+  `genero` enum('Hombre','Mujer') DEFAULT NULL,
+  `detalle` text DEFAULT NULL,
+  `foto` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -626,9 +640,9 @@ CREATE TABLE `sponsors` (
 --
 
 INSERT INTO `sponsors` (`id`, `nombre`, `monto_por_partido`, `condiciones`) VALUES
-(1, 'McDonalds', '200000', 'Ninguna'),
-(2, 'McDonaldss', '500000', 'Ninguna'),
-(3, 'emp', '454545', 'Condicion: Dar Plata');
+(1, 'McDonalds', 200000, 'Ninguna'),
+(2, 'McDonaldss', 500000, 'Ninguna'),
+(3, 'emp', 454545, 'Condicion: Dar Plata');
 
 -- --------------------------------------------------------
 
@@ -675,10 +689,10 @@ CREATE TABLE `traspaso` (
 --
 
 INSERT INTO `traspaso` (`id`, `nombre_jugador`, `equipo_origen`, `equipo_destino`, `fecha_traspaso`, `monto`) VALUES
-(1, 'Arturo Mival', 'Los Alces FC M', 'Tigres Dorados', '2023-06-13', '1231231'),
-(2, 'Maite Fernandez', 'Los Alces FC F', 'Coyotes Salvajes', '2023-06-13', '9999999999'),
-(3, 'Andres Manchez', 'Los Alces FC M', 'Lobas Plateadas', '2023-06-13', '1233'),
-(4, 'Paulo Neyman', 'Los Alces FC M', 'Leonas Blancas', '2023-06-13', '10000000');
+(1, 'Arturo Mival', 'Los Alces FC M', 'Tigres Dorados', '2023-06-13', 1231231),
+(2, 'Maite Fernandez', 'Los Alces FC F', 'Coyotes Salvajes', '2023-06-13', 9999999999),
+(3, 'Andres Manchez', 'Los Alces FC M', 'Lobas Plateadas', '2023-06-13', 1233),
+(4, 'Paulo Neyman', 'Los Alces FC M', 'Leonas Blancas', '2023-06-13', 10000000);
 
 -- --------------------------------------------------------
 
@@ -707,8 +721,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion`, `telefono`, `password_hash`, `rol`, `socio_id_fk`, `jugador_id_fk`, `equipo_tecnico_id_fk`, `direccion_id_fk`) VALUES
-(3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, 'd038153e18469d76cd25266a1fdbff705512a7d3a629d6b705882c6af9209767e9b8bd963ff2339e0effd1b542f1425176bfad3c9300b6d768816e43ff308c2b22ba55fa7f2ef42d7444b9eee435e29e1598771d1b11', 'administrador', NULL, NULL, NULL, NULL),
-(4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, '86ad61534ee0e4c4ad6455764ba193d1c5bce2995a47bfd50f7d21688a76165b65b1b83d6fc60d4a3a0d936f88d6e10c9bf53bad9bd8447b5089894b913818c26e79b23e898c78689c75f6021918f4de3e5c19243fef', 'socio', 1, NULL, NULL, NULL),
+(3, 'Diego Matias', 'Servietti', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, 'd038153e18469d76cd25266a1fdbff705512a7d3a629d6b705882c6af9209767e9b8bd963ff2339e0effd1b542f1425176bfad3c9300b6d768816e43ff308c2b22ba55fa7f2ef42d7444b9eee435e29e1598771d1b11', 'administrador', NULL, NULL, NULL, NULL),
+(4, 'Ricardo', 'Garrido', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, '28d55e9e3f03238c05dae48c91de122cc2b87337e2d7373bc904b1a791de4c2744aec66927164fcf060b10a76c6b4cd60bc889b46b3868a48527d40aaf1021f0c803a7ad2c25c7fa826d41a2e000974e65e78e8452cb', 'socio', 1, NULL, NULL, NULL),
 (5, 'Humberta', 'Suazo', 'chupete.suazo@gmail.com', '112584128-K', 'Avenida siempre viva 123', 11122258, '6ac0c2e3e24a2c48736f51c42af167a175b8617d91f5d928f095d4aa40f106c6c674a0a93901396e84332ffce25d8f01cc3a6c2adfa01ed087763cb5dc386a640c6442664d5485e0590001c6703cb9749fdfb1bd13c9', 'jugador', NULL, 1, NULL, NULL),
 (6, 'Maite', 'Fernandez', 'matigol@gmail.com', '44487158-8', 'calle 123', 111228420, '4251d90af3706b68c96d5c616348bed521ecc9dead4efce3466a5ca6c4341a20565a8baad3f4254ea3cec8ceb5c30470f4e6069300cbe241418935f70fe7ee2b0b2800e778dd7c3d6973594844c237ffa5f4da67f4ff', 'jugador', NULL, 2, NULL, NULL),
 (7, 'Marcela', 'Salas', 'msalas@gmail.com', '11557848-8', 'chillan', 4455842, 'f7a083febf922f8152a9655b4467819112bda1cfbc949d085ee60361074d0b9de8c8181fa3e94816518bd53123f1c083a5defa1b621e245b1ad80f4c8dca56d6944824e4348883dac5b45e0c083fdf7f200ba823995f', 'jugador', NULL, 11, NULL, NULL),
@@ -745,16 +759,9 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion
 (39, 'Robert', 'Leva', 'robertleva@gmail.com', '27092037-9', ' Avenida De Gea 654', 87654321, '31760045a974e97b7f580f440904a8ceb5570b8a9acf47426e470eb8a3554f39eda8217fdb3a0b610a7ee61cebbfc32e3d0c8b2f3053c6b74cb3bd9a3f9628cac999d633eab7cd8d2aa36d9ac07edcb8362782051a4a', 'jugador', NULL, 28, NULL, NULL),
 (40, 'Arturo', 'Mival', 'amival@gmail.com', '28011185-4', 'Calle Francia 68', 98765432, '905007cbcd9c898d326b187d0860f8f0c42b1493ac3e489e36d75f0ea8cd1501bef466d45020b53ff5e409f49abf089b1bade9a92c0270b40801ce6ab8f6562dcec1f485ef702158bc7e7f1613bf33fa76d45f4783d5', 'jugador', NULL, 29, NULL, NULL),
 (41, 'Jorge', 'Valdibia', 'jvaldibia@gmail.com', '1231581-9', 'casa roja 123', 99885127, '3ae40fec330292d5cf555a8293c1142fed39efb70ab19230660162b92f83bb438d69d6dc36a7b21b1d0220c3a5377da5afbc2bdf3fc4f2eea936b0c184f76306940f6b9981f0d3fd96721422f0b60b055ccf4b0319b4', 'socio', NULL, NULL, NULL, NULL),
-(42, 'asdasd', 'asdasd', 'dieg.barros@duocuc.cl', '234234', 'dsfsdds', 234234, '9b183761be24fae1ebf03d9ae2aef316d759c77bbb6ad08bba2eaa483ce403f08e5565207bca6fca544a26f3b516ea882a0b7f91c3ea71cdc5cf88c27417a92580999a1f7c91a8d8dc00d2ad30b776f318668c', 'socio', NULL, NULL, NULL, NULL),
-(43, 'Probando', 'Probando 2', 'probando1@hotmail.com', '111231232', 'Clave 123456 o 123455', 2147483647, '3cc53b4f0929b03cfdb52091c90715ee4cd0b3883b42945beb8ec4360a89f0a80899b04ea556439a7212fcf178cd5afabfbe1ada95444226d5352034ed00d680beb254d9ec6642ad92746be0442da5f57ffa6a292b47', 'socio', NULL, NULL, NULL, NULL),
-(46, 'tornado', 'sdasd', 'probando3333333@gmail.com', '20150863-4', 'Pablo de Rokhasdd123 1231231', 2147483647, 'e401c84d57b23bf50151f4732d72bf4c7711a41e7e69c0b35e9d21b12211c8b32718f23570cb9dc8f67a6695aa42c0e938b53fd607843d4eebfe35d670f86847092ca6f179d0069d005503de6e32eeb4de9c57ac69b8', 'jugador', NULL, 39, NULL, NULL),
-(47, 'Probando ', 'Jugador', 'probandojugador2@hotmail.com', '12312322-2', 'sdsdsdddd', 33333333, '4b84a746e3f82c50cdfc5dd6c5b341d19286f279b9ef120453afe54bd8fd4da0cb7281225bde48775b24e8345854b35a381e86fb3b8b31c4a3480d5d34e58764bd40c6469daa2ee7c3c940d821f29678737d00706d4b', 'jugador', NULL, 40, NULL, NULL),
-(48, 'Probando', 'Clave', 'probando2@gmail.com', '12666878-0', 'Pablito', 95939444, 'c7ee042451c464d714b723dac74b9e5c750a1e3a609a2da0271ea9f9d92c867271be347416bdb7b1ccf3a2b08812248d0ad3102b260acd43caeda98fcd831b3695cd58ca55403341ee6301be5303cdd0b0573de6723e', 'jugador', NULL, 41, NULL, NULL),
-(49, 'Clave', 'Probando', 'registro@hotmail.com', '454343-4', 'Iyytt', 64544545, '7ee991ef9cdaee849d910e27156049ffc9fce57a1066c357006bef17eb91ec37ec3f6fdc0f958f9244e11a72a7e33df57f1126c4d00b6d744f4f02343730a6ed21105d7122cb9321babca9d0e765463157cbf0db2ba5', 'jugador', NULL, 42, NULL, NULL),
-(50, 'Tornadito', 'Rojo', 'tornado@gmail.com', '2923344-3', 'Pablo de Rokha 433', 34343444, '37d15f078854f89424543fc72baf62b74f8a3566240f3744231cba9f145d5e6678a4c7f7a413d768309bd507c36e2c045c893c0997a5d80d8319cbfa6804fef938af6885aac3a11c808199564e41237b4813b0ef763506', 'jugador', NULL, 43, NULL, NULL),
-(51, 'Probando', 'Probando 2', 'probando222221@hotmail.com', '1231233-K', 'ssdsdsd', 1231233, 'd8004b99ac33d26a6761b34aa9ba331d400c5a18560bd6e2364dced63e4497cbb310839bc009060f57f2d912195dda0ff7149f8731f18d4d7587b44d9f9c601c7ecaf55fef37e3cc609fa55d88e1df4f768c606b9cfe', 'jugador', NULL, 51, NULL, NULL),
-(52, 'wdasasdasd', 'asdasdsssd', 'asdasdasd@guoddd.cl', '19.532.588-2', 'assdsasddas', 2147483647, '1470cc9b137d1afe89a6606c20373a3d43b74199b9d1ebbf9c9421401f731bda2333a59a2a6416adf3396574315dc4cb3cc8dfb83ce338a4ccec3e8c93883e929aa5c152b7eefe8f80fec969fe183b9558623bc7c40d', 'jugador', NULL, 52, NULL, NULL),
-(53, 'Probando22', 'Probando 222', 'aperegriasdsdsdni@gmail.com', '20100863-2', 'asadasdsaasd', 1231231232, '75ff4120be7dfe5160a0bfe9471cf8c7af0c7f94bec40eb7779e49602a218fb9e96fb276d622eb3716f9845a48b0a365b9de78e1629eadbc843f632dc3a70d8ead6efc0200fcfd13d8205260d9d7fc8a9c1ab4c24698', 'jugador', NULL, NULL, NULL, NULL);
+(42, 'Diego', 'Barros', 'dieg.barros@duocuc.cl', '234234', 'dsfsdds', 234234, '9b183761be24fae1ebf03d9ae2aef316d759c77bbb6ad08bba2eaa483ce403f08e5565207bca6fca544a26f3b516ea882a0b7f91c3ea71cdc5cf88c27417a92580999a1f7c91a8d8dc00d2ad30b776f318668c', 'administrador', NULL, NULL, NULL, NULL),
+(43, 'Jorge', 'Salah', 'jsalah@gmail.com', '111231232', 'Clave 123456 o 123455', 2147483647, '3cc53b4f0929b03cfdb52091c90715ee4cd0b3883b42945beb8ec4360a89f0a80899b04ea556439a7212fcf178cd5afabfbe1ada95444226d5352034ed00d680beb254d9ec6642ad92746be0442da5f57ffa6a292b47', 'administrador', NULL, NULL, NULL, NULL),
+(62, 'Manuel', 'Orellana', 'morellana@gmail.com', '20245842-6', 'Villa la salud 123', 955364812, 'ae9463bb240725e24533a2ea65f371d77b2a1a1b4e3eddfa716560e3834af20c89ba9c597b0fd551738609b33ee6571446135b95e343ff0a0eb0d0081fd52c21aa2ef4827d4e3416b08a94fd622d695042252f460096', 'equipo_tecnico', NULL, NULL, 16, NULL);
 
 -- --------------------------------------------------------
 
@@ -772,7 +779,7 @@ CREATE TABLE `valor_utm` (
 --
 
 INSERT INTO `valor_utm` (`id`, `valor`) VALUES
-(1, '63263');
+(1, 63263);
 
 -- --------------------------------------------------------
 
@@ -799,7 +806,7 @@ CREATE TABLE `vista_partidos_hasta_hoy` (
 --
 DROP TABLE IF EXISTS `vista_partidos_hasta_hoy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_partidos_hasta_hoy`  AS SELECT `p`.`fecha` AS `fecha`, concat(`e_local`.`nombre`,' vs ',`e_visita`.`nombre`) AS `equipos`, concat(`g`.`goles_equipo_local`,' - ',`g`.`goles_equipo_visita`) AS `resultado`, (select group_concat(concat(ifnull(concat(`j`.`numero_camiseta`,' ',`u`.`nombres`,' ',`u`.`apellidos`),''),if(`g`.`minuto` is not null,concat(' ',`g`.`minuto`),''),' (',`e_local`.`nombre`,')') separator '\n') from ((`goles` `g` left join `jugadores` `j` on(`j`.`id` = `g`.`jugador_id_fk`)) left join `usuarios` `u` on(`j`.`id` = `u`.`jugador_id_fk`)) where `g`.`partido_id_fk` = `p`.`id` and `g`.`jugador_visita` is null order by `g`.`minuto`) AS `goles_jugadores_local`, (select group_concat(concat(ifnull(`g`.`jugador_visita`,''),if(`g`.`minuto` is not null,concat(' ',`g`.`minuto`),''),' (',`e_visita`.`nombre`,')') separator '\n') from `goles` `g` where `g`.`partido_id_fk` = `p`.`id` and `g`.`jugador_id_fk` is null order by `g`.`minuto`) AS `goles_jugadores_visita`, (select group_concat(concat(ifnull(concat(`j2`.`numero_camiseta`,' ',`u_sal`.`nombres`,' ',`u_sal`.`apellidos`),''),' -> ',concat(`j`.`numero_camiseta`,' ',`u_ent`.`nombres`,' ',`u_ent`.`apellidos`),if(`c`.`minuto` is not null,concat(' ',`c`.`minuto`),''),' (',`e_local`.`nombre`,')') separator '\n') from ((((`cambios` `c` left join `usuarios` `u_sal` on(`c`.`jugador_saliente_fk` = `u_sal`.`jugador_id_fk`)) left join `usuarios` `u_ent` on(`c`.`jugador_entrante_fk` = `u_ent`.`jugador_id_fk`)) left join `jugadores` `j` on(`c`.`jugador_entrante_fk` = `j`.`id`)) left join `jugadores` `j2` on(`c`.`jugador_saliente_fk` = `j2`.`id`)) where `c`.`partido_fk` = `p`.`id` order by `c`.`minuto`) AS `cambios_local`, (select group_concat(concat(`e`.`nombre`,', ',`ce`.`nombre_jugador_saliente`,' -> ',`ce`.`nombre_jugador_entrante`,if(`ce`.`minuto` is not null,concat(' ',`ce`.`minuto`),''),' (',`e_visita`.`nombre`,')') separator '\n') from (`cambios_externo` `ce` left join `equipos` `e` on(`e`.`id` = `p`.`equipo_visita_fk`)) where `ce`.`partido_id_fk` = `p`.`id` order by `ce`.`minuto`) AS `cambios_visita`, (select group_concat(concat(ifnull(concat(`u`.`nombres`,' ',`u`.`apellidos`),''),' ',`tp`.`tarjeta`,if(`tp`.`minuto` is not null,concat(' ',`tp`.`minuto`),''),' (',`e_local`.`nombre`,')') separator '\n') from ((`tarjetas_partido` `tp` left join `jugadores` `j` on(`j`.`id` = `tp`.`jugador_fk`)) left join `usuarios` `u` on(`u`.`jugador_id_fk` = `j`.`id`)) where `tp`.`partido_fk` = `p`.`id` and `tp`.`jugador_fk` is not null order by `tp`.`minuto`) AS `tarjetas_local`, (select group_concat(concat(ifnull(case when `tp`.`jugador_fk` is not null then concat(`u`.`nombres`,' ',`u`.`apellidos`) else `tp`.`jugador_externo` end,''),' ',`tp`.`tarjeta`,if(`tp`.`minuto` is not null,concat(' ',`tp`.`minuto`),''),' (',`e_visita`.`nombre`,')') separator '\n') from ((`tarjetas_partido` `tp` left join `jugadores` `j` on(`j`.`id` = `tp`.`jugador_fk`)) left join `usuarios` `u` on(`u`.`jugador_id_fk` = `j`.`id`)) where `tp`.`partido_fk` = `p`.`id` and `tp`.`jugador_fk` is null order by `tp`.`minuto`) AS `tarjetas_visita` FROM (((`partidos` `p` join `equipos` `e_local` on(`e_local`.`id` = `p`.`equipo_local_fk`)) join `equipos` `e_visita` on(`e_visita`.`id` = `p`.`equipo_visita_fk`)) left join (select `p`.`id` AS `partido_id`,count(case when `g`.`jugador_id_fk` is not null then 1 end) AS `goles_equipo_local`,count(case when `g`.`jugador_id_fk` is null then 1 end) AS `goles_equipo_visita` from (`partidos` `p` left join `goles` `g` on(`p`.`id` = `g`.`partido_id_fk`)) where `p`.`fecha` <= current_timestamp() group by `p`.`id`) `g` on(`p`.`id` = `g`.`partido_id`)) WHERE `p`.`fecha` <= current_timestamp() ORDER BY `p`.`fecha` AS `DESCdesc` ASC  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_partidos_hasta_hoy`  AS SELECT `p`.`fecha` AS `fecha`, concat(`e_local`.`nombre`,' vs ',`e_visita`.`nombre`) AS `equipos`, concat(`g`.`goles_equipo_local`,' - ',`g`.`goles_equipo_visita`) AS `resultado`, (select group_concat(concat(ifnull(concat(`j`.`numero_camiseta`,' ',`u`.`nombres`,' ',`u`.`apellidos`),''),if(`g`.`minuto` is not null,concat(' ',`g`.`minuto`),''),' (',`e_local`.`nombre`,')') separator '\n') from ((`goles` `g` left join `jugadores` `j` on(`j`.`id` = `g`.`jugador_id_fk`)) left join `usuarios` `u` on(`j`.`id` = `u`.`jugador_id_fk`)) where `g`.`partido_id_fk` = `p`.`id` and `g`.`jugador_visita` is null order by `g`.`minuto`) AS `goles_jugadores_local`, (select group_concat(concat(ifnull(`g`.`jugador_visita`,''),if(`g`.`minuto` is not null,concat(' ',`g`.`minuto`),''),' (',`e_visita`.`nombre`,')') separator '\n') from `goles` `g` where `g`.`partido_id_fk` = `p`.`id` and `g`.`jugador_id_fk` is null order by `g`.`minuto`) AS `goles_jugadores_visita`, (select group_concat(concat(ifnull(concat(`j2`.`numero_camiseta`,' ',`u_sal`.`nombres`,' ',`u_sal`.`apellidos`),''),' -> ',concat(`j`.`numero_camiseta`,' ',`u_ent`.`nombres`,' ',`u_ent`.`apellidos`),if(`c`.`minuto` is not null,concat(' ',`c`.`minuto`),''),' (',`e_local`.`nombre`,')') separator '\n') from ((((`cambios` `c` left join `usuarios` `u_sal` on(`c`.`jugador_saliente_fk` = `u_sal`.`jugador_id_fk`)) left join `usuarios` `u_ent` on(`c`.`jugador_entrante_fk` = `u_ent`.`jugador_id_fk`)) left join `jugadores` `j` on(`c`.`jugador_entrante_fk` = `j`.`id`)) left join `jugadores` `j2` on(`c`.`jugador_saliente_fk` = `j2`.`id`)) where `c`.`partido_fk` = `p`.`id` order by `c`.`minuto`) AS `cambios_local`, (select group_concat(concat(`e`.`nombre`,', ',`ce`.`nombre_jugador_saliente`,' -> ',`ce`.`nombre_jugador_entrante`,if(`ce`.`minuto` is not null,concat(' ',`ce`.`minuto`),''),' (',`e_visita`.`nombre`,')') separator '\n') from (`cambios_externo` `ce` left join `equipos` `e` on(`e`.`id` = `p`.`equipo_visita_fk`)) where `ce`.`partido_id_fk` = `p`.`id` order by `ce`.`minuto`) AS `cambios_visita`, (select group_concat(concat(ifnull(concat(`u`.`nombres`,' ',`u`.`apellidos`),''),' ',`tp`.`tarjeta`,if(`tp`.`minuto` is not null,concat(' ',`tp`.`minuto`),''),' (',`e_local`.`nombre`,')') separator '\n') from ((`tarjetas_partido` `tp` left join `jugadores` `j` on(`j`.`id` = `tp`.`jugador_fk`)) left join `usuarios` `u` on(`u`.`jugador_id_fk` = `j`.`id`)) where `tp`.`partido_fk` = `p`.`id` and `tp`.`jugador_fk` is not null order by `tp`.`minuto`) AS `tarjetas_local`, (select group_concat(concat(ifnull(case when `tp`.`jugador_fk` is not null then concat(`u`.`nombres`,' ',`u`.`apellidos`) else `tp`.`jugador_externo` end,''),' ',`tp`.`tarjeta`,if(`tp`.`minuto` is not null,concat(' ',`tp`.`minuto`),''),' (',`e_visita`.`nombre`,')') separator '\n') from ((`tarjetas_partido` `tp` left join `jugadores` `j` on(`j`.`id` = `tp`.`jugador_fk`)) left join `usuarios` `u` on(`u`.`jugador_id_fk` = `j`.`id`)) where `tp`.`partido_fk` = `p`.`id` and `tp`.`jugador_fk` is null order by `tp`.`minuto`) AS `tarjetas_visita` FROM (((`partidos` `p` join `equipos` `e_local` on(`e_local`.`id` = `p`.`equipo_local_fk`)) join `equipos` `e_visita` on(`e_visita`.`id` = `p`.`equipo_visita_fk`)) left join (select `p`.`id` AS `partido_id`,count(case when `g`.`jugador_id_fk` is not null then 1 end) AS `goles_equipo_local`,count(case when `g`.`jugador_id_fk` is null then 1 end) AS `goles_equipo_visita` from (`partidos` `p` left join `goles` `g` on(`p`.`id` = `g`.`partido_id_fk`)) where `p`.`fecha` <= current_timestamp() group by `p`.`id`) `g` on(`p`.`id` = `g`.`partido_id`)) WHERE `p`.`fecha` <= current_timestamp() ORDER BY `p`.`fecha` DESC ;
 
 --
 -- Índices para tablas volcadas
@@ -972,6 +979,12 @@ ALTER TABLE `socios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `souvenirs`
+--
+ALTER TABLE `souvenirs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `sponsors`
 --
 ALTER TABLE `sponsors`
@@ -1070,7 +1083,7 @@ ALTER TABLE `equipos_campeonato`
 -- AUTO_INCREMENT de la tabla `equipo_tecnico`
 --
 ALTER TABLE `equipo_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `estadisticas_campeonato`
@@ -1094,7 +1107,7 @@ ALTER TABLE `goles`
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
@@ -1151,6 +1164,12 @@ ALTER TABLE `socios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `souvenirs`
+--
+ALTER TABLE `souvenirs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `sponsors`
 --
 ALTER TABLE `sponsors`
@@ -1172,7 +1191,7 @@ ALTER TABLE `traspaso`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Restricciones para tablas volcadas
