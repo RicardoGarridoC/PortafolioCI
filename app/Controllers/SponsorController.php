@@ -21,7 +21,7 @@ class SponsorController extends BaseController
             if ($validation->withRequest($this->request)->run()) {
                 $sponsor->save($this->request->getPost());
                 // Redirigir a la página deseada después de guardar el sponsor
-                return redirect()->to('direccion/agregar_sponsor')->with('success', 'Sponsor registrado exitosamente');
+                return redirect()->to('SponsorController/registrar')->with('success', 'Sponsor registrado exitosamente');
             } else {
                 // Si la validación falla, mostrar el cuadro de diálogo
                 echo '<script>alert("Sponsor ya registrado");</script>';

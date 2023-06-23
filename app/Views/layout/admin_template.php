@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  <title><?= $title ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -110,7 +111,7 @@
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
               <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
               <li><a class="dropdown-item" href="#">Configuración</a></li>
-              <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+              <li><a class="dropdown-item" href="<?php echo base_url('PerfilAdmin')?>">Ver Perfil</a></li>
               <li>
                   <hr class="dropdown-divider">
               </li>

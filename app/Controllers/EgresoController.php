@@ -63,7 +63,7 @@ class EgresoController extends BaseController
             }
         }
 
-        return view('pago_jugadores', $data);
+        return view('direccion/pago_jugadores', $data);
     }
 
     public function PagarSueldoEquipoTecnico()
@@ -101,7 +101,7 @@ class EgresoController extends BaseController
                 return redirect()->to('EgresoController/PagarSueldoEquipoTecnico')->with('success', 'Pago de sueldo registrado exitosamente');
         }
 
-        return view('agregar_egreso_tecnico', $data);
+        return view('direccion/agregar_egreso_tecnico', $data);
     }
 
     public function PagarSueldoDirigente()
@@ -134,7 +134,7 @@ class EgresoController extends BaseController
             return redirect()->to('EgresoController/PagarSueldoDirigente')->with('success', 'Pago de sueldo registrado exitosamente');
     }
 
-        return view('agregar_egreso_dirigente', $data);
+        return view('direccion/agregar_egreso_dirigente', $data);
     }
 
     public function pagarMensualidadAnfa()
@@ -177,7 +177,7 @@ class EgresoController extends BaseController
         }
     }
 
-    return view('agregar_pago_mensualidad_anfa', $data);
+    return view('direccion/agregar_pago_mensualidad_anfa', $data);
 }
 
 

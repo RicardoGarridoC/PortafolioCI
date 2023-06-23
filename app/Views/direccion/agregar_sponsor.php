@@ -1,6 +1,6 @@
-<?= $this->extend('layout/sidebarsocio') ?>
+<?= $this->extend('layout/direccion_template') ?>
 
-<?= $this->section('contenido') ?>
+<?= $this->section('direccion_contenido') ?>
 <?php echo form_open('AgregarSponsor'); ?>
   <div class="form-group">
     <?php

@@ -12,7 +12,7 @@ class IngresoModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['concepto', 'monto', 'fecha', 'detalle','id_usuario_fk'];
+    protected $allowedFields = ['concepto', 'monto', 'fecha', 'detalle', 'id_usuario_fk'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\PartidosModel;
 use App\Models\CustomModel;
+use App\Models\UsuarioModel;
 
 
 
@@ -18,8 +19,17 @@ class EquipoTecnicoController extends BaseController
         $titulo = [ 
             'title' => 'Inicio Equipo Técnico',
         ];
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
 
-        return view('equipotecnico/inicio_equipotecnico', $titulo);
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $titulo);
+
+        return view('equipotecnico/inicio_equipotecnico', $verPartidos);
     }
     public function equipotecnicoverCampeonatos()
     {
@@ -259,6 +269,115 @@ class EquipoTecnicoController extends BaseController
         // Agregando Titulo a Cada View
 
         return view('equipotecnico/equipotecnico_ver_partidos', $verPartidos);
+    }
+    public function equipotecnicoverEquipoTecnico()
+    {
+        $titulo = [
+            'title' => 'Equipo Tecnico ET'
+        ];
+
+        $db = db_connect();
+
+        $query = $db->query('SELECT 
+        concat(u.nombres, " ", u.apellidos) as nombre,
+        et.cargo,
+        CASE WHEN e.nombre is NULL THEN "Sin equipo previo" ELSE e.nombre END AS equipo_proviene,
+        et.sueldo ,
+        et.valor_hora_extra ,
+        et.horas_extras_mes ,
+        et.sueldo + et.valor_hora_extra * et.horas_extras_mes as total_a_pagar
+        FROM equipo_tecnico et
+        inner join usuarios u on
+        u.equipo_tecnico_id_fk = et.id
+        left join equipos e on
+        e.id = et.equipo_proviene_fk ;');
+
+        $equipotecnicos  = $query->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data1['equipotecnicos'] = array();
+
+        foreach ($equipotecnicos as $equipotecnico) {
+            $data1['equipotecnicos'][] = array(
+                'nombre' => $equipotecnico->nombre,
+                'cargo' => $equipotecnico->cargo,
+                'equipo_proviene' => $equipotecnico->equipo_proviene,
+                'sueldo' => $equipotecnico->sueldo,
+                'valor_hora_extra' => $equipotecnico->valor_hora_extra,
+                'horas_extras_mes' => $equipotecnico->horas_extras_mes,
+                'total_a_pagar' => $equipotecnico->total_a_pagar
+            );
+        }
+
+        $viewData = array_merge($data1, $titulo);
+
+        return view('equipotecnico/equipotecnico_ver_equipotecnico', $viewData);
+
+    }
+    public function verEquipoTecnicoUsuario()
+    {
+        $titulo = [
+            'title' => 'Ver Usuario Equipo Tecnico',
+        ];
+
+        // Obtén una instancia del encrypter
+        $encrypter = \Config\Services::encrypter();
+
+        // Verifica si la contraseña encriptada está presente en la sesión
+        if (session()->has('passwordUsuario')) {
+            // Desencripta la contraseña almacenada en la sesión
+            $encryptedPassword = session('passwordUsuario');
+            $clavebuena = $encrypter->decrypt(hex2bin($encryptedPassword));
+        } else {
+            // La contraseña encriptada no está presente en la sesión, intenta obtenerla de la otra función
+            $clave = $this->request->getPost('password_hash');
+            $clavebuena = $encrypter->decrypt(hex2bin($clave));
+        }
+
+        // Combina los datos en un solo array
+        $verCosas = array_merge(['clavebuena' => $clavebuena], $titulo);
+        return view('equipotecnico/equipotecnico_ver_perfil', $verCosas);
+    }
+    public function guardaEquipoTecnicoUsuario()
+    {
+        $usuarioModel = new UsuarioModel();
+        $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
+
+        // Obtén la contraseña en claro
+        $clavebuena = $request->getPost('password_hash');
+        // Encripta la contraseña
+        $password = bin2hex($encrypter->encrypt($clavebuena));
+        // Actualizar Clave de Session
+        $session = session();
+        $session->set('passwordUsuario', $password);
+
+        
+        $data = array(
+            'nombres' => $request->getPostGet('nombres'),
+            'apellidos' => $request->getPostGet('apellidos'),
+            'email' => $request->getPostGet('email'),
+            'run' => $request->getPostGet('run'),
+            'direccion' => $request->getPostGet('direccion'),
+            'telefono' => $request->getPostGet('telefono'),
+            'password_hash' => $password // Utiliza la contraseña encriptada
+        );
+        
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        
+        if ($usuarioModel->save($data) === false) {
+            var_dump($usuarioModel->errors());
+        }
+        
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Editar Usuario Equipo Tecnico',
+            'clavebuena' => $clavebuena // Agrega el valor de $clavebuena al arreglo $titulo
+        ];
+        
+        return view('equipotecnico/equipotecnico_ver_perfil', $titulo);
     }
 
 }
