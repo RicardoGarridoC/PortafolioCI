@@ -251,6 +251,63 @@ class EquipoTecnicoController extends BaseController
 
         return view('equipotecnico/equipotecnico_ver_jugadores', $verData);
     }
+    public function equipotecnicoverJugadores2()
+    {
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Jugadores Equipo Tecnico',
+        ];
+
+        $db = db_connect();
+
+        $campeonato = $db->query('select 
+        j.id,
+        u.nombres ,
+        u.apellidos ,
+        u.run ,
+        j.posicion ,
+        j.genero ,
+        j.partidos_jugados ,
+        e.nombre as equipo_proviene,
+        j.tipo ,
+        j.sueldo ,
+        j.ayuda_economica ,
+        j.numero_camiseta ,
+        j.foto
+        from jugadores j 
+        inner join usuarios u on
+        j.id = u.jugador_id_fk
+        left join equipos e on
+        j.equipo_proviene_id_fk = e.id ;');
+
+        $results = $campeonato->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data['results'] = array();
+
+        foreach ($results as $row) {
+            $data['results'][] = array(
+                'id' => $row->id,
+                'nombres' => $row->nombres,
+                'apellidos' => $row->apellidos,
+                'run' => $row->run,
+                'posicion' => $row->posicion,
+                'genero' => $row->genero,
+                'partidos_jugados' => $row->partidos_jugados,
+                'equipo_proviene' => $row->equipo_proviene,
+                'tipo' => $row->tipo,
+                'sueldo' => $row->sueldo,
+                'ayuda_economica' => $row->ayuda_economica,
+                'numero_camiseta' => $row->numero_camiseta,
+                'foto' => $row->foto
+            );
+        }
+
+        $viewData = array_merge($data, $titulo);
+
+        return view('equipotecnico/equipotecnico_ver_jugadores', $viewData);
+    }
+
     public function equipotecnicoverPartidos()
     {
 
