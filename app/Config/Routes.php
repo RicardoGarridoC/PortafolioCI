@@ -28,7 +28,7 @@ $routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
 $routes->get('ProximoPartido', 'Home::proximoPartido');
 //Rutas Socio / Perfile0s
 $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio']);
-$routes->get('VerJugadores', 'SocioController::mostrarJugador', ['filter' => 'SesionSocio']);
+$routes->get('VerJugadores', 'SocioController::mostrarJugador2', ['filter' => 'SesionSocio']);
 $routes->get('VerCampeonatos', 'SocioController::mostrarCampeonatos', ['filter' => 'SesionSocio']);
 $routes->get('VerPartidos', 'SocioController::verPartidos', ['filter' => 'SesionSocio']);
 $routes->get('VerMensualidad', 'SocioController::verMensualidad', ['filter' => 'SesionSocio']);

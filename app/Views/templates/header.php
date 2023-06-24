@@ -71,6 +71,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Próximos partidos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('ProximoPartido'); ?>">Tienda oficial</a>
+                    </li>
                 </ul>
             </div>
         </div>
