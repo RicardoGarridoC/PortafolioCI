@@ -378,6 +378,11 @@ class Home extends BaseController
         return view('templates/header') . view('home/actividades_especiales') . view('templates/footer');
     }
 
+    public function compraEntradas()
+    {
+        return view('templates/header') . view('home/compra_entradas') . view('templates/footer');
+    }
+
     public function proximoPartido()
     {
         $db = db_connect();

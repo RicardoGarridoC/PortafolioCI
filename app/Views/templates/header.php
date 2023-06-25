@@ -63,6 +63,9 @@
                         <a class="nav-link" href="<?php echo base_url('ActividadesEspeciales'); ?>">Actividades especiales</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('CompraEntradas'); ?>">Compra Entradas</a>
+                    </li>
+                    <li class="nav-item">
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="navbar-logo" alt="Image description">
                     </li>
                     <li class="nav-item">

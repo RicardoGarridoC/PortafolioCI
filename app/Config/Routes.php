@@ -26,6 +26,7 @@ $routes->get('IniciarSesion', 'Home::homeiniciosesion');
 $routes->get('Registrarse', 'Home::register');
 $routes->get('ActividadesEspeciales', 'Home::ActividadesEspeciales');
 $routes->get('ProximoPartido', 'Home::proximoPartido');
+$routes->get('CompraEntradas' , 'Home::compraEntradas');
 //Rutas Socio / Perfile0s
 $routes->get('InicioSocios', 'SocioController::inicioSocios', ['filter' => 'SesionSocio']);
 $routes->get('VerJugadores', 'SocioController::mostrarJugador2', ['filter' => 'SesionSocio']);
