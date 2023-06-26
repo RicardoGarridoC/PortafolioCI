@@ -97,7 +97,7 @@ class SocioController extends BaseController
     {
         // Agregando Titulo a Cada View
         $titulo = [
-            'title' => 'Campeonatos Socio',
+            'title' => 'Jugadores Socio',
         ];
 
         $db = db_connect();

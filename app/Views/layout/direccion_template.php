@@ -27,10 +27,10 @@
         <div class="row flex-nowrap">
             <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/">
+                    <a  href="<?php echo base_url('DireccionHome'); ?>">
                         <img src="<?= base_url() ?>/public/images/losalces.png" class="img-fluid" alt="Image description">
                     </a>
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <a href="<?php echo base_url('DireccionHome'); ?>" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="hide-on-small fs-5 d-none d-sm-inline">Club Los Alces F.C.</span>
                     </a>
 

@@ -4,18 +4,23 @@
 
 <!-- Button trigger modal -->
 <div class="row">
-    <?php foreach ($jugadores as $jugador) { ?>
-    <div class="card mb-3 mx-auto col-12 col-sm-6 col-md-4 col-lg-3 card-sm">
-        <img class="card-img-top" src="" alt="Imagen de <?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?>">
-        <div class="card-body">
-            <h5 class="card-title"><?php echo $jugador['nombres']. ' ' . $jugador['apellidos']; ?></h5>
-            <p class="card-text"><?php echo $jugador['run']; ?></p>
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="#" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $jugador['id']; ?>">Ver Perfil</a>
-                <small class="text-muted"><?php echo $jugador['posicion']; ?></small>
+    <?php foreach ($results as $jugador) { ?>
+        <div class="card mb-3 mx-auto col-12 col-sm-6 col-md-4 col-lg-3 card-sm">
+            <?php
+            $fotoData = $jugador['foto'];
+            $fotoBase64 = base64_encode($fotoData);
+            $fotoSrc = 'data:image/jpeg;base64,' . $fotoBase64;
+            ?>
+            <img class="card-img-top" src="<?php echo $fotoSrc; ?>" alt="Imagen de <?php echo $jugador['nombres'] . ' ' . $jugador['apellidos']; ?>">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $jugador['nombres'] . ' ' . $jugador['apellidos']; ?></h5>
+                <p class="card-text"><?php echo $jugador['run']; ?></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $jugador['id']; ?>">Ver Perfil</a>
+                    <small class="text-muted"><?php echo $jugador['posicion']; ?></small>
+                </div>
             </div>
         </div>
-    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal<?php echo $jugador['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,7 +59,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">Equipo anterior</th>
-                                <td><?php echo $jugador['equipo_proviene_id_fk']; ?></td>
+                                <td><?php echo $jugador['equipo_proviene']; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Estatuto:</th>
