@@ -560,7 +560,8 @@ class Home extends BaseController
                             //redirecciona a vista de socio
 
                             return $this->response->setJSON([
-                                'status' => 'success',
+                                'status' => 'success'
+
 
                             ]);
                     }
@@ -577,13 +578,15 @@ class Home extends BaseController
             return view(('home/iniciar_sesion'), $data);
         }
     }
-
-    //Cerrar Sesion (Aplicacion Movil)
+    // Cerrar Sesion Web
     public function cerrarSesion()
     {
         session()->destroy();
         return redirect()->to(base_url() . 'Home');
     }
+
+
+    //Cerrar Sesion (Aplicacion Movil)
 
     public function cerrarSesionMovil()
     {

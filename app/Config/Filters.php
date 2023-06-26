@@ -27,6 +27,7 @@ class Filters extends BaseConfig
         'SesionJugador' => \App\Filters\SesionJugador::class,
         'SesionEntrenador' => \App\Filters\SesionEntrenador::class,
         'SesionDirector' => \App\Filters\SesionDirector::class,
+        'cors' => \CodeIgniter\Filters\CORS::class
     ];
 
     /**

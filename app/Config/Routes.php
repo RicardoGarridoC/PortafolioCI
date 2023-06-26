@@ -113,6 +113,9 @@ $routes->post('Home/validarIngresoMovil', 'Home::validarIngresoMovil');
 $routes->get('ReporteEstadisticasMovil', 'SocioController::getReporteEstadisticasMovil');
 //Cerrar sesion Movil
 $routes->get('/logoutM', 'Home::cerrarSesionMovil');
+//Perfil Socio Movil
+$routes->post('PerfilSocio', 'SocioController::obtenerPerfilMovil');
+
 
 
 

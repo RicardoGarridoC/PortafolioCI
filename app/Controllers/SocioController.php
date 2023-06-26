@@ -828,4 +828,29 @@ class SocioController extends BaseController
         // Retornar la respuesta como un objeto JSON
         return $this->respond($reporte);
     }
+
+    //perfil de socios Movil
+    public function obtenerPerfilMovil()
+    {
+
+        $usuarioModel = new UsuarioModel();
+
+        $email = $this->request->getPost("email");
+
+        // Buscar el usuario por email
+        $usuario = $usuarioModel->buscarUsuarioPorEmail($email);
+
+        // Verificar si el usuario existe
+        if (!$usuario) {
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Usuario no encontrado']);
+        }
+
+        // Combinar los datos en un arreglo JSON
+        $datos = [
+            'usuario' => $usuario
+        ];
+
+        // Devolver los datos en formato JSON
+        return $this->response->setJSON($datos);
+    }
 }
