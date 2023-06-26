@@ -130,6 +130,7 @@ $routes->get('TiendaOficial', 'VentaSouvenirsController::cargaArticulos');
 $routes->get('DetalleProducto', 'VentaSouvenirsController::detalleProducto');
 $routes->get('CarroCompras', 'VentaSouvenirsController::mostrarCarro');
 $routes->get('Checkout', 'VentaSouvenirsController::checkout');
+$routes->get('VentaEntradas', 'VentaSouvenirsController::loadVentaEntradas');
 
 
 

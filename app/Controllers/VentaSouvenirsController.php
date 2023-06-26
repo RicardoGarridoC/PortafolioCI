@@ -260,6 +260,45 @@ class VentaSouvenirsController extends BaseController
         return $response;
     }
 
+    public function loadVentaEntradas() {
+        $db = db_connect();
+        
+        $partidos = $db->query("SELECT p.fecha , e.nombre AS nombre_equipo_local,
+            e2.nombre AS nombre_equipo_visita,
+            c.nombre AS campeonato,
+            c2.nombre AS nombre_cancha,
+            c2.ubicacion 
+            FROM partidos p 
+            LEFT JOIN equipos e ON 
+            e.id = p.equipo_local_fk
+            LEFT JOIN equipos e2 ON
+            e2.id = p.equipo_visita_fk
+            LEFT JOIN campeonatos c ON
+            c.id = p.campeonato_id_fk 
+            LEFT JOIN cancha c2 ON
+            c2.id = p.ubicacion_fk 
+            WHERE p.fecha >= CURDATE()
+            ORDER BY p.fecha");
+        
+        $results = $partidos->getResult();
+
+        $data['results'] = array();
+        foreach ($results as $row) {
+            $data['results'][] = array(
+                'fecha' => $row->fecha,
+                'nombre_equipo_local' => $row->nombre_equipo_local,
+                'nombre_equipo_visita' => $row->nombre_equipo_visita,
+                'campeonato' => $row->campeonato,
+                'nombre_cancha' => $row->nombre_cancha,
+                'ubicacion' => $row->ubicacion
+            );
+        }
+
+        $viewData = array_merge($data, ['title' => 'Venta de Entradas']);
+        
+        echo view('templates/header') . view('home/compra_entradas', $viewData) . view('templates/footer');
+    }
+
     public function __construct()
     {
         helper('form');

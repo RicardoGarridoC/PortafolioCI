@@ -1,25 +1,57 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<?php foreach ($results as $index => $article): ?>
-    <div class="article<?= ($index + 1) % 4 === 0 ? ' last-in-row' : ''; ?>">
-        <?php
-            $fotoData = $article['foto'];
-            $fotoBase64 = base64_encode($fotoData);
-            $fotoSrc = 'data:image/jpeg;base64,' . $fotoBase64;
-            $precioFormateado = number_format($article['precio'], 0, ',', '.');
-        ?>
-        <a href="<?= base_url('VentaSouvenirsController/detalleProducto/' . $article['id']); ?>" target="_self" class="article-link">
-            <div class="article-image-container">
-                <img class="article-image" src="<?= $fotoSrc; ?>" alt="<?= $article['producto']; ?>">
-            </div>
-            <h3 class="article-title"><?= $article['producto']; ?></h3>
-            <p class="article-price">Precio: $<?= $precioFormateado; ?></p>
-        </a>
-    </div>
-<?php endforeach; ?>
+
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      background-color: #111;
+      color: white;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+    }
+
+    .footer p {
+      margin-bottom: 0;
+      color: #fff;
+    }
+</style>
+
+<div class="content-wrapper">
+  <main>
+    <?php foreach ($results as $index => $article): ?>
+        <div class="article<?= ($index + 1) % 4 === 0 ? ' last-in-row' : ''; ?>">
+            <?php
+                $fotoData = $article['foto'];
+                $fotoBase64 = base64_encode($fotoData);
+                $fotoSrc = 'data:image/jpeg;base64,' . $fotoBase64;
+                $precioFormateado = number_format($article['precio'], 0, ',', '.');
+            ?>
+            <a href="<?= base_url('VentaSouvenirsController/detalleProducto/' . $article['id']); ?>" target="_self" class="article-link">
+                <div class="article-image-container">
+                    <img class="article-image" src="<?= $fotoSrc; ?>" alt="<?= $article['producto']; ?>">
+                </div>
+                <h3 class="article-title"><?= $article['producto']; ?></h3>
+                <p class="article-price">Precio: $<?= $precioFormateado; ?></p>
+            </a>
+        </div>
+    <?php endforeach; ?>
+  </main>
+
 <a href="<?= base_url('VentaSouvenirsController/mostrarCarro'); ?>" class="floating-button" title="Ver Carro de Compras">
     <i class="fas fa-shopping-cart"></i>
 </a>
-
 
 <style>
     .article {
@@ -67,17 +99,7 @@
         color: inherit; /* Heredar el color del texto */
     }
 
-    /* Estilos responsivos */
-    @media (max-width: 767px) {
-        .article {
-            width: 100%;
-            margin-right: 0;
-        }
-
-        .last-in-row {
-            margin-right: 0;
-        }
-    }
+    /* Estilos para el botón flotante */
     .floating-button {
         position: fixed;
         right: 20px;
@@ -96,12 +118,5 @@
 
     .floating-button:hover {
         background-color: #45a049;
-}
-
-
+    }
 </style>
-
-
-
-
-

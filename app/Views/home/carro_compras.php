@@ -126,8 +126,6 @@
     .btn-eliminar-producto {
         text-decoration: none;
     }
-
-
 </style>
 
 
