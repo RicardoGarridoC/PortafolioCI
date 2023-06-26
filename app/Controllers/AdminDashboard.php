@@ -8,6 +8,8 @@ use App\Models\UsuarioModel;
 use App\Models\EquipoTecnicoModel;
 use App\Models\SocioModel;
 use App\Models\CustomModel;
+use App\Models\PartidosModel;
+use App\Models\ResultadosModel;
 
 class AdminDashboard extends BaseController
 {
@@ -435,4 +437,78 @@ class AdminDashboard extends BaseController
         
         return view('admin/admin_ver_perfil', $titulo);
     }
+
+    public function partidoHome()
+    {
+        //$db = db_connect();
+        $data1 = [
+            'title' => 'Partidos Home Admin'
+        ];
+
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
+
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $data1);
+        
+        return view('admin/admin_partido_home', $verPartidos);
+    }
+
+    public function campeonatoHome()
+    {
+        //$db = db_connect();
+        $data1 = [
+            'title' => 'Camperonato Home Admin'
+        ];
+
+        $resultado = new ResultadosModel();
+        $db = \Config\Database::connect();
+
+        // Obtener partido que no este ya en la tabla campeonato
+        $queryEquiposDestino = "SELECT id, nombre, genero FROM equipos WHERE id = 10 OR id = 14";
+        $equiposDestino = $db->query($queryEquiposDestino)->getResultArray();
+
+        $data['equiposDestino'] = $equiposDestino;
+
+        if ($this->request->getMethod() === 'post') {
+            $postData = $this->request->getPost();
+
+            // Equipos local
+            // Equipo visita
+            // Goles local
+            // Goles Visita
+
+            $queryEquiposOrigen = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_origen']}'";
+            $equipoOrigen = $db->query($queryEquiposOrigen)->getFirstRow();
+            
+            // Almacena la id y el genero del equipo origen en la sesión
+            session()->set('equipo_origen', $equipoOrigen->id);
+            session()->set('genero_origen', $equipoOrigen->genero);
+            session()->set('nombres', $postData['nombres']);
+            session()->set('apellidos', $postData['apellidos']);
+            
+
+            // Datos para la tabla egresos
+            $egresoData = [
+                'concepto' => 'compra_jugadores',
+                'monto' => $postData['monto'],
+                'fecha' => date('Y-m-d'),
+                'detalle' => 'Compra de jugador ' . $postData['nombres'] . ' ' . $postData['apellidos'] . ' origen ' . $equipoOrigen->nombre,
+            ];
+
+            $egreso->save($egresoData);
+            
+
+            return redirect()->to('/CompraJugadorController/registrarJugador')->with('success', 'Compra de jugador registrada exitosamente');
+        }
+
+        $cc = array_merge($data, $data1);
+        
+        return view('admin/admin_campeonato_home', $cc);
+    }
+
 }
