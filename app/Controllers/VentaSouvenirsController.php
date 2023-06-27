@@ -8,6 +8,7 @@ require 'vendor/autoload.php';
 
 use App\Models\IngresosModel;
 use App\Models\VentaSouvenirsModel;
+use App\Models\VentaEntradasModel;
 
 class VentaSouvenirsController extends BaseController
 {
@@ -263,7 +264,7 @@ class VentaSouvenirsController extends BaseController
     public function loadVentaEntradas() {
         $db = db_connect();
         
-        $partidos = $db->query("SELECT p.fecha , e.nombre AS nombre_equipo_local,
+        $partidos = $db->query("SELECT p.id, p.fecha , e.nombre AS nombre_equipo_local,
             e2.nombre AS nombre_equipo_visita,
             c.nombre AS campeonato,
             c2.nombre AS nombre_cancha,
@@ -285,6 +286,7 @@ class VentaSouvenirsController extends BaseController
         $data['results'] = array();
         foreach ($results as $row) {
             $data['results'][] = array(
+                'id' => $row->id,
                 'fecha' => $row->fecha,
                 'nombre_equipo_local' => $row->nombre_equipo_local,
                 'nombre_equipo_visita' => $row->nombre_equipo_visita,
@@ -297,6 +299,112 @@ class VentaSouvenirsController extends BaseController
         $viewData = array_merge($data, ['title' => 'Venta de Entradas']);
         
         echo view('templates/header') . view('home/compra_entradas', $viewData) . view('templates/footer');
+    }
+
+    public function datosComprador($partidoId)
+    {
+        $titulo = [
+            'title' => 'datosComprador',
+            'id' => $partidoId, // Pasamos la id a la vista
+        ];
+
+        return view('templates/header') . view('home/datos_comprador_entrada', $titulo) . view('templates/footer');
+    }
+
+
+    public function confirmarCompraEntrada()
+    {
+        // Recoger los datos enviados desde la vista
+        $nombre_comprador = $this->request->getPost('nombre_comprador');
+        $rut_comprador = $this->request->getPost('rut_comprador');
+        $id_partido_fk = $this->request->getPost('partidoId');
+        $monto = 5000;  // Monto fijo de entrada
+
+        $db = db_connect();
+
+        $query = $db->query("SELECT p.id, p.fecha, e.nombre AS nombre_equipo_local, e2.nombre AS nombre_equipo_visita,
+        c.nombre AS campeonato, c2.nombre AS nombre_cancha, c2.ubicacion FROM partidos p LEFT JOIN equipos e ON e.id = p.equipo_local_fk 
+        LEFT JOIN equipos e2 ON e2.id = p.equipo_visita_fk 
+        LEFT JOIN campeonatos c ON c.id = p.campeonato_id_fk 
+        LEFT JOIN cancha c2 ON c2.id = p.ubicacion_fk WHERE p.id = '$id_partido_fk'");
+        $results = $query->getResult();
+
+        $nombre_equipo_local = null;
+        $nombre_equipo_visita = null;
+        $campeonato = null;
+        $nombre_cancha = null;
+
+        foreach ($results as $row) {
+            $nombre_equipo_local = $row->nombre_equipo_local;
+            $nombre_equipo_visita = $row->nombre_equipo_visita;
+            $campeonato = $row->campeonato;
+            $nombre_cancha = $row->nombre_cancha;
+
+            $data['results'][] = array(
+                'id' => $row->id,
+                'fecha' => $row->fecha,
+                'nombre_equipo_local' => $nombre_equipo_local,
+                'nombre_equipo_visita' => $nombre_equipo_visita,
+                'campeonato' => $campeonato,
+                'nombre_cancha' => $nombre_cancha,
+                'ubicacion' => $row->ubicacion
+            );
+        }
+        
+        // Crear una nueva entrada en la tabla venta_entradas
+        $ventaEntradasData = [
+            'monto' => $monto,
+            'nombre_comprador' => $nombre_comprador,
+            'rut_comprador' => $rut_comprador,
+            'id_partido_fk' => $id_partido_fk
+        ];
+        $ventaEntradasModel = new VentaEntradasModel();
+        $ventaEntradasModel->insert($ventaEntradasData);
+
+        // Obtener la ID de la venta insertada
+        $id_venta = $ventaEntradasModel->insertID();
+
+        // Crear una nueva entrada en la tabla ingresos
+        $fecha = date('Y-m-d');
+        $detalle = 'Venta de entradas';
+        $ingresosData = [
+            'concepto' => 'venta_entradas',
+            'monto' => $monto,
+            'fecha' => $fecha,
+            'detalle' => $detalle
+        ];
+        $ingresosModel = new IngresosModel();
+        $ingresosModel->insert($ingresosData);
+
+        $html = view('pdf/compra_entradas',[
+            'id_venta' => $id_venta,
+            'nombre_comprador' => $nombre_comprador,
+            'rut_comprador' => $rut_comprador,
+            'nombre_equipo_local' => $nombre_equipo_local,
+            'nombre_equipo_visita' => $nombre_equipo_visita,
+            'campeonato' => $campeonato,
+            'nombre_cancha' => $nombre_cancha,
+            'monto' => $monto
+        ]);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // Renderiza el PDF
+        $dompdf->render();
+
+        // Genera el nombre del archivo PDF
+        $filename = 'boleta_compra_' . date('YmdHis') . '.pdf';
+
+        $output = $dompdf->output();
+
+        $response = $this->response
+        ->setHeader('Content-Type', 'application/pdf')
+        ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+        ->setBody($output);
+
+        echo '<script>window.location.href = "' . base_url('VentaEntradas') . '";</script>';
+
+        return $response;
     }
 
     public function __construct()

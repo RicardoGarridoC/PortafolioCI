@@ -131,9 +131,9 @@ $routes->get('DetalleProducto', 'VentaSouvenirsController::detalleProducto');
 $routes->get('CarroCompras', 'VentaSouvenirsController::mostrarCarro');
 $routes->get('Checkout', 'VentaSouvenirsController::checkout');
 $routes->get('VentaEntradas', 'VentaSouvenirsController::loadVentaEntradas');
-
-
-
+$routes->get('DatosComprador', 'VentaSouvenirsController::datosComprador');
+$routes->post('VentaEntradasController/confirmarCompraEntrada', 'VentaEntradasController::confirmarCompraEntrada');
+$route['VentaSouvenirsController/datosComprador/(:num)'] = 'VentaSouvenirsController/datosComprador/$1';
 
 //RUTAS INICIO Y REGISTER
 //$routes->get('logout/login', 'SocioController::inicioSocios');

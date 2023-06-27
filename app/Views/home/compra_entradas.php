@@ -34,15 +34,6 @@
         background: #555;
         color: white;
     }
-    footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        background-color: #111;
-        color: white;
-        padding: 20px;
-    }
 </style>
 <div class="container">
     <h1><?= $title ?></h1>
@@ -76,7 +67,7 @@
                 <p>Cancha: <?= $partido['nombre_cancha']; ?></p>
                 <p>Ubicación: <?= $partido['ubicacion']; ?></p>
                 <p>Valor: $5.000</p>
-                <button class="confirmar-button">Confirmar</button>
+                <button class="confirmar-button" data-id="<?= $partido['id'] ?>">Confirmar</button>
             </div>
         <?php endforeach; ?>
         
@@ -99,7 +90,10 @@
             
             buttons.forEach(function(button) {
                 button.addEventListener('click', function() {
-                    alert('Has confirmado la compra para el partido: ' + button.parentElement.querySelector('h2').textContent);
+                    let partidoId = button.getAttribute('data-id');
+                    
+                    // Redireccionamos a la vista datos_comprador_entrada.php
+                    window.location.href = 'VentaSouvenirsController/datosComprador/' + partidoId;
                 });
             });
         </script>
