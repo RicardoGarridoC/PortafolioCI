@@ -23,59 +23,74 @@ setTimeout(function() {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Campeonato</h1>
-    <?= \Config\Services::validation()->listErrors(); ?>
+    <div class="container">
+        <h1>Agregar Resultado</h1>
+        <?= \Config\Services::validation()->listErrors(); ?>
 
-    <form action="<?= base_url('AdminDashboard/campeonatoHome') ?>" method="post">
-        <div class="form-group">
-            <label for="equipo_destino">Equipo destino:</label>
-            <select id="equipo_destino" name="equipo_destino" class="form-control">
-                <option value="">Seleccione el equipo destino</option>
-                <?php foreach ($equiposDestino as $equipo) : ?>
-                    <option value="<?= $equipo['id'] ?>" data-genero="<?= $equipo['genero'] ?>"><?= $equipo['nombre'] ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
+        <form action="<?= base_url('AdminDashboard/campeonatoHome') ?>" method="post">
+            <div class="form-group">
+                <label for="equipo_destino">Elegir Partido</label>
+                <select id="equipo_destino" name="equipo_destino" class="form-control">
+                    <option value="">Seleccione el partido</option>
+                    <?php foreach ($partidosLibres as $partidoLibre) : ?>
+                        <option value="<?= $partidoLibre['id'] ?>"><?= $partidoLibre['id'] ?></option>
+                    <?php endforeach; ?>
+                    <option value="">No Aplica</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="equipo_origen">Equipo origen:</label>
-            <select id="equipo_origen" name="equipo_origen" class="form-control">
-                <!-- Los equipos origen se cargarán aquí mediante AJAX -->
-            </select>
-        </div>
+            <div class="form-group">
+                <label for="equipo_local">Equipo Local:</label>
+                <select id="equipo_local" name="equipo_local" class="form-control">
+                    <!-- Los equipos se cargarán aquí mediante AJAX -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="equipo_visita">Equipo Visita:</label>
+                <select id="equipo_visita" name="equipo_visita" class="form-control">
+                    <!-- Los equipos se cargarán aquí mediante AJAX -->
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombres" name="nombres">
-        </div>
 
-        <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" class="form-control" id="apellidos" name="apellidos">
-        </div>
 
-        <div class="form-group">
-            <label for="monto">Monto:</label>
-            <input type="number" class="form-control" id="monto" name="monto">
-        </div>
+            <div class="form-group">
+                <label for="goleslocal">Goles Local:</label>
+                <input type="number" class="form-control" id="goleslocal" name="goleslocal">
+            </div>
 
-        <button type="submit" class="btn btn-primary">Registrar</button>
-    </form>
+            <div class="form-group">
+                <label for="golesvisita">Goles Visita:</label>
+                <input type="number" class="form-control" id="golesvisita" name="golesvisita">
+            </div>
+
+            <div class="form-group">
+                <label for="tipopartido">Categoria Partido:</label>
+                <select id="tipopartido" name="tipopartido" class="form-control">
+                    <!-- <?php foreach ($partidosLibres as $partidoLibre) : ?>
+                        <option value="<?= $partidoLibre['id'] ?>"><?= $partidoLibre['id'] ?></option>
+                    <?php endforeach; ?> -->
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
 
     <script>
     $(document).ready(function(){
         $('#equipo_destino').change(function(){
             var genero = $(this).find(':selected').data('genero');
             $.ajax({
-                url: '<?= base_url('CompraJugadorController/obtenerEquiposOrigen/') ?>' + genero,
+                url: '<?= base_url('AdminDashboard/obtenerEquiposLocalVisita/') ?>' + genero,
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    var $equipo_origen = $('#equipo_origen');
-                    $equipo_origen.empty();
-                    $equipo_origen.append('<option value="">Seleccione el equipo origen</option>');
+                    var $equipoLocal = $('#equipo_local');
+                    $equipoLocal.empty();
+                    $equipoLocal.append('<option value="">Seleccione el equipo origen</option>');
                     $.each(response, function(index, equipo) {
-                        $equipo_origen.append('<option value="' + equipo.id + '">' + equipo.nombre + '</option>');
+                        $equipoLocal.append('<option value="' + equipo.id + '">' + equipo.nombre + '</option>');
                     });
                 },
                 error: function(error) {
