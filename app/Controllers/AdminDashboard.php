@@ -492,6 +492,18 @@ class AdminDashboard extends BaseController
             //$equipoLocalId = $postData['equipo_local'];
             //$equipoVisitaId = $postData['equipo_visita'];
 
+            if (empty($postData['equipo_destino']) || empty($postData['equipo_local']) || empty($postData['equipo_visita']) || empty($postData['tipopartido'])) {
+                return redirect()->back()->withInput()->with('error', 'Falta seleccionar una opción en el formulario');
+            }
+            
+            if (empty($postData['goleslocal']) || empty($postData['golesvisita'])) {
+                return redirect()->back()->withInput()->with('error', 'Falta ingresar los goles');
+            }
+            
+            if ($postData['equipo_local'] === $postData['equipo_visita']) {
+                return redirect()->back()->withInput()->with('error', 'Los equipos no pueden ser los mismos');
+            }
+
             $equiposLocalIdd = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_local']}'";
             $equipoLocal = $db->query($equiposLocalIdd)->getFirstRow();
             $equipoLocalId = $equipoLocal->id;
@@ -499,15 +511,6 @@ class AdminDashboard extends BaseController
             $equiposVisitaIdd = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_visita']}'";
             $equipoVisita = $db->query($equiposVisitaIdd)->getFirstRow();
             $equipoVisitaId = $equipoVisita->id;
-
-            // Obtener nombres de los equipos local y visita
-            // $queryEquipos = "SELECT e_local.nombre AS equipo_local, e_visita.nombre AS equipo_visita
-            //     FROM equipos e_local, equipos e_visita
-            //     WHERE e_local.id = ?
-            //     AND e_visita.id = ?";
-            // $equipos = $db->query($queryEquipos, [$equipoLocalId, $equipoVisitaId])->getRow();
-            
-
 
             // Datos para la tabla resultados
             $resultadoData = [
