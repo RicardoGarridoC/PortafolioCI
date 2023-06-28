@@ -489,15 +489,25 @@ class AdminDashboard extends BaseController
             $postData = $this->request->getPost();
 
             // Equipos local y visita
-            $equipoLocalId = $postData['equipo_local'];
-            $equipoVisitaId = $postData['equipo_visita'];
+            //$equipoLocalId = $postData['equipo_local'];
+            //$equipoVisitaId = $postData['equipo_visita'];
+
+            $equiposLocalIdd = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_local']}'";
+            $equipoLocal = $db->query($equiposLocalIdd)->getFirstRow();
+            $equipoLocalId = $equipoLocal->id;
+
+            $equiposVisitaIdd = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_visita']}'";
+            $equipoVisita = $db->query($equiposVisitaIdd)->getFirstRow();
+            $equipoVisitaId = $equipoVisita->id;
 
             // Obtener nombres de los equipos local y visita
-            $queryEquipos = "SELECT e_local.nombre AS equipo_local, e_visita.nombre AS equipo_visita
-                FROM equipos e_local, equipos e_visita
-                WHERE e_local.id = ?
-                AND e_visita.id = ?";
-            $equipos = $db->query($queryEquipos, [$equipoLocalId, $equipoVisitaId])->getRow();
+            // $queryEquipos = "SELECT e_local.nombre AS equipo_local, e_visita.nombre AS equipo_visita
+            //     FROM equipos e_local, equipos e_visita
+            //     WHERE e_local.id = ?
+            //     AND e_visita.id = ?";
+            // $equipos = $db->query($queryEquipos, [$equipoLocalId, $equipoVisitaId])->getRow();
+            
+
 
             // Datos para la tabla resultados
             $resultadoData = [
@@ -539,16 +549,16 @@ class AdminDashboard extends BaseController
         } else {
             // Realiza la consulta original para obtener los equipos del partido seleccionado
             $db = \Config\Database::connect();
-            $query = "SELECT p.id, e_local.nombre AS equipo_local, e_visita.nombre AS equipo_visita, c.id AS categoriaid, c.nombre AS nombrecategoria
-                      FROM partidos p
-                      LEFT JOIN resultados r ON p.id = r.id_partido_fk
-                      LEFT JOIN equipos e_local ON p.equipo_local_fk = e_local.id
-                      LEFT JOIN equipos e_visita ON p.equipo_visita_fk = e_visita.id
-                      LEFT JOIN campeonatos c ON c.id = p.campeonato_id_fk
-                      WHERE r.id_partido_fk IS NULL
-                      AND (p.equipo_local_fk = 10 OR p.equipo_local_fk = 14)
-                      AND p.id = ?
-                      ORDER BY p.id ASC";
+            $query = "SELECT p.id, e_local.id as id_local ,e_local.nombre AS equipo_local, e_visita.id as id_visita,e_visita.nombre AS equipo_visita, c.id AS categoriaid, c.nombre AS nombrecategoria
+                        FROM partidos p
+                        LEFT JOIN resultados r ON p.id = r.id_partido_fk
+                        LEFT JOIN equipos e_local ON p.equipo_local_fk = e_local.id
+                        LEFT JOIN equipos e_visita ON p.equipo_visita_fk = e_visita.id
+                        LEFT JOIN campeonatos c ON c.id = p.campeonato_id_fk
+                        WHERE r.id_partido_fk IS NULL
+                        AND (p.equipo_local_fk = 10 OR p.equipo_local_fk = 14)
+                        AND p.id = ?
+                        ORDER BY p.id ASC";
             $equipos = $db->query($query, [$idd])->getResultArray();
             echo json_encode($equipos);
         }

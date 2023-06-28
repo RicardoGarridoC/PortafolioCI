@@ -128,14 +128,14 @@ setTimeout(function() {
                             var $equipoLocal = $('#equipo_local');
                             $equipoLocal.empty();
                             $.each(response, function(index, equipo) {
-                                $equipoLocal.append('<option value="' + equipo.id + '">' + equipo.equipo_local + '</option>');
+                                $equipoLocal.append('<option value="' + equipo.id_local + '">' + equipo.equipo_local + '</option>');
                             });
                             //$equipoLocal.prop('disabled', true); // Bloquear el campo equipo_local
 
                             var $equipoVisita = $('#equipo_visita');
                             $equipoVisita.empty();
                             $.each(response, function(index, equipo) {
-                                $equipoVisita.append('<option value="' + equipo.id + '">' + equipo.equipo_visita + '</option>');
+                                $equipoVisita.append('<option value="' + equipo.id_visita + '">' + equipo.equipo_visita + '</option>');
                             });
                             //$equipoVisita.prop('disabled', true); // Bloquear el campo equipo_visita
 
