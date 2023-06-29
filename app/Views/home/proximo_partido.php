@@ -6,7 +6,7 @@
         }
         
         .probando {
-            background-color: #222;
+            background-color: #11151C;
             padding: 20px;
             margin-bottom: 20px;
         }
