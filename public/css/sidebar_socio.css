@@ -6,11 +6,12 @@
     width: 200px; /* Adjust the width according to your needs */
     z-index: 1; /* Ensure the sidebar stays on top of other content */
     transition: all 0.2s ease-in-out; /* Add a transition effect when the sidebar changes position */
+    background-color: #11151C;
 }
 
 footer {
     height: 160px; /* Adjust to your desired height */
-    background: linear-gradient(45deg, #c4a283 10%, #795c3d 90%);
+    background: linear-gradient(45deg, #a36224 5%, #fa8e2a 95%);
     bottom: 0;
     z-index: 999;
 }

@@ -14,7 +14,7 @@
         }
 
         .navbar {
-            background-color: #212121;
+            background-color: #11151C;
             top: 0;
             z-index: 100;
         }

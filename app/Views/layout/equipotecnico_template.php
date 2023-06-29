@@ -22,7 +22,7 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
+            <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="<?php echo base_url('InicioEquipoTecnico'); ?>">
                         <img src="<?= base_url()?>/public/images/losalces.png" class="img-fluid" alt="Image description">
