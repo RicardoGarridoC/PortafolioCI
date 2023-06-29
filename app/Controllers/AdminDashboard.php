@@ -13,40 +13,86 @@ class AdminDashboard extends BaseController
 {
     public function Dashboard()
     {
-        return view('admin/admin_dashboard');
+        $titulo = [
+            'title' => 'Ver Usuario Admin',
+        ];
+
+        return view('admin/admin_dashboard', $titulo);
     }
 
     public function equipoDatabase()
     {
+        $titulo = [
+            'title' => 'Ver Equipos Admin',
+        ];
+
         $equipoModel = new EquipoModel();
         $equipos = $equipoModel->findAll();
         $equipos = array('equipos' => $equipos);
-        return view('admin/admin_equipo_dt', $equipos);
+
+        $viewData = array_merge($titulo, $equipos);
+
+        return view('admin/admin_equipo_dt', $viewData);
+    }
+
+    public function __construct()
+    {
+        helper(['form', 'encryption']);
+
+        //$this->encryption = \Config\Services::encryption();
     }
 
     public function usuarioDatabase()
     {
+        $titulo = [
+            'title' => 'Ver Usuarios Admin',
+        ];
+
         $usuarioModel = new UsuarioModel();
+        $encrypter = \config\Services::encrypter();
         $usuarios = $usuarioModel->findAll();
         $usuarios = array('usuarios' => $usuarios);
-        return view('admin/admin_usuarios_dt', $usuarios);
+
+        foreach ($usuarios['usuarios'] as &$usuario) {
+            $encryptedPassword = $usuario['password_hash'];
+            $usuario['clavebuena'] = $encrypter->decrypt(hex2bin($encryptedPassword));
+        }
+
+        $data = ['usuarios' => $usuarios['usuarios']];
+
+        $viewData = array_merge($titulo, $data);
+
+        return view('admin/admin_usuarios_dt', $viewData);
     }
 
     public function jugadorDataBase()
     {
 
+        $titulo = [
+            'title' => 'Ver Jugadores Admin',
+        ];
+
         $jugadorModel = new JugadorModel();
         $jugadores = $jugadorModel->findAll();
         $jugadores = array('jugadores' => $jugadores);
-        return view('admin/admin_jugador_dt', $jugadores);
+
+        $viewData = array_merge($titulo, $jugadores);
+        return view('admin/admin_jugador_dt', $viewData);
     }
 
     public function equipotecnicoDatabase()
     {
+
         $db = db_connect();
         $equipotecnicoModel = new CustomModel($db);
         $equipots = $equipotecnicoModel->getEquipoTecnico();
-        return view('admin/admin_equipotecnico_dt', ['equipots' => $equipots]);
+
+        $data = [
+            'equipots' => $equipots,
+            'title' => 'Ver Equipo Tecnico Admin'
+        ];
+
+        return view('admin/admin_equipotecnico_dt', $data);
 
         //$equipotecnicoModel = new EquipoTecnicoModel();
         //$equipots=$equipotecnicoModel->findAll();
@@ -58,17 +104,18 @@ class AdminDashboard extends BaseController
         $db = db_connect();
         $socioModel = new CustomModel($db);
         $socios = $socioModel->getSocios();
-        return view('admin/admin_socio_dt', ['socios' => $socios]);
+
+        $data = [
+            'socios' => $socios,
+            'title' => 'Ver Socio Admin'
+        ];
+        
+        return view('admin/admin_socio_dt', $data);
 
         //$socioModel = new SocioModel();
         //$socios=$socioModel->findAll();
         //$socios=array('socios'=>$socios);
         //return view('admin/admin_socio_dt', $socios);
-    }
-
-    public function __construct()
-    {
-        helper('form');
     }
 
     public function guardaJugador()
@@ -93,9 +140,15 @@ class AdminDashboard extends BaseController
         if ($jugadorModel->save($data) === false) {
             var_dump($jugadorModel->errors());
         }
+
+        $titulo = [
+            'title' => 'Ver Jugadores Admin',
+        ];
+        
         $jugadores = $jugadorModel->findAll();
         $jugadores = array('jugadores' => $jugadores);
-        return view('admin/admin_jugador_dt', $jugadores);
+        $viewData = array_merge($titulo, $jugadores);
+        return view('admin/admin_jugador_dt', $viewData);
     }
     public function guardaUsuario()
     {
@@ -124,7 +177,20 @@ class AdminDashboard extends BaseController
         }
         $usuarios = $usuarioModel->findAll();
         $usuarios = array('usuarios' => $usuarios);
-        return view('admin/admin_usuarios_dt', $usuarios);
+
+        foreach ($usuarios['usuarios'] as &$usuario) {
+            $encryptedPassword = $usuario['password_hash'];
+            $usuario['clavebuena'] = $encrypter->decrypt(hex2bin($encryptedPassword));
+        }
+
+        $titulo = [
+            'title' => 'Ver Usuarios Admin',
+        ];
+    
+        $data = ['usuarios' => $usuarios['usuarios']];
+        $viewData = array_merge($titulo, $data);
+
+        return view('admin/admin_usuarios_dt', $viewData);
     }
     public function guardaEquipo()
     {
@@ -143,14 +209,17 @@ class AdminDashboard extends BaseController
         if ($equipoModel->save($data) === false) {
             var_dump($equipoModel->errors());
         }
+        $titulo = [
+            'title' => 'Ver Equipos Admin',
+        ];
+        
         $equipos = $equipoModel->findAll();
         $equipos = array('equipos' => $equipos);
-        return view('admin/admin_equipo_dt', $equipos);
+        $viewData = array_merge($titulo, $equipos);
+        return view('admin/admin_equipo_dt', $viewData);
     }
     public function guardaEquipoTecnico()
     {
-
-
         $equipotecnicoModel = new EquipoTecnicoModel();
         $request = \Config\Services::request();
         $data = array(
@@ -169,11 +238,14 @@ class AdminDashboard extends BaseController
         }
         $equipots = $equipotecnicoModel->findAll();
         $equipots = array('equipots' => $equipots);
-        return view('admin/admin_equipotecnico_dt', $equipots);
+        $viewData = [
+            'equipots' => $equipots,
+            'title' => 'Ver Equipo Tecnico Admin'
+        ];
+        return view('admin/admin_equipotecnico_dt', $viewData);
     }
     public function guardaSocio()
     {
-
 
         $socioModel = new SocioModel();
         $request = \Config\Services::request();
@@ -189,7 +261,11 @@ class AdminDashboard extends BaseController
         }
         $socios = $socioModel->findAll();
         $socios = array('socios' => $socios);
-        return view('admin/admin_socio_dt', $socios);
+        $viewData = [
+            'socios' => $socios,
+            'title' => 'Ver Socio Admin'
+        ];
+        return view('admin/admin_socio_dt', $viewData);
     }
 
     public function borrarJugador()
@@ -198,19 +274,48 @@ class AdminDashboard extends BaseController
         $request = \Config\Services::request();
         $id = $request->getPostGet('id');
         $jugadorModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Jugadores Admin',
+        ];
+        
         $jugadores = $jugadorModel->findAll();
         $jugadores = array('jugadores' => $jugadores);
-        return view('admin/admin_jugador_dt', $jugadores);
+        $viewData = array_merge($titulo, $jugadores);
+        return view('admin/admin_jugador_dt', $viewData);
+
+        // $jugadores = $jugadorModel->findAll();
+        // $jugadores = array('jugadores' => $jugadores);
+        // return view('admin/admin_jugador_dt', $jugadores);
     }
     public function borrarUsuario()
     {
         $usuarioModel = new UsuarioModel();
         $request = \Config\Services::request();
+        $encrypter = \config\Services::encrypter();
         $id = $request->getPostGet('id');
         $usuarioModel->delete($id);
+
         $usuarios = $usuarioModel->findAll();
         $usuarios = array('usuarios' => $usuarios);
-        return view('admin/admin_usuarios_dt', $usuarios);
+
+        foreach ($usuarios['usuarios'] as &$usuario) {
+            $encryptedPassword = $usuario['password_hash'];
+            $usuario['clavebuena'] = $encrypter->decrypt(hex2bin($encryptedPassword));
+        }
+
+        $titulo = [
+            'title' => 'Ver Usuarios Admin',
+        ];
+    
+        $data = ['usuarios' => $usuarios['usuarios']];
+        $viewData = array_merge($titulo, $data);
+
+        return view('admin/admin_usuarios_dt', $viewData);
+
+        // $usuarios = $usuarioModel->findAll();
+        // $usuarios = array('usuarios' => $usuarios);
+        // return view('admin/admin_usuarios_dt', $usuarios);
     }
     public function borrarEquipo()
     {
@@ -218,9 +323,19 @@ class AdminDashboard extends BaseController
         $request = \Config\Services::request();
         $id = $request->getPostGet('id');
         $equipoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Equipos Admin',
+        ];
+        
         $equipos = $equipoModel->findAll();
         $equipos = array('equipos' => $equipos);
-        return view('admin/admin_equipo_dt', $equipos);
+        $viewData = array_merge($titulo, $equipos);
+        return view('admin/admin_equipo_dt', $viewData);
+
+        // $equipos = $equipoModel->findAll();
+        // $equipos = array('equipos' => $equipos);
+        // return view('admin/admin_equipo_dt', $equipos);
     }
     public function borrarEquipoTecnico()
     {
@@ -228,9 +343,14 @@ class AdminDashboard extends BaseController
         $request = \Config\Services::request();
         $id = $request->getPostGet('id');
         $equipotecnicoModel->delete($id);
+        
         $equipots = $equipotecnicoModel->findAll();
         $equipots = array('equipots' => $equipots);
-        return view('admin/admin_equipotecnico_dt', $equipots);
+        $viewData = [
+            'equipots' => $equipots,
+            'title' => 'Ver Equipo Tecnico Admin'
+        ];
+        return view('admin/admin_equipotecnico_dt', $viewData);
     }
     public function borrarSocio()
     {
@@ -240,7 +360,15 @@ class AdminDashboard extends BaseController
         $socioModel->delete($id);
         $socios = $socioModel->findAll();
         $socios = array('socios' => $socios);
-        return view('admin/admin_socio_dt', $socios);
+        $viewData = [
+            'socios' => $socios,
+            'title' => 'Ver Socio Admin'
+        ];
+        return view('admin/admin_socio_dt', $viewData);
+
+        // $socios = $socioModel->findAll();
+        // $socios = array('socios' => $socios);
+        // return view('admin/admin_socio_dt', $socios);
     }
     public function verAdminUsuario()
     {

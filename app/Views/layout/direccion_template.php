@@ -59,6 +59,12 @@
                                 <li>
                                     <a href="<?php echo base_url('CompraJugadores'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class="hide-on-small d-none d-sm-inline">Comprar Jugador</span></a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('RegistrarNuevoJugador'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class="hide-on-small d-none d-sm-inline">Crear Jugador</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('RegistrarNuevoEquipoTecnico'); ?>" class="nav-link px-0"> <i class="fs-4 bi-person-add"></i> <span class="hide-on-small d-none d-sm-inline">Registrar Nuevo Miembro</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2023 a las 02:40:33
+-- Tiempo de generación: 15-06-2023 a las 20:13:23
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -154,7 +154,7 @@ INSERT INTO `division` (`id`, `categoria`) VALUES
 
 CREATE TABLE `egresos` (
   `id` int(11) NOT NULL,
-  `concepto` enum('sueldo_jugadores','sueldo_e_tecnico','sueldo_dirigentes','pago_mensualidad','impuesto_venta') NOT NULL,
+  `concepto` enum('sueldo_jugadores','sueldo_e_tecnico','sueldo_dirigentes','pago_mensualidad','impuesto_venta','compra_jugadores') NOT NULL,
   `monto` decimal(10,0) NOT NULL,
   `fecha` date NOT NULL,
   `detalle` varchar(100) NOT NULL
@@ -177,7 +177,13 @@ INSERT INTO `egresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`) VALUES
 (29, 'sueldo_jugadores', '150000', '2023-06-13', 'Pago de sueldo jugador Kevin Ronalducci'),
 (30, 'sueldo_e_tecnico', '640000', '2023-06-13', 'Sueldo de equipo tecnico Jorge Sampaoli'),
 (31, 'sueldo_dirigentes', '1000000', '2023-06-13', 'Pago de sueldo dirigente Andres  Peregrini'),
-(32, 'sueldo_jugadores', '150000', '2023-06-14', 'Pago de sueldo jugador Kevin Ronalducci');
+(32, 'sueldo_jugadores', '150000', '2023-06-14', 'Pago de sueldo jugador Kevin Ronalducci'),
+(33, 'compra_jugadores', '99990', '2023-06-14', 'Compra de jugador Ricardito Garrido origen Dragones Rojos'),
+(34, 'compra_jugadores', '888881', '2023-06-14', 'Compra de jugador tornado sdasd origen Tornado Rojo'),
+(35, 'compra_jugadores', '6666666', '2023-06-14', 'Compra de jugador Probando  Jugador origen Dragones Rojos'),
+(36, 'compra_jugadores', '555559', '2023-06-14', 'Compra de jugador Probando Clave origen Rusia Dortmund'),
+(37, 'compra_jugadores', '555657575', '2023-06-14', 'Compra de jugador Clave Probando origen Concepcion United'),
+(38, 'compra_jugadores', '293434', '2023-06-14', 'Compra de jugador Tornadito Rojo origen Tornado Rojo');
 
 -- --------------------------------------------------------
 
@@ -253,7 +259,9 @@ INSERT INTO `equipo_tecnico` (`id`, `cargo`, `equipo_proviene_fk`, `sueldo`, `va
 (2, 'asistente_entrenador', 1, '350000.00', '3000.00', 0),
 (3, 'preparador_fisico', 8, '400000.00', '4000.00', 5),
 (4, 'utilero', NULL, '350000.00', '3000.00', 0),
-(5, 'kinesiologo', NULL, '400000.00', '4000.00', 5);
+(5, 'kinesiologo', NULL, '400000.00', '4000.00', 5),
+(6, 'entrenador', NULL, '22.00', '131.00', 0),
+(7, 'entrenador', 11, '1000000.00', '13100.00', 0);
 
 -- --------------------------------------------------------
 
@@ -348,7 +356,10 @@ INSERT INTO `ingresos` (`id`, `concepto`, `monto`, `fecha`, `detalle`, `id_usuar
 (27, 'actividades_extra', '9999999999', '2023-06-13', '', NULL),
 (28, 'actividades_extra', '8886', '2023-06-13', 'Ingresos Especiales', NULL),
 (29, 'sponsor', '200000', '2023-06-14', 'McDonalds', NULL),
-(30, 'sponsor', '200000', '2023-06-15', 'McDonalds', NULL);
+(30, 'sponsor', '200000', '2023-06-15', 'McDonalds', NULL),
+(31, 'mensualidad', '30000', '2023-06-14', 'Pago de mensualidad', 43),
+(69, 'mensualidad', '30000', '2023-06-15', 'Pago de mensualidad', 41),
+(70, 'mensualidad', '30000', '2023-06-15', 'Pago de mensualidad', 42);
 
 -- --------------------------------------------------------
 
@@ -401,7 +412,20 @@ INSERT INTO `jugadores` (`id`, `posicion`, `partidos_jugados`, `tipo`, `sueldo`,
 (26, 'Mediocampista', 4, 'aficionado', NULL, '150000.00', NULL, 30, 'masculino'),
 (27, 'Lateral', 6, 'aficionado', NULL, '50000.00', 18, 24, 'masculino'),
 (28, 'Lateral', 2, 'profesional', '150000.00', NULL, NULL, 19, 'masculino'),
-(29, 'Delantero', 1, 'aficionado', NULL, '46000.00', NULL, 40, 'masculino');
+(29, 'Delantero', 1, 'aficionado', NULL, '46000.00', NULL, 40, 'masculino'),
+(39, 'Defensa', 0, 'profesional', '888887.00', NULL, 17, 232, 'masculino'),
+(40, 'Defensa', 0, 'aficionado', NULL, '10000.00', 1, 31, 'femenino'),
+(41, 'Defensa', 0, 'profesional', '55557.00', NULL, 15, 2211, 'masculino'),
+(42, 'Delantero', 0, 'profesional', '99999999.99', NULL, 19, 674, 'masculino'),
+(43, 'Defensa', 0, 'profesional', '33224.00', NULL, 17, 322, 'masculino'),
+(44, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
+(45, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
+(46, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
+(47, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 89, 'masculino'),
+(48, 'Defensa', 0, 'aficionado', NULL, '1.00', 18, 88, 'masculino'),
+(49, 'Delantero', 0, 'profesional', '1.00', NULL, 12, 88, 'femenino'),
+(51, 'Defensa', 0, 'profesional', '1.00', NULL, 16, 0, 'masculino'),
+(52, 'Defensa', 0, 'profesional', '200000.00', NULL, 16, 78, 'masculino');
 
 -- --------------------------------------------------------
 
@@ -581,7 +605,8 @@ CREATE TABLE `socios` (
 
 INSERT INTO `socios` (`id`, `fecha_pago`) VALUES
 (1, '2023-04-20'),
-(4, '2023-04-20');
+(4, '2023-04-20'),
+(5, '2023-06-09');
 
 -- --------------------------------------------------------
 
@@ -682,46 +707,54 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `run`, `direccion`, `telefono`, `password_hash`, `rol`, `socio_id_fk`, `jugador_id_fk`, `equipo_tecnico_id_fk`, `direccion_id_fk`) VALUES
-(3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, '092f4ccc7f9cb7512e3dad89417d2cbbd702adfd2c11deabb7ee866e1360447f0339458b6ad667a339b94431e4f202d3cb8f18751e931d386f1bf0fc4c0e5e70f5c585430abeadb2b2294d25d4ebc64afa7581c06f60', 'administrador', NULL, NULL, NULL, NULL),
-(4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, 'b2d6691b7a055d72a3b3da1ee4e590ce22070b3acf3da66984c2c2147139e8cf23c4bfbc48465cf6afb895e62e041f1dc0b8a02f8c1583f4b8505ce58f636cd44fd2e7a819f0ce9a1f040cc14406b49da1bc6d0b7bf5', 'socio', 1, NULL, NULL, NULL),
+(3, 'Diego Matias', 'Servietti Martinez', 'di.servietti@duocuc.cl', '19.532.588-K', 'Pablo de Rokha', 988839401, 'd038153e18469d76cd25266a1fdbff705512a7d3a629d6b705882c6af9209767e9b8bd963ff2339e0effd1b542f1425176bfad3c9300b6d768816e43ff308c2b22ba55fa7f2ef42d7444b9eee435e29e1598771d1b11', 'administrador', NULL, NULL, NULL, NULL),
+(4, 'Ricardo', 'Garrido Contreras', 'rangamind@gmail.com', '20.020.289-9', 'psj 5 636 chgte', 955269593, '86ad61534ee0e4c4ad6455764ba193d1c5bce2995a47bfd50f7d21688a76165b65b1b83d6fc60d4a3a0d936f88d6e10c9bf53bad9bd8447b5089894b913818c26e79b23e898c78689c75f6021918f4de3e5c19243fef', 'socio', 1, NULL, NULL, NULL),
 (5, 'Humberta', 'Suazo', 'chupete.suazo@gmail.com', '112584128-K', 'Avenida siempre viva 123', 11122258, '6ac0c2e3e24a2c48736f51c42af167a175b8617d91f5d928f095d4aa40f106c6c674a0a93901396e84332ffce25d8f01cc3a6c2adfa01ed087763cb5dc386a640c6442664d5485e0590001c6703cb9749fdfb1bd13c9', 'jugador', NULL, 1, NULL, NULL),
-(6, 'Maite', 'Fernandez', 'matigol@gmail.com', '44487158-8', 'calle 123', 111228420, '123456', 'jugador', NULL, 2, NULL, NULL),
-(7, 'Marcela', 'Salas', 'msalas@gmail.com', '11557848-8', 'chillan', 4455842, '123456', 'jugador', NULL, 11, NULL, NULL),
-(8, 'Alexa', 'Sanchez', 'asanchez@@gmail.com', '448815789-7', 'tocopilla 1', 445468487, '123456', 'jugador', NULL, 9, NULL, NULL),
-(9, 'Artura', 'Vidal', 'avidal@gmail.com', '448712138-8', 'pintana 10', 11544510, '123456', 'jugador', NULL, 4, NULL, NULL),
-(10, 'Gabriela', 'Medel', 'gmedel@gmail.com', '17712557-8', 'pintana 1', 445122358, '123456', 'jugador', NULL, 8, NULL, NULL),
-(11, 'Cristina', 'Ronaldo', 'cr7@gmail.com', '123354875-8', 'portugal 1', 1123459, '123456', 'jugador', NULL, 7, NULL, NULL),
-(12, 'Claudia', 'Empate', 'kempate@gmail.com', '11254887-2', 'francia 3', 15843598, '123456', 'jugador', NULL, 3, NULL, NULL),
-(14, 'Carla', 'Caszely', 'ccaszeli@gmail.com', '88752146-8', 'Santiago 1', 84257299, '123456', 'jugador', NULL, 5, NULL, NULL),
-(15, 'Liona', 'Messa', 'lmessa@gmail.com', '4452175-5', 'La Plata 533', 44583321, '123456', 'jugador', NULL, 10, NULL, NULL),
-(16, 'Claudia', 'Bravo', 'cbravo@gmail.com', '55887123-8', 'Viluco 50', 884263575, '123456', 'jugador', NULL, 12, NULL, NULL),
-(17, 'Huasa', 'Isla', 'hisla@gmail.com', '23555782-4', 'buin 789', 88752587, '123456', 'jugador', NULL, 13, NULL, NULL),
-(18, 'Jovanna', 'Beausejour', 'jbeausejour@gmail.com', '7745123-8', 'pasaje 1', 445123548, '123456', 'jugador', NULL, 6, NULL, NULL),
-(19, 'Joana', 'Herrera', 'jherrera@gmail.com', '44212354-8', 'PAsje2', 48551284, '123456', 'jugador', NULL, 14, NULL, NULL),
-(20, 'Eugenia', 'Mena', 'emena@gmail.com', '44212354-8', 'Pasaje 6 55', 45615815, '123456', 'jugador', NULL, 15, NULL, NULL),
-(21, 'Josefa', 'Rojas', 'jrojas@gmail.com', '11235445-8', 'pasaje8 10', 4561238, '123456', 'jugador', NULL, 16, NULL, NULL),
-(22, 'Fernanda', 'Gutierrez', 'fgutierrez@gmail.com', '4321587-8', 'casa 123', 1456481, '123456', 'jugador', NULL, 17, NULL, NULL),
-(23, 'Gonzala', 'Jara', 'gjara@gmail.com', '1122354-5', 'pasaje 8 santiago', 112335487, '123456', 'jugador', NULL, 18, NULL, NULL),
-(24, 'Jorge', 'Sampaoli', 'jsampaoli@gmail.com', '220481263-8', 'CALLE 4 Pasaje 5', 22345681, '123456', 'equipo_tecnico', NULL, NULL, 1, NULL),
-(25, 'Andres', 'Mundi', 'amundi@gmail.com', '120228574-8', 'pasaje 6 76', 71235481, '123456', 'equipo_tecnico', NULL, NULL, 2, NULL),
-(26, 'Emilio', 'Gutierrez', 'eguttierrez@gmail.com', '12502758-4', 'Calle 6 451', 77512813, '123456', 'equipo_tecnico', NULL, NULL, 3, NULL),
-(27, 'Damian', 'Salgado', 'dsalgado@gmail.com', '50158412-8', 'Av Libertad 358', 744812357, '123456', 'equipo_tecnico', NULL, NULL, 4, NULL),
-(28, 'Antonia', 'Riffo', 'ariffo@gmail.com', '42242057-8', 'Chgte Psj 8', 45212358, '123456', 'equipo_tecnico', NULL, NULL, 5, NULL),
-(29, 'Andres ', 'Peregrini', 'aperegrini@gmail.com', '50124805-8', 'Italia 98 concepción', 88123587, 'b8613ae046879dec582cf12cbde292a7077c7c8753a4347f10caba4e28566209e91aa220d131cbb64bb48bd98cf5c309fea30357532a7aa6c2b07f7d32dab35d17b2920a6e2e55afee676e75f2e5ddd603d4d33f3d57', 'direccion', NULL, NULL, NULL, 1),
-(30, 'Cristian', 'Ronaldinho', 'cristianronaldinho@gmail.com', '221257788-8', 'Calle Messi 123', 12345678, '123456', 'jugador', NULL, 19, NULL, NULL),
-(31, 'Cristiano', 'Evangelista', 'cristianoevangelista@gmail.com', '22051247-7', ' Avenida Neymar 456', 87654321, '123456', 'jugador', NULL, 20, NULL, NULL),
-(32, 'Andres', 'Manchez', 'andresmanchez@gmail.com', '20100863-4', 'Calle Cristiano Ronaldo 789', 76543218, '123456', 'jugador', NULL, 21, NULL, NULL),
-(33, 'Leo', 'Modric', 'leomodric@gmail.com', '23120931-6', 'Avenida Hazard 321', 65432187, '123456', 'jugador', NULL, 22, NULL, NULL),
-(34, 'Antoine', 'Curtoa', 'acurtoa@gmail.com', '21040687-5', 'Calle Messi 654', 54321876, '123456', 'jugador', NULL, 23, NULL, NULL),
-(35, 'Paulo', 'Neyman', 'pauloneyman@gmail.com', '25070392-3', 'Avenida Salah 987', 43218765, '123456', 'jugador', NULL, 24, NULL, NULL),
-(36, 'Kevin', 'Ronalducci', 'kevinronalducci@gmail.com', '24081574-1', 'Calle Mbappe 789', 32187654, '123456', 'jugador', NULL, 25, NULL, NULL),
-(37, 'Leonardo', 'Suarez', 'leonardosuarez@gmail.com', '23060528-8', 'Avenida Lewandowski 654', 21876543, '123456', 'jugador', NULL, 26, NULL, NULL),
-(38, 'Karim', 'Benzeme', 'karimbenzeme@gmail.com', '26031416-0', 'Calle De Bruyne 987', 18765432, '123456', 'jugador', NULL, 27, NULL, NULL),
-(39, 'Robert', 'Leva', 'robertleva@gmail.com', '27092037-9', ' Avenida De Gea 654', 87654321, '123456', 'jugador', NULL, 28, NULL, NULL),
-(40, 'Arturo', 'Mival', 'amival@gmail.com', '28011185-4', 'Calle Francia 68', 98765432, '123456', 'jugador', NULL, 29, NULL, NULL),
+(6, 'Maite', 'Fernandez', 'matigol@gmail.com', '44487158-8', 'calle 123', 111228420, '4251d90af3706b68c96d5c616348bed521ecc9dead4efce3466a5ca6c4341a20565a8baad3f4254ea3cec8ceb5c30470f4e6069300cbe241418935f70fe7ee2b0b2800e778dd7c3d6973594844c237ffa5f4da67f4ff', 'jugador', NULL, 2, NULL, NULL),
+(7, 'Marcela', 'Salas', 'msalas@gmail.com', '11557848-8', 'chillan', 4455842, 'f7a083febf922f8152a9655b4467819112bda1cfbc949d085ee60361074d0b9de8c8181fa3e94816518bd53123f1c083a5defa1b621e245b1ad80f4c8dca56d6944824e4348883dac5b45e0c083fdf7f200ba823995f', 'jugador', NULL, 11, NULL, NULL),
+(8, 'Alexa', 'Sanchez', 'asanchez@@gmail.com', '448815789-7', 'tocopilla 1', 445468487, '123df4aa0076eb812d6f384a524c8cf617108acb87503d0bba05337e60c266034c17507149202f2f2962aee07857326e316215577b2add918177b9f4b0b264a2b0b3d252daa36001e703646fa76afc01105651e843f3', 'jugador', NULL, 9, NULL, NULL),
+(9, 'Artura', 'Vidal', 'avidal@gmail.com', '448712138-8', 'pintana 10', 11544510, 'bb6b79c6d65dd75cabaeb4307116f8b1dd590527edc12b8e848b7856067bf4fb6bdc72f1f787c063af81cd6471cbbb9882a87ec5b4c289ffbc519fe5f14607536fb7eae322fa655f48c1b1e368e4f033517f9c35fb6d', 'jugador', NULL, 4, NULL, NULL),
+(10, 'Gabriela', 'Medel', 'gmedel@gmail.com', '17712557-8', 'pintana 1', 445122358, 'b6787ab5828997b5a70bd0af1976cc3740a1978058c8fa8f7f77bf0e8dacd175a648b6be93d8f7ba43af0588d2f43e879c1df7e59263bd406d1f35c02b3337785909a543753f70d36f9be9e1043ed7eafe14df24315a', 'jugador', NULL, 8, NULL, NULL),
+(11, 'Cristina', 'Ronaldo', 'cr7@gmail.com', '123354875-8', 'portugal 1', 1123459, '39fcf5ebdfac6735858c33b9707b00b0b4c30c3e9d443f2d62bd783d53f4b3f9203d4c1b83f10a1f070cf4d9bc6863051d57087bd09d67c32345afef835f5c46a8f6707465cceb4ff8607bf9959680fb9ad2613737c1', 'jugador', NULL, 7, NULL, NULL),
+(12, 'Claudia', 'Empate', 'kempate@gmail.com', '11254887-2', 'francia 3', 15843598, 'ddfbdfb75cbc120289aa76705e04ad6bbee1c8d2cf99ca33344da9aa16793f833d80f67253cf0a608bda0098611111c2f70f56e0addadfc696220173eb903b5c4c1c6c052902e18510e7373db2ea1132bd337f4cd762', 'jugador', NULL, 3, NULL, NULL),
+(14, 'Carla', 'Caszely', 'ccaszeli@gmail.com', '88752146-8', 'Santiago 1', 84257299, '74ebbf7aa853cdcb189182709a4b756f3ddf498455df9bc3d9cff51070fadf859e2fc9bf30ea6bd5a12130a7d3f02698257d2bd7c801b07e594ac1a08e88ee67412e58bec4e2201c224a333f976d9aec14393f7d02c3', 'jugador', NULL, 5, NULL, NULL),
+(15, 'Liona', 'Messa', 'lmessa@gmail.com', '4452175-5', 'La Plata 533', 44583321, '60ab86c48b32cda8cff96aac4c254729c19e6d608e864a295548a057d71be746dcdd736464115b3aee3ccb759245e612a3d9a6de3a2a1d13832332939a1abf9b33966dfd06c4c72a928ff13f1b9142b0e6f6c818eb56', 'jugador', NULL, 10, NULL, NULL),
+(16, 'Claudia', 'Bravo', 'cbravo@gmail.com', '55887123-8', 'Viluco 50', 884263575, '7e4fa1b6be2d1d553cffc6ae6e96712a98ee6c131f3540012a334a62c4c194d7e35299319023748a77ab726a099357639be70a6ac80fffa9c2077919c979a78c97402c9c6aa43b8a5b5ef2840dcc74d92aa54edfa687', 'jugador', NULL, 12, NULL, NULL),
+(17, 'Huasa', 'Isla', 'hisla@gmail.com', '23555782-4', 'buin 789', 88752587, '5219a8f6932c538a24b2f348c6e7bdff6a9f7bb31723ac32d69012eda2fe08da9f52873d580d0e82107bbc980aade531f4c1c0d74cc0c86eae49a08a7cf06c47726188a14c4d8c955f18f2e4808b33652fda04e38d17', 'jugador', NULL, 13, NULL, NULL),
+(18, 'Jovanna', 'Beausejour', 'jbeausejour@gmail.com', '7745123-8', 'pasaje 1', 445123548, 'ff860fbca3307d8cac87719059dbbd4085283526eea6d87f921fbef61d276bd30df12c28953959928c5384510319a367375e37dcabc51ab11aaacb0611494ace7c0043b5db6ff2a1f1bd3237c7550dd7547f835a11b5', 'jugador', NULL, 6, NULL, NULL),
+(19, 'Joana', 'Herrera', 'jherrera@gmail.com', '44212354-8', 'PAsje2', 48551284, '8c2a91cc88fdc104d8d7595657a561b4e5b8e54b9fb89eb7c3fdd32fcf55ab46373fb257b0dc468c6dca40a1c518c389022a2c350d9776a6b70d69932f3b1044633ed73294a564b6d5fac7e07ef2ddbdf43345d0c8aa', 'jugador', NULL, 14, NULL, NULL),
+(20, 'Eugenia', 'Mena', 'emena@gmail.com', '44212354-8', 'Pasaje 6 55', 45615815, 'd231e757ed826c357a8b344da5e7c23b97d9d78d5f455422bac038b782ab244d88fe4b6a90cbf8fa71ae12ad0184932571bb0f90685bec0bc89ebdbd518328f4c5183f816d8b283ad78f41b6f3ee84238476fb9af6e1', 'jugador', NULL, 15, NULL, NULL),
+(21, 'Josefa', 'Rojas', 'jrojas@gmail.com', '11235445-8', 'pasaje8 10', 4561238, '86607ec9905238cedfa7583c2b34d162f8b787f27d08267f88e1df97aafad2c30bf935e9a3cd7f380e8293846f23674d01e2860f9ae1bf7316d3f5189568da4e0a12a38e3f854658e4777886a944a1380fe877c7ed38', 'jugador', NULL, 16, NULL, NULL),
+(22, 'Fernanda', 'Gutierrez', 'fgutierrez@gmail.com', '4321587-8', 'casa 123', 1456481, 'e4ded618db8c127799afbe2aa4f64e4ec5fd61b88ed380f11f7261cfb09d2f86f57421cb08703ff25833a4e12a8d631b1235ea6ff7c05fc7fe87289baf25bbde1298cbec7deea4f81989b63fbe28226da9e585b5ac69', 'jugador', NULL, 17, NULL, NULL),
+(23, 'Gonzala', 'Jara', 'gjara@gmail.com', '1122354-5', 'pasaje 8 santiago', 112335487, 'c78746a734e901c35a77e8073d840ac129c8a35be49d9903fb720cc7027aa788a7563fa00450485a77aff9a4e3d7c3c4ab5b3f2277f87054932d04c1b543367cd162f8e8ed10ab1ac6323fcb9c0699d2564a2cc49087', 'jugador', NULL, 18, NULL, NULL),
+(24, 'Jorge', 'Sampaoli', 'jsampaoli@gmail.com', '220481263-8', 'CALLE 4 Pasaje 5', 22345681, '0931a3b7e0ba0affaef49c366724477e5ecddc00c76986062633c701e59b7ff0855835c37861cea03c7f93d4855b13b5408f37a4d772b6763d9f779c002bdd2e0ca5cdf1e76eb13db4e21b6e4feea1ebd7d309508e62', 'equipo_tecnico', NULL, NULL, 1, NULL),
+(25, 'Andres', 'Mundi', 'amundi@gmail.com', '120228574-8', 'pasaje 6 76', 71235481, '37e0645a3c5999cb60b5695994c7660c4b05c6fdc64bf212e773e02c78e96135107078ea850b0ef59abd7cb25fb5319abac98e3227f56d6b5767ec027d8facf6dd7c9b5ea45b2ef4819fc88d4f01370d896e08396afe', 'equipo_tecnico', NULL, NULL, 2, NULL),
+(26, 'Emilio', 'Gutierrez', 'eguttierrez@gmail.com', '12502758-4', 'Calle 6 451', 77512813, '0780d85fa0645200b0a13bf116e5f5eeaa9c22e133eaa81a1d94f7ecb20a441eb4c927e6600aa0954b5938e890ef8d563937fcae0df216e6be4f962618b00602491254a26102b4f6d88df5df68a06e0fae66b8204e3d', 'equipo_tecnico', NULL, NULL, 3, NULL),
+(27, 'Damian', 'Salgado', 'dsalgado@gmail.com', '50158412-8', 'Av Libertad 358', 744812357, '2b2d6143dfbcef75c81b17cd1ddc48844b8d4db5b56de83debdae1c152d1da0bc26735674d396d66fcfc5d0a86df5f5fb14aad648a71b5d3a54238edf95bf81bd38888a54d908937e7dd14a724afe59fa4ab697440cb', 'equipo_tecnico', NULL, NULL, 4, NULL),
+(28, 'Antonia', 'Riffo', 'ariffo@gmail.com', '42242057-8', 'Chgte Psj 8', 45212358, 'f3001202d3f9397909890868697f2f3e8caa5a4555f39d6da9bf6b66884b9e7cb1849e6cf59ed753e1dd14c9949d0d3e00bbda1de7faf876cd6ef8675e3310b16d8ea291cf5f55015018b2c8fa027aac0319745dea4e', 'equipo_tecnico', NULL, NULL, 5, NULL),
+(29, 'Andres ', 'Peregrini', 'aperegrini@gmail.com', '50124805-8', 'Italia 98 concepción', 88123587, 'dc401da092c2f9f23ce7f1bb847248af5d0ed09058fc4be72e3a89d998cbd6ba00e01127efb871877f65354308e6dbf626b6caa92deb49aa137f82debe7da0326e00c4ef308c08806d5395af545b51f38bd441b015d8', 'direccion', NULL, NULL, NULL, 1),
+(30, 'Cristian', 'Ronaldinho', 'cristianronaldinho@gmail.com', '221257788-8', 'Calle Messi 123', 122345678, 'bad9d47b5b14f7bc9c150523d5170b993e6f6fe56c0f44d70c87f14a411977df72e2371d9d486e1e0ec014131a873f86219e645468093a93dddd739655502ce4121f9a62434524ba80897cdedb6e909543cf846f4564', 'jugador', NULL, 19, NULL, NULL),
+(31, 'Cristiano', 'Evangelista', 'cristianoevangelista@gmail.com', '22051247-7', ' Avenida Neymar 456', 87654321, 'fe6b4a246d7307b74a89c7429c87b3cb34c7511c85a80aa3faec7d34a0fccb8143f26d74c0e29d3e4480f1636255ecd9ea6645c1aa0cc166086f7464111d1c74349d590438f039940191046e04cbcd54e1e52b6be4e1', 'jugador', NULL, 20, NULL, NULL),
+(32, 'Andres', 'Manchez', 'andresmanchez@gmail.com', '20100863-4', 'Calle Cristiano Ronaldo 789', 76543218, 'ca9cdc9fa196b720fa0367d99d4ec49490bd4a7b65673f6de39240a8266a21f2efabdc374dc64c07936bfd93e3ffa9e961d96a7094b38a02528853a1731f8ae59b2bcf589e6805863825d71aa38a134479973ed5e8ed', 'jugador', NULL, 21, NULL, NULL),
+(33, 'Leo', 'Modric', 'leomodric@gmail.com', '23120931-6', 'Avenida Hazard 321', 65432187, 'e3c49f91778be02436957e78afbd39be467d9cb47f41f51a58aadc9af615e76ee3249f28cb98cf2892fbdb8a11eb32e681fb3b67f1d3732f53d57267cb6d793065d32ba3bc9b2467110d482d1e50bb62590284b731fb', 'jugador', NULL, 22, NULL, NULL),
+(34, 'Antoine', 'Curtoa', 'acurtoa@gmail.com', '21040687-5', 'Calle Messi 654', 54321876, 'fc82f442957acc3e34b60980aed17ea265519515274e69ace82e352d4a1997563c9a805ffefa3f91b683bb8127425b5c98823bb33d2578a02b0b0ab029212bd7cba0f80e651294c4876e0cd79621fed5f80c93396de7', 'jugador', NULL, 23, NULL, NULL),
+(35, 'Paulo', 'Neyman', 'pauloneyman@gmail.com', '25070392-3', 'Avenida Salah 987', 43218765, 'ba57ec808c19682bf9b7bed3cd46b1443f6186f79faca2764ae8e9f47dd3887a28214347cc1d43382f68013dfa662c6c842152d3ed07581d60bc3a1b9fbd1cd3352e17c0180c02f3785766b2ba193626a8d2f39e7b51', 'jugador', NULL, 24, NULL, NULL),
+(36, 'Kevin', 'Ronalducci', 'kevinronalducci@gmail.com', '24081574-1', 'Calle Mbappe 789', 32187654, 'c28f7f277c5409cb98916d81196c5bffd83d61c650e1694ae42d868259ceabbe93987f8ed9ae92f43edf28658ef7c37d1e2cf331959c5b772298aa7171b8716a9e220d725d222adbf65995634cee7353fac829195a84', 'jugador', NULL, 25, NULL, NULL),
+(37, 'Leonardo', 'Suarez', 'leonardosuarez@gmail.com', '23060528-8', 'Avenida Lewandowski 654', 21876543, 'ac371d269c85f9bf7b560c63d4bcd0935513a54e4c84f7f1a8ccbba744f64e5f54f9fbfdd6349a345ccebd41a80233917649adbd5da2cfd075c20b04af6221e793cdf529dff5ccb67f974c41de631232dae6e7fccfae', 'jugador', NULL, 26, NULL, NULL),
+(38, 'Karim', 'Benzeme', 'karimbenzeme@gmail.com', '26031416-0', 'Calle De Bruyne 987', 18765432, '51fe799eb3727b1f972633b7ab733a4973df66e0703545e6a5cb2caea9ce1012dc2fe3cc273fec4bc63fce04f077d4316a24ada724e63a9263a125f53ba98fa43074227c0cc56cde6962ac596bd0702d97efd4889e57', 'jugador', NULL, 27, NULL, NULL),
+(39, 'Robert', 'Leva', 'robertleva@gmail.com', '27092037-9', ' Avenida De Gea 654', 87654321, '31760045a974e97b7f580f440904a8ceb5570b8a9acf47426e470eb8a3554f39eda8217fdb3a0b610a7ee61cebbfc32e3d0c8b2f3053c6b74cb3bd9a3f9628cac999d633eab7cd8d2aa36d9ac07edcb8362782051a4a', 'jugador', NULL, 28, NULL, NULL),
+(40, 'Arturo', 'Mival', 'amival@gmail.com', '28011185-4', 'Calle Francia 68', 98765432, '905007cbcd9c898d326b187d0860f8f0c42b1493ac3e489e36d75f0ea8cd1501bef466d45020b53ff5e409f49abf089b1bade9a92c0270b40801ce6ab8f6562dcec1f485ef702158bc7e7f1613bf33fa76d45f4783d5', 'jugador', NULL, 29, NULL, NULL),
 (41, 'Jorge', 'Valdibia', 'jvaldibia@gmail.com', '1231581-9', 'casa roja 123', 99885127, '3ae40fec330292d5cf555a8293c1142fed39efb70ab19230660162b92f83bb438d69d6dc36a7b21b1d0220c3a5377da5afbc2bdf3fc4f2eea936b0c184f76306940f6b9981f0d3fd96721422f0b60b055ccf4b0319b4', 'socio', NULL, NULL, NULL, NULL),
 (42, 'asdasd', 'asdasd', 'dieg.barros@duocuc.cl', '234234', 'dsfsdds', 234234, '9b183761be24fae1ebf03d9ae2aef316d759c77bbb6ad08bba2eaa483ce403f08e5565207bca6fca544a26f3b516ea882a0b7f91c3ea71cdc5cf88c27417a92580999a1f7c91a8d8dc00d2ad30b776f318668c', 'socio', NULL, NULL, NULL, NULL),
-(43, 'Probando', 'Probando 2', 'probando1@hotmail.com', '111231232', 'Clave 123456 o 123455', 2147483647, '667386b82e344309e4f199d88c3cc9796b206c5a4f260823da4cad7e1681cd3ac10ec549f09217c000c1a980300bd5f03f3f96c223c8f68e9ae4fba64c34be82da136b447dfc63061cde55c26e24f01a53c1c4786f57', 'socio', NULL, NULL, NULL, NULL);
+(43, 'Probando', 'Probando 2', 'probando1@hotmail.com', '111231232', 'Clave 123456 o 123455', 2147483647, '3cc53b4f0929b03cfdb52091c90715ee4cd0b3883b42945beb8ec4360a89f0a80899b04ea556439a7212fcf178cd5afabfbe1ada95444226d5352034ed00d680beb254d9ec6642ad92746be0442da5f57ffa6a292b47', 'socio', NULL, NULL, NULL, NULL),
+(46, 'tornado', 'sdasd', 'probando3333333@gmail.com', '20150863-4', 'Pablo de Rokhasdd123 1231231', 2147483647, 'e401c84d57b23bf50151f4732d72bf4c7711a41e7e69c0b35e9d21b12211c8b32718f23570cb9dc8f67a6695aa42c0e938b53fd607843d4eebfe35d670f86847092ca6f179d0069d005503de6e32eeb4de9c57ac69b8', 'jugador', NULL, 39, NULL, NULL),
+(47, 'Probando ', 'Jugador', 'probandojugador2@hotmail.com', '12312322-2', 'sdsdsdddd', 33333333, '4b84a746e3f82c50cdfc5dd6c5b341d19286f279b9ef120453afe54bd8fd4da0cb7281225bde48775b24e8345854b35a381e86fb3b8b31c4a3480d5d34e58764bd40c6469daa2ee7c3c940d821f29678737d00706d4b', 'jugador', NULL, 40, NULL, NULL),
+(48, 'Probando', 'Clave', 'probando2@gmail.com', '12666878-0', 'Pablito', 95939444, 'c7ee042451c464d714b723dac74b9e5c750a1e3a609a2da0271ea9f9d92c867271be347416bdb7b1ccf3a2b08812248d0ad3102b260acd43caeda98fcd831b3695cd58ca55403341ee6301be5303cdd0b0573de6723e', 'jugador', NULL, 41, NULL, NULL),
+(49, 'Clave', 'Probando', 'registro@hotmail.com', '454343-4', 'Iyytt', 64544545, '7ee991ef9cdaee849d910e27156049ffc9fce57a1066c357006bef17eb91ec37ec3f6fdc0f958f9244e11a72a7e33df57f1126c4d00b6d744f4f02343730a6ed21105d7122cb9321babca9d0e765463157cbf0db2ba5', 'jugador', NULL, 42, NULL, NULL),
+(50, 'Tornadito', 'Rojo', 'tornado@gmail.com', '2923344-3', 'Pablo de Rokha 433', 34343444, '37d15f078854f89424543fc72baf62b74f8a3566240f3744231cba9f145d5e6678a4c7f7a413d768309bd507c36e2c045c893c0997a5d80d8319cbfa6804fef938af6885aac3a11c808199564e41237b4813b0ef763506', 'jugador', NULL, 43, NULL, NULL),
+(51, 'Probando', 'Probando 2', 'probando222221@hotmail.com', '1231233-K', 'ssdsdsd', 1231233, 'd8004b99ac33d26a6761b34aa9ba331d400c5a18560bd6e2364dced63e4497cbb310839bc009060f57f2d912195dda0ff7149f8731f18d4d7587b44d9f9c601c7ecaf55fef37e3cc609fa55d88e1df4f768c606b9cfe', 'jugador', NULL, 51, NULL, NULL),
+(52, 'wdasasdasd', 'asdasdsssd', 'asdasdasd@guoddd.cl', '19.532.588-2', 'assdsasddas', 2147483647, '1470cc9b137d1afe89a6606c20373a3d43b74199b9d1ebbf9c9421401f731bda2333a59a2a6416adf3396574315dc4cb3cc8dfb83ce338a4ccec3e8c93883e929aa5c152b7eefe8f80fec969fe183b9558623bc7c40d', 'jugador', NULL, 52, NULL, NULL),
+(53, 'Probando22', 'Probando 222', 'aperegriasdsdsdni@gmail.com', '20100863-2', 'asadasdsaasd', 1231231232, '75ff4120be7dfe5160a0bfe9471cf8c7af0c7f94bec40eb7779e49602a218fb9e96fb276d622eb3716f9845a48b0a365b9de78e1629eadbc843f632dc3a70d8ead6efc0200fcfd13d8205260d9d7fc8a9c1ab4c24698', 'jugador', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1019,13 +1052,13 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT de la tabla `egresos`
 --
 ALTER TABLE `egresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `equipos_campeonato`
@@ -1037,7 +1070,7 @@ ALTER TABLE `equipos_campeonato`
 -- AUTO_INCREMENT de la tabla `equipo_tecnico`
 --
 ALTER TABLE `equipo_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `estadisticas_campeonato`
@@ -1061,13 +1094,13 @@ ALTER TABLE `goles`
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `lesiones`
@@ -1115,7 +1148,7 @@ ALTER TABLE `resultados`
 -- AUTO_INCREMENT de la tabla `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `sponsors`
@@ -1139,7 +1172,7 @@ ALTER TABLE `traspaso`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Restricciones para tablas volcadas

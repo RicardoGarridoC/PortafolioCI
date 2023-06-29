@@ -10,7 +10,7 @@ use App\Models\PartidosModel;
 use CodeIgniter\Controller;
 use App\Models\PagoSocioModel;
 use App\Models\CustomModel;
-use Dompdf\Dompdf as Dompdf;
+use Dompdf\Dompdf;
 use CodeIgniter\API\ResponseTrait;
 
 
