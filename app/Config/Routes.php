@@ -47,6 +47,7 @@ $routes->get('AdminUsuarioDt', 'AdminDashboard::usuarioDatabase', ['filter' => '
 $routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminResultadoDt', 'AdminDashboard::resultadoDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('PerfilAdmin', 'AdminDashboard::verAdminUsuario', ['filter' => 'SesionAdmin']);
 $routes->get('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin']);
 $routes->post('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin']);

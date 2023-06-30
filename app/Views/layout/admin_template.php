@@ -115,7 +115,7 @@
               <li>
                   <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="/PortafolioCI/logout">Cerrar Sesión</a></li>
+              <li><a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesión</a></li>
           </ul>
       </div>
 
@@ -202,6 +202,12 @@
                 <a href="<?php echo base_url('AdminEquipoDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Equipos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminResultadoDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Resultados</p>
                 </a>
               </li>
             </ul>
@@ -309,6 +315,12 @@
             $('#myForm')[0].reset();
         });
     });
+</script>
+
+<script type="text/javascript">
+    function cerrarSesion() {
+        window.location.href = "<?php echo base_url('Home/cerrarSesion'); ?>";
+    }
 </script>
 
 </body>

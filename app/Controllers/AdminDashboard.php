@@ -120,6 +120,21 @@ class AdminDashboard extends BaseController
         //return view('admin/admin_socio_dt', $socios);
     }
 
+    public function resultadoDatabase()
+    {
+        //$db = db_connect();
+        $resultadoModel = new ResultadosModel();
+        //$resultados = $resultadoModel->getResultados();
+        $resultados = $resultadoModel->findAll();
+
+        $data = [
+            'resultados' => $resultados,
+            'title' => 'Ver Resultados Admin'
+        ];
+
+        return view('admin/admin_resultados_dt', $data);
+    }
+
     public function guardaJugador()
     {
 
