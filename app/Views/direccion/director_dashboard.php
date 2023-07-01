@@ -12,33 +12,40 @@
         padding: 20px; 
         border-radius: 10px;
     }
+    .tabla2 {
+        background-color: #f0f2f0;
+        border-radius: 10px;
+    }
 </style>
 
 <br>
-<div class="table-container">
-    <h2 class="text-center">Total Haberes</h2>
+<div class="tabla2">
+<h2 class="text-center">Total Haberes</h2>
     <div class="row justify-content-center">
-    <div class="col-6">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Cantidad de Ingresos</th>
-            <th>Cantidad de Egresos</th>
-            <th>Total $</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($totaltodo as $tt): ?>
+        <div class="col-md-auto">
+        <table class="table table-bordered">
+            <thead>
             <tr>
-            <td><?php echo $tt['total_ingresos']; ?></td>
-            <td><?php echo $tt['total_egresos']; ?></td>
-            <td><?php echo $tt['diferencia_monto']; ?></td>
+                <th>Cantidad de Ingresos</th>
+                <th>Cantidad de Egresos</th>
+                <th>Total $</th>
             </tr>
-        <?php endforeach; ?>
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+            <?php foreach ($totaltodo as $tt): ?>
+                <tr>
+                <td><?php echo $tt['total_ingresos']; ?></td>
+                <td><?php echo $tt['total_egresos']; ?></td>
+                <td><?php echo $tt['diferencia_monto']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        </div>
     </div>
-  </div>
+</div>
+<div class="table-container">
+    
     <table id="example" class="table table-striped">
         <thead>
             <tr>
