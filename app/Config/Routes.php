@@ -121,6 +121,9 @@ $routes->get('AdminDashboard/borrarJugador', 'AdminDashboard::borrarJugador', ['
 $routes->post('AdminDashboard/guardaJugador', 'AdminDashboard::guardaJugador', ['filter' => 'SesionAdmin']);
 $routes->post('AdminDashboard/guardaUsuario', 'AdminDashboard::guardaUsuario', ['filter' => 'SesionAdmin']);
 $routes->post('AdminDashboard/guardaEquipo', 'AdminDashboard::guardaEquipo', ['filter' => 'SesionAdmin']);
+//
+$routes->get('PartidoEnVivo', 'PartidoEnVivoController::index', ['filter' => 'SesionAdmin']);
+
 //Rutas Aplicacion Movil
 //login
 $routes->post('Home/validarIngresoMovil', 'Home::validarIngresoMovil');

@@ -197,7 +197,7 @@ class Home extends BaseController
                 'minuto' => $row->minuto
             );
         }
-        //TARJETAS VISITA
+        //TARJETAS LOCAL
         $query5 = $db->query('SELECT
         CONCAT(u.nombres, " ", u.apellidos) AS jugador,
         tp.tarjeta,
