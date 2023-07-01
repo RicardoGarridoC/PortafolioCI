@@ -1,6 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
@@ -15,16 +16,34 @@
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
   <style>
-    html,
+      html,
     body {
-    background-image: url(<?php echo base_url('/public/images/estadio2.jpg'); ?>);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    font-family: 'Numans', sans-serif;
+      height: 100%;
+      font-family: 'Numans', sans-serif;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      background-image: url(<?php echo base_url('/public/images/estadio2.jpg'); ?>);
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: blur(8px); /* Ajusta el nivel de desenfoque a tu gusto */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Coloca la imagen de fondo detrás del contenido */
+    }
+
+    @media only screen and (max-width: 768px) {
+      .card {
+        width: 100%;
+        border-radius: 0;
+        height: auto; /* Esto permitirá que el card se estire verticalmente si el contenido es más largo */
+      }
   }
-
-
     .container {
       height: 100%;
       align-content: center;
@@ -38,37 +57,14 @@
       background-color: rgba(0, 0, 0, 0.5) !important;
     }
 
-    @media only screen and (max-width: 768px) {
-      .card {
-        width: 80%;
-      }
-    }
-
-
-    .social_icon span {
-      font-size: 60px;
-      margin-left: 10px;
-      color: #000000;
-    }
-
-    .social_icon span:hover {
-      color: white;
-      cursor: pointer;
-    }
-
     .card-header h3 {
       color: rgb(255, 238, 0);
     }
-
-    .social_icon {
-      position: absolute;
-      right: 20px;
-      top: -45px;
-    }
     .back_button {
-      position: absolute;
-      right: 350px;
-      top: -45px;
+      position: relative;
+      right: 0px;
+      top: 0px;
+      margin-right: 15px;
     }
     .back_button .btn {
       color: #000;
@@ -131,9 +127,6 @@
         <div class="card-header">
           <h3></h3>
           <div class="d-flex justify-content-end social_icon">
-            <span><i class="fab fa-facebook-square"></i></span>
-            <span><i class="fab fa-google-plus-square"></i></span>
-            <span><i class="fab fa-twitter-square"></i></span>
           </div>
           <div class="d-flex justify-content-start back_button">
             <a  href=<?php echo base_url('Home'); ?> class="btn btn-link text-left">
@@ -181,9 +174,7 @@
           <div class="d-flex justify-content-center links">
             ¿Eres nuevo?<a href=<?php echo base_url('Registrarse'); ?>>Registrate</a>
           </div>
-          <div class="d-flex justify-content-center">
-            <a href="#">. </a>
-          </div>
+          <br>
         </div>
       </div>
     </div>

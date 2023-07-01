@@ -25,9 +25,9 @@ setTimeout(function() {
     <h1><?= esc($title); ?></h1>
     <?= \Config\Services::validation()->listErrors(); ?>
 
-    <form action="<?= base_url('RegistrarJugadorController/registrar') ?>" method="post">
+    <form action="<?= base_url('RegistrarJugadorController/registrar') ?>" method="post" id="registro-form">
         <div class="form-group">
-        <label for="genero">Género:</label>
+            <label for="genero">Género:</label>
             <select id="genero" name="genero" class="form-control">
                 <option value="">Seleccione el género</option>
                 <option value="masculino">Masculino</option>
@@ -50,7 +50,7 @@ setTimeout(function() {
         </div>
 
         <div class="form-group">
-            <label for="monto">Sueldo o Ayuda economica:</label>
+            <label for="monto">Sueldo o Ayuda económica:</label>
             <input type="text" class="form-control" id="monto" name="monto" required>
         </div>
 
@@ -62,7 +62,7 @@ setTimeout(function() {
         </div>
 
         <div class="form-group">
-            <label for="numero_camiseta">Numero de camiseta:</label>
+            <label for="numero_camiseta">Número de camiseta:</label>
             <input type="text" class="form-control" id="numero_camiseta" name="numero_camiseta" required>
         </div>
 
@@ -71,6 +71,35 @@ setTimeout(function() {
 
     <script>
     $(document).ready(function(){
+        $('#registro-form').submit(function(event) {
+            var genero = $('#genero').val();
+            var tipo = $('#tipo').val();
+            var equipoOrigen = $('#equipo_origen').val();
+            var posicion = $('#posicion').val();
+            var monto = $('#monto').val();
+            var numeroCamiseta = $('#numero_camiseta').val();
+
+            if (genero === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un género.');
+            } else if (tipo === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un tipo de jugador.');
+            } else if (equipoOrigen === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un equipo origen.');
+            } else if (posicion === '') {
+                event.preventDefault();
+                alert('Debe ingresar una posición.');
+            } else if (monto === '') {
+                event.preventDefault();
+                alert('Debe ingresar un sueldo o ayuda económica.');
+            } else if (numeroCamiseta === '') {
+                event.preventDefault();
+                alert('Debe ingresar un número de camiseta.');
+            }
+        });
+
         $('#genero').change(function(){
             var genero = $(this).val();
             $.ajax({
@@ -93,7 +122,3 @@ setTimeout(function() {
     });
     </script>
 <?= $this->endSection() ?>
-
-
-
-

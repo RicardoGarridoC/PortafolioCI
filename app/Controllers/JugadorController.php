@@ -307,14 +307,22 @@ class JugadorController extends BaseController
 
         return view('jugador/jugador_ver_jugadores', $viewData);
     }
-    public function jugadorverPartidos()
+    public function verPartidos()
     {
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
+
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
         // Agregando Titulo a Cada View
-        $titulo = [ 
-            'title' => 'Partidos Jugador',
+        $titulo = [
+            'title' => 'Partidos',
         ];
 
-        return view('jugador/jugador_ver_partidos', $titulo);
+        $verPartidos = array_merge($data, $titulo);
+
+        return view('jugador/jugador_ver_partidos', $verPartidos);
     }
     public function jugadorverEquipoTecnico()
     {

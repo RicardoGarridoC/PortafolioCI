@@ -93,7 +93,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="AdminDashboard" class="brand-link">
       <img src="<?= base_url() ?>/public/images/losalces.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Los Alces</span>
     </a>
@@ -110,7 +110,6 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
               <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
-              <li><a class="dropdown-item" href="#">Configuración</a></li>
               <li><a class="dropdown-item" href="<?php echo base_url('PerfilAdmin')?>">Ver Perfil</a></li>
               <li>
                   <hr class="dropdown-divider">
@@ -145,21 +144,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url('AdminDashboard')?>" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="<?php echo base_url('PartidoHomeAdmin')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Partido Home</p>
+                  <p>Ultimos partidos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url('CampeonatoHomeAdmin')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Campeonato Home</p>
+                  <p>Agregar resultados</p>
                 </a>
               </li>
             </ul>
@@ -210,12 +203,6 @@
                   <p>Resultados</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url('AdminCambioDt')?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cambios</p>
-                </a>
-              </li>
             </ul>
           </li>
         </ul>
@@ -232,13 +219,16 @@
   <!-- /.content-wrapper -->
 
 
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="#">MiEmpresa S.A.</a>.</strong>
-    Todos los derechos reservados.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Contáctanos: info@miempresa.com</b>
-    </div>
-  </footer>
+  <footer class="text-center text-black">
+        <div class="container pt-4">
+            <!-- Social media -->
+            <section class="mb-4">
+            <p>© Los Alces FC. Todos los derechos reservados.</p>
+            <p>Developed by DevGroup DAF devgroupdaf@contacto.com</p>
+            </section>
+        </div>
+
+    </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

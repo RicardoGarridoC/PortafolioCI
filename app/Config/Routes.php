@@ -48,7 +48,6 @@ $routes->get('AdminEquipoTecnicoDt', 'AdminDashboard::equipotecnicoDatabase', ['
 $routes->get('AdminEquipoDt', 'AdminDashboard::equipoDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('AdminSocioDt', 'AdminDashboard::socioDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('AdminResultadoDt', 'AdminDashboard::resultadoDatabase', ['filter' => 'SesionAdmin']);
-$routes->get('AdminCambioDt', 'AdminDashboard::cambioDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('PerfilAdmin', 'AdminDashboard::verAdminUsuario', ['filter' => 'SesionAdmin']);
 $routes->get('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin']);
 $routes->post('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin']);
@@ -99,7 +98,7 @@ $routes->post('RegistrarEquipoTecnicoController/registrarUsuarioEquipoTecnico', 
 $routes->get('InicioJugador', 'JugadorController::Dashboard', ['filter' => 'SesionJugador']);
 $routes->get('JugadoresJugador', 'JugadorController::jugadorverJugadores2', ['filter' => 'SesionJugador']);
 $routes->get('CampeonatosJugador', 'JugadorController::jugadorverCampeonatos', ['filter' => 'SesionJugador']);
-$routes->get('PartidosJugador', 'JugadorController::jugadorverPartidos', ['filter' => 'SesionJugador']);
+$routes->get('PartidosJugador', 'JugadorController::verPartidos', ['filter' => 'SesionJugador']);
 $routes->get('EstadisticasJugador', 'JugadorController::jugadorverEstadisticas', ['filter' => 'SesionJugador']);
 $routes->get('EquipoTecnicoJugador', 'JugadorController::jugadorverEquipoTecnico', ['filter' => 'SesionJugador']);
 $routes->get('PerfilJugador', 'JugadorController::verJugadorUsuario', ['filter' => 'SesionJugador']);

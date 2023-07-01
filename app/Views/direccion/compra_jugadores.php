@@ -24,9 +24,20 @@ setTimeout(function() {
 </head>
 <body>
     <h1>Compra de jugadores</h1>
-    <?= \Config\Services::validation()->listErrors(); ?>
+    <?php if(session('error')): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+        <?php foreach(session('error') as $error): ?>
+            <li><?= $error ?></li>
+        <?php endforeach; ?>
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php endif; ?>
 
-    <form action="<?= base_url('CompraJugadorController/index') ?>" method="post">
+    <form action="<?= base_url('CompraJugadorController/index') ?>" method="post" id="registro-form">
         <div class="form-group">
             <label for="equipo_destino">Equipo destino:</label>
             <select id="equipo_destino" name="equipo_destino" class="form-control">
@@ -59,11 +70,36 @@ setTimeout(function() {
             <input type="number" class="form-control" id="monto" name="monto">
         </div>
 
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary" id="btn-registrar">Registrar</button>
     </form>
 
     <script>
     $(document).ready(function(){
+        $('#registro-form').submit(function(event) {
+            var equipoDestino = $('#equipo_destino').val();
+            var equipoOrigen = $('#equipo_origen').val();
+            var nombres = $('#nombres').val();
+            var apellidos = $('#apellidos').val();
+            var monto = $('#monto').val();
+
+            if (equipoDestino === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un equipo destino.');
+            } else if (equipoOrigen === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un equipo origen.');
+            } else if (nombres === '') {
+                event.preventDefault();
+                alert('Debe ingresar un nombre.');
+            } else if (apellidos === '') {
+                event.preventDefault();
+                alert('Debe ingresar un apellido.');
+            } else if (monto === '') {
+                event.preventDefault();
+                alert('Debe ingresar un monto.');
+            }
+        });
+
         $('#equipo_destino').change(function(){
             var genero = $(this).find(':selected').data('genero');
             $.ajax({

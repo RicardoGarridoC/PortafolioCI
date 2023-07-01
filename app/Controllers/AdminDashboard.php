@@ -10,7 +10,6 @@ use App\Models\SocioModel;
 use App\Models\CustomModel;
 use App\Models\PartidosModel;
 use App\Models\ResultadosModel;
-use App\Models\CambiosModel;
 
 class AdminDashboard extends BaseController
 {
@@ -134,19 +133,6 @@ class AdminDashboard extends BaseController
         ];
 
         return view('admin/admin_resultados_dt', $data);
-    }
-
-    public function cambioDatabase()
-    {
-        $cambioModel = new CambiosModel();
-        $cambios = $cambioModel->findAll();
-
-        $data = [
-            'cambios' => $cambios,
-            'title' => 'Ver Cambios Admin'
-        ];
-
-        return view('admin/admin_cambios_dt', $data);
     }
 
     public function guardaJugador()

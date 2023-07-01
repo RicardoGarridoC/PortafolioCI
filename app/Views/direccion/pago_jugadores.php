@@ -62,6 +62,12 @@ setTimeout(function() {
         const jugadorSelect = document.getElementById('jugador_id');
         jugadorSelect.innerHTML = ''; // Limpiar opciones anteriores
 
+        // Agregar opción "Seleccione jugador" como valor por defecto
+        const optionSeleccione = document.createElement('option');
+        optionSeleccione.value = '';
+        optionSeleccione.text = 'Seleccione jugador';
+        jugadorSelect.appendChild(optionSeleccione);
+
         jugadores.forEach((jugador) => {
             const option = document.createElement('option');
             option.value = jugador.nombre_jugador;
@@ -71,6 +77,9 @@ setTimeout(function() {
 
         JugadorContainer.style.display = 'block';
         MontoContainer.style.display = 'block';
+
+        // Restablecer el valor del campo de sueldo a vacío
+        montoInput.value = '';
     });
 
     document.getElementById('jugador_id').addEventListener('change', (event) => {
@@ -92,4 +101,3 @@ setTimeout(function() {
 
 
 <?= $this->endSection() ?>
-
