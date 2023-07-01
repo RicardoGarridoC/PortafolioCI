@@ -57,6 +57,9 @@ $routes->post('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filt
 $routes->get('PartidoHomeAdmin', 'AdminDashboard::partidoHome', ['filter' => 'SesionAdmin']);
 $routes->get('CampeonatoHomeAdmin', 'AdminDashboard::campeonatoHome', ['filter' => 'SesionAdmin']);
 $routes->post('CampeonatoHomeAdmin', 'AdminDashboard::campeonatoHome', ['filter' => 'SesionAdmin']);
+//
+$routes->get('PartidoEnVivo', 'PartidoEnVivoController::index', ['filter' => 'SesionAdmin']);
+
 //Rutas Direccion - Detalle, le saque filter a sponsor por caso ver-sponsor en socio, revisar
 $routes->get('DireccionHome', 'DireccionDashboard::direccionDashboard', ['filter' => 'SesionDirector']);
 $routes->get('AgregarSponsor', 'SponsorController::registrar');

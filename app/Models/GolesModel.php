@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CambiosExternosModel extends Model
+class GolesModel extends Model
 {
-    protected $table = 'cambios_externo';
+    protected $table = 'goles';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['minuto' , 'partido_id_fk', 'nombre_jugador_saliente' , 'nombre_jugador_entrante'];
+    protected $allowedFields = ['partido_id_fk', 'jugador_id_fk', 'minuto', 'jugador_visita'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
