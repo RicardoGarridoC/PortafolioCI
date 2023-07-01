@@ -107,32 +107,68 @@
                         <div class="col-12">
                             <div class="row text-center">
                                 <div class="col-4">
-                                    <h4>COLOCAR NOMBRE EQUIPO LOCAL</h4>
+                                    <h4><?php echo $results15[0]->equipo_local; ?></h4>
                                     <img src="<?= base_url()?>public/images/logovisita1.png" class="logo2" alt="">
                                     
                                 </div>
                                 <div class="col-4">
                                     <div style="margin-top: 70px;">
-                                        <h3> COLOCAR GOLES EQUIPO LOCAL - COLOCAR GOLES EQUIPO VISITA </h3>
+                                        <h3> <?php echo $results15[0]->goles_equipo_local; ?> - <?php echo $results15[0]->goles_equipo_visita; ?> </h3>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <h4>COLOCAR NOMBRE EQUIPO VISITA</h4>
+                                    <h4><?php echo $results15[0]->equipo_visita; ?></h4>
                                     <img src="<?= base_url()?>public/images/logovisita1.png" class="logo2" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <p class="text-center"> Algo</p>
-                            <div class="col-4 float-start"> <!-- Agrega la clase "float-start" para alinear a la izquierda -->
-                                <p class="placeholder-glow d-flex align-items-center justify-content-center"> <!-- Agrega las clases "d-flex align-items-center justify-content-center" para centrar el contenido -->
+                            <div class="col-4 float-start"> 
+                                <p class="placeholder-glow d-flex align-items-center justify-content-center"> 
                                     <span class="placeholder col-6"></span>
                                 </p>
+                                <!-- AQUI AGREGAR LOS GOLES, CAMBIOS Y TARJETAS DEL EQUIPO LOCAL POR AHORA PONDRE TODOS JUNTOS-->
+                                <ul class="text-start smaller-text">
+                                    <!-- GOLES -->
+                                    <?php foreach ($results9 as $row) : ?>
+                                        <li><?php echo $row['nombre_jugador']; ?> <?php echo $row['minuto_gol']; ?>"</li>
+                                        <hr>
+                                    <?php endforeach; ?>
+                                    <!-- CAMBIOS -->
+                                    <?php foreach ($results11 as $row) : ?>
+                                        <li><?php echo $row['jugador_saliente']; ?> -> <?php echo $row['jugador_entrante']; ?> <?php echo $row['minuto']; ?>"</li>
+                                        <hr>
+                                    <?php endforeach; ?>
+                                    <!-- TARJETAS -->
+                                    <?php foreach ($results13 as $row) : ?>
+                                        <li><?php echo $row['jugador']; ?> Tarjeta <?php echo $row['tarjeta']; ?> <?php echo $row['minuto']; ?>"</li>
+                                        <hr>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
-                            <div class="col-4 float-end"> <!-- Agrega la clase "float-end" para alinear a la derecha -->
-                                <p class="placeholder-glow d-flex align-items-center justify-content-center"> <!-- Agrega las clases "d-flex align-items-center justify-content-center" para centrar el contenido -->
+                            <div class="col-4 float-end"> 
+                                <p class="placeholder-glow d-flex align-items-center justify-content-center"> 
                                     <span class="placeholder col-6"></span>
                                 </p>
+                                <!-- AQUI AGREGAR LOS GOLES, CAMBIOS Y TARJETAS DEL EQUIPO VISITA -->
+                                <ul class="text-start smaller-text">
+                                    <!-- GOLES -->
+                                    <?php foreach ($results10 as $row) : ?>
+                                        <li><?php echo $row['nombre_jugador']; ?> <?php echo $row['minuto_gol']; ?>"</li>
+                                        <hr>
+                                    <?php endforeach; ?>
+                                    <!-- CAMBIOS -->
+                                    <?php foreach ($results12 as $row) : ?>
+                                        <li><?php echo $row['jugador_saliente']; ?> -> <?php echo $row['jugador_entrante']; ?> <?php echo $row['minuto']; ?>"</li>
+                                        <hr>
+                                    <?php endforeach; ?>
+                                    <!-- TARJETAS -->
+                                    <?php foreach ($results14 as $row) : ?>
+                                        <li><?php echo $row['jugador']; ?> Tarjeta <?php echo $row['tarjeta']; ?> <?php echo $row['minuto']; ?>"</li>
+                                        <hr>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
