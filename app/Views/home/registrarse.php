@@ -79,12 +79,12 @@
     }
 
     .back_button .btn {
-      color: #000;
+      color: #fff;
       font-size: 1rem;
     }
 
     .back_button .btn:hover {
-      color: #fff;
+      color: #000;
     }
 
     .input-group-prepend span {
