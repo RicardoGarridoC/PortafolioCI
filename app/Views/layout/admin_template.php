@@ -108,7 +108,7 @@
             </div>  
               <span class="d-block info d-none d-sm-inline mx-1"><?= session('nombreUsuario') ?></span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow bg-dark">
               <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
               <li><a class="dropdown-item" href="<?php echo base_url('PerfilAdmin')?>">Ver Perfil</a></li>
               <li>
@@ -168,6 +168,24 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="<?php echo base_url('AdminCambioDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cambios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminCambioExternoDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cambios Externos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminCampeonatoDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Campeonatos</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url('AdminUsuarioDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
@@ -223,7 +241,7 @@
         <div class="container pt-4">
             <!-- Social media -->
             <section class="mb-4">
-            <p>© Los Alces FC. Todos los derechos reservados.</p>
+            <p><strong>Copyright &copy; 2023 <a href="#">Los Alces FC</a>.</strong> Todos los derechos reservados.</p>
             <p>Developed by DevGroup DAF devgroupdaf@contacto.com</p>
             </section>
         </div>

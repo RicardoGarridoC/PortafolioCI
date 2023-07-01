@@ -4,18 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CampeonatoModel extends Model
+class CambiosExternosModel extends Model
 {
-    protected $table = 'campeonatos';
+    protected $table = 'cambios_externo';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id', 'nombre', 'division_id_fk', 'temporada'];
+    protected $allowedFields = ['id', 'minuto' , 'partido_id_fk', 'nombre_jugador_saliente' , 'nombre_jugador_entrante'];
 
-    protected $validationRules = [
-    ];
+    protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }

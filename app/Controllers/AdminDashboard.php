@@ -10,6 +10,9 @@ use App\Models\SocioModel;
 use App\Models\CustomModel;
 use App\Models\PartidosModel;
 use App\Models\ResultadosModel;
+use App\Models\CambiosModel;
+use App\Models\CambiosExternosModel;
+use App\Models\CampeonatoModel;
 
 class AdminDashboard extends BaseController
 {
@@ -133,6 +136,45 @@ class AdminDashboard extends BaseController
         ];
 
         return view('admin/admin_resultados_dt', $data);
+    }
+
+    public function cambioDatabase()
+    {
+        $cambioModel = new CambiosModel();
+        $cambios = $cambioModel->findAll();
+
+        $data = [
+            'cambios' => $cambios,
+            'title' => 'Ver Cambios Admin'
+        ];
+
+        return view('admin/admin_cambios_dt', $data);
+    }
+
+    public function cambioexternoDatabase()
+    {
+        $cambioexternoModel = new CambiosExternosModel();
+        $cambiosexternos = $cambioexternoModel->findAll();
+
+        $data = [
+            'cambiosexternos' => $cambiosexternos,
+            'title' => 'Ver Cambios Externos Admin'
+        ];
+
+        return view('admin/admin_cambiosexternos_dt', $data);
+    }
+
+    public function campeonatoDatabase()
+    {
+        $campeonatoModel = new CampeonatoModel();
+        $campeonatos = $campeonatoModel->findAll();
+
+        $data = [
+            'campeonatos' => $campeonatos,
+            'title' => 'Ver Campeonatos Admin'
+        ];
+
+        return view('admin/admin_campeonatos_dt', $data);
     }
 
     public function guardaJugador()
