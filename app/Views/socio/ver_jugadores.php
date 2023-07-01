@@ -66,14 +66,6 @@
                                 <td><?php echo $jugador['tipo']; ?></td>
                             </tr>
                             <tr>
-                                <th scope="row">Sueldo:</th>
-                                <td>$<?php echo $jugador['sueldo']; ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Ayuda económica:</th>
-                                <td>$<?php echo $jugador['ayuda_economica']; ?></td>
-                            </tr>
-                            <tr>
                                 <th scope="row">N°Camiseta:</th>
                                 <td><?php echo $jugador['numero_camiseta']; ?></td>
                             </tr>

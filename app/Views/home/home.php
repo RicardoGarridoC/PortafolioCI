@@ -33,6 +33,10 @@
         max-width: 100%;
         height: auto;
         }
+        .logo2 {
+        max-width: 50%;
+        height: auto;
+        }
         .carousel-item img {
         object-fit: cover;
         height: 100%;
@@ -94,6 +98,48 @@
     <!-- Match Section 
     CAMBIAR ESTA SECCION CON LOS DATOS DE CAMPEONATO Y PARTIDO -->
     <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <div class="container probando text-center">
+                    <h2>Partido En Vivo</h2>
+                    <h6 class="text-center gray-text">Minuto: <div class="spinner-border spinner-border-sm" role="status"> </div> </h6>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <h4>COLOCAR NOMBRE EQUIPO LOCAL</h4>
+                                    <img src="<?= base_url()?>public/images/logovisita1.png" class="logo2" alt="">
+                                    
+                                </div>
+                                <div class="col-4">
+                                    <div style="margin-top: 70px;">
+                                        <h3> COLOCAR GOLES EQUIPO LOCAL - COLOCAR GOLES EQUIPO VISITA </h3>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <h4>COLOCAR NOMBRE EQUIPO VISITA</h4>
+                                    <img src="<?= base_url()?>public/images/logovisita1.png" class="logo2" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-center"> Algo</p>
+                            <div class="col-4 float-start"> <!-- Agrega la clase "float-start" para alinear a la izquierda -->
+                                <p class="placeholder-glow d-flex align-items-center justify-content-center"> <!-- Agrega las clases "d-flex align-items-center justify-content-center" para centrar el contenido -->
+                                    <span class="placeholder col-6"></span>
+                                </p>
+                            </div>
+                            <div class="col-4 float-end"> <!-- Agrega la clase "float-end" para alinear a la derecha -->
+                                <p class="placeholder-glow d-flex align-items-center justify-content-center"> <!-- Agrega las clases "d-flex align-items-center justify-content-center" para centrar el contenido -->
+                                    <span class="placeholder col-6"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="container probando">
