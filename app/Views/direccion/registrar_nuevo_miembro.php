@@ -25,7 +25,7 @@ setTimeout(function() {
     <h1><?= esc($title); ?></h1>
     <?= \Config\Services::validation()->listErrors(); ?>
 
-    <form action="<?= base_url('RegistrarEquipoTecnicoController/registrar') ?>" method="post">
+    <form action="<?= base_url('RegistrarEquipoTecnicoController/registrar') ?>" method="post" id="registro-form">
         <div class="form-group">
             <label for="cargo">Cargo:</label>
             <select name="cargo" id="cargo" class="form-control" required>
@@ -39,7 +39,7 @@ setTimeout(function() {
 
         <div class="form-group">
             <label for="equipo_origen">Equipo origen:</label>
-            <select id="equipo_origen" name="equipo_origen" class="form-control">
+            <select id="equipo_origen" name="equipo_origen" class="form-control" required>
                 <!-- Los equipos origen se cargarán aquí mediante AJAX -->
             </select>
         </div>
@@ -59,21 +59,42 @@ setTimeout(function() {
 
     <script>
     $(document).ready(function(){
+        $('#registro-form').submit(function(event) {
+            var cargo = $('#cargo').val();
+            var equipoOrigen = $('#equipo_origen').val();
+            var sueldo = $('#sueldo').val();
+            var valorHoraExtra = $('#valor_hora_extra').val();
+
+            if (cargo === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un cargo.');
+            } else if (equipoOrigen === '') {
+                event.preventDefault();
+                alert('Debe seleccionar un equipo origen.');
+            } else if (sueldo === '') {
+                event.preventDefault();
+                alert('Debe ingresar un sueldo.');
+            } else if (valorHoraExtra === '') {
+                event.preventDefault();
+                alert('Debe ingresar un valor de hora extra.');
+            }
+        });
+
         $.ajax({
             url: '<?= base_url('RegistrarEquipoTecnicoController/obtenerEquipos/') ?>',
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-                    var $equipo_origen = $('#equipo_origen');
-                    $equipo_origen.empty();
-                    $equipo_origen.append('<option value="">Seleccione el equipo origen</option>');
-                    $.each(response, function(index, equipo) {
-                        $equipo_origen.append('<option value="' + equipo.id + '">' + equipo.nombre + '</option>');
-                    });
-                },
-                error: function(error) {
-                    console.log(error);
-                }
+                var $equipo_origen = $('#equipo_origen');
+                $equipo_origen.empty();
+                $equipo_origen.append('<option value="">Seleccione el equipo origen</option>');
+                $.each(response, function(index, equipo) {
+                    $equipo_origen.append('<option value="' + equipo.id + '">' + equipo.nombre + '</option>');
+                });
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
     });
     </script>
