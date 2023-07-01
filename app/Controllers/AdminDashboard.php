@@ -8,6 +8,8 @@ use App\Models\UsuarioModel;
 use App\Models\EquipoTecnicoModel;
 use App\Models\SocioModel;
 use App\Models\CustomModel;
+use App\Models\PartidosModel;
+use App\Models\ResultadosModel;
 
 class AdminDashboard extends BaseController
 {
@@ -116,6 +118,21 @@ class AdminDashboard extends BaseController
         //$socios=$socioModel->findAll();
         //$socios=array('socios'=>$socios);
         //return view('admin/admin_socio_dt', $socios);
+    }
+
+    public function resultadoDatabase()
+    {
+        //$db = db_connect();
+        $resultadoModel = new ResultadosModel();
+        //$resultados = $resultadoModel->getResultados();
+        $resultados = $resultadoModel->findAll();
+
+        $data = [
+            'resultados' => $resultados,
+            'title' => 'Ver Resultados Admin'
+        ];
+
+        return view('admin/admin_resultados_dt', $data);
     }
 
     public function guardaJugador()
@@ -434,5 +451,133 @@ class AdminDashboard extends BaseController
         ];
         
         return view('admin/admin_ver_perfil', $titulo);
+    }
+    public function partidoHome()
+    {
+        //$db = db_connect();
+        $data1 = [
+            'title' => 'Partidos Home Admin'
+        ];
+
+        //Agrega Ultimos Partidos
+        $partidosModel = new PartidosModel();
+        $partidos = $partidosModel->findAll();
+
+        // Pasar los datos a la vista
+        $data['partidos'] = $partidos;
+
+
+        $verPartidos = array_merge($data, $data1);
+        
+        return view('admin/admin_partido_home', $verPartidos);
+    }
+
+    public function campeonatoHome()
+    {
+        //$db = db_connect();
+        $data1 = [
+            'title' => 'Campeonato Home Admin'
+        ];
+    
+        $resultado = new ResultadosModel();
+        $db = \Config\Database::connect();
+    
+        // Obtener partido que no esté ya en la tabla de resultados (solo aplica para los equipos los alces)
+        $queryPartidosLibres = "SELECT p.id, e_local.nombre AS equipo_local, e_visita.nombre AS equipo_visita, c.id AS categoriaid, c.nombre AS nombrecategoria
+            FROM partidos p
+            LEFT JOIN resultados r ON p.id = r.id_partido_fk
+            LEFT JOIN equipos e_local ON p.equipo_local_fk = e_local.id
+            LEFT JOIN equipos e_visita ON p.equipo_visita_fk = e_visita.id
+            LEFT JOIN campeonatos c ON c.id = p.campeonato_id_fk
+            WHERE r.id_partido_fk IS NULL
+            AND (p.equipo_local_fk = 10 OR p.equipo_local_fk = 14)
+            ORDER BY p.id ASC";
+            
+        $partidosLibres = $db->query($queryPartidosLibres)->getResultArray();
+    
+        $data['partidosLibres'] = $partidosLibres;
+    
+    
+        //AQUI
+        if ($this->request->getMethod() === 'post') {
+            $postData = $this->request->getPost();
+
+            // Equipos local y visita
+            //$equipoLocalId = $postData['equipo_local'];
+            //$equipoVisitaId = $postData['equipo_visita'];
+
+            if (empty($postData['equipo_destino']) || empty($postData['equipo_local']) || empty($postData['equipo_visita']) || empty($postData['tipopartido'])) {
+                return redirect()->back()->withInput()->with('error', 'Falta seleccionar una opción en el formulario');
+            }
+            
+            if (empty($postData['goleslocal']) || empty($postData['golesvisita'])) {
+                return redirect()->back()->withInput()->with('error', 'Falta ingresar los goles');
+            }
+            
+            if ($postData['equipo_local'] === $postData['equipo_visita']) {
+                return redirect()->back()->withInput()->with('error', 'Los equipos no pueden ser los mismos');
+            }
+
+            $equiposLocalIdd = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_local']}'";
+            $equipoLocal = $db->query($equiposLocalIdd)->getFirstRow();
+            $equipoLocalId = $equipoLocal->id;
+
+            $equiposVisitaIdd = "SELECT id, nombre, genero FROM equipos WHERE id = '{$postData['equipo_visita']}'";
+            $equipoVisita = $db->query($equiposVisitaIdd)->getFirstRow();
+            $equipoVisitaId = $equipoVisita->id;
+
+            // Datos para la tabla resultados
+            $resultadoData = [
+                'equipo_local_fk' => $equipoLocalId,
+                'equipo_visita_fk' => $equipoVisitaId,
+                'goles_local' => $postData['goleslocal'],
+                'goles_visita' => $postData['golesvisita'],
+                'id_partido_fk' => ($postData['equipo_destino'] === 'no_aplica') ? null : $postData['equipo_destino'],
+                'campeonato_id_fk' => $postData['tipopartido']
+            ];
+
+            // Guardar el resultado en la base de datos
+            $resultado->save($resultadoData);
+
+            return redirect()->to('/AdminDashBoard/campeonatoHome')->with('success', 'Resultado agregado exitosamente');
+        }
+    
+        $cc = array_merge($data, $data1);
+    
+        return view('admin/admin_campeonato_home', $cc);
+    }
+
+    public function obtenerEquiposLocalVisita($idd)
+    {
+        if ($idd === "no_aplica") {
+            $db = \Config\Database::connect();
+            $query = "SELECT id, nombre FROM equipos";
+            $query2 = "SELECT r.campeonato_id_fk AS id, c.nombre 
+                        FROM resultados r 
+                        JOIN campeonatos c ON r.campeonato_id_fk = c.id 
+                        GROUP BY r.campeonato_id_fk;";
+            $equipos = $db->query($query)->getResultArray();
+            $categorias = $db->query($query2)->getResultArray();
+            $equipos2 = [
+                'equipos' => $equipos,
+                'categorias' => $categorias
+            ];
+            echo json_encode($equipos2);
+        } else {
+            // Realiza la consulta original para obtener los equipos del partido seleccionado
+            $db = \Config\Database::connect();
+            $query = "SELECT p.id, e_local.id as id_local ,e_local.nombre AS equipo_local, e_visita.id as id_visita,e_visita.nombre AS equipo_visita, c.id AS categoriaid, c.nombre AS nombrecategoria
+                        FROM partidos p
+                        LEFT JOIN resultados r ON p.id = r.id_partido_fk
+                        LEFT JOIN equipos e_local ON p.equipo_local_fk = e_local.id
+                        LEFT JOIN equipos e_visita ON p.equipo_visita_fk = e_visita.id
+                        LEFT JOIN campeonatos c ON c.id = p.campeonato_id_fk
+                        WHERE r.id_partido_fk IS NULL
+                        AND (p.equipo_local_fk = 10 OR p.equipo_local_fk = 14)
+                        AND p.id = ?
+                        ORDER BY p.id ASC";
+            $equipos = $db->query($query, [$idd])->getResultArray();
+            echo json_encode($equipos);
+        }
     }
 }

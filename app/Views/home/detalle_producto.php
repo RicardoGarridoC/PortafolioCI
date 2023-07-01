@@ -46,6 +46,17 @@
         max-width: 1200px; /* Opcional: ajusta el ancho máximo según tus necesidades */
     }
 
+    @media (max-width: 600px) {
+        .detalle-producto {
+            flex-direction: column; /* En pantallas menores a 600px, los hijos se organizan en una columna */
+        }
+
+        .detalle-info {
+            margin-left: 0; /* Quitamos el margen izquierdo en pantallas pequeñas */
+            text-align: center; /* Centramos el texto en pantallas pequeñas */
+        }
+    }
+
     .detalle-image-container {
         max-width: 700px; /* Ajusta el valor para cambiar el tamaño máximo de la imagen */
         overflow: hidden;

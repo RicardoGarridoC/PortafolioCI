@@ -22,7 +22,7 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-dark my-class">
+            <aside class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 my-class">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="<?php echo base_url('InicioEquipoTecnico'); ?>">
                         <img src="<?= base_url()?>/public/images/losalces.png" class="img-fluid" alt="Image description">
@@ -73,7 +73,6 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
-                            <li><a class="dropdown-item" href="#">Configuración</a></li>
                             <li><a class="dropdown-item" href="<?php echo base_url('PerfilEquipoTecnico'); ?>">Ver Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -92,55 +91,11 @@
         <div class="container pt-4">
             <!-- Social media -->
             <section class="mb-4">
-            <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-facebook"></i>
-            </a>
-            <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-twitter"></i>
-            </a>
-            <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-google"></i
-            ></a>
-            <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-instagram"></i
-            ></a>
-            <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-linkedin"></i
-            ></a>
-            <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-github"></i
-            ></a>
-                <p>© 2023 MiEmpresa S.A. Todos los derechos reservados.</p>
-                <p>
-                Contáctanos: <a class="text-dark"> info@miempresa.com</a>
-                </p>
+            <p>© Los Alces FC. Todos los derechos reservados.</p>
+            <p>Developed by DevGroup DAF devgroupdaf@contacto.com</p>
             </section>
         </div>
-        
+
     </footer>
    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 

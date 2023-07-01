@@ -62,6 +62,13 @@
         vertical-align: top;
     }
 
+    @media (max-width: 600px) {
+        .article {
+            width: 100%; /* Hacemos que los artículos ocupen el 100% del ancho en pantallas menores a 600px */
+            margin: 10px 0; /* Margen solo en la parte superior e inferior */
+        }
+    }
+
     .last-in-row {
         margin-right: 0;
     }

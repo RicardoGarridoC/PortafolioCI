@@ -36,6 +36,7 @@
     }
 </style>
 <div class="container">
+    <br>
     <h1><?= $title ?></h1>
     
     <?php if (count($results) === 0): ?>

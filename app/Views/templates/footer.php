@@ -18,8 +18,8 @@
     footer {
       width: 100%;
       text-align: center;
-      background-color: #111;
-      color: white;
+      background: linear-gradient(45deg, #c13b1d 5%, #fa8e2a 95%);
+      color: black;
       padding: 20px;
       position: fixed;
       bottom: 0;

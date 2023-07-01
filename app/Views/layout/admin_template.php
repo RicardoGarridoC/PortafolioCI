@@ -110,12 +110,11 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
               <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
-              <li><a class="dropdown-item" href="#">Configuración</a></li>
               <li><a class="dropdown-item" href="<?php echo base_url('PerfilAdmin')?>">Ver Perfil</a></li>
               <li>
                   <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="/PortafolioCI/logout">Cerrar Sesión</a></li>
+              <li><a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesión</a></li>
           </ul>
       </div>
 
@@ -151,15 +150,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url('PartidoHomeAdmin')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Partido Home</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url('CampeonatoHomeAdmin')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                  <p>Campeonato Home</p>
                 </a>
               </li>
             </ul>
@@ -204,6 +203,12 @@
                   <p>Equipos</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminResultadoDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Resultados</p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -220,13 +225,16 @@
   <!-- /.content-wrapper -->
 
 
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="#">MiEmpresa S.A.</a>.</strong>
-    Todos los derechos reservados.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Contáctanos: info@miempresa.com</b>
-    </div>
-  </footer>
+  <footer class="text-center text-black">
+        <div class="container pt-4">
+            <!-- Social media -->
+            <section class="mb-4">
+            <p>© Los Alces FC. Todos los derechos reservados.</p>
+            <p>Developed by DevGroup DAF devgroupdaf@contacto.com</p>
+            </section>
+        </div>
+
+    </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -309,6 +317,12 @@
             $('#myForm')[0].reset();
         });
     });
+</script>
+
+<script type="text/javascript">
+    function cerrarSesion() {
+        window.location.href = "<?php echo base_url('Home/cerrarSesion'); ?>";
+    }
 </script>
 
 </body>
