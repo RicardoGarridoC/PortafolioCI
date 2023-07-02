@@ -4,18 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CampeonatoModel extends Model
+class TarjetasPartidoModel extends Model
 {
-    protected $table = 'campeonatos';
+    protected $table = 'tarjetas_partido';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'division_id_fk', 'temporada'];
+    protected $allowedFields = ['jugador_fk', 'minuto', 'partido_fk', 'jugador_externo', 'tarjeta'];
 
-    protected $validationRules = [
-    ];
+    protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }

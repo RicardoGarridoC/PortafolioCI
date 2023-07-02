@@ -13,6 +13,21 @@ use App\Models\ResultadosModel;
 use App\Models\CambiosModel;
 use App\Models\CambiosExternosModel;
 use App\Models\CampeonatoModel;
+use App\Models\CanchaModel;
+use App\Models\DivisionModel;
+use App\Models\DirigenteModel;
+use App\Models\EgresoModel;
+use App\Models\GolesModel;
+use App\Models\IngresoModel;
+use App\Models\LesionesModel;
+use App\Models\MotivoModel;
+use App\Models\PagoSocioModel;
+use App\Models\PartidoModel;
+use App\Models\SouvenirModel;
+use App\Models\SponsorModel;
+use App\Models\TarjetasPartidoModel;
+use App\Models\TraspasoModel;
+
 
 class AdminDashboard extends BaseController
 {
@@ -176,6 +191,189 @@ class AdminDashboard extends BaseController
 
         return view('admin/admin_campeonatos_dt', $data);
     }
+
+    public function canchaDatabase()
+    {
+        $canchaModel = new CanchaModel();
+        $canchas = $canchaModel->findAll();
+    
+        $data = [
+            'canchas' => $canchas,
+            'title' => 'Ver Canchas Admin'
+        ];
+    
+        return view('admin/admin_canchas_dt', $data);
+    }
+
+    public function dirigenteDatabase()
+    {
+        $dirigenteModel = new DirigenteModel();
+        $dirigentes = $dirigenteModel->findAll();
+
+        $data = [
+            'dirigentes' => $dirigentes,
+            'title' => 'Ver Dirigentes Admin'
+        ];
+
+        return view('admin/admin_dirigente_dt', $data);
+    }
+
+    public function divisionDatabase()
+    {
+        $divisionModel = new DivisionModel();
+        $divisiones = $divisionModel->findAll();
+
+        $data = [
+            'divisiones' => $divisiones,
+            'title' => 'Ver Divisiones Admin'
+        ];
+
+        return view('admin/admin_division_dt', $data);
+    }
+
+    public function egresosDatabase()
+    {
+        $egresoModel = new EgresoModel();
+        $egresos = $egresoModel->findAll();
+
+        $data = [
+            'egresos' => $egresos,
+            'title' => 'Ver Egresos Admin'
+        ];
+
+        return view('admin/admin_egresos_dt', $data);
+    }
+
+    public function golesDatabase()
+    {
+        $golModel = new GolesModel();
+        $goles = $golModel->findAll();
+
+        $data = [
+            'goles' => $goles,
+            'title' => 'Ver Goles Admin'
+        ];
+
+        return view('admin/admin_goles_dt', $data);
+    }
+
+    public function ingresosDatabase()
+    {
+        $ingresoModel = new IngresoModel();
+        $ingresos = $ingresoModel->findAll();
+
+        $data = [
+            'ingresos' => $ingresos,
+            'title' => 'Ver Ingresos Admin'
+        ];
+
+        return view('admin/admin_ingresos_dt', $data);
+    }
+
+    public function lesionesDatabase()
+    {
+        $lesionModel = new LesionesModel();
+        $lesiones = $lesionModel->findAll();
+
+        $data = [
+            'lesiones' => $lesiones,
+            'title' => 'Ver Lesiones Admin'
+        ];
+
+        return view('admin/admin_lesiones_dt', $data);
+    }
+
+    public function motivosDatabase()
+    {
+        $motivoModel = new MotivoModel();
+        $motivos = $motivoModel->findAll();
+
+        $data = [
+            'motivos' => $motivos,
+            'title' => 'Ver Motivos Admin'
+        ];
+
+        return view('admin/admin_motivos_dt', $data);
+    }
+
+    public function pagosociosDatabase()
+    {
+        $pagoSocioModel = new PagoSocioModel();
+        $pagosocios = $pagoSocioModel->findAll();
+
+        $data = [
+            'pagosocios' => $pagosocios,
+            'title' => 'Ver Pagos de Socios Admin'
+        ];
+
+        return view('admin/admin_pagosocios_dt', $data);
+    }
+
+    public function partidosDatabase()
+    {
+        $partidoModel = new PartidoModel();
+        $partidos = $partidoModel->findAll();
+
+        $data = [
+            'partidos' => $partidos,
+            'title' => 'Ver Partidos Admin'
+        ];
+
+        return view('admin/admin_partidos_dt', $data);
+    }
+    
+    public function souvenirsDatabase()
+    {
+        $souvenirModel = new SouvenirModel();
+        $souvenirs = $souvenirModel->findAll();
+
+        $data = [
+            'souvenirs' => $souvenirs,
+            'title' => 'Ver Souvenirs Admin'
+        ];
+
+        return view('admin/admin_souvenirs_dt', $data);
+    }
+
+    public function sponsorsDatabase()
+    {
+        $sponsorModel = new SponsorModel();
+        $sponsors = $sponsorModel->findAll();
+
+        $data = [
+            'sponsors' => $sponsors,
+            'title' => 'Ver Sponsors Admin'
+        ];
+
+        return view('admin/admin_sponsors_dt', $data);
+    }
+
+    public function tarjetaspartidosDatabase()
+    {
+        $tarjetaPartidoModel = new TarjetasPartidoModel();
+        $tarjetaspartido = $tarjetaPartidoModel->findAll();
+
+        $data = [
+            'tarjetaspartido' => $tarjetaspartido,
+            'title' => 'Ver Tarjetas de Partidos Admin'
+        ];
+
+        return view('admin/admin_tarjetaspartidos_dt', $data);
+    }
+
+    public function traspasosDatabase()
+    {
+        $traspasoModel = new TraspasoModel();
+        $traspasos = $traspasoModel->findAll();
+
+        $data = [
+            'traspasos' => $traspasos,
+            'title' => 'Ver Traspasos Admin'
+        ];
+
+        return view('admin/admin_traspasos_dt', $data);
+    }
+
 
     public function guardaJugador()
     {

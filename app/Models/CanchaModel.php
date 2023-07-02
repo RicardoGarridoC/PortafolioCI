@@ -12,7 +12,7 @@ class CanchaModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id','nombre', 'ubicacion'];
+    protected $allowedFields = ['nombre', 'ubicacion'];
 
     protected $validationRules = [
     ];

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CampeonatoModel extends Model
+class DivisionModel extends Model
 {
-    protected $table = 'campeonatos';
+    protected $table = 'division';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'division_id_fk', 'temporada'];
+    protected $allowedFields = ['categoria'];
 
     protected $validationRules = [
     ];

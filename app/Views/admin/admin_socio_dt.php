@@ -1,5 +1,5 @@
 <?= $this->extend('layout/admin_template') ?>
-    <?= $this->section('content') ?>
+<?= $this->section('content') ?>
 
     <!-- Content Header (Page header) -->
         <section class="content-header">

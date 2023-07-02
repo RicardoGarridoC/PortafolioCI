@@ -51,6 +51,22 @@ $routes->get('AdminResultadoDt', 'AdminDashboard::resultadoDatabase', ['filter' 
 $routes->get('AdminCambioDt', 'AdminDashboard::cambioDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('AdminCambioExternoDt', 'AdminDashboard::cambioexternoDatabase', ['filter' => 'SesionAdmin']);
 $routes->get('AdminCampeonatoDt', 'AdminDashboard::campeonatoDatabase', ['filter' => 'SesionAdmin']);
+
+$routes->get('AdminCanchaDt', 'AdminDashboard::canchaDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminDirectorDt', 'AdminDashboard::dirigenteDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminDivisionDt', 'AdminDashboard::divisionDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminEgresoDt', 'AdminDashboard::egresosDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminGolesDt', 'AdminDashboard::golesDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminIngresoDt', 'AdminDashboard::ingresosDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminLesionesDt', 'AdminDashboard::lesionesDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminMotivoDt', 'AdminDashboard::motivosDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminPagoSocioDt', 'AdminDashboard::pagosociosDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminPartidoDt', 'AdminDashboard::partidosDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminSouvenirDt', 'AdminDashboard::souvenirsDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminSponsorDt', 'AdminDashboard::sponsorsDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminTarjetaPartidoDt', 'AdminDashboard::tarjetaspartidosDatabase', ['filter' => 'SesionAdmin']);
+$routes->get('AdminTraspasoDt', 'AdminDashboard::traspasosDatabase', ['filter' => 'SesionAdmin']);
+
 $routes->get('PerfilAdmin', 'AdminDashboard::verAdminUsuario', ['filter' => 'SesionAdmin']);
 $routes->get('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin']);
 $routes->post('EditarUsuarioAdmin', 'AdminDashboard::guardaAdminUsuario', ['filter' => 'SesionAdmin']);

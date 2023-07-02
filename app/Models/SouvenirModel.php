@@ -4,18 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CampeonatoModel extends Model
+class SouvenirModel extends Model
 {
-    protected $table = 'campeonatos';
+    protected $table = 'souvenirs';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'division_id_fk', 'temporada'];
+    protected $allowedFields = ['producto', 'talla', 'precio', 'genero', 'detalle', 'foto'];
 
-    protected $validationRules = [
-    ];
+    protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }
