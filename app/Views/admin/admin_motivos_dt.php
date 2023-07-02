@@ -18,37 +18,7 @@
     </div><!-- /.container-fluid -->
 </section>
 
-<!-- Modal Añadir -->
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Motivo</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <?php echo form_open('AdminDashboard/guardaMotivo', 'id="myForm"'); ?>
 
-                <div class="form-group">
-                    <?php
-                    echo form_label('Nombre', 'nombre_motivo');
-                    echo form_input(array('name' => 'nombre_motivo', 'placeholder' => 'Nombre', 'class' => 'form-control', 'required' => 'required'));
-                    echo "<br>";
-
-                    echo form_label('Tipo', 'tipo');
-                    echo form_input(array('name' => 'tipo', 'placeholder' => 'Tipo', 'class' => 'form-control', 'required' => 'required'));
-                    echo "<br>";
-                    ?>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <?php echo form_submit('guardaMotivo', 'Guardar', 'class="btn btn-primary"'); ?>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <?php echo form_close(); ?>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal Editar -->
 <?php foreach ($motivos as $motivo) : ?>
@@ -99,9 +69,9 @@
                     <p>¿Estás seguro de que quieres eliminar este motivo?</p>
                 </div>
                 <div class="modal-footer">
-                    <?php echo form_open('AdminDashboard/eliminaMotivo'); ?>
+                    <?php echo form_open('AdminDashboard/borrarMotivo'); ?>
                     <?php echo form_hidden('id', $motivo['id']); ?>
-                    <?php echo form_submit('eliminaMotivo', 'Eliminar', 'class="btn btn-danger"'); ?>
+                    <?php echo form_submit('borrarMotivo', 'Eliminar', 'class="btn btn-danger"'); ?>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <?php echo form_close(); ?>
                 </div>
@@ -116,9 +86,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#agregarModal">Añadir Motivo</button>
-                    </div>
+                    <!-- <div class="card-header d-flex justify-content-between align-items-center">
+                         <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#agregarModal">Añadir Motivo</button> 
+                    </div> -->
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-hover">

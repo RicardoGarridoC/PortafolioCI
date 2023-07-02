@@ -24,7 +24,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Egreso</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="fa fa-times" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <?php echo form_open('AdminDashboard/guardaEgreso', 'id="myForm"'); ?>
@@ -118,9 +118,9 @@
                         <p>¿Estás seguro de que quieres eliminar este egreso?</p>
                     </div>
                     <div class="modal-footer">
-                        <?php echo form_open('AdminDashboard/eliminaEgreso'); ?>
+                        <?php echo form_open('AdminDashboard/borrarEgreso'); ?>
                         <?php echo form_hidden('id', $egreso['id']); ?>
-                        <?php echo form_submit('eliminaEgreso', 'Eliminar', 'class="btn btn-danger"'); ?>
+                        <?php echo form_submit('borrarEgreso', 'Eliminar', 'class="btn btn-danger"'); ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <?php echo form_close(); ?>
                     </div>

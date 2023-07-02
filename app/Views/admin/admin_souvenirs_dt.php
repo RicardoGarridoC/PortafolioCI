@@ -24,7 +24,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Souvenir</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="fa fa-times" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <?php echo form_open('AdminDashboard/guardaSouvenir', 'id="myForm"'); ?>
@@ -126,9 +126,9 @@
                         <p>¿Estás seguro de que quieres eliminar este souvenir?</p>
                     </div>
                     <div class="modal-footer">
-                        <?php echo form_open('AdminDashboard/eliminaSouvenir'); ?>
+                        <?php echo form_open('AdminDashboard/borrarSouvenir'); ?>
                         <?php echo form_hidden('id', $souvenir['id']); ?>
-                        <?php echo form_submit('eliminaSouvenir', 'Eliminar', 'class="btn btn-danger"'); ?>
+                        <?php echo form_submit('borrarSouvenir', 'Eliminar', 'class="btn btn-danger"'); ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <?php echo form_close(); ?>
                     </div>

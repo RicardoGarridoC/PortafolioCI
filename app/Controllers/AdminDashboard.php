@@ -374,6 +374,736 @@ class AdminDashboard extends BaseController
         return view('admin/admin_traspasos_dt', $data);
     }
 
+    public function guardaResultado()
+    {
+        $resultadoModel = new ResultadosModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'equipo_local_fk' => $request->getPostGet('equipo_local_fk'),
+            'equipo_visita_fk' => $request->getPostGet('equipo_visita_fk'),
+            'goles_local' => $request->getPostGet('goles_local'),
+            'goles_visita' => $request->getPostGet('goles_visita'),
+            'id_partido_fk' => $request->getPostGet('id_partido_fk'),
+            'campeonato_id_fk' => $request->getPostGet('campeonato_id_fk'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($resultadoModel->save($data) === false) {
+            var_dump($resultadoModel->errors());
+        }
+        
+        $titulo = [
+            'title' => 'Ver Resultados Admin',
+        ];
+        
+        $resultados = $resultadoModel->findAll();
+        $resultados = array('resultados' => $resultados);
+        $viewData = array_merge($titulo, $resultados);
+        return view('admin/admin_resultados_dt', $viewData);
+    }
+
+    public function borrarResultado()
+    {
+        $resultadoModel = new ResultadosModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $resultadoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Resultados Admin',
+        ];
+        
+        $resultados = $resultadoModel->findAll();
+        $resultados = array('resultados' => $resultados);
+        $viewData = array_merge($titulo, $resultados);
+        return view('admin/admin_resultados_dt', $viewData);
+    }
+
+    public function guardaCambio()
+    {
+        $cambiosModel = new CambiosModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'minuto' => $request->getPostGet('minuto'),
+            'jugador_entrante_fk' => $request->getPostGet('jugador_entrante_fk'),
+            'jugador_saliente_fk' => $request->getPostGet('jugador_saliente_fk'),
+            'partido_fk' => $request->getPostGet('partido_fk'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($cambiosModel->save($data) === false) {
+            var_dump($cambiosModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Cambios Admin',
+        ];
+
+        $cambios = $cambiosModel->findAll();
+        $cambios = array('cambios' => $cambios);
+        $viewData = array_merge($titulo, $cambios);
+        return view('admin/admin_cambios_dt', $viewData);
+    }
+
+    public function borrarCambio()
+    {
+        $cambiosModel = new CambiosModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $cambiosModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Cambios Admin',
+        ];
+
+        $cambios = $cambiosModel->findAll();
+        $cambios = array('cambios' => $cambios);
+        $viewData = array_merge($titulo, $cambios);
+        return view('admin/admin_cambios_dt', $viewData);
+    }
+
+    public function guardaCambioExterno()
+    {
+        $cambioexternoModel = new CambiosExternosModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'minuto' => $request->getPostGet('minuto'),
+            'partido_id_fk' => $request->getPostGet('partido_id_fk'),
+            'nombre_jugador_saliente' => $request->getPostGet('nombre_jugador_saliente'),
+            'nombre_jugador_entrante' => $request->getPostGet('nombre_jugador_entrante'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($cambioexternoModel->save($data) === false) {
+            var_dump($cambioexternoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Cambios Externos Admin',
+        ];
+        
+        $cambiosexternos = $cambioexternoModel->findAll();
+        $cambiosexternos = array('cambiosexternos' => $cambiosexternos);
+        $viewData = array_merge($titulo, $cambiosexternos);
+        return view('admin/admin_cambiosexternos_dt', $viewData);
+    }
+
+    public function borrarCambioExterno()
+    {
+        $cambioexternoModel = new CambiosExternosModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $cambioexternoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Cambios Externos Admin',
+        ];
+        
+        $cambiosexternos = $cambioexternoModel->findAll();
+        $cambiosexternos = array('cambiosexternos' => $cambiosexternos);
+        $viewData = array_merge($titulo, $cambiosexternos);
+        return view('admin/admin_cambiosexternos_dt', $viewData);
+    }
+
+    public function guardaCancha()
+    {
+        $canchaModel = new CanchaModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'nombre' => $request->getPostGet('nombre'),
+            'ubicacion' => $request->getPostGet('ubicacion'),
+            // Otros campos de la cancha si los hay
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($canchaModel->save($data) === false) {
+            var_dump($canchaModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Canchas Admin',
+        ];
+
+        $canchas = $canchaModel->findAll();
+        $canchas = array('canchas' => $canchas);
+        $viewData = array_merge($titulo, $canchas);
+        return view('admin/admin_canchas_dt', $viewData);
+    }
+
+    public function borrarCancha()
+    {
+        $canchaModel = new CanchaModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $canchaModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Canchas Admin',
+        ];
+
+        $canchas = $canchaModel->findAll();
+        $canchas = array('canchas' => $canchas);
+        $viewData = array_merge($titulo, $canchas);
+        return view('admin/admin_canchas_dt', $viewData);
+    }
+
+    public function guardaDirigente()
+    {
+        $dirigenteModel = new DirigenteModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'sueldo' => $request->getPostGet('sueldo')
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($dirigenteModel->save($data) === false) {
+            var_dump($dirigenteModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Dirigentes Admin',
+        ];
+
+        $dirigentes = $dirigenteModel->findAll();
+        $dirigentes = array('dirigentes' => $dirigentes);
+        $viewData = array_merge($titulo, $dirigentes);
+        return view('admin/admin_dirigente_dt', $viewData);
+    }
+
+    public function borrarDirigente()
+    {
+        $dirigenteModel = new DirigenteModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $dirigenteModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Dirigentes Admin',
+        ];
+
+        $dirigentes = $dirigenteModel->findAll();
+        $dirigentes = array('dirigentes' => $dirigentes);
+        $viewData = array_merge($titulo, $dirigentes);
+        return view('admin/admin_dirigente_dt', $viewData);
+    }
+
+    public function guardaDivision()
+    {
+        $divisionModel = new DivisionModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'nombre' => $request->getPostGet('nombre'),
+            'genero' => $request->getPostGet('genero'),
+            'categoria' => $request->getPostGet('categoria'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($divisionModel->save($data) === false) {
+            var_dump($divisionModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Divisiones Admin',
+        ];
+
+        $divisiones = $divisionModel->findAll();
+        $divisiones = array('divisiones' => $divisiones);
+        $viewData = array_merge($titulo, $divisiones);
+        return view('admin/admin_division_dt', $viewData);
+    }
+
+    public function borrarDivision()
+    {
+        $divisionModel = new DivisionModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $divisionModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Divisiones Admin',
+        ];
+
+        $divisiones = $divisionModel->findAll();
+        $divisiones = array('divisiones' => $divisiones);
+        $viewData = array_merge($titulo, $divisiones);
+        return view('admin/admin_division_dt', $viewData);
+    }
+
+    public function guardaEgreso()
+    {
+        $egresoModel = new EgresoModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'concepto' => $request->getPostGet('concepto'),
+            'monto' => $request->getPostGet('monto'),
+            'fecha' => $request->getPostGet('fecha'),
+            'detalle' => $request->getPostGet('detalle'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($egresoModel->save($data) === false) {
+            var_dump($egresoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Egresos Admin',
+        ];
+
+        $egresos = $egresoModel->findAll();
+        $egresos = array('egresos' => $egresos);
+        $viewData = array_merge($titulo, $egresos);
+        return view('admin/admin_egresos_dt', $viewData);
+    }
+
+    public function borrarEgreso()
+    {
+        $egresoModel = new EgresoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $egresoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Egresos Admin',
+        ];
+
+        $egresos = $egresoModel->findAll();
+        $egresos = array('egresos' => $egresos);
+        $viewData = array_merge($titulo, $egresos);
+        return view('admin/admin_egresos_dt', $viewData);
+    }
+    // EDITAR GOL TIENE PROBLEMA AL CAMBIAR JUGADOR A INVITADO
+    public function guardaGol()
+    {
+        $golModel = new GolesModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'partido_id_fk' => $request->getPostGet('partido_id_fk'),
+            'jugador_id_fk' => $request->getPostGet('jugador_id_fk'),
+            'minuto' => $request->getPostGet('minuto'),
+            'jugador_visita' => $request->getPostGet('jugador_visita')
+        );
+
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+
+        if ($golModel->save($data) === false) {
+            var_dump($golModel->errors());
+        }
+
+        $titulo = [
+            'title' => 'Ver Goles Admin',
+        ];
+
+        $goles = $golModel->findAll();
+        $goles = array('goles' => $goles);
+        $viewData = array_merge($titulo, $goles);
+        return view('admin/admin_goles_dt', $viewData);
+    }
+
+    public function borrarGol()
+    {
+        $golModel = new GolesModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $golModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Goles Admin',
+        ];
+
+        $goles = $golModel->findAll();
+        $goles = array('goles' => $goles);
+        $viewData = array_merge($titulo, $goles);
+        return view('admin/admin_goles_dt', $viewData);
+    }
+    // FALTA AÑADIR QUE DEJE USUARIO VACIO
+    public function guardaIngreso()
+    {
+        $ingresoModel = new IngresoModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'concepto' => $request->getPostGet('concepto'),
+            'monto' => $request->getPostGet('monto'),
+            'fecha' => $request->getPostGet('fecha'),
+            'detalle' => $request->getPostGet('detalle'),
+            'id_usuario_fk' => $request->getPostGet('id_usuario_fk'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($ingresoModel->save($data) === false) {
+            var_dump($ingresoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Ingresos Admin',
+        ];
+
+        $ingresos = $ingresoModel->findAll();
+        $ingresos = array('ingresos' => $ingresos);
+        $viewData = array_merge($titulo, $ingresos);
+        return view('admin/admin_ingresos_dt', $viewData);
+    }
+
+    public function borrarIngreso()
+    {
+        $ingresoModel = new IngresoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $ingresoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Ingresos Admin',
+        ];
+
+        $ingresos = $ingresoModel->findAll();
+        $ingresos = array('ingresos' => $ingresos);
+        $viewData = array_merge($titulo, $ingresos);
+        return view('admin/admin_ingresos_dt', $viewData);
+    }
+
+    public function guardaLesion()
+    {
+        $lesionModel = new LesionesModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'fecha_inicio_lesion' => $request->getPostGet('fecha_inicio_lesion'),
+            'fecha_fin_lesion' => $request->getPostGet('fecha_fin_lesion'),
+            'jugador_id_fk' => $request->getPostGet('jugador_id_fk'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($lesionModel->save($data) === false) {
+            var_dump($lesionModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Lesiones Admin',
+        ];
+        
+        $lesiones = $lesionModel->findAll();
+        $lesiones = array('lesiones' => $lesiones);
+        $viewData = array_merge($titulo, $lesiones);
+        return view('admin/admin_lesiones_dt', $viewData);
+    }
+
+    public function borrarLesion()
+    {
+        $lesionModel = new LesionesModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $lesionModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Lesiones Admin',
+        ];
+        
+        $lesiones = $lesionModel->findAll();
+        $lesiones = array('lesiones' => $lesiones);
+        $viewData = array_merge($titulo, $lesiones);
+        return view('admin/admin_lesiones_dt', $viewData);
+    }
+
+    public function guardaMotivo()
+    {
+        $motivoModel = new MotivoModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'nombre_motivo' => $request->getPostGet('nombre'),
+            'tipo' => $request->getPostGet('genero'),
+            'division_id_fk' => $request->getPostGet('division_id_fk'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($motivoModel->save($data) === false) {
+            var_dump($motivoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Motivos Admin',
+        ];
+
+        $motivos = $motivoModel->findAll();
+        $motivos = array('motivos' => $motivos);
+        $viewData = array_merge($titulo, $motivos);
+        return view('admin/admin_motivos_dt', $viewData);
+    }
+
+    public function borrarMotivo()
+    {
+        $motivoModel = new MotivoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $motivoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Motivos Admin',
+        ];
+
+        $motivos = $motivoModel->findAll();
+        $motivos = array('motivos' => $motivos);
+        $viewData = array_merge($titulo, $motivos);
+        return view('admin/admin_motivos_dt', $viewData);
+    }
+
+    public function guardaPagoSocio()
+    {
+        $pagoSocioModel = new PagoSocioModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'monto' => $request->getPostGet('monto')
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($pagoSocioModel->save($data) === false) {
+            var_dump($pagoSocioModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Pagos de Socios Admin',
+        ];
+
+        $pagosocios= $pagoSocioModel->findAll();
+        $pagosocios = array('pagosocios' => $pagosocios);
+        $viewData = array_merge($titulo, $pagosocios);
+        return view('admin/admin_pagosocios_dt', $viewData);
+    }
+
+    public function borrarPagoSocio()
+    {
+        $pagoSocioModel = new PagoSocioModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $pagoSocioModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Pagos de Socios Admin',
+        ];
+
+        $pagosocios = $pagoSocioModel->findAll();
+        $pagosocios = array('pagosocios' => $pagosocios);
+        $viewData = array_merge($titulo, $pagosocios);
+        return view('admin/admin_pagosocios_dt', $viewData);
+    }
+
+    public function guardaPartido()
+    {
+        $partidoModel = new PartidoModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'equipo_local_fk' => $request->getPostGet('equipo_local_fk'),
+            'equipo_visita_fk' => $request->getPostGet('equipo_visita_fk'),
+            'ubicacion_fk' => $request->getPostGet('ubicacion_fk'),
+            'fecha' => $request->getPostGet('fecha'),
+            'campeonato_id_fk' => $request->getPostGet('campeonato_id_fk'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($partidoModel->save($data) === false) {
+            var_dump($partidoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Partidos Admin',
+        ];
+        
+        $partidos = $partidoModel->findAll();
+        $partidos = array('partidos' => $partidos);
+        $viewData = array_merge($titulo, $partidos);
+        return view('admin/admin_partidos_dt', $viewData);
+    }
+
+    public function borrarPartido()
+    {
+        $partidoModel = new PartidoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $partidoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Partidos Admin',
+        ];
+        
+        $partidos = $partidoModel->findAll();
+        $partidos = array('partidos' => $partidos);
+        $viewData = array_merge($titulo, $partidos);
+        return view('admin/admin_partidos_dt', $viewData);
+    }
+    //FALTA AGREGARLE IMAGEN
+    public function guardaSouvenir()
+    {
+        $souvenirModel = new SouvenirModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'producto' => $request->getPostGet('producto'),
+            'talla' => $request->getPostGet('talla'),
+            'precio' => $request->getPostGet('precio'),
+            'genero' => $request->getPostGet('genero'),
+            'detalle' => $request->getPostGet('detalle')
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($souvenirModel->save($data) === false) {
+            var_dump($souvenirModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Souvenirs Admin',
+        ];
+
+        $souvenirs = $souvenirModel->findAll();
+        $souvenirs = array('souvenirs' => $souvenirs);
+        $viewData = array_merge($titulo, $souvenirs);
+        return view('admin/admin_souvenirs_dt', $viewData);
+    }
+
+    public function borrarSouvenir()
+    {
+        $souvenirModel = new SouvenirModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $souvenirModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Souvenirs Admin',
+        ];
+
+        $souvenirs = $souvenirModel->findAll();
+        $souvenirs = array('souvenirs' => $souvenirs);
+        $viewData = array_merge($titulo, $souvenirs);
+        return view('admin/admin_souvenirs_dt', $viewData);
+    }
+
+    public function guardaSponsor()
+    {
+        $sponsorModel = new SponsorModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'nombre' => $request->getPostGet('nombre'),
+            'monto_por_partido' => $request->getPostGet('monto_por_partido'),
+            'condiciones' => $request->getPostGet('condiciones'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($sponsorModel->save($data) === false) {
+            var_dump($sponsorModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Sponsors Admin',
+        ];
+        
+        $sponsors = $sponsorModel->findAll();
+        $sponsors = array('sponsors' => $sponsors);
+        $viewData = array_merge($titulo, $sponsors);
+        return view('admin/admin_sponsors_dt', $viewData);
+    }
+
+    public function borrarSponsor()
+    {
+        $sponsorModel = new SponsorModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $sponsorModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Sponsors Admin',
+        ];
+        
+        $sponsors = $sponsorModel->findAll();
+        $sponsors = array('sponsors' => $sponsors);
+        $viewData = array_merge($titulo, $sponsors);
+        return view('admin/admin_sponsors_dt', $viewData);
+    }
+    //FALTA ARREGLAR LO DE JUGADOR ID
+    public function guardaTarjetaPartido()
+    {
+        $tarjetaPartidoModel = new TarjetasPartidoModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'jugador_fk' => $request->getPostGet('jugador_fk'),
+            'minuto' => $request->getPostGet('minuto'),
+            'partido_fk' => $request->getPostGet('partido_fk'),
+            'jugador_externo' => $request->getPostGet('jugador_externo'),
+            'tarjeta' => $request->getPostGet('tarjeta'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($tarjetaPartidoModel->save($data) === false) {
+            var_dump($tarjetaPartidoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Tarjetas de Partido Admin',
+        ];
+        
+        $tarjetaspartido = $tarjetaPartidoModel->findAll();
+        $tarjetaspartido = array('tarjetaspartido' => $tarjetaspartido);
+        $viewData = array_merge($titulo, $tarjetaspartido);
+        return view('admin/admin_tarjetaspartidos_dt', $viewData);
+    }
+
+    public function borrarTarjetaPartido()
+    {
+        $tarjetaPartidoModel = new TarjetasPartidoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $tarjetaPartidoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Tarjetas de Partido Admin',
+        ];
+        
+        $tarjetaspartido = $tarjetaPartidoModel->findAll();
+        $tarjetaspartido = array('tarjetaspartido' => $tarjetaspartido);
+        $viewData = array_merge($titulo, $tarjetaspartido);
+        return view('admin/admin_tarjetaspartidos_dt', $viewData);
+    }
+
+    public function guardaTraspaso()
+    {
+        $traspasoModel = new TraspasoModel();
+        $request = \Config\Services::request();
+        $data = array(
+            'nombre_jugador' => $request->getPostGet('nombre_jugador'),
+            'equipo_origen' => $request->getPostGet('equipo_origen'),
+            'equipo_destino' => $request->getPostGet('equipo_destino'),
+            'fecha_traspaso' => $request->getPostGet('fecha_traspaso'),
+            'monto' => $request->getPostGet('monto'),
+        );
+        if ($request->getPostGet('id')) {
+            $data['id'] = $request->getPostGet('id');
+        }
+        if ($traspasoModel->save($data) === false) {
+            var_dump($traspasoModel->errors());
+        }
+        $titulo = [
+            'title' => 'Ver Traspasos Admin',
+        ];
+
+        $traspasos = $traspasoModel->findAll();
+        $traspasos = array('traspasos' => $traspasos);
+        $viewData = array_merge($titulo, $traspasos);
+        return view('admin/admin_traspasos_dt', $viewData);
+    }
+
+    public function borrarTraspaso()
+    {
+        $traspasoModel = new TraspasoModel();
+        $request = \Config\Services::request();
+        $id = $request->getPostGet('id');
+        $traspasoModel->delete($id);
+
+        $titulo = [
+            'title' => 'Ver Traspasos Admin',
+        ];
+
+        $traspasos = $traspasoModel->findAll();
+        $traspasos = array('traspasos' => $traspasos);
+        $viewData = array_merge($titulo, $traspasos);
+        return view('admin/admin_traspasos_dt', $viewData);
+    }
 
     public function guardaJugador()
     {

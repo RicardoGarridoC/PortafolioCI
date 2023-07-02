@@ -24,7 +24,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar División</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="fa fa-times" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?php echo form_open('AdminDashboard/guardaDivision', 'id="myForm"'); ?>
@@ -94,9 +94,9 @@
                     <p>¿Estás seguro de que quieres eliminar esta división?</p>
                 </div>
                 <div class="modal-footer">
-                    <?php echo form_open('AdminDashboard/eliminaDivision'); ?>
+                    <?php echo form_open('AdminDashboard/borrarDivision'); ?>
                     <?php echo form_hidden('id', $division['id']); ?>
-                    <?php echo form_submit('eliminaDivision', 'Eliminar', 'class="btn btn-danger"'); ?>
+                    <?php echo form_submit('borrarDivision', 'Eliminar', 'class="btn btn-danger"'); ?>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <?php echo form_close(); ?>
                 </div>

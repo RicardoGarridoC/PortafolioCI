@@ -24,7 +24,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar Sponsor</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="fa fa-times" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?php echo form_open('AdminDashboard/guardaSponsor', 'id="myForm"'); ?>
@@ -110,9 +110,9 @@
                     <p>¿Estás seguro de que quieres eliminar este sponsor?</p>
                 </div>
                 <div class="modal-footer">
-                    <?php echo form_open('AdminDashboard/eliminaSponsor'); ?>
+                    <?php echo form_open('AdminDashboard/borrarSponsor'); ?>
                     <?php echo form_hidden('id', $sponsor['id']); ?>
-                    <?php echo form_submit('eliminaSponsor', 'Eliminar', 'class="btn btn-danger"'); ?>
+                    <?php echo form_submit('borrarSponsor', 'Eliminar', 'class="btn btn-danger"'); ?>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <?php echo form_close(); ?>
                 </div>
