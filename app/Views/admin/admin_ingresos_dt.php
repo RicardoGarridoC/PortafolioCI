@@ -45,11 +45,11 @@
                         echo "<br>";
 
                         echo form_label('Detalle', 'detalle');
-                        echo form_input(array('name' => 'detalle', 'placeholder' => 'Detalle', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'detalle', 'placeholder' => 'Detalle', 'class' => 'form-control'));
                         echo "<br>";
 
                         echo form_label('ID Usuario', 'id_usuario_fk');
-                        echo form_input(array('name' => 'id_usuario_fk', 'placeholder' => 'ID Usuario', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'id_usuario_fk', 'placeholder' => 'ID Usuario', 'class' => 'form-control'));
                         echo "<br>";
                         ?>
                     </div>
@@ -92,11 +92,11 @@
                             echo "<br>";
 
                             echo form_label('Detalle', 'detalle');
-                            echo form_input(array('name' => 'detalle', 'placeholder' => 'Detalle', 'class' => 'form-control', 'value' => $ingreso['detalle'], 'required' => 'required'));
+                            echo form_input(array('name' => 'detalle', 'placeholder' => 'Detalle', 'class' => 'form-control', 'value' => $ingreso['detalle']));
                             echo "<br>";
 
                             echo form_label('ID Usuario', 'id_usuario_fk');
-                            echo form_input(array('name' => 'id_usuario_fk', 'placeholder' => 'ID Usuario', 'class' => 'form-control', 'value' => $ingreso['id_usuario_fk'], 'required' => 'required'));
+                            echo form_input(array('name' => 'id_usuario_fk', 'placeholder' => 'ID Usuario', 'class' => 'form-control', 'value' => $ingreso['id_usuario_fk']));
                             echo "<br>";
                             ?>
                         </div>

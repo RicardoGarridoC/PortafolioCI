@@ -37,7 +37,7 @@
                         echo "<br>";
 
                         echo form_label('ID Jugador', 'jugador_id_fk');
-                        echo form_input(array('name' => 'jugador_id_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'jugador_id_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control'));
                         echo "<br>";
 
                         echo form_label('Minuto', 'minuto');
@@ -45,7 +45,7 @@
                         echo "<br>";
 
                         echo form_label('Jugador Visita', 'jugador_visita');
-                        echo form_input(array('name' => 'jugador_visita', 'placeholder' => 'Jugador Visita', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'jugador_visita', 'placeholder' => 'Jugador Visita', 'class' => 'form-control'));
                         echo "<br>";
                         ?>
                     </div>
@@ -80,7 +80,7 @@
                             echo "<br>";
 
                             echo form_label('ID Jugador', 'jugador_id_fk');
-                            echo form_input(array('name' => 'jugador_id_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control', 'value' => $gol['jugador_id_fk'], 'required' => 'required'));
+                            echo form_input(array('name' => 'jugador_id_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control', 'value' => $gol['jugador_id_fk']));
                             echo "<br>";
 
                             echo form_label('Minuto', 'minuto');
@@ -88,7 +88,7 @@
                             echo "<br>";
 
                             echo form_label('Jugador Visita', 'jugador_visita');
-                            echo form_input(array('name' => 'jugador_visita', 'placeholder' => 'Jugador Visita', 'class' => 'form-control', 'value' => $gol['jugador_visita'], 'required' => 'required'));
+                            echo form_input(array('name' => 'jugador_visita', 'placeholder' => 'Jugador Visita', 'class' => 'form-control', 'value' => $gol['jugador_visita']));
                             echo "<br>";
                             ?>
                         </div>

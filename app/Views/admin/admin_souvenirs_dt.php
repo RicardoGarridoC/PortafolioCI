@@ -37,7 +37,7 @@
                         echo "<br>";
 
                         echo form_label('Talla', 'talla');
-                        echo form_input(array('name' => 'talla', 'placeholder' => 'Talla', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'talla', 'placeholder' => 'Talla', 'class' => 'form-control'));
                         echo "<br>";
 
                         echo form_label('Precio', 'precio');
@@ -45,7 +45,7 @@
                         echo "<br>";
 
                         echo form_label('Género', 'genero');
-                        echo form_input(array('name' => 'genero', 'placeholder' => 'Género', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'genero', 'placeholder' => 'Género', 'class' => 'form-control'));
                         echo "<br>";
 
                         echo form_label('Detalle', 'detalle');
@@ -84,7 +84,7 @@
                             echo "<br>";
 
                             echo form_label('Talla', 'talla');
-                            echo form_input(array('name' => 'talla', 'placeholder' => 'Talla', 'class' => 'form-control', 'value' => $souvenir['talla'], 'required' => 'required'));
+                            echo form_input(array('name' => 'talla', 'placeholder' => 'Talla', 'class' => 'form-control', 'value' => $souvenir['talla']));
                             echo "<br>";
 
                             echo form_label('Precio', 'precio');
@@ -92,7 +92,7 @@
                             echo "<br>";
 
                             echo form_label('Género', 'genero');
-                            echo form_input(array('name' => 'genero', 'placeholder' => 'Género', 'class' => 'form-control', 'value' => $souvenir['genero'], 'required' => 'required'));
+                            echo form_input(array('name' => 'genero', 'placeholder' => 'Género', 'class' => 'form-control', 'value' => $souvenir['genero']));
                             echo "<br>";
 
                             echo form_label('Detalle', 'detalle');

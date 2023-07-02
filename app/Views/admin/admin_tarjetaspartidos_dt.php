@@ -33,7 +33,7 @@
                         <?php
 
                         echo form_label('ID Jugador', 'jugador_fk');
-                        echo form_input(array('name' => 'jugador_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'jugador_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control'));
                         echo "<br>";
 
                         echo form_label('Minuto', 'minuto');
@@ -45,7 +45,7 @@
                         echo "<br>";
 
                         echo form_label('Jugador Externo', 'jugador_externo');
-                        echo form_input(array('name' => 'jugador_externo', 'placeholder' => 'Jugador Externo', 'class' => 'form-control', 'required' => 'required'));
+                        echo form_input(array('name' => 'jugador_externo', 'placeholder' => 'Jugador Externo', 'class' => 'form-control'));
                         echo "<br>";
 
                         echo form_label('Tarjeta', 'tarjeta');
@@ -80,7 +80,7 @@
                             <?php
 
                             echo form_label('ID Jugador', 'jugador_fk');
-                            echo form_input(array('name' => 'jugador_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control', 'value' => $tarjetapartido['jugador_fk'], 'required' => 'required'));
+                            echo form_input(array('name' => 'jugador_fk', 'placeholder' => 'ID Jugador', 'class' => 'form-control', 'value' => $tarjetapartido['jugador_fk']));
                             echo "<br>";
 
                             echo form_label('Minuto', 'minuto');
@@ -92,7 +92,7 @@
                             echo "<br>";
 
                             echo form_label('Jugador Externo', 'jugador_externo');
-                            echo form_input(array('name' => 'jugador_externo', 'placeholder' => 'Jugador Externo', 'class' => 'form-control', 'value' => $tarjetapartido['jugador_externo'], 'required' => 'required'));
+                            echo form_input(array('name' => 'jugador_externo', 'placeholder' => 'Jugador Externo', 'class' => 'form-control', 'value' => $tarjetapartido['jugador_externo']));
                             echo "<br>";
 
                             echo form_label('Tarjeta', 'tarjeta');
