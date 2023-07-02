@@ -100,8 +100,8 @@
         </div>
 
         <div id="section-nombre-tarjeta" style="display: none;">
-            <label for="nombre">Nombre del jugador:</label>
-            <input type="text" name="nombre" id="nombre">
+            <label for="nombre-tarjeta">Nombre del jugador:</label>
+            <input type="text" name="nombre-tarjeta" id="nombre-tarjeta">
         </div>
 
         <label for="minuto-tarjeta">Minuto de tarjeta:</label>
@@ -213,13 +213,15 @@ document.getElementById('agregar-gol').addEventListener('click', function(e) {
         if (response.status === 200) {
             alert('Gol agregado exitosamente');
             // Limpiar los campos del formulario
-            document.getElementById('partidos').value = '';
-            document.getElementById('equipo').innerHTML = '<option value="">Selecciona un equipo</option>';
-            document.getElementById('jugador').innerHTML = '<option value="">Selecciona un jugador</option>';
-            document.getElementById('nombre').value = '';
-            document.getElementById('minuto').value = '';
-            document.getElementById('section-goles').style.display = 'none';
-            document.getElementById('section-cambios').style.display = 'none';
+            location.reload();
+            // document.getElementById('partidos').value = '';
+            // document.getElementById('equipo').innerHTML = '<option value="">Selecciona un equipo</option>';
+            // document.getElementById('jugador').innerHTML = '<option value="">Selecciona un jugador</option>';
+            // document.getElementById('nombre').value = '';
+            // document.getElementById('minuto').value = '';
+            // document.getElementById('section-goles').style.display = 'none';
+            // document.getElementById('section-cambios').style.display = 'none';
+            // document.getElementById('section-tarjeta').style.display = 'none';
         } else {
             alert('Error al agregar gol');
         }
@@ -338,15 +340,17 @@ document.getElementById('agregar-cambio').addEventListener('click', function(e) 
         if (response.status === 200) {
             alert('Cambio agregado exitosamente');
             // Limpiar los campos del formulario
-            document.getElementById('partidos').value = '';
-            document.getElementById('equipo-tarjeta').innerHTML = '<option value="">Selecciona un equipo</option>';
-            document.getElementById('jugador-saliendo').innerHTML = '<option value="">Selecciona un jugador</option>';
-            document.getElementById('jugador-entrante').innerHTML = '<option value="">Selecciona un jugador</option>';
-            document.getElementById('jugador-saliendo-visita').value = '';
-            document.getElementById('jugador-entrante-visita').value = '';
-            document.getElementById('minuto-cambio').value = '';
-            document.getElementById('section-goles').style.display = 'none';
-            document.getElementById('section-cambios').style.display = 'none';
+            location.reload();
+            // document.getElementById('partidos').value = '';
+            // document.getElementById('equipo-tarjeta').innerHTML = '<option value="">Selecciona un equipo</option>';
+            // document.getElementById('jugador-saliendo').innerHTML = '<option value="">Selecciona un jugador</option>';
+            // document.getElementById('jugador-entrante').innerHTML = '<option value="">Selecciona un jugador</option>';
+            // document.getElementById('jugador-saliendo-visita').value = '';
+            // document.getElementById('jugador-entrante-visita').value = '';
+            // document.getElementById('minuto-cambio').value = '';
+            // document.getElementById('section-goles').style.display = 'none';
+            // document.getElementById('section-cambios').style.display = 'none';
+            // document.getElementById('section-tarjeta').style.display = 'none';
         } else {
             alert('Error al agregar cambio');
         }
@@ -381,13 +385,13 @@ document.getElementById('partidos').addEventListener('change', function() {
 });
 
 document.getElementById('equipo-tarjeta').addEventListener('change', function() {
-    let sectionJugador = document.getElementById('section-jugador-tarjeta');
-    let sectionNombre = document.getElementById('section-nombre-tarjeta');
+    let sectionJugadorTarjeta = document.getElementById('section-jugador-tarjeta');
+    let sectionNombreTarjeta = document.getElementById('section-nombre-tarjeta');
     let sectionTtarjeta = document.getElementById('section-tarjeta-tarjeta');
 
     if (this.value === 'local') {
-        sectionJugador.style.display = 'block';
-        sectionNombre.style.display = 'none';
+        sectionJugadorTarjeta.style.display = 'block';
+        sectionNombreTarjeta.style.display = 'none';
         sectionTtarjeta.style.display = 'block';
 
         // Obtener los jugadores del equipo local con AJAX
@@ -404,12 +408,13 @@ document.getElementById('equipo-tarjeta').addEventListener('change', function() 
                 });
             });
     } else if (this.value === 'visita') {
-        sectionJugador.style.display = 'none';
-        sectionNombre.style.display = 'block';
+        sectionJugadorTarjeta.style.display = 'none';
+        sectionNombreTarjeta.style.display = 'block';
         sectionTtarjeta.style.display = 'block';
     } else {
-        sectionJugador.style.display = 'none';
-        sectionNombre.style.display = 'none';
+        sectionJugadorTarjeta.style.display = 'none';
+        sectionNombreTarjeta.style.display = 'none';
+        sectionTtarjeta.style.display = 'none';
     }
 });
 
@@ -446,15 +451,16 @@ document.getElementById('agregar-tarjeta').addEventListener('click', function(e)
         if (response.status === 200) {
             alert('Tarjeta agregado exitosamente');
             // Limpiar los campos del formulario
-            document.getElementById('partidos').value = '';
-            document.getElementById('equipo-tarjeta').innerHTML = '<option value="">Selecciona un equipo</option>';
-            document.getElementById('jugador-tarjeta').innerHTML = '<option value="">Selecciona un jugador</option>';
-            document.getElementById('nombre-tarjeta').value = '';
-            document.getElementById('minuto-tarjeta').value = '';
-            document.getElementById('tarjeta').innerHTML = '<option value="">Seleccione una tarjeta</option>';
-            document.getElementById('section-goles').style.display = 'none';
-            document.getElementById('section-cambios').style.display = 'none';
-            document.getElementById('section-tarjeta').style.display = 'none';
+            location.reload();
+            // document.getElementById('partidos').value = '';
+            // document.getElementById('equipo-tarjeta').innerHTML = '<option value="">Selecciona un equipo</option>';
+            // document.getElementById('jugador-tarjeta').innerHTML = '<option value="">Selecciona un jugador</option>';
+            // document.getElementById('nombre-tarjeta').value = '';
+            // document.getElementById('minuto-tarjeta').value = '';
+            // document.getElementById('tarjeta').innerHTML = '<option value="">Seleccione una tarjeta</option>';
+            // document.getElementById('section-goles').style.display = 'none';
+            // document.getElementById('section-cambios').style.display = 'none';
+            // document.getElementById('section-tarjeta').style.display = 'none';
         } else {
             alert('Error al agregar tarjeta');
         }
