@@ -187,6 +187,8 @@ $routes->get('ReporteEstadisticasMovil', 'SocioController::getReporteEstadistica
 //Cerrar sesion Movil
 $routes->get('/logoutM', 'Home::cerrarSesionMovil');
 
+$routes->post('PerfilSocio', 'SocioController::obtenerPerfilMovil');
+
 //nuevas rutas venta souvenirs
 $routes->get('TiendaOficial', 'VentaSouvenirsController::cargaArticulos');
 $routes->get('DetalleProducto', 'VentaSouvenirsController::detalleProducto');
