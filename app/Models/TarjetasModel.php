@@ -19,4 +19,3 @@ class TarjetasModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 }
-?>

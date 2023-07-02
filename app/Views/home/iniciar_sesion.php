@@ -58,21 +58,27 @@
     }
 
     .card-header h3 {
-      color: rgb(255, 238, 0);
+      color: rgb(255, 255, 255);
     }
-    .back_button {
+
+    .card-header {
       position: relative;
+    }
+
+    .back_button {
+      position: absolute;
       right: 0px;
-      top: 0px;
+      top: 10px;
       margin-right: 15px;
     }
+    
     .back_button .btn {
-      color: #000;
+      color: #fff;
       font-size: 2rem;
     }
 
     .back_button .btn:hover {
-      color: #fff;
+      color: #000;
     }
 
     .input-group-prepend span {
@@ -125,11 +131,9 @@
     <div class="d-flex justify-content-center h-100">
       <div class="card">
         <div class="card-header">
-          <h3></h3>
-          <div class="d-flex justify-content-end social_icon">
-          </div>
-          <div class="d-flex justify-content-start back_button">
-            <a  href=<?php echo base_url('Home'); ?> class="btn btn-link text-left">
+          <h3>Iniciar Sesion</h3>
+          <div class="back_button">
+            <a href="<?php echo base_url('Home'); ?>" class="btn btn-link">
               <span><i class="fas fa-arrow-left"></i></span>
             </a>
           </div>
@@ -174,9 +178,7 @@
           <div class="d-flex justify-content-center links">
             ¿Eres nuevo?<a href=<?php echo base_url('Registrarse'); ?>>Registrate</a>
           </div>
-          <div class="d-flex justify-content-center">
-            <a href="#">. </a>
-          </div>
+          <br>
         </div>
       </div>
     </div>

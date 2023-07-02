@@ -10,13 +10,13 @@ use App\Models\TarjetasModel;
 use App\Models\PartidoModel;
 use App\Models\EquipoModel;
 use App\Models\UsuarioModel;
-use App\Models\CambiosExternoModel;
+use App\Models\CambiosExternosModel;
 
 class PartidoEnVivoController extends BaseController
 {
     public function index (){
         $db = \Config\Database::connect();
-    
+
         $queryPartidos = $db->query("SELECT p.id,
         e.nombre as equipo_local,
         e.id as id_equipo_local,
@@ -29,20 +29,20 @@ class PartidoEnVivoController extends BaseController
         left join equipos e2 on
         e2.id = p.equipo_visita_fk 
         WHERE DATE(p.fecha) = CURDATE()");
-    
+
         $partidos = $queryPartidos->getResult();
-        
+
         $data = [ 
             'title' => 'Partido en vivo',
             'partidos' => $partidos,
         ];
-    
+
         return view('admin/partido_en_vivo', $data);
     }
-    
+
     public function obtenerJugadores($genero_equipo_local) {
         $db = \Config\Database::connect();
-    
+
         $queryJugadores = $db->query("select j.id,
         concat(u.nombres, ' ', u.apellidos) as nombre_jugador,
         j.numero_camiseta
@@ -50,12 +50,12 @@ class PartidoEnVivoController extends BaseController
         left join usuarios u on
         j.id = u.jugador_id_fk
         where genero = '{$genero_equipo_local}'");
-    
+
         $jugadores = $queryJugadores->getResult();
-    
+
         return $this->response->setJSON($jugadores);
     }
-    
+
     public function agregarGol()
     {
         if ($this->request->getMethod() === 'post') {
@@ -76,7 +76,7 @@ class PartidoEnVivoController extends BaseController
 
             $golModel = new GolesModel();
             $golModel->save($golData);
-            
+
             return $this->response->setStatusCode(200, 'Gol agregado exitosamente');
         } else {
             return $this->response->setStatusCode(405, 'Método no permitido');
@@ -85,7 +85,7 @@ class PartidoEnVivoController extends BaseController
 
     public function obtenerJugadoresSin($genero_equipo_local, $jugador_id) {
         $db = \Config\Database::connect();
-    
+
         $queryJugadores = $db->query("SELECT j.id,
         CONCAT(u.nombres, ' ', u.apellidos) AS nombre_jugador,
         j.numero_camiseta
@@ -93,12 +93,12 @@ class PartidoEnVivoController extends BaseController
         LEFT JOIN usuarios u ON
         j.id = u.jugador_id_fk
         WHERE genero = '{$genero_equipo_local}' AND j.id != '{$jugador_id}'");
-    
+
         $jugadores = $queryJugadores->getResult();
-    
+
         return $this->response->setJSON($jugadores);
     }
-    
+
     public function agregarCambio()
     {
         if ($this->request->getMethod() === 'post') {
@@ -122,10 +122,10 @@ class PartidoEnVivoController extends BaseController
                 $cambioData['partido_id_fk'] = $postData->partido_id_fk;
                 $cambioData['nombre_jugador_saliente'] = $postData->jugador_saliendo_visita;
                 $cambioData['nombre_jugador_entrante'] = $postData->jugador_entrante_visita;
-                $cambioModel = new CambiosExternoModel();
+                $cambioModel = new CambiosExternosModel();
                 $cambioModel->save($cambioData);
             }
-            
+
             return $this->response->setStatusCode(200, 'Cambio agregado exitosamente');
         } else {
             return $this->response->setStatusCode(405, 'Método no permitido');
@@ -135,7 +135,7 @@ class PartidoEnVivoController extends BaseController
 
     public function obtenerJugadoresExcluyendo($genero_equipo_local, $excluir_id) {
         $db = \Config\Database::connect();
-    
+
         $queryJugadores = $db->query("SELECT j.id,
             CONCAT(u.nombres, ' ', u.apellidos) as nombre_jugador,
             j.numero_camiseta
@@ -144,15 +144,15 @@ class PartidoEnVivoController extends BaseController
             j.id = u.jugador_id_fk
             WHERE genero = '{$genero_equipo_local}'
             AND j.id != {$excluir_id}");
-    
+
         $jugadores = $queryJugadores->getResult();
-    
+
         return $this->response->setJSON($jugadores);
     }
 
     public function obtenerJugadoresTarjeta($genero_equipo_local) {
         $db = \Config\Database::connect();
-    
+
         $queryJugadores = $db->query("select j.id,
         concat(u.nombres, ' ', u.apellidos) as nombre_jugador,
         j.numero_camiseta
@@ -160,9 +160,9 @@ class PartidoEnVivoController extends BaseController
         left join usuarios u on
         j.id = u.jugador_id_fk
         where genero = '{$genero_equipo_local}'");
-    
+
         $jugadores = $queryJugadores->getResult();
-    
+
         return $this->response->setJSON($jugadores);
     }
 
@@ -187,14 +187,14 @@ class PartidoEnVivoController extends BaseController
 
             $tarjetaModel = new TarjetasModel();
             $tarjetaModel->save($tarjetaData);
-            
+
             return $this->response->setStatusCode(200, 'Tarjeta agregado exitosamente');
         } else {
             return $this->response->setStatusCode(405, 'Método no permitido');
         }
     }
-    
-  
+
+
     public function __construct()
     {
         helper('form');

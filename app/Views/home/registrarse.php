@@ -79,12 +79,12 @@
     }
 
     .back_button .btn {
-      color: #000;
+      color: #fff;
       font-size: 1rem;
     }
 
     .back_button .btn:hover {
-      color: #fff;
+      color: #000;
     }
 
     .input-group-prepend span {
@@ -197,7 +197,7 @@
             <br>
             <div class="input-group form-group">
               <div class="d-flex justify-content-center links">
-                Al crear una cuenta, aceptas las Condiciones de Uso y el Aviso de Privacidad de amazon.com.
+                Al crear una cuenta, aceptas las Condiciones de Uso y el Aviso de Privacidad de LOS ALCES F.C.
               </div>
 
             </div>

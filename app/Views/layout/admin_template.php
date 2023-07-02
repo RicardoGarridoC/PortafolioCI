@@ -108,7 +108,7 @@
             </div>  
               <span class="d-block info d-none d-sm-inline mx-1"><?= session('nombreUsuario') ?></span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow bg-dark">
               <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
               <li><a class="dropdown-item" href="<?php echo base_url('PerfilAdmin')?>">Ver Perfil</a></li>
               <li>
@@ -174,41 +174,164 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url('AdminUsuarioDt')?>" class="nav-link">
+                <a href="<?php echo base_url('AdminCambioDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Usuarios</p>
+                  <p>Cambios</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url('AdminSocioDt')?>" class="nav-link">
+                <a href="<?php echo base_url('AdminCambioExternoDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Socios</p>
+                  <p>Cambios Externos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url('AdminJugadorDt')?>" class="nav-link">
+                <a href="<?php echo base_url('AdminCampeonatoDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jugadores</p>
+                  <p>Campeonatos</p>
                 </a>
               </li>
+
               <li class="nav-item">
-                <a href="<?php echo base_url('AdminEquipoTecnicoDt')?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Equipo Técnico</p>
-                </a>
+                  <a href="<?php echo base_url('AdminCanchaDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Canchas</p>
+                  </a>
               </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminDirectorDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Sueldo Dirigente</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminDivisionDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Divisiones</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminEgresoDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Egresos</p>
+                  </a>
+              </li>
+
               <li class="nav-item">
                 <a href="<?php echo base_url('AdminEquipoDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Equipos</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminEquipoTecnicoDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Equipo Técnico</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminGolesDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Goles</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminIngresoDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Ingresos</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminJugadorDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jugadores</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminLesionesDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Lesiones</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminMotivoDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Motivos</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminPagoSocioDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pagos de Socios</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminPartidoDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Partidos</p>
+                  </a>
+              </li>
+
               <li class="nav-item">
                 <a href="<?php echo base_url('AdminResultadoDt')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Resultados</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminSocioDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Socios</p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminSouvenirDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Souvenirs</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminSponsorDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Sponsors</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminTarjetaPartidoDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tarjetas de Partidos</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?php echo base_url('AdminTraspasoDt')?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Traspasos</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php echo base_url('AdminUsuarioDt')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
+              
             </ul>
           </li>
         </ul>
@@ -229,7 +352,7 @@
         <div class="container pt-4">
             <!-- Social media -->
             <section class="mb-4">
-            <p>© Los Alces FC. Todos los derechos reservados.</p>
+            <p><strong>Copyright &copy; 2023 <a href="#">Los Alces FC</a>.</strong> Todos los derechos reservados.</p>
             <p>Developed by DevGroup DAF devgroupdaf@contacto.com</p>
             </section>
         </div>

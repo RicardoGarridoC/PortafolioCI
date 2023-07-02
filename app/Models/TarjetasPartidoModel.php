@@ -4,19 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CambiosExternoModel extends Model
+class TarjetasPartidoModel extends Model
 {
-    protected $table = 'cambios_externo';
+    protected $table = 'tarjetas_partido';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['minuto', 'partido_id_fk', 'nombre_jugador_saliente', 'nombre_jugador_entrante'];
+    protected $allowedFields = ['jugador_fk', 'minuto', 'partido_fk', 'jugador_externo', 'tarjeta'];
 
-    protected $validationRules = [
-    ];
+    protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }
-?>

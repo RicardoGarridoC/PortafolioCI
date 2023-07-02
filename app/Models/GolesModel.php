@@ -14,9 +14,7 @@ class GolesModel extends Model
 
     protected $allowedFields = ['partido_id_fk', 'jugador_id_fk', 'minuto', 'jugador_visita'];
 
-    protected $validationRules = [
-    ];
+    protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
 }
-?>

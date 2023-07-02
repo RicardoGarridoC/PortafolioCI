@@ -24,7 +24,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar Jugador</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="fa fa-times" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     <?php echo form_open('AdminDashboard/guardaJugador', 'id="myForm"'); ?>
@@ -59,7 +59,7 @@
                             echo "<br>";
 
                             echo form_label('Equipo Proviene', 'equipo_proviene_id_fk');
-                            echo form_input(array('name' => 'equipo_proviene_id_fk', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'required' => 'required'));
+                            echo form_input(array('name' => 'equipo_proviene_id_fk', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control'));
                             echo "<br>";
                             ?>
                         </div>
@@ -115,7 +115,7 @@
                             echo "<br>";
 
                             echo form_label('Equipo Proviene', 'equipo_proviene_id_fk');
-                            echo form_input(array('name' => 'equipo_proviene_id_fk', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'value' => $jugador['equipo_proviene_id_fk'], 'required' => 'required'));
+                            echo form_input(array('name' => 'equipo_proviene_id_fk', 'placeholder' => 'Equipo Proviene', 'class' => 'form-control', 'value' => $jugador['equipo_proviene_id_fk']));
                             echo "<br>";
 
                             ?>
