@@ -12,7 +12,7 @@ class SouvenirModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['producto', 'talla', 'precio', 'genero', 'detalle', 'foto'];
+    protected $allowedFields = ['producto', 'talla', 'precio', 'genero', 'detalle', 'foto', 'stock'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

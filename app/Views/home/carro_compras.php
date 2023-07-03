@@ -17,6 +17,7 @@
                 <img src="<?= $fotoSrc; ?>" alt="<?= $producto['nombre']; ?>">
                 <div class="producto-info">
                     <h3><?= $producto['nombre']; ?></h3>
+                    <p>Talla: <?= $producto['talla']; ?></p>
                     <p>Precio: $<?= $producto['precio']; ?></p>
                     <p>Cantidad: <?= $producto['cantidad']; ?></p>
                     <a href="<?= base_url('VentaSouvenirsController/eliminarProducto/' . $producto['id']); ?>" class="btn-eliminar-producto">Eliminar Producto</a>
@@ -33,6 +34,7 @@
         <button class="btn-vaciar-carro">Vaciar Carro</button>
     </form>
     <form action="<?= base_url('VentaSouvenirsController/checkout'); ?>" method="post" style="display: inline-block;">
+        <input type="hidden" name="total" value="<?= $total ?>">
         <button class="btn-comprar">Comprar</button>
     </form>
 </div>
@@ -127,5 +129,3 @@
         text-decoration: none;
     }
 </style>
-
-

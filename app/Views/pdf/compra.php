@@ -39,7 +39,7 @@
     <p><strong>Nombre:</strong> <?= $nombre; ?></p>
     <p><strong>Teléfono:</strong> <?= $telefono; ?></p>
 
-    <?php if ($entrega === 'domicilio'): ?>
+    <?php if ($entrega === 'despacho'): ?>
         <p><strong>Entrega:</strong> Despacho a domicilio</p>
         <p><strong>Dirección de envío:</strong> <?= $direccion; ?></p>
     <?php else: ?>
