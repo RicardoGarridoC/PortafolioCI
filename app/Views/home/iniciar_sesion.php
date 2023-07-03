@@ -153,9 +153,9 @@
               </div>
               <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
             </div>
-            <div class="row align-items-center remember">
+            <!-- <div class="row align-items-center remember">
               <input type="checkbox">Recuerdame
-            </div>
+            </div> -->
             <div class="form-group">
               <input type="submit" value="Iniciar Sesión" class="btn float-right login_btn">
             </div>
