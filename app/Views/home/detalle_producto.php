@@ -12,9 +12,6 @@
         }, 3000); 
     </script>
 <?php endif; ?>
-
-
-
 <div class="detalle-producto">
     <div class="detalle-image-container">
         <?php
@@ -30,12 +27,72 @@
         <p class="detalle-price">Precio: $<?= number_format($producto['precio'], 0, ',', '.'); ?></p>
         <p class="detalle-genero">Género: <?= $producto['genero']; ?></p>
         <p class="detalle-detail"><?= $producto['detalle']; ?></p>
-        <a href="<?= base_url('VentaSouvenirsController/agregarProducto/' . $producto['id']); ?>" class="agregar-carro">Agregar al Carro</a>
+
+        <?php if (!empty($producto['tallas']) && $producto['tallas'][0]->talla != 0): ?>
+            <form action="<?= base_url('VentaSouvenirsController/agregarProducto'); ?>" method="post">
+                <input type="hidden" name="id" value="<?= $producto['id']; ?>">
+                <label for="talla">Talla:</label>
+                <select name="talla" id="talla">
+                    <option value="">Seleccione su talla</option>
+                    <?php foreach ($producto['tallas'] as $talla): ?>
+                        <option value="<?= $talla->talla; ?>" data-stock="<?= $talla->stock; ?>"><?= $talla->talla; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <p id="stock-message">Stock: </p>
+                <button type="submit" class="agregar-carro" disabled>Agregar al Carro</button>
+            </form>
+        <?php else: ?>
+            <p>Stock: <?= $producto['tallas'][0]->stock; ?></p>
+            <form action="<?= base_url('VentaSouvenirsController/agregarProducto'); ?>" method="post">
+                <input type="hidden" name="id" value="<?= $producto['id']; ?>">
+                <button type="submit" class="agregar-carro" <?= $producto['tallas'][0]->stock > 0 ? "" : "disabled"; ?>>Agregar al Carro</button>
+            </form>
+        <?php endif; ?>
     </div>
 </div>
 <a href="<?= base_url('VentaSouvenirsController/mostrarCarro'); ?>" class="floating-button" title="Ver Carro de Compras">
     <i class="fas fa-shopping-cart"></i>
 </a>
+
+<script>
+    const stockMessage = document.getElementById('stock-message');
+    const tallaSelect = document.getElementById('talla');
+    const agregarCarroBtn = document.querySelector('.agregar-carro');
+
+    if (tallaSelect) {
+        tallaSelect.addEventListener('change', updateStock);
+    }
+    
+    const stockNoTalla = <?= $producto['tallas'][0]->stock; ?>;
+
+    if (!tallaSelect && stockNoTalla <= 0) {
+        agregarCarroBtn.disabled = true;
+        document.querySelector('.detalle-info > p').textContent += ' No hay stock para este producto';
+    }
+
+    function updateStock() {
+        const selectedTalla = tallaSelect.value;
+        const selectedOption = tallaSelect.options[tallaSelect.selectedIndex];
+        const stock = selectedOption.getAttribute('data-stock');
+
+        if (!selectedTalla) {
+            stockMessage.textContent = 'Por favor, seleccione una talla';
+            agregarCarroBtn.disabled = true;
+        } else if (stock > 0) {
+            stockMessage.textContent = `Stock: ${stock}`;
+            agregarCarroBtn.disabled = false;
+        } else {
+            stockMessage.textContent = 'No hay stock para esta talla';
+            agregarCarroBtn.disabled = true;
+        }
+    }
+
+    if (tallaSelect) {
+        updateStock();
+    }
+</script>
+
+
 
 <style>
     .detalle-producto {

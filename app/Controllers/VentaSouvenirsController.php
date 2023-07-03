@@ -8,6 +8,7 @@ require 'vendor/autoload.php';
 
 use App\Models\IngresosModel;
 use App\Models\VentaSouvenirsModel;
+use App\Models\SouvenirModel;
 use App\Models\VentaEntradasModel;
 
 class VentaSouvenirsController extends BaseController
@@ -21,19 +22,20 @@ class VentaSouvenirsController extends BaseController
 
         $db = db_connect();
 
-        $campeonato = $db->query('select 
-        s.id ,
-        s.producto ,
-        s.talla ,
-        s.precio ,
-        s.genero ,
-        s.detalle ,
-        s.foto 
-        from souvenirs s;');
+        $campeonato = $db->query('SELECT DISTINCT 
+            s.producto,
+            s.talla,
+            s.precio,
+            s.genero,
+            s.detalle,
+            s.foto,
+            s.stock,
+            MIN(s.id) AS id
+            FROM souvenirs s
+            GROUP BY s.producto, s.talla, s.precio, s.genero, s.detalle, s.foto, s.stock;');
 
         $results = $campeonato->getResult();
 
-        // Preparar los datos en un formato adecuado
         $data['results'] = array();
 
         foreach ($results as $row) {
@@ -44,7 +46,8 @@ class VentaSouvenirsController extends BaseController
                 'precio' => $row->precio,
                 'genero' => $row->genero,
                 'detalle' => $row->detalle,
-                'foto' => $row->foto
+                'foto' => $row->foto,
+                'stock' => $row->stock
             );
         }
 
@@ -53,76 +56,105 @@ class VentaSouvenirsController extends BaseController
         return view('templates/header') . view('home/venta_souvenirs', $viewData) . view('templates/footer');
     }
 
+
+
     public function detalleProducto($id)
     {
         $db = db_connect();
-
+    
         $producto = $db->query("SELECT * FROM souvenirs WHERE id = '$id'");
         $result = $producto->getRow();
-
-        $data['producto'] = [
-            'id' => $result->id,
-            'producto' => $result->producto,
-            'talla' => $result->talla,
-            'precio' => $result->precio,
-            'genero' => $result->genero,
-            'detalle' => $result->detalle,
-            'foto' => $result->foto
-        ];
-
+    
+        if ($result) {
+            $productoNombre = $result->producto;
+            $tallas = $db->query("SELECT * FROM souvenirs WHERE producto = '$productoNombre'");
+            $tallasResult = $tallas->getResult();
+    
+            $data['producto'] = [
+                'id' => $result->id,
+                'producto' => $result->producto,
+                'precio' => $result->precio,
+                'genero' => $result->genero,
+                'detalle' => $result->detalle,
+                'foto' => $result->foto,
+                'tallas' => $tallasResult
+            ];
+        } else {
+            // Si no se encontró ningún resultado para el ID, puedes manejar el error o redirigir a una página de error, por ejemplo:
+            return redirect()->to('/error');
+        }
+    
         return view('templates/header') . view('home/detalle_producto', $data) . view('templates/footer');
     }
+    
 
-    public function agregarProducto($productoId)
+    public function agregarProducto()
     {
+        $productoId = $this->request->getPost('id');
+        $talla = $this->request->getPost('talla');
+    
         $carro = session('carro') ?: [];
-        if (isset($carro[$productoId])) {
-            $carro[$productoId] += 1;
+    
+        // Generar una clave única para el producto con la talla seleccionada
+        $productoTallaId = $productoId . '-' . $talla;
+    
+        if (isset($carro[$productoTallaId])) {
+            $carro[$productoTallaId] += 1;
         } else {
-            $carro[$productoId] = 1;
+            $carro[$productoTallaId] = 1;
         }
+    
         session()->set('carro', $carro);
         session()->setFlashdata('success', 'Producto agregado al carro correctamente');
         return redirect()->back();
     }
+    
 
     public function mostrarCarro()
     {
         $carro = session('carro') ?: [];
         $productos = [];
-
+    
         $db = db_connect();
         $productosModel = $db->table('souvenirs');
-
+    
         $total = 0;
-
-        foreach ($carro as $productoId => $cantidad) {
+    
+        foreach ($carro as $productoTallaId => $cantidad) {
+            // Dividir el productoTallaId en productoId y talla
+            list($productoId, $talla) = explode('-', $productoTallaId, 2);
+    
             $producto = $productosModel->where('id', $productoId)->get()->getRow();
-
+    
             if ($producto !== null) {
                 $productos[] = [
                     'id' => $producto->id,
                     'nombre' => $producto->producto,
                     'foto' => $producto->foto,
                     'precio' => $producto->precio,
-                    'cantidad' => $cantidad
+                    'cantidad' => $cantidad,
+                    'talla' => $talla,  // Usar la talla del carro
                 ];
-
+    
                 $total += floatval($producto->precio) * intval($cantidad);
             }
         }
-
+    
+        // Almacenar los productos en la sesión
+        session()->set('productos', $productos);
+    
         $data['productos'] = $productos;
         $data['total'] = $total;
-
+    
         $titulo = [
             'title' => 'Carro de Compras',
         ];
-
+    
         $viewData = array_merge($data, $titulo);
-
+    
         return view('templates/header') . view('home/carro_compras', $viewData) . view('templates/footer');
     }
+    
 
     public function vaciarCarro()
     {
@@ -131,26 +163,56 @@ class VentaSouvenirsController extends BaseController
         return redirect()->to(base_url('TiendaOficial'));
     }
 
-    public function eliminarProducto($productoId)
+    public function eliminarProducto($productoTallaId)
     {
         $carro = session('carro') ?: [];
-
-        if (isset($carro[$productoId])) {
-            unset($carro[$productoId]);
+    
+        if (isset($carro[$productoTallaId])) {
+            if ($carro[$productoTallaId] > 1) {
+                $carro[$productoTallaId] -= 1;
+            } else {
+                unset($carro[$productoTallaId]);
+            }
             session()->set('carro', $carro);
         }
-
+    
         return redirect()->to('CarroCompras');
-    }
+    }     
 
     public function checkout()
     {
+        $carro = session('carro') ?: [];
+        $db = db_connect();
+        $productosModel = $db->table('souvenirs');
+    
+        // Verificar si hay suficiente stock para cada producto en el carro
+        foreach ($carro as $productoTallaId => $cantidad) {
+            list($productoId, $talla) = explode('-', $productoTallaId, 2);
+    
+            // Obtener el nombre del producto en base al id proporcionado.
+            $productoNombre = $db->table('souvenirs')->where('id', $productoId)->get()->getRow()->producto;
+    
+            if ($talla == null) {
+                // Si la talla es null, buscar el producto por id
+                $producto = $productosModel->where(['producto' => $productoNombre])->get()->getRow();
+            } else {
+                // Si la talla no es null, buscar el producto por nombre y talla
+                $producto = $productosModel->where(['producto' => $productoNombre, 'talla' => $talla])->get()->getRow();
+            }
+    
+            if ($producto !== null && $producto->stock < $cantidad) {
+                session()->setFlashdata('error', "Lo sentimos, no queda suficiente stock para {$producto->producto} de talla {$talla}. Por favor, ajusta la cantidad o elimina el artículo de tu carrito.");
+                return redirect()->to('/VentaSouvenirsController/mostrarCarro');
+            }
+        }
+    
         $titulo = [
             'title' => 'Checkout',
         ];
-
+    
         return view('templates/header') . view('home/checkout', $titulo) . view('templates/footer');
-    }
+    }   
+      
 
     public function confirmarCompra()
     {
@@ -219,11 +281,27 @@ class VentaSouvenirsController extends BaseController
                 $productos[] = [
                     'nombre' => $producto->producto,
                     'precio' => $producto->precio,
-                    'cantidad' => $cantidad
+                    'cantidad' => $cantidad,
+                    'talla' => $producto->talla
                 ];
 
                 //$total += floatval($producto->precio) * intval($cantidad);
             }
+        }
+
+        $productos = session('productos');
+
+        // Actualizar el stock de cada producto vendido
+        foreach ($productos as $producto) {
+            $nombre = $producto['nombre'];
+            $talla = $producto['talla'];
+            $cantidad = $producto['cantidad'];
+            if($talla == null){
+                $db->query("UPDATE souvenirs SET stock = stock - '{$cantidad}' WHERE producto = '{$nombre}'");
+            }
+            else{
+                $db->query("UPDATE souvenirs SET stock = stock - '{$cantidad}' WHERE producto = '{$nombre}' AND talla = '{$talla}'");
+            }  
         }
 
         $html = view('pdf/compra', [
@@ -233,7 +311,7 @@ class VentaSouvenirsController extends BaseController
             'entrega' => $entrega,
             'direccion' => $direccion,
             'productos' => $productos,
-            'total' => $montoCompra
+            'total' => $montoCompra,
         ]);        
 
         // Crea una instancia de Dompdf
@@ -253,14 +331,18 @@ class VentaSouvenirsController extends BaseController
         ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
         ->setBody($output);
 
+    
+        // ... (la mayoría del código se ha omitido para enfocarnos en las modificaciones relevantes)
+    
         session()->remove('carro');
-
+        session()->remove('productos');
+    
         // Redirige a TiendaOficial después de descargar el PDF
         echo '<script>window.location.href = "' . base_url('TiendaOficial') . '";</script>';
-
+    
         return $response;
     }
-
+    
     public function loadVentaEntradas() {
         $db = db_connect();
         

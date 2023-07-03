@@ -51,18 +51,31 @@
     <table>
         <tr>
             <th>Producto</th>
+            <th>Talla</th>
             <th>Cantidad</th>
-            <th>Precio</th>
+            <th>Precio unitario</th>
+            <th>Precio total</th>
         </tr>
         <?php foreach ($productos as $producto): ?>
             <tr>
                 <td><?= $producto['nombre']; ?></td>
+                <td><?= isset($producto['talla']) ? $producto['talla'] : 'N/A'; ?></td>
                 <td><?= $producto['cantidad']; ?></td>
                 <td>$<?= $producto['precio']; ?></td>
+                <td>$<?= $producto['precio']*$producto['cantidad']; ?></td>
             </tr>
         <?php endforeach; ?>
+        <?php if ($entrega === 'despacho'): ?>
+            <tr>
+                <td>Costo de envío</td>
+                <td>N/A</td>
+                <td>1</td>
+                <td>$10000</td>
+                <td>$10000</td>
+            </tr>
+        <?php endif; ?>
         <tr class="total">
-            <td colspan="2">Total</td>
+            <td colspan="3">Total</td>
             <td>$<?= $total; ?></td>
         </tr>
     </table>

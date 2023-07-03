@@ -98,8 +98,6 @@
     <!-- Match Section 
     CAMBIAR ESTA SECCION CON LOS DATOS DE CAMPEONATO Y PARTIDO -->
     <div class="container">
-        
-
         <div class="row">
             <div class="col-md-6">
                 <div class="container probando">

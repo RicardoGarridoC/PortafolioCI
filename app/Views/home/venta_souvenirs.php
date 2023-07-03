@@ -29,25 +29,48 @@
 </style>
 
 <div class="content-wrapper">
-  <main>
-    <?php foreach ($results as $index => $article): ?>
-        <div class="article<?= ($index + 1) % 4 === 0 ? ' last-in-row' : ''; ?>">
-            <?php
-                $fotoData = $article['foto'];
-                $fotoBase64 = base64_encode($fotoData);
-                $fotoSrc = 'data:image/jpeg;base64,' . $fotoBase64;
-                $precioFormateado = number_format($article['precio'], 0, ',', '.');
-            ?>
-            <a href="<?= base_url('VentaSouvenirsController/detalleProducto/' . $article['id']); ?>" target="_self" class="article-link">
+<main>
+    <?php
+        $productosAgrupados = array();
+
+        foreach ($results as $article) {
+            $producto = $article['producto'];
+
+            if (!isset($productosAgrupados[$producto])) {
+                $productosAgrupados[$producto] = array(
+                    'id' => $article['id'],
+                    'producto' => $producto,
+                    'tallas' => array($article['talla']),
+                    'precio' => $article['precio'],
+                    'genero' => $article['genero'],
+                    'detalle' => $article['detalle'],
+                    'foto' => $article['foto'],
+                    'stock' => $article['stock']
+                );
+            } else {
+                $productosAgrupados[$producto]['tallas'][] = $article['talla'];
+            }
+        }
+
+        foreach ($productosAgrupados as $producto) {
+            $fotoData = $producto['foto'];
+            $fotoBase64 = base64_encode($fotoData);
+            $fotoSrc = 'data:image/jpeg;base64,' . $fotoBase64;
+            $precioFormateado = number_format($producto['precio'], 0, ',', '.');
+    ?>
+        <div class="article">
+            <a href="<?= base_url('VentaSouvenirsController/detalleProducto/' . $producto['id']); ?>" target="_self" class="article-link">
                 <div class="article-image-container">
-                    <img class="article-image" src="<?= $fotoSrc; ?>" alt="<?= $article['producto']; ?>">
+                    <img class="article-image" src="<?= $fotoSrc; ?>" alt="<?= $producto['producto']; ?>">
                 </div>
-                <h3 class="article-title"><?= $article['producto']; ?></h3>
+                <h3 class="article-title"><?= $producto['producto']; ?></h3>
                 <p class="article-price">Precio: $<?= $precioFormateado; ?></p>
             </a>
         </div>
-    <?php endforeach; ?>
-  </main>
+    <?php } ?>
+</main>
+
+
 
 <a href="<?= base_url('VentaSouvenirsController/mostrarCarro'); ?>" class="floating-button" title="Ver Carro de Compras">
     <i class="fas fa-shopping-cart"></i>
