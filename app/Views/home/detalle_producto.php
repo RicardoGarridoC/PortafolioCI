@@ -18,6 +18,7 @@
             $fotoData = $producto['foto'];
             $fotoBase64 = base64_encode($fotoData);
             $fotoSrc = 'data:image/jpeg;base64,' . $fotoBase64;
+            $fotoSrc = str_replace('http://', 'https://', $fotoSrc);
         ?>
         <img class="detalle-image" src="<?= $fotoSrc; ?>" alt="<?= $producto['producto']; ?>">
     </div>
@@ -27,17 +28,18 @@
         <p class="detalle-price">Precio: $<?= number_format($producto['precio'], 0, ',', '.'); ?></p>
         <p class="detalle-genero">Género: <?= $producto['genero']; ?></p>
         <p class="detalle-detail"><?= $producto['detalle']; ?></p>
-
-        <?php if (!empty($producto['tallas']) && $producto['tallas'][0]->talla != 0): ?>
+        <?php if (!empty($producto['tallas']) && count($producto['tallas'])>1): ?>
             <form action="<?= base_url('VentaSouvenirsController/agregarProducto'); ?>" method="post">
                 <input type="hidden" name="id" value="<?= $producto['id']; ?>">
-                <label for="talla">Talla:</label>
-                <select name="talla" id="talla">
-                    <option value="">Seleccione su talla</option>
-                    <?php foreach ($producto['tallas'] as $talla): ?>
-                        <option value="<?= $talla->talla; ?>" data-stock="<?= $talla->stock; ?>"><?= $talla->talla; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="talla-container">
+                    <label for="talla">Talla:</label>
+                    <select name="talla" id="talla" class="detalle-talla">
+                        <option value="">Seleccione su talla</option>
+                        <?php foreach ($producto['tallas'] as $talla): ?>
+                            <option value="<?= $talla->talla; ?>" data-stock="<?= $talla->stock; ?>"><?= $talla->talla; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 <p id="stock-message">Stock: </p>
                 <button type="submit" class="agregar-carro" disabled>Agregar al Carro</button>
             </form>
@@ -55,46 +57,41 @@
 </a>
 
 <script>
-    const stockMessage = document.getElementById('stock-message');
-    const tallaSelect = document.getElementById('talla');
-    const agregarCarroBtn = document.querySelector('.agregar-carro');
+    document.addEventListener('DOMContentLoaded', function() {
+        const tallaSelector = document.getElementById('talla');
+        const agregarCarroButton = document.querySelector('.agregar-carro');
+        const stockMessage = document.getElementById('stock-message');
 
-    if (tallaSelect) {
-        tallaSelect.addEventListener('change', updateStock);
-    }
-    
-    const stockNoTalla = <?= $producto['tallas'][0]->stock; ?>;
+        tallaSelector.addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const stock = selectedOption.getAttribute('data-stock');
 
-    if (!tallaSelect && stockNoTalla <= 0) {
-        agregarCarroBtn.disabled = true;
-        document.querySelector('.detalle-info > p').textContent += ' No hay stock para este producto';
-    }
+            stockMessage.textContent = 'Stock: ' + stock;
 
-    function updateStock() {
-        const selectedTalla = tallaSelect.value;
-        const selectedOption = tallaSelect.options[tallaSelect.selectedIndex];
-        const stock = selectedOption.getAttribute('data-stock');
-
-        if (!selectedTalla) {
-            stockMessage.textContent = 'Por favor, seleccione una talla';
-            agregarCarroBtn.disabled = true;
-        } else if (stock > 0) {
-            stockMessage.textContent = `Stock: ${stock}`;
-            agregarCarroBtn.disabled = false;
-        } else {
-            stockMessage.textContent = 'No hay stock para esta talla';
-            agregarCarroBtn.disabled = true;
-        }
-    }
-
-    if (tallaSelect) {
-        updateStock();
-    }
+            if (parseInt(stock, 10) > 0) {
+                agregarCarroButton.disabled = false;
+            } else {
+                agregarCarroButton.disabled = true;
+            }
+        });
+    });
 </script>
 
-
-
 <style>
+    /* Colores */
+    :root {
+        --color-fondo: #333333;
+        --color-texto: #ffffff;
+        --color-primario: #4CAF50;
+        --color-primario-hover: #45a049;
+        --color-secundario: #888888;
+    }
+
+    body {
+        background-color: var(--color-fondo);
+        color: var(--color-texto);
+    }
+
     .detalle-producto {
         display: flex;
         align-items: center;
@@ -136,13 +133,13 @@
 
     .detalle-price {
         font-size: 20px;
-        color: #888;
+        color: var(--color-secundario);
         margin-bottom: 10px;
     }
 
     .detalle-genero {
         font-size: 16px;
-        color: #888;
+        color: var(--color-secundario);
         margin-bottom: 10px;
     }
 
@@ -150,38 +147,66 @@
         font-size: 16px;
         margin-bottom: 20px;
     }
-    
+
+    .talla-container {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .detalle-talla {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+        color: var(--color-texto);
+        background-color: var(--color-fondo);
+        border: 1px solid var(--color-secundario);
+        border-radius: 4px;
+    }
+
+    #stock-message {
+        font-size: 16px;
+        color: var(--color-secundario);
+        margin-bottom: 10px;
+    }
+
     .agregar-carro {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
+        background-color: var(--color-primario);
+        color: var(--color-texto);
         text-decoration: none;
         border-radius: 4px;
         transition: background-color 0.3s ease-in-out;
     }
-    
+
     .agregar-carro:hover {
-        background-color: #45a049;
+        background-color: var(--color-primario-hover);
     }
+
     .volver-atras {
         display: inline-block;
         margin-bottom: 10px;
-        color: #888;
+        color: var(--color-secundario);
         text-decoration: none;
         font-size: 16px;
     }
 
     .volver-atras::before {
-        content: "\2190"; 
+        content: "\2190";
         margin-right: 5px;
     }
+
     .floating-button {
         position: fixed;
         right: 20px;
         bottom: 70px;
-        background-color: #4CAF50;
-        color: white;
+        background-color: var(--color-primario);
+        color: var(--color-texto);
         width: 50px;
         height: 50px;
         border-radius: 50%;
@@ -193,8 +218,6 @@
     }
 
     .floating-button:hover {
-        background-color: #45a049;
+        background-color: var(--color-primario-hover);
     }
 </style>
-
-
