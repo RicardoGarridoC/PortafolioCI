@@ -1,6 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
@@ -8,30 +9,41 @@
 
 <head>
   <title>Login Page</title>
-  <!--Made with love by Mutiullah Samim -->
 
-  <!--Bootsrap 4 CDN-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
   <!--Fontawesome CDN-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-  <!--Custom styles-->
-  <link rel="stylesheet" type="text/css" href="styles.css">
-
   <style>
-    html,
+      html,
     body {
-    background-image: url(<?php echo base_url('/public/images/estadio2.jpg'); ?>);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    font-family: 'Numans', sans-serif;
+      height: 100%;
+      font-family: 'Numans', sans-serif;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      background-image: url(<?php echo base_url('/public/images/estadio2.jpg'); ?>);
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: blur(8px); /* Ajusta el nivel de desenfoque a tu gusto */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Coloca la imagen de fondo detrás del contenido */
+    }
+
+    @media only screen and (max-width: 768px) {
+      .card {
+        width: 100%;
+        border-radius: 0;
+        height: auto; /* Esto permitirá que el card se estire verticalmente si el contenido es más largo */
+      }
   }
-
-
     .container {
       height: 100%;
       align-content: center;
@@ -45,38 +57,28 @@
       background-color: rgba(0, 0, 0, 0.5) !important;
     }
 
-    .social_icon span {
-      font-size: 60px;
-      margin-left: 10px;
-      color: #000000;
-    }
-
-    .social_icon span:hover {
-      color: white;
-      cursor: pointer;
-    }
-
     .card-header h3 {
-      color: rgb(255, 238, 0);
+      color: rgb(255, 255, 255);
     }
 
-    .social_icon {
-      position: absolute;
-      right: 20px;
-      top: -45px;
+    .card-header {
+      position: relative;
     }
+
     .back_button {
       position: absolute;
-      right: 350px;
-      top: -45px;
+      right: 0px;
+      top: 10px;
+      margin-right: 15px;
     }
+    
     .back_button .btn {
-      color: #000;
+      color: #fff;
       font-size: 2rem;
     }
 
     .back_button .btn:hover {
-      color: #fff;
+      color: #000;
     }
 
     .input-group-prepend span {
@@ -129,14 +131,9 @@
     <div class="d-flex justify-content-center h-100">
       <div class="card">
         <div class="card-header">
-          <h3></h3>
-          <div class="d-flex justify-content-end social_icon">
-            <span><i class="fab fa-facebook-square"></i></span>
-            <span><i class="fab fa-google-plus-square"></i></span>
-            <span><i class="fab fa-twitter-square"></i></span>
-          </div>
-          <div class="d-flex justify-content-start back_button">
-            <a  href=<?php echo base_url('Home'); ?> class="btn btn-link text-left">
+          <h3>Iniciar Sesion</h3>
+          <div class="back_button">
+            <a href="<?php echo base_url('Home'); ?>" class="btn btn-link">
               <span><i class="fas fa-arrow-left"></i></span>
             </a>
           </div>
@@ -156,9 +153,9 @@
               </div>
               <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
             </div>
-            <div class="row align-items-center remember">
+            <!-- <div class="row align-items-center remember">
               <input type="checkbox">Recuerdame
-            </div>
+            </div> -->
             <div class="form-group">
               <input type="submit" value="Iniciar Sesión" class="btn float-right login_btn">
             </div>
@@ -181,9 +178,7 @@
           <div class="d-flex justify-content-center links">
             ¿Eres nuevo?<a href=<?php echo base_url('Registrarse'); ?>>Registrate</a>
           </div>
-          <div class="d-flex justify-content-center">
-            <a href="#">. </a>
-          </div>
+          <br>
         </div>
       </div>
     </div>

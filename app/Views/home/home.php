@@ -7,7 +7,7 @@
         
         .match-section,
         .championship-table {
-            background-color: #222;
+            background-color: #11151C;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -20,7 +20,7 @@
         }
         
         .probando {
-            background-color: #222;
+            background-color: #11151C;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -31,6 +31,10 @@
         }
         .logo {
         max-width: 100%;
+        height: auto;
+        }
+        .logo2 {
+        max-width: 50%;
         height: auto;
         }
         .carousel-item img {
@@ -203,38 +207,41 @@
             <div class="col-md-6">
                 <div class="championship-table">
                     <h2 class="text-center">Campeonato Femenino</h2>
-                    <table class="table table-dark">
-                    <thead>
-                        <tr>
-                            <th>Equipo</th>
-                            <th>PJ</th>
-                            <th>PG</th>
-                            <th>PE</th>
-                            <th>PP</th>
-                            <th>GF</th>
-                            <th>GC</th>
-                            <th>+/- </th>
-                            <th>Puntaje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($results8 as $row): ?>
-                            <tr>
-                                <td><?php echo $row['equipo']; ?></td>
-                                <td><?php echo $row['partidos_jugados']; ?></td>
-                                <td><?php echo $row['partidos_ganados']; ?></td>
-                                <td><?php echo $row['partidos_empatados']; ?></td>
-                                <td><?php echo $row['partidos_perdidos']; ?></td>
-                                <td><?php echo $row['goles_a_favor']; ?></td>
-                                <td><?php echo $row['goles_en_contra']; ?></td>
-                                <td><?php echo $row['diferencia_goles']; ?></td>
-                                <td><?php echo $row['puntaje']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>Equipo</th>
+                                    <th>PJ</th>
+                                    <th>PG</th>
+                                    <th>PE</th>
+                                    <th>PP</th>
+                                    <th>GF</th>
+                                    <th>GC</th>
+                                    <th>+/- </th>
+                                    <th>Puntaje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($results8 as $row): ?>
+                                    <tr>
+                                        <td><?php echo $row['equipo']; ?></td>
+                                        <td><?php echo $row['partidos_jugados']; ?></td>
+                                        <td><?php echo $row['partidos_ganados']; ?></td>
+                                        <td><?php echo $row['partidos_empatados']; ?></td>
+                                        <td><?php echo $row['partidos_perdidos']; ?></td>
+                                        <td><?php echo $row['goles_a_favor']; ?></td>
+                                        <td><?php echo $row['goles_en_contra']; ?></td>
+                                        <td><?php echo $row['diferencia_goles']; ?></td>
+                                        <td><?php echo $row['puntaje']; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 

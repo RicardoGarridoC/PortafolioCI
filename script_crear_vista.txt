@@ -1,0 +1,174 @@
+CREATE VIEW vista_partidos_hasta_hoy AS
+SELECT
+    p.fecha,
+    CONCAT(e_local.nombre, ' vs ', e_visita.nombre) AS equipos,
+    CONCAT(g.goles_equipo_local, ' - ', g.goles_equipo_visita) AS resultado,
+    (
+        SELECT
+            GROUP_CONCAT(
+                CONCAT(
+                    IFNULL(CONCAT(j.numero_camiseta, ' ', u.nombres, ' ', u.apellidos), ''),
+                    IF(g.minuto IS NOT NULL, CONCAT(' ', g.minuto), ''),
+                    ' (', e_local.nombre, ')'
+                )
+                SEPARATOR '\n'
+            )
+        FROM
+            goles g
+        LEFT JOIN jugadores j ON
+            j.id = g.jugador_id_fk
+        LEFT JOIN usuarios u ON
+            j.id = u.jugador_id_fk
+        WHERE
+            g.partido_id_fk = p.id
+            AND g.jugador_visita IS NULL
+        ORDER BY
+            g.minuto ASC
+    ) AS goles_jugadores_local,
+    (
+        SELECT
+            GROUP_CONCAT(
+                CONCAT(
+                    IFNULL(g.jugador_visita, ''),
+                    IF(g.minuto IS NOT NULL, CONCAT(' ', g.minuto), ''),
+                    ' (', e_visita.nombre, ')'
+                )
+                SEPARATOR '\n'
+            )
+        FROM
+            goles g
+        WHERE
+            g.partido_id_fk = p.id
+            AND g.jugador_id_fk IS NULL
+        ORDER BY
+            g.minuto ASC
+    ) AS goles_jugadores_visita,
+    (
+        SELECT
+            GROUP_CONCAT(
+                CONCAT(
+                    IFNULL(CONCAT(j2.numero_camiseta, ' ', u_sal.nombres, ' ', u_sal.apellidos), ''),
+                    ' -> ',
+                    CONCAT(j.numero_camiseta, ' ', u_ent.nombres, ' ', u_ent.apellidos),
+                    IF(c.minuto IS NOT NULL, CONCAT(' ', c.minuto), ''),
+                    ' (', e_local.nombre, ')'
+                )
+                SEPARATOR '\n'
+            )
+        FROM
+            cambios c
+        LEFT JOIN usuarios u_sal ON
+            c.jugador_saliente_fk = u_sal.jugador_id_fk
+        LEFT JOIN usuarios u_ent ON
+            c.jugador_entrante_fk = u_ent.jugador_id_fk
+        LEFT JOIN jugadores j ON
+            c.jugador_entrante_fk = j.id
+        LEFT JOIN jugadores j2 ON
+            c.jugador_saliente_fk = j2.id
+        WHERE
+            c.partido_fk = p.id
+        ORDER BY
+            c.minuto ASC
+    ) AS cambios_local,
+    (
+        SELECT
+            GROUP_CONCAT(
+                CONCAT(
+                    e.nombre,
+                    ', ',
+                    ce.nombre_jugador_saliente,
+                    ' -> ',
+                    ce.nombre_jugador_entrante,
+                    IF(ce.minuto IS NOT NULL, CONCAT(' ', ce.minuto), ''),
+                    ' (', e_visita.nombre, ')'
+                )
+                SEPARATOR '\n'
+            )
+        FROM
+            cambios_externo ce
+        LEFT JOIN equipos e ON
+            e.id = p.equipo_visita_fk
+        WHERE
+            ce.partido_id_fk = p.id
+        ORDER BY
+            ce.minuto ASC
+    ) AS cambios_visita,
+    (
+        SELECT
+            GROUP_CONCAT(
+                CONCAT(
+                    IFNULL(CONCAT(u.nombres, ' ', u.apellidos), ''),
+                    ' ',
+                    tp.tarjeta,
+                    IF(tp.minuto IS NOT NULL, CONCAT(' ', tp.minuto), ''),
+                    ' (', e_local.nombre, ')'
+                )
+                SEPARATOR '\n'
+            )
+        FROM
+            tarjetas_partido tp
+        LEFT JOIN jugadores j ON
+            j.id = tp.jugador_fk
+        LEFT JOIN usuarios u ON
+            u.jugador_id_fk = j.id
+        WHERE
+            tp.partido_fk = p.id
+            AND tp.jugador_fk IS NOT NULL
+        ORDER BY
+            tp.minuto ASC
+    ) AS tarjetas_local,
+    (
+        SELECT
+            GROUP_CONCAT(
+                CONCAT(
+                    IFNULL(
+                        CASE
+                            WHEN tp.jugador_fk IS NOT NULL THEN CONCAT(u.nombres, ' ', u.apellidos)
+                            ELSE tp.jugador_externo
+                        END,
+                        ''
+                    ),
+                    ' ',
+                    tp.tarjeta,
+                    IF(tp.minuto IS NOT NULL, CONCAT(' ', tp.minuto), ''),
+                    ' (', e_visita.nombre, ')'
+                )
+                SEPARATOR '\n'
+            )
+        FROM
+            tarjetas_partido tp
+        LEFT JOIN jugadores j ON
+            j.id = tp.jugador_fk
+        LEFT JOIN usuarios u ON
+            u.jugador_id_fk = j.id
+        WHERE
+            tp.partido_fk = p.id
+            AND tp.jugador_fk IS NULL
+        ORDER BY
+            tp.minuto ASC
+    ) AS tarjetas_visita
+FROM
+    partidos p
+INNER JOIN equipos e_local ON
+    e_local.id = p.equipo_local_fk
+INNER JOIN equipos e_visita ON
+    e_visita.id = p.equipo_visita_fk
+LEFT JOIN (
+    SELECT
+        p.id AS partido_id,
+        COUNT(CASE WHEN g.jugador_id_fk IS NOT NULL THEN 1 END) AS goles_equipo_local,
+        COUNT(CASE WHEN g.jugador_id_fk IS NULL THEN 1 END) AS goles_equipo_visita
+    FROM
+        partidos p
+    LEFT JOIN goles g ON
+        p.id = g.partido_id_fk
+    WHERE
+        p.fecha <= NOW()
+    GROUP BY
+        p.id
+) g ON
+    p.id = g.partido_id
+WHERE
+    p.fecha <= NOW()
+ORDER BY
+    p.fecha DESC;

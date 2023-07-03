@@ -24,7 +24,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Equipo</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="fa fa-times" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                 <?php echo form_open('AdminDashboard/guardaEquipo', 'id="myForm"'); ?>

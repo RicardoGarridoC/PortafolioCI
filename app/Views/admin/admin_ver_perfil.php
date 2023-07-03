@@ -7,6 +7,8 @@
     }
 </style>
 
+<br>
+<div class="container">
 <?php echo form_open('EditarUsuarioAdmin'); ?>
     <div class="form-group">
         <?php
@@ -70,7 +72,7 @@
 
   <button type="submit" class="btn btn-primary btn-block">Editar Usuario</button>
 <?php echo form_close(); ?>
-
+</div>
 <script>
 function togglePasswordVisibility() {
     var passwordInput = document.getElementsByName('password_hash')[0];

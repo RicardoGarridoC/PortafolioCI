@@ -29,35 +29,37 @@ class DireccionDashboard extends BaseController
 
         $query = $db->query('SELECT
         CASE
-          WHEN concepto = "sponsor" THEN "Sponsor"
-          WHEN concepto = "venta_jugadores" THEN "Venta de jugador"
-          WHEN concepto = "actividades_extra" THEN "Actividades Extras"
-          WHEN concepto = "mensualidad" THEN "Mensualidad"
-        END AS concepto,
-        CONCAT("$", monto) AS monto,
-        DATE_FORMAT(fecha, "%e de %M del %Y", "es_ES") AS fecha,
-        CASE
-          WHEN detalle = " " THEN "Sin Detalle"
-          ELSE detalle
-        END AS detalle
-        FROM ingresos
-        UNION
-        SELECT
-            CASE
-            WHEN concepto = "sueldo_jugadores" THEN "Sueldo de Jugador"
-            WHEN concepto = "sueldo_e_tecnico" THEN "Sueldo Equipo Tecnico"
-            WHEN concepto = "sueldo_dirigentes" THEN "Sueldo de Dirigente"
-            WHEN concepto = "pago_mensualidad" THEN "Pago de Mensualidad"
-            WHEN concepto = "impuesto_venta" THEN "Impuesto de venta"
-            WHEN concepto = "compra_jugadores" THEN "Compra de Jugador"
+            WHEN concepto = "sponsor" THEN "Sponsor"
+            WHEN concepto = "venta_jugadores" THEN "Venta de jugador"
+            WHEN concepto = "actividades_extra" THEN "Actividades Extras"
+            WHEN concepto = "mensualidad" THEN "Mensualidad"
+            WHEN concepto = "venta_souvenirs" THEN "Venta de Souvenir"
+            WHEN concepto = "venta_entradas" THEN "Venta de Entradas"
             END AS concepto,
             CONCAT("$", monto) AS monto,
             DATE_FORMAT(fecha, "%e de %M del %Y", "es_ES") AS fecha,
             CASE
-            WHEN detalle = " " THEN "Sin Detalle"
-            ELSE detalle
+                WHEN detalle = " " THEN "Sin Detalle"
+                ELSE detalle
             END AS detalle
-        FROM egresos;
+        FROM ingresos
+        UNION ALL
+        SELECT
+            CASE
+                WHEN concepto = "sueldo_jugadores" THEN "Sueldo de Jugador"
+                WHEN concepto = "sueldo_e_tecnico" THEN "Sueldo Equipo Tecnico"
+                WHEN concepto = "sueldo_dirigentes" THEN "Sueldo de Dirigente"
+                WHEN concepto = "pago_mensualidad" THEN "Pago de Mensualidad"
+                WHEN concepto = "impuesto_venta" THEN "Impuesto de venta"
+                WHEN concepto = "compra_jugadores" THEN "Compra de Jugador"
+            END AS concepto,
+            CONCAT("$", monto) AS monto,
+            DATE_FORMAT(fecha, "%e de %M del %Y", "es_ES") AS fecha,
+            CASE
+                WHEN detalle = " " THEN "Sin Detalle"
+                ELSE detalle
+            END AS detalle
+            FROM egresos;
         ');
 
         $totalhaberes = $query->getResult();
@@ -425,6 +427,65 @@ class DireccionDashboard extends BaseController
 
         return view('direccion/direccion_ver_jugadores', $verData);
     }
+
+    public function direccionverJugadores2()
+    {
+        // Agregando Titulo a Cada View
+        $titulo = [
+            'title' => 'Jugadores Direccion',
+        ];
+
+        $db = db_connect();
+
+        $campeonato = $db->query('select 
+        j.id,
+        u.nombres ,
+        u.apellidos ,
+        u.run ,
+        j.posicion ,
+        j.genero ,
+        j.partidos_jugados ,
+        e.nombre as equipo_proviene,
+        j.tipo ,
+        j.sueldo ,
+        j.ayuda_economica ,
+        j.numero_camiseta ,
+        j.foto
+        from jugadores j 
+        inner join usuarios u on
+        j.id = u.jugador_id_fk
+        left join equipos e on
+        j.equipo_proviene_id_fk = e.id ;');
+
+        $results = $campeonato->getResult();
+
+        // Preparar los datos en un formato adecuado
+        $data['results'] = array();
+
+        foreach ($results as $row) {
+            $data['results'][] = array(
+                'id' => $row->id,
+                'nombres' => $row->nombres,
+                'apellidos' => $row->apellidos,
+                'run' => $row->run,
+                'posicion' => $row->posicion,
+                'genero' => $row->genero,
+                'partidos_jugados' => $row->partidos_jugados,
+                'equipo_proviene' => $row->equipo_proviene,
+                'tipo' => $row->tipo,
+                'sueldo' => $row->sueldo,
+                'ayuda_economica' => $row->ayuda_economica,
+                'numero_camiseta' => $row->numero_camiseta,
+                'foto' => $row->foto
+            );
+        }
+
+        $viewData = array_merge($data, $titulo);
+
+        return view('direccion/direccion_ver_jugadores', $viewData);
+    }
+
+
     public function direccionverPartidos()
     {
         $partidosModel = new PartidosModel();
