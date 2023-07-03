@@ -1,3 +1,9 @@
+<?php if (session('error')): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= session('error') ?>
+    </div>
+<?php endif; ?>
+
 <h2>Carro de Compras</h2>
 <a href="<?= base_url('VentaSouvenirsController/cargaArticulos'); ?>" class="volver-tienda">Volver a la tienda</a>
 
@@ -20,7 +26,7 @@
                     <p>Talla: <?= $producto['talla']; ?></p>
                     <p>Precio: $<?= $producto['precio']; ?></p>
                     <p>Cantidad: <?= $producto['cantidad']; ?></p>
-                    <a href="<?= base_url('VentaSouvenirsController/eliminarProducto/' . $producto['id']); ?>" class="btn-eliminar-producto">Eliminar Producto</a>
+                    <a href="<?= base_url('VentaSouvenirsController/eliminarProducto/' . $producto['id'].'-'.$producto['talla']); ?>" class="btn-eliminar-producto">Eliminar Producto</a>
                 </div>
             </div>
         </li>
@@ -41,6 +47,7 @@
 
 
 <?php endif; ?>
+
 
 <style>
     .producto-item {

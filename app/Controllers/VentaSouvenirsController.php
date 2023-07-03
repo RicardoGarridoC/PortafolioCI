@@ -140,6 +140,9 @@ class VentaSouvenirsController extends BaseController
             }
         }
     
+        // Almacenar los productos en la sesión
+        session()->set('productos', $productos);
+    
         $data['productos'] = $productos;
         $data['total'] = $total;
     
@@ -160,26 +163,56 @@ class VentaSouvenirsController extends BaseController
         return redirect()->to(base_url('TiendaOficial'));
     }
 
-    public function eliminarProducto($productoId)
+    public function eliminarProducto($productoTallaId)
     {
         $carro = session('carro') ?: [];
-
-        if (isset($carro[$productoId])) {
-            unset($carro[$productoId]);
+    
+        if (isset($carro[$productoTallaId])) {
+            if ($carro[$productoTallaId] > 1) {
+                $carro[$productoTallaId] -= 1;
+            } else {
+                unset($carro[$productoTallaId]);
+            }
             session()->set('carro', $carro);
         }
-
+    
         return redirect()->to('CarroCompras');
-    }
+    }     
 
     public function checkout()
     {
+        $carro = session('carro') ?: [];
+        $db = db_connect();
+        $productosModel = $db->table('souvenirs');
+    
+        // Verificar si hay suficiente stock para cada producto en el carro
+        foreach ($carro as $productoTallaId => $cantidad) {
+            list($productoId, $talla) = explode('-', $productoTallaId, 2);
+    
+            // Obtener el nombre del producto en base al id proporcionado.
+            $productoNombre = $db->table('souvenirs')->where('id', $productoId)->get()->getRow()->producto;
+    
+            if ($talla == null) {
+                // Si la talla es null, buscar el producto por id
+                $producto = $productosModel->where(['producto' => $productoNombre])->get()->getRow();
+            } else {
+                // Si la talla no es null, buscar el producto por nombre y talla
+                $producto = $productosModel->where(['producto' => $productoNombre, 'talla' => $talla])->get()->getRow();
+            }
+    
+            if ($producto !== null && $producto->stock < $cantidad) {
+                session()->setFlashdata('error', "Lo sentimos, no queda suficiente stock para {$producto->producto} de talla {$talla}. Por favor, ajusta la cantidad o elimina el artículo de tu carrito.");
+                return redirect()->to('/VentaSouvenirsController/mostrarCarro');
+            }
+        }
+    
         $titulo = [
             'title' => 'Checkout',
         ];
-
+    
         return view('templates/header') . view('home/checkout', $titulo) . view('templates/footer');
-    }
+    }   
+      
 
     public function confirmarCompra()
     {
@@ -248,11 +281,27 @@ class VentaSouvenirsController extends BaseController
                 $productos[] = [
                     'nombre' => $producto->producto,
                     'precio' => $producto->precio,
-                    'cantidad' => $cantidad
+                    'cantidad' => $cantidad,
+                    'talla' => $producto->talla
                 ];
 
                 //$total += floatval($producto->precio) * intval($cantidad);
             }
+        }
+
+        $productos = session('productos');
+
+        // Actualizar el stock de cada producto vendido
+        foreach ($productos as $producto) {
+            $nombre = $producto['nombre'];
+            $talla = $producto['talla'];
+            $cantidad = $producto['cantidad'];
+            if($talla == null){
+                $db->query("UPDATE souvenirs SET stock = stock - '{$cantidad}' WHERE producto = '{$nombre}'");
+            }
+            else{
+                $db->query("UPDATE souvenirs SET stock = stock - '{$cantidad}' WHERE producto = '{$nombre}' AND talla = '{$talla}'");
+            }  
         }
 
         $html = view('pdf/compra', [
@@ -262,7 +311,7 @@ class VentaSouvenirsController extends BaseController
             'entrega' => $entrega,
             'direccion' => $direccion,
             'productos' => $productos,
-            'total' => $montoCompra
+            'total' => $montoCompra,
         ]);        
 
         // Crea una instancia de Dompdf
@@ -282,11 +331,15 @@ class VentaSouvenirsController extends BaseController
         ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
         ->setBody($output);
 
+    
+        // ... (la mayoría del código se ha omitido para enfocarnos en las modificaciones relevantes)
+    
         session()->remove('carro');
-
+        session()->remove('productos');
+    
         // Redirige a TiendaOficial después de descargar el PDF
         echo '<script>window.location.href = "' . base_url('TiendaOficial') . '";</script>';
-
+    
         return $response;
     }
     

@@ -39,13 +39,13 @@
                     <?php endforeach; ?>
                 </select>
                 <p id="stock-message">Stock: </p>
-                <button type="submit" class="agregar-carro">Agregar al Carro</button>
+                <button type="submit" class="agregar-carro" disabled>Agregar al Carro</button>
             </form>
         <?php else: ?>
             <p>Stock: <?= $producto['tallas'][0]->stock; ?></p>
             <form action="<?= base_url('VentaSouvenirsController/agregarProducto'); ?>" method="post">
                 <input type="hidden" name="id" value="<?= $producto['id']; ?>">
-                <button type="submit" class="agregar-carro">Agregar al Carro</button>
+                <button type="submit" class="agregar-carro" <?= $producto['tallas'][0]->stock > 0 ? "" : "disabled"; ?>>Agregar al Carro</button>
             </form>
         <?php endif; ?>
     </div>
@@ -57,20 +57,41 @@
 <script>
     const stockMessage = document.getElementById('stock-message');
     const tallaSelect = document.getElementById('talla');
+    const agregarCarroBtn = document.querySelector('.agregar-carro');
 
-    tallaSelect.addEventListener('change', updateStock);
+    if (tallaSelect) {
+        tallaSelect.addEventListener('change', updateStock);
+    }
+    
+    const stockNoTalla = <?= $producto['tallas'][0]->stock; ?>;
+
+    if (!tallaSelect && stockNoTalla <= 0) {
+        agregarCarroBtn.disabled = true;
+        document.querySelector('.detalle-info > p').textContent += ' No hay stock para este producto';
+    }
 
     function updateStock() {
         const selectedTalla = tallaSelect.value;
         const selectedOption = tallaSelect.options[tallaSelect.selectedIndex];
-
         const stock = selectedOption.getAttribute('data-stock');
 
-        stockMessage.textContent = stock ? `Stock: ${stock}` : 'Stock: ';
+        if (!selectedTalla) {
+            stockMessage.textContent = 'Por favor, seleccione una talla';
+            agregarCarroBtn.disabled = true;
+        } else if (stock > 0) {
+            stockMessage.textContent = `Stock: ${stock}`;
+            agregarCarroBtn.disabled = false;
+        } else {
+            stockMessage.textContent = 'No hay stock para esta talla';
+            agregarCarroBtn.disabled = true;
+        }
     }
 
-    updateStock();
+    if (tallaSelect) {
+        updateStock();
+    }
 </script>
+
 
 
 <style>

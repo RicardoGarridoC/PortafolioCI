@@ -65,7 +65,6 @@
                 </div>
                 <h3 class="article-title"><?= $producto['producto']; ?></h3>
                 <p class="article-price">Precio: $<?= $precioFormateado; ?></p>
-                <p class="article-size">Tallas disponibles: <?= implode(', ', $producto['tallas']); ?></p>
             </a>
         </div>
     <?php } ?>
