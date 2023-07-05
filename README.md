@@ -15,11 +15,10 @@ Portafolio, realizacion de aplicacion WEB de un club de futbol.
 
 ## Requisitos
 
-Composer Update 
+- Composer Update 
 - Revisar Archivo .env app.baseURL = 'http://localhost:TUPUERTOENXAMPP/PortafolioCI/'
 - XAMPP Control Panel v3.0.0 o LASTEST y sacarle al comentario ';' a extension=intl ( XAMPP -> APACHE -> Config -> PHP.ini)
-- ADMINLTE3 https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.2.0 - Dercargar y Colocar en Carpeta 'Publics' los archivos 'dist' y 'plugins'.
-- Subir Archivo SQL (club_de_futbol.sql) a MySQL 
+- Subir Archivo SQL (club_de_futbol.sql) a MySQL , en caso de tener un error, borrar la vista_partidos_hasta_hoy (unica vista) y subir sql, despues correr el script del archivo de texto de "script_crear_vista".
 
 ## Instalación
 
@@ -49,12 +48,13 @@ Se pueden revisar demas usuarios desde admin.
 ## Licencia
 
 Este proyecto está bajo la Licencia Patito de Goma
-© 2023 MiEmpresa S.A. Todos los derechos reservados.
+© Los Alces FC. Todos los derechos reservados.
+Developed by DevGroup DAF
 
 ## Contacto
 
-Cualquier Integrante del grupo
-di.servietti@duocuc.cl
-ricardogarrido398@gmail.com
-dieg.barros@duocuc.cl
+Cualquier Integrante del grupo:
+- di.servietti@duocuc.cl
+- ricardogarrido398@gmail.com
+- dieg.barros@duocuc.cl
 
