@@ -31,7 +31,7 @@ Revisar Las dependencias
 -Iniciar sesion
 Usuarios 
 - Admin= di.servietti@duocuc.cl contraseña: 123455
-- Socio= rangamind@gmail.com contraseña: 123456
+- Socio= redacted@gmail.com contraseña: 123456
 - Direccion = aperegrini@gmail.com contraseña: 123456
 - Equipo Tecnico = jsampaoli@gmail.com contraseña: 123456
 - Jugador = chupete.suazo@gmail.com contraseña: 123456
@@ -55,6 +55,6 @@ Developed by DevGroup DAF
 
 Cualquier Integrante del grupo:
 - di.servietti@duocuc.cl
-- ricardogarrido398@gmail.com
+- redacted@gmail.com
 - dieg.barros@duocuc.cl
 
